@@ -27,7 +27,7 @@
             </div>
             <div class="flex-center mt-15 mb-25">
                 <div class="amount">
-                    <div class="number sunk color-orange">{{ play.stakeA + play.stakeB|currency }}</div>
+                    <div class="number sunk color-orange">{{ play.stakeA + play.stakeB + play.stakeC|currency }}</div>
                     <small>sunk</small>
                 </div>
             </div>

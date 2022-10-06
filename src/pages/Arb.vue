@@ -180,7 +180,7 @@ export default {
 
 			const payoutB = Number(this.getPayout(this.oddsB, stakeB));
 			const payoutC = this.threeway ? Number(this.getPayout(this.oddsC, stakeC)) : 0;
-			const sunk = Number(this.stakeA) + Number(stakeB) + stakeC;
+			const sunk = Number(this.stakeA) + Number(stakeB) + Number(stakeC);
 			const profitB = payoutB - sunk;
 			const profitA = payoutA - sunk;
 			const profitC = payoutC - sunk;
