@@ -4,9 +4,11 @@ const helpers = {
         stakeA: '',
         oddsA: '',
         oddsB: '',
+        oddsC: '',
         conversionRate: '75',
-        labelA: 'Book A',
-        labelB: 'Book B',
+        labelA: 'Bet A',
+        labelB: 'Bet B',
+		labelC: 'Bet 3',
         winback: false,
 		winbackAmount: '',
         editingLabel: false,
@@ -28,13 +30,21 @@ const helpers = {
                 `oddsa=${this.oddsA}`,
                 `oddsb=${this.oddsB}`,
             ];
+
+			if (this.oddsC) {
+				arr.push(`oddsc=${this.oddsC}`);
+			}
               
-            if ( this.labelA !== 'Book A') {
+            if ( this.labelA !== 'Bet A') {
                 arr.push(`booka=${encodeURIComponent(this.labelA)}`);
             }
               
-            if ( this.labelB !== 'Book B') {
+            if ( this.labelB !== 'Bet B') {
                 arr.push(`bookb=${encodeURIComponent(this.labelB)}`);
+            }
+
+			if ( this.labelC !== 'Bet C') {
+                arr.push(`bookc=${encodeURIComponent(this.labelC)}`);
             }
 
             if ( this.winback ) {
@@ -64,8 +74,9 @@ const helpers = {
     },
     methods: {
         resetState() {
-            this.labelA = 'Book A';
-			this.labelB = 'Book B';
+            this.labelA = 'Bet A';
+			this.labelB = 'Bet B';
+			this.labelC = 'Bet C';
 			this.oddsA = '';
 			this.stakeA = '';
 			this.oddsB = '';
@@ -99,13 +110,15 @@ const helpers = {
             console.log('on keyup', field);
             
             if ( field == 'oa' && this.oddsA ) {
-                console.log(this.oddsA);
                 this.oddsA = this.oddsA.replace(/[^+-\d]/, '');                
             }
             
             if ( field == 'ob' && this.oddsB ) {
-                console.log(this.oddsB);
                 this.oddsB = this.oddsB.replace(/[^+-\d]/, '');
+            }
+
+			if ( field == 'oc' && this.oddsC ) {
+                this.oddsC = this.oddsC.replace(/[^+-\d]/, '');
             }
             
             if ( field == 'xa' && this.stakeA ) {

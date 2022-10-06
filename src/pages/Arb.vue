@@ -3,7 +3,7 @@
 		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
 		<input id="csv" class="copy-input" type="text" :value="csv">
 	
-		<form @submit.prevent="calculate">
+		<form @submit.prevent="calculate" :class="{'threeway': threeway}">
 			<div v-if="bookmarks.length" class="bookmarks">
 				<div v-for="(play, i) in bookmarks" class="bookmark flex-stretch" :key="i" @click="loadBookmark(play)">
 					<div :class="{'color-green': play.ev > 0, 'color-red': play.ev < 0}" class="ev flex-center">{{ play.ev|currency }}</div>
@@ -23,9 +23,17 @@
 					</div>
 				</div>
 				<div>
+					<label for="" style="display:block;">Three-way</label>
+					<div class="toggle toggle-round">
+						<input id="threeway" v-model="threeway" type="checkbox" value="false" tabindex="-1">
+						<label for="threeway"></label>
+						<div class="knob"></div>
+					</div>
+				</div>
+				<div>
 					<label for="" style="display:block;">
-						Winback
-						<svg width="12" v-tooltip.right="'Extra winnings awarded only if the bet hits'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm0-338c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/></svg>
+						Extra
+						<svg width="12" v-tooltip.right="'Additional winnings awarded only if the bet hits'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm0-338c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/></svg>
 					</label>
 					<div class="toggle toggle-round">
 						<input id="winback" v-model="winback" type="checkbox" value="true" tabindex="-1">
@@ -46,7 +54,7 @@
 						<input type="text" v-model="oddsA" required tabindex="4" @keyup="onKeyUp('oa')">
 					</div>
 					<div v-if="winback" class="field">
-						<label for="">Winback</label>
+						<label for="">Extra</label>
 						<input type="text" v-model="winbackAmount" required tabindex="4" @keyup="onKeyUp('wb')">
 					</div>
 				</div>
@@ -56,7 +64,16 @@
 				<div class="field-wrap flex-center">
 					<div class="field">
 						<label for="">Odds</label>
-						<input type="text" v-model="oddsB" value="375" required tabindex="5" @keyup="onKeyUp('ob')">
+						<input type="text" v-model="oddsB" required tabindex="5" @keyup="onKeyUp('ob')">
+					</div>
+				</div>
+			</div>
+			<div v-if="threeway" class="book">
+				<input type="text" v-model="labelC" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false">
+				<div class="field-wrap flex-center">
+					<div class="field">
+						<label for="">Odds</label>
+						<input type="text" v-model="oddsC" required tabindex="6" @keyup="onKeyUp('oc')">
 					</div>
 				</div>
 			</div>
@@ -95,6 +112,7 @@ export default {
 	},
 	data() {
 		return {
+			threeway: false,
 			viewingBookmark: false,
 			arbBalanced: false,
 			loading: false,
@@ -134,48 +152,57 @@ export default {
 			});
 		},
 		calculate() {
-			console.log('calculate');
-			// Don't search again if we haven't changed any inputs
 			if ( !this.freshInput ) return;
 			if ( !this.oddsA || !this.stakeA || !this.oddsB ) return;
-			
+
 			// Reset stuff
 			this.loading = true;
 			this.freshInput = false;
-			console.log('calculate 2');
+			let stakeC = 0;
 			
-			// Calculations
+			// Get payout
 			let payoutA = Number(this.getPayout(this.oddsA, this.stakeA));
 
+			// Add winback to payout if exists
 			if ( this.winback ) {
 				payoutA += Number(this.winbackAmount);
 			}
 
+			// stake B
 			let stakeB = this.getStake(this.oddsB, payoutA);
-			if ( this.round ) {
-				stakeB = Math.round(stakeB);
+			stakeB = this.round ? Math.round(stakeB) : stakeB;
+
+			// stake C
+			if (this.threeway) {
+				stakeC = this.getStake(this.oddsC, payoutA);
+				stakeC = this.round ? Math.round(stakeC) : stakeC;
 			}
+
 			const payoutB = Number(this.getPayout(this.oddsB, stakeB));
-			const sunk = Number(this.stakeA) + Number(stakeB);
+			const payoutC = this.threeway ? Number(this.getPayout(this.oddsC, stakeC)) : 0;
+			const sunk = Number(this.stakeA) + Number(stakeB) + stakeC;
 			const profitB = payoutB - sunk;
 			const profitA = payoutA - sunk;
-			console.log('calculate 3');
+			const profitC = payoutC - sunk;
 			
 			// Push our card data
 			this.arbBalanced = {
 				stakeA: Number(this.stakeA),
+				stakeB,
+				stakeC,
 				oddsA: this.oddsA,
 				oddsB: this.oddsB,
+				oddsC: this.oddsC,
 				payoutA,
-				profitA,
-				stakeB,
 				payoutB,
+				payoutC,
+				profitA,
 				profitB,
+				profitC,
 				ev: (profitA + profitB) / 2,
 				winback: this.winback ? this.winbackAmount : false
 			}
-			
-			console.log('calculate 4');
+
 			// Done loading
 			this.loading = false;
 			this.hasSearched = true;
@@ -186,19 +213,24 @@ export default {
 			} else {
 				this.viewingBookmark = false;
 			}
-			
-			console.log('calculate 5');
 		},
 		calcFromUrl() {
 			const a = this.getQueryString('oddsa');
 			const ax = this.getQueryString('stakea');
 			const b = this.getQueryString('oddsb');			
+			const c = this.getQueryString('oddsc');
 			const labelA = this.getQueryString('booka');
 			const labelB = this.getQueryString('bookb');
+			const labelC = this.getQueryString('bookc');
 			const wb = this.getQueryString('wb');
 			this.oddsA = a;
 			this.stakeA = ax;
 			this.oddsB = b;
+
+			if (c) {
+				this.threeway = true;
+				this.oddsC = c;
+			}
 			
 			if ( labelA ) {
 				this.labelA = decodeURIComponent(labelA);
@@ -206,6 +238,10 @@ export default {
 			
 			if ( labelB ) {
 				this.labelB = decodeURIComponent(labelB);
+			}
+
+			if ( labelC ) {
+				this.labelC = decodeURIComponent(labelC);
 			}
 			
 			if ( wb ) {
@@ -246,13 +282,15 @@ export default {
 			this.labelA = bookmark.labelA;
 			this.labelB = bookmark.labelB;
 			this.freshInput = true;
-			this.calculate();
 		},
 	},
 	watch: {
 		round() {
 			this.freshInput = true;
 			this.calculate();
+		},
+		threeway() {
+			this.freshInput = true;
 		}
 	},
 }

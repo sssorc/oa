@@ -11,6 +11,19 @@
     max-width: 400px;
     margin: 0 auto 20px;
 
+	&.threeway {
+		max-width: 470px;
+		flex: 0 0 45%;
+		
+		.or {
+			display: none;
+		}
+
+		.sunk {
+			padding-top: 16px;
+		}
+	}
+
     @include min( $md ) {
         flex: 0 0 45%;
         margin: 0 10px 20px;
