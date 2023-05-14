@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 
 @mixin gutter( $pixels ) {
-	$px: ($pixels / 2 );
+	$px: calc($pixels / 2 );
 
 	@include min( $sm ) {
 		margin-left: -$px;
@@ -27,8 +27,8 @@
 }
 
 @mixin symmetrical-layout( $breakpoint, $units ) {
-	$basis: (100 / $units * 1%);
-	$n: ($units + 1);
+	$basis: calc(100 / $units * 1%);
+	$n: calc($units + 1);
 
 	> * {
 		margin-top: 16px;
