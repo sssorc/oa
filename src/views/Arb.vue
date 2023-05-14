@@ -199,7 +199,7 @@ export default {
 </script>
 
 <template>
-	<div class="page arb">
+	<div class="page legacy arb">
 		<Navigation/>
 		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
 		<input id="csv" class="copy-input" type="text" :value="csv">

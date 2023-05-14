@@ -1,45 +1,47 @@
-.btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 3rem;
-    // border-radius: 40px;
-    border: 0;
-    outline: 0;
-    font-size: 14px;
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: 1px;
-    cursor: pointer;
+.legacy {
+	.btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem 3rem;
+		// border-radius: 40px;
+		border: 0;
+		outline: 0;
+		font-size: 14px;
+		font-weight: 600;
+		font-size: 15px;
+		letter-spacing: 1px;
+		cursor: pointer;
 
-    &[disabled] {
-        cursor: not-allowed;
-        opacity: .8;
-    }
-}
+		&[disabled] {
+			cursor: not-allowed;
+			opacity: .8;
+		}
+	}
 
 
-.btn-teal {
-    background: $teal;
-    color: #fff;
+	.btn-teal {
+		background: $teal;
+		color: #fff;
 
-    &:hover {
-        background: lighten($teal, 3%);
-    }
+		&:hover {
+			background: lighten($teal, 3%);
+		}
 
-    &[disabled]:hover {
-        background: $teal;
-    }
-}
+		&[disabled]:hover {
+			background: $teal;
+		}
+	}
 
-.arb .btn-calculate {
-    background: $color-arb;    
-}
+	&.arb .btn-calculate {
+		background: $color-arb;    
+	}
 
-.free-bet .btn-calculate {
-    background: $color-fb;
-}
+	&.free-bet .btn-calculate {
+		background: $color-fb;
+	}
 
-.risk-free .btn-calculate {
-    background: $color-rfb;
+	&.risk-free .btn-calculate {
+		background: $color-rfb;
+	}
 }

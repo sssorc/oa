@@ -152,7 +152,7 @@ export default {
 </script>
 
 <template>
-	<div class="page free-bet">
+	<div class="page legacy free-bet">
 		<Navigation/>
 		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
 

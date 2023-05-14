@@ -15,8 +15,8 @@ export default {
 			kellyBankroll: 1000,
 			useBoost: 0,
 			inputs: {
-				LegOdds: '-110/-110,-110/-110',
-				FinalOdds: '264',
+				LegOdds: '',
+				FinalOdds: '',
 				Correlation_Text: '',
 				Boost_Text: '',
 				Boost_Type: 0,
@@ -194,7 +194,7 @@ export default {
 </script>
 
 <template>
-	<div>
+	<div class="devig">
 		<header class="section full-width py-12 bg-blue show-md">
 			<nav class="flex-center wrap gap-x-32 gap-y-16 contain">
 				<a id="HyperLinkArbCalculator" target="_blank" href="http://www.crazyninjamike.com/Public/sportsbooks/sportsbook_calculator.aspx">Hedge Calculator</a>

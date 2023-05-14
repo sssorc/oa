@@ -1,72 +1,73 @@
 $border-width: 5px;
-
-.masthead {
-	border-bottom: $border-width solid $gray;
-	
-	.logo {
-		font-size: 20px;
-		font-weight: bold;
-		
-		@include max($lg) {
-			display: none;
-		}
-	}
-	
-	@include min($lg) {
-		display: flex;
-		padding-left: 2rem;
+.legacy {
+	.masthead {
+		border-bottom: $border-width solid $gray;
 		
 		.logo {
-			margin-right: 200px;
+			font-size: 20px;
+			font-weight: bold;
+			
+			@include max($lg) {
+				display: none;
+			}
+		}
+		
+		@include min($lg) {
+			display: flex;
+			padding-left: 2rem;
+			
+			.logo {
+				margin-right: 200px;
+			}
 		}
 	}
-}
-nav {
-	display: flex;
-	flex: 1 1 auto;
-	
-	a {
-		height: 40px;
-		flex: 1 1 33.33%;
-		text-decoration: none;
-		text-transform: uppercase;
-		color: rgba(#333, .4);
-		letter-spacing: 0.5px;
-		font-size: 13px;
-		transition: 0s;
-		position: relative;
-		font-weight: 500;
-		font-family: 'Roboto', sans-serif;
+	nav {
+		display: flex;
+		flex: 1 1 auto;
 		
-		&:after {
-			content: '';
-			position: absolute;
-			bottom: -#{$border-width};
-			left: 0;
-			right: 0;
-			height: $border-width;
-			background: $color-arb;
-			opacity: 0;
-		}
-		
-		&:nth-child(2):after {
-			background: $color-fb;
-		}
-
-		&:nth-child(3):after {
-			background: $color-rfb;
-		}
-		
-		&:hover:after {
-			opacity: .3;	
-		}
-		
-		&.router-link-active {
-			color: #333;
-			background: #fdfdfd;
+		a {
+			height: 40px;
+			flex: 1 1 33.33%;
+			text-decoration: none;
+			text-transform: uppercase;
+			color: rgba(#333, .4);
+			letter-spacing: 0.5px;
+			font-size: 13px;
+			transition: 0s;
+			position: relative;
+			font-weight: 500;
+			font-family: 'Roboto', sans-serif;
 			
 			&:after {
-				opacity: 1;
+				content: '';
+				position: absolute;
+				bottom: -#{$border-width};
+				left: 0;
+				right: 0;
+				height: $border-width;
+				background: $color-arb;
+				opacity: 0;
+			}
+			
+			&:nth-child(2):after {
+				background: $color-fb;
+			}
+
+			&:nth-child(3):after {
+				background: $color-rfb;
+			}
+			
+			&:hover:after {
+				opacity: .3;	
+			}
+			
+			&.router-link-active {
+				color: #333;
+				background: #fdfdfd;
+				
+				&:after {
+					opacity: 1;
+				}
 			}
 		}
 	}

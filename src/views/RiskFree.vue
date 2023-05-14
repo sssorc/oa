@@ -129,7 +129,7 @@ export default {
 </script>
 
 <template>
-	<div class="page risk-free">
+	<div class="page legacy risk-free">
 		<Navigation/>
 		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
 
