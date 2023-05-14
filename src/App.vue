@@ -2,9 +2,6 @@
 import { RouterLink, RouterView } from 'vue-router';
 
 export default {
-	components: {
-        Navigation
-    },
 	data() {
 		return {
 			showMobileNav: false,
