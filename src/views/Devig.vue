@@ -6,7 +6,7 @@ axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded'
 export default {
 	data() {
 		return {
-			apiUrl: 'http://api.crazyninjaodds.com/api/devigger/v1/sportsbook_devigger.aspx?api=open&Args=ev_p,fb_p,fo_o,kelly&',
+			apiUrl: '//api.crazyninjaodds.com/api/devigger/v1/sportsbook_devigger.aspx?api=open&Args=ev_p,fb_p,fo_o,kelly&',
 			showSettings: false,
 			results: false,
 			copied: false,
