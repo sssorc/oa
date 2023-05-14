@@ -1,6 +1,6 @@
 {
-  "name": "atmo-stacks",
-  "version": "0.0.0",
+  "name": "hedge-calculator",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",
