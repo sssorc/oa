@@ -1,5 +1,6 @@
 <script>
 import CardConversion from '@/components/CardConversion.vue';
+import Navigation from '@/components/Navigation.vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers';
 import '@/assets/legacy/style.scss'
@@ -9,6 +10,7 @@ export default {
 	mixins: [helpers],
 	components: {
 		CardConversion,
+		Navigation,
 	},
 	data() {
 		return {
@@ -150,7 +152,8 @@ export default {
 </script>
 
 <template>
-	<div class="page">
+	<div class="page free-bet">
+		<Navigation/>
 		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
 
 		<form @submit.prevent="calculate">

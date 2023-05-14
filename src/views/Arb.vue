@@ -1,5 +1,6 @@
 <script>
 import CardBalanced from '@/components/CardBalanced.vue';
+import Navigation from '@/components/Navigation.vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers.js';
 import '@/assets/legacy/style.scss'
@@ -9,6 +10,7 @@ export default {
 	mixins: [helpers],
 	components: {
 		CardBalanced,
+		Navigation,
 	},
 	data() {
 		return {
@@ -197,7 +199,8 @@ export default {
 </script>
 
 <template>
-	<div class="page">
+	<div class="page arb">
+		<Navigation/>
 		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
 		<input id="csv" class="copy-input" type="text" :value="csv">
 	

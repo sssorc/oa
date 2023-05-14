@@ -1,5 +1,6 @@
 <script>
 import CardRiskFree from '@/components/CardRiskFree.vue';
+import Navigation from '@/components/Navigation.vue';
 import helpers from '@/mixins/helpers';
 import '@/assets/legacy/style.scss'
 
@@ -8,6 +9,7 @@ export default {
 	mixins: [helpers],
 	components: {
 		CardRiskFree,
+		Navigation,
 	},
 	data() {
 		return {
@@ -127,7 +129,8 @@ export default {
 </script>
 
 <template>
-	<div class="page">
+	<div class="page risk-free">
+		<Navigation/>
 		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
 
 		<form @submit.prevent="calculate">
