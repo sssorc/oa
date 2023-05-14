@@ -1,0 +1,69 @@
+.results {
+	padding: 24px;
+	background-color: rgba($blue, .03);
+}
+
+.results-ev {
+	display: flex;
+	justify-content: flex-start;
+
+	
+	
+	.item {
+		background-color: #fff;
+		border-radius: 4px;
+		padding: 16px;
+		border: 2px solid rgba(#656565, .5);
+	}
+	
+	.number {
+		font-size: 34px;
+		font-weight: 600;
+	}
+
+	label {
+		display: block;
+		text-align: right;
+	}
+}
+
+.results .leg {
+	font-size: 12px;
+	border-collapse: collapse;
+	border: 1px solid rgba($blue, .1);
+	
+	th {
+		padding: 8px;
+		font-weight: 600;
+		text-align: center;
+		border: 1px solid rgba($blue, .1);
+	}
+
+	td {
+		padding: 8px;
+		border: 1px solid rgba($blue, .1);
+	}
+
+	td:first-child {
+		padding-right: 8px;
+	}
+}
+
+// -----------------------------------------------------------------------------
+//! Mobile
+// -----------------------------------------------------------------------------
+
+@include max(600px) {
+	.results-ev {
+		justify-content: flex-start;
+		flex: 1 0 100%;
+	}
+}
+
+
+
+.reddit-text {
+	position: absolute;
+	opacity: 0;
+	left: -1000px;
+}

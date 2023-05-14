@@ -73,6 +73,14 @@ const helpers = {
       }
     },
     methods: {
+		formatUSD(number) {
+			let dollarUS = Intl.NumberFormat("en-US", {
+    			style: "currency",
+    			currency: "USD",
+			});
+
+			return dollarUS.format(number).replace('.00', '');
+		},
         resetState() {
             this.labelA = 'Bet A';
 			this.labelB = 'Bet B';
@@ -182,5 +190,3 @@ const helpers = {
 };
 
 export default helpers;
-
-

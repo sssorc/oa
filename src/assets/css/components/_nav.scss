@@ -1,0 +1,15 @@
+header nav {
+	@include max($md) {
+		flex-direction: column;		
+	}
+}
+header nav a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 15px;
+
+	&:hover {
+		text-decoration: underline;
+		color: #fff;
+	}
+}

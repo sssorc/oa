@@ -11,49 +11,49 @@
             <div class="flex split">
                 <div class="amount">
                     <label>{{ this.$parent.labelA }} ({{ this.play.oddsA }})</label>
-                    <div class="number">{{ play.stakeA|currency }}</div>
+                    <div class="number">{{ formatUSD(play.stakeA) }}</div>
                     <small>stake</small>
                 </div>
                 <div class="amount">
                     <label>{{ this.$parent.labelB }} ({{ this.play.oddsB }})</label>
-                    <div class="number">{{ play.stakeB|currency }}</div>
+                    <div class="number">{{ formatUSD(play.stakeB) }}</div>
                     <small>stake</small>
                 </div>
 				<div v-if="play.stakeC" class="amount">
 					<label>{{ this.$parent.labelC }} ({{ this.play.oddsC }})</label>
-                    <div class="number">{{ play.stakeC|currency }}</div>
+                    <div class="number">{{ formatUSD(play.stakeC) }}</div>
                     <small>stake</small>
 				</div>
             </div>
             <div class="flex-center mt-15 mb-25">
                 <div class="amount">
-                    <div class="number sunk color-orange">{{ play.stakeA + play.stakeB + play.stakeC|currency }}</div>
+                    <div class="number sunk color-orange">{{ formatUSD(play.stakeA + play.stakeB + play.stakeC) }}</div>
                     <small>sunk</small>
                 </div>
             </div>
             <div class="flex split card-bottom">
                 <div v-if="play.winback" class="amount">
-					<div class="number color-red small">{{ play.profitA - play.winback|currency }}</div>
-					<small>{{ play.payoutA - play.winback|currency }} payout</small>
+					<div class="number color-red small">{{ formatUSD(play.profitA - play.winback) }}</div>
+					<small>{{ formatUSD(play.payoutA - play.winback) }} payout</small>
 					
-					<div class="number color-blue small mt-10">+{{ play.winback|currency }}</div>
+					<div class="number color-blue small mt-10">+{{ formatUSD(play.winback) }}</div>
 					<small>Extra</small>
 					
-					<div class="number color-green mt-10">{{ play.profitA|currency }}</div>
+					<div class="number color-green mt-10">{{ formatUSD(play.profitA) }}</div>
 					<small>after extra</small>
 				</div>
                 <div v-else class="amount">
-                    <div :class="{'color-green': play.profitA > 0, 'color-red': play.profitA < 0}" class="number">{{ play.profitA|currency }}</div>
-                    <small>{{ play.payoutA|currency }} payout</small>
+                    <div :class="{'color-green': play.profitA > 0, 'color-red': play.profitA < 0}" class="number">{{ formatUSD(play.profitA) }}</div>
+                    <small>{{ formatUSD(play.payoutA) }} payout</small>
                 </div>
                 <span class="or">or</span>
                 <div :class="{'mt-a': play.winback }" class="amount">
-                    <div :class="{'color-green': play.profitB > 0, 'color-red': play.profitB < 0}" class="number">{{ play.profitB|currency }}</div>
-                    <small>{{ play.payoutB|currency }} payout</small>
+                    <div :class="{'color-green': play.profitB > 0, 'color-red': play.profitB < 0}" class="number">{{ formatUSD(play.profitB) }}</div>
+                    <small>{{ formatUSD(play.payoutB) }} payout</small>
                 </div>
 				<div v-if="play.stakeC" :class="{'mt-a': play.winback }" class="amount">
-					<div :class="{'color-green': play.profitC > 0, 'color-red': play.profitC < 0}" class="number">{{ play.profitC|currency }}</div>
-					<small>{{ play.payoutC|currency }} payout</small>
+					<div :class="{'color-green': play.profitC > 0, 'color-red': play.profitC < 0}" class="number">{{ formatUSD(play.profitC) }}</div>
+					<small>{{ formatUSD(play.payoutC) }} payout</small>
 				</div>
             </div>
         </div>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import helpers from '@/components/mixins/helpers';
+import helpers from '@/mixins/helpers';
 
 export default {
     name: 'CardBalanced',

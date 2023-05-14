@@ -1,68 +1,7 @@
-<template>
-	<div class="page">
-		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
-
-		<form @submit.prevent="calculate">
-			<div class="settings">
-				<div>
-					<label for="" style="display:block;">Rounding</label>
-					<div class="toggle toggle-round">
-						<input id="round" v-model="round" type="checkbox" value="true">
-						<label for="round"></label>
-						<div class="knob"></div>
-					</div>
-				</div>
-				<div class="field mt-5">
-					<label for="">Conversion %</label>
-					<input type="text" v-model="conversionRate" @keyup="onKeyUp('cr')">
-				</div>
-			</div>
-			<div class="book">
-				<input type="text" v-model="labelA" class="label-input" tabindex="1" @focus="editingLabel = true" @blur="editingLabel = false">
-				<div class="field-wrap flex-center">
-					<div class="field">
-						<label for="" class="color-rfb">Risk-free stake</label>
-						<input type="text" v-model="stakeA" value="25" tabindex="3" required @keyup="onKeyUp('xa')">
-					</div>
-					<div class="field">
-						<label for="">Odds</label>
-						<input type="text" v-model="oddsA" value="100" tabindex="4" required @keyup="onKeyUp('oa')">
-					</div>
-				</div>
-			</div>
-			<div class="book">
-				<input type="text" v-model="labelB" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false">
-				<div class="field-wrap flex-center">
-					<div class="field">
-						<label for="">Odds</label>
-						<input type="text" v-model="oddsB" value="375" tabindex="5" required @keyup="onKeyUp('ob')">
-					</div>
-				</div>
-			</div>
-			<div class="flex-center button-wrap">
-				<button class="btn btn-calculate" type="submit" tabindex="6" name="button">Calculate hedge</button>
-			</div>
-		</form>
-	
-	
-		<section v-if="loading" class="loading flex-center">
-			<div class="spinner"></div>
-		</section>
-	
-		<section class="card-section alt">		
-			<transition>
-				<div v-if="rfbSafe && rfbRisky" class="card-wrap">
-					<CardRiskFree :play="rfbRisky"/>
-					<CardRiskFree :play="rfbSafe"/>
-				</div>
-			</transition>
-		</section>
-	</div>
-</template>
-
 <script>
-import CardRiskFree from '@/components/CardRiskFree';
-import helpers from '@/components/mixins/helpers';
+import CardRiskFree from '@/components/CardRiskFree.vue';
+import helpers from '@/mixins/helpers';
+import '@/assets/legacy/style.scss'
 
 export default {
 	name: 'RiskFree',
@@ -186,3 +125,65 @@ export default {
 	},
 }
 </script>
+
+<template>
+	<div class="page">
+		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
+
+		<form @submit.prevent="calculate">
+			<div class="settings">
+				<div>
+					<label for="" style="display:block;">Rounding</label>
+					<div class="toggle toggle-round">
+						<input id="round" v-model="round" type="checkbox" value="true">
+						<label for="round"></label>
+						<div class="knob"></div>
+					</div>
+				</div>
+				<div class="field mt-5">
+					<label for="">Conversion %</label>
+					<input type="text" v-model="conversionRate" @keyup="onKeyUp('cr')">
+				</div>
+			</div>
+			<div class="book">
+				<input type="text" v-model="labelA" class="label-input" tabindex="1" @focus="editingLabel = true" @blur="editingLabel = false">
+				<div class="field-wrap flex-center">
+					<div class="field">
+						<label for="" class="color-rfb">Risk-free stake</label>
+						<input type="text" v-model="stakeA" tabindex="3" required @keyup="onKeyUp('xa')">
+					</div>
+					<div class="field">
+						<label for="">Odds</label>
+						<input type="text" v-model="oddsA" tabindex="4" required @keyup="onKeyUp('oa')">
+					</div>
+				</div>
+			</div>
+			<div class="book">
+				<input type="text" v-model="labelB" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false">
+				<div class="field-wrap flex-center">
+					<div class="field">
+						<label for="">Odds</label>
+						<input type="text" v-model="oddsB" tabindex="5" required @keyup="onKeyUp('ob')">
+					</div>
+				</div>
+			</div>
+			<div class="flex-center button-wrap">
+				<button class="btn btn-calculate" type="submit" tabindex="6" name="button">Calculate hedge</button>
+			</div>
+		</form>
+	
+	
+		<section v-if="loading" class="loading flex-center">
+			<div class="spinner"></div>
+		</section>
+	
+		<section class="card-section alt">		
+			<transition>
+				<div v-if="rfbSafe && rfbRisky" class="card-wrap">
+					<CardRiskFree :play="rfbRisky"/>
+					<CardRiskFree :play="rfbSafe"/>
+				</div>
+			</transition>
+		</section>
+	</div>
+</template>

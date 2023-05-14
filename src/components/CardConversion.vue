@@ -11,30 +11,30 @@
 			<div class="flex split">
 				<div class="amount">
 					<label>{{ this.$parent.labelA }} ({{ this.play.oddsA }})</label>
-					<div class="number">{{ play.stakeA|currency }}</div>
+					<div class="number">{{ formatUSD(play.stakeA) }}</div>
 					<small>free bet</small>
 				</div>
 				<div class="amount">
 					<label>{{ this.$parent.labelB }} ({{ this.play.oddsB }})</label>
-					<div class="number">{{ play.stakeB|currency }}</div>
+					<div class="number">{{ formatUSD(play.stakeB) }}</div>
 					<small>stake</small>
 				</div>
 			</div>
 			<div class="flex-center mt-15 mb-25">
 				<div class="amount">
-					<div class="number sunk color-orange">{{ play.stakeB|currency }}</div>
+					<div class="number sunk color-orange">{{ formatUSD(play.stakeB) }}</div>
 					<small>sunk</small>
 				</div>
 			</div>
 			<div class="flex split card-bottom">
 				<div class="amount">
-					<div class="number color-green">{{ play.profitA|currency }}</div>
-					<small>{{ play.payoutA|currency }} payout</small>
+					<div class="number color-green">{{ formatUSD(play.profitA) }}</div>
+					<small>{{ formatUSD(play.payoutA) }} payout</small>
 				</div>
 				<span class="or">or</span>
 				<div class="amount">
-					<div class="number color-green">{{ play.profitB|currency }}</div>
-					<small>{{ play.payoutB|currency }} payout</small>
+					<div class="number color-green">{{ formatUSD(play.profitB) }}</div>
+					<small>{{ formatUSD(play.payoutB) }} payout</small>
 				</div>
 			</div>
 		</div>
@@ -42,13 +42,13 @@
 </template>
 
 <script>
-import helpers from '@/components/mixins/helpers';
+import helpers from '@/mixins/helpers';
 
 export default {
 	name: 'CardConversion',
+	mixins: [helpers],
 	props: {
 		play: Object,
 	},
-	mixins: [helpers],
 }
 </script>

@@ -14,35 +14,35 @@
 			<div class="flex split">
 				<div class="amount">
 					<label>{{ this.$parent.labelA }} ({{ this.play.oddsA }})</label>
-					<div class="number">{{ play.stakeA|currency }}</div>
+					<div class="number">{{ formatUSD(play.stakeA) }}</div>
 					<small>risk-free</small>
 				</div>
 				<div class="amount">
 					<label>{{ this.$parent.labelB }} ({{ this.play.oddsB }})</label>
-					<div class="number">{{ play.stakeB|currency }}</div>
+					<div class="number">{{ formatUSD(play.stakeB) }}</div>
 					<small>stake</small>
 				</div>
 			</div>
 			<div class="flex-center mt-15 mb-25">
 				<div class="amount">
-					<div class="number sunk color-orange">{{ Number(play.stakeA) + Number(play.stakeB)|currency }}</div>
+					<div class="number sunk color-orange">{{ formatUSD(Number(play.stakeA) + Number(play.stakeB)) }}</div>
 					<small>sunk</small>
 				</div>
 			</div>
 			<div class="flex split card-bottom flex-bottom">
 				<div class="amount">
-					<div class="number color-green">{{ play.profitA|currency }}</div>
-					<small>{{ play.payoutA|currency }} payout</small>
+					<div class="number color-green">{{ formatUSD(play.profitA) }}</div>
+					<small>{{ formatUSD(play.payoutA) }} payout</small>
 				</div>
 				<span class="or">or</span>
 				<div class="amount">
-					<div class="number color-red small">{{ play.profitB|currency }}</div>
-					<small>{{ play.payoutB|currency }} payout</small>
+					<div class="number color-red small">{{ formatUSD(play.profitB) }}</div>
+					<small>{{ formatUSD(play.payoutB) }} payout</small>
 					
-					<div class="number color-blue small mt-10">+{{ play.conversion|currency }}</div>
+					<div class="number color-blue small mt-10">+{{ formatUSD(play.conversion) }}</div>
 					<small>{{ play.conversionRate }}% conversion</small>
 					
-					<div class="number color-green mt-10">{{ play.profitAfterConversion|currency }}</div>
+					<div class="number color-green mt-10">{{ formatUSD(play.profitAfterConversion) }}</div>
 					<small>after conversion</small>
 				</div>
 			</div>
@@ -51,13 +51,13 @@
 </template>
 
 <script>
-import helpers from '@/components/mixins/helpers';
+import helpers from '@/mixins/helpers';
 
 export default {
-	name: 'CardConversion',
+	name: 'CardRiskFree',
+	mixins: [helpers],
 	props: {
 		play: Object,
 	},
-	mixins: [helpers],
 }
 </script>

@@ -1,0 +1,145 @@
+/*! purgecss start ignore */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+	min-width: 320px;
+	overflow-x: hidden;
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+	-mos-osx-font-smoothing: grayscale;
+	font-family: 'Open Sans', sans-serif;
+}
+
+img {
+	max-width: 100%;
+}
+
+
+// -----------------------------------------------------------------------------
+//! Margins
+// -----------------------------------------------------------------------------
+
+*:first-child {
+    margin-top: 0;
+}
+
+*:last-child {
+    margin-bottom: 0;
+}
+
+// -----------------------------------------------------------------------------
+//! Sections
+// -----------------------------------------------------------------------------
+
+section,
+.section {
+	padding: 32px $pad-x;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $contain-with-pad;
+
+	&.full-width {
+		max-width: none;
+	}
+}
+
+.contain {
+	position: relative;
+	max-width: $contain;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// -----------------------------------------------------------------------------
+//! Headings
+// -----------------------------------------------------------------------------
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   margin: 0;
+   font-weight: 700;
+   line-height: 1.2;
+}
+
+h1 {
+	font-size: 36px;
+}
+
+h2 {
+	font-size: 25px;
+}
+
+h3 {
+	font-size: 20px;
+}
+
+// -----------------------------------------------------------------------------
+//! Paragraphs
+// -----------------------------------------------------------------------------
+
+p {
+	margin: 0;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+// -----------------------------------------------------------------------------
+//! Lists
+// -----------------------------------------------------------------------------
+
+// Put inside .wysi for actual "list" styles
+ul,
+ol {
+	padding: 0;
+	margin: 0;
+}
+
+ul {
+	list-style-type: none;
+}
+
+// -----------------------------------------------------------------------------
+//! Links
+// -----------------------------------------------------------------------------
+
+a,
+button {
+	transition: .1s;
+	color: $blue;
+
+	&:hover {
+		color: lighten($blue, 10%);
+	}
+}
+
+// -----------------------------------------------------------------------------
+//! Layout
+// -----------------------------------------------------------------------------
+
+.layout {
+	display: flex;
+	flex-direction: column;
+	gap: 60px;
+
+	@include min($md) {
+		flex-direction: row;
+
+		main {
+			flex: 1 1 70%;
+		}
+
+		aside {
+			flex: 0 0 30%;
+		}
+	}
+}
+/*! purgecss end ignore */

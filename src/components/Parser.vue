@@ -42,7 +42,7 @@
 <script>
 import _ from 'lodash';
 import map from '@/components/mixins/map';
-import helpers from '@/components/mixins/helpers';
+import helpers from '@/mixins/helpers';
 
 export default {
     name: 'Parser',

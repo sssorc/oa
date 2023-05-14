@@ -1,0 +1,157 @@
+// -----------------------------------------------------------------------------
+//! Mixins
+// -----------------------------------------------------------------------------
+
+@mixin flex-width-factory($breakpoint, $unit: '%') {
+	$attr-list: null;
+	
+	@for $i from 1 through 10 {
+        $width: 10 * $i;
+
+        .#{$breakpoint}-flex-#{$width} {
+            flex: 0 1 #{$width}#{$unit};
+        }
+
+        $attr-list: append($attr-list, unquote(".#{$breakpoint}-flex-#{$width}"), comma);
+    }
+}
+
+@mixin flex-parent-factory($breakpoint: '') {
+	$attr-list: null;
+	$prefix: $breakpoint;
+
+	.#{$prefix}flex {
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+	}
+
+	.#{$prefix}wrap {
+		flex-wrap: wrap;
+	}
+
+	.#{$prefix}inline-flex {
+		display: inline-flex;
+	}
+
+	.#{$prefix}flex-right {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	
+	.#{$prefix}flex-center {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.#{$prefix}flex-split {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	
+	.#{$prefix}flex-stretch {
+		display: flex;
+		align-items: stretch;
+	}
+	
+	.#{$prefix}flex-top {
+		display: flex;
+		align-items: flex-start;
+	}
+	
+	.#{$prefix}flex-bottom {
+		display: flex;
+		align-items: flex-end;
+	}
+
+	.#{$prefix}flex-col {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.#{$prefix}flex-row {
+		display: flex;
+		flex-direction: row;
+	}
+}
+
+// -----------------------------------------------------------------------------
+//! Parents
+// -----------------------------------------------------------------------------
+
+@include flex-parent-factory();
+
+@include min($md) {
+	@include flex-parent-factory('md-');
+}
+
+@include min($lg) {
+	@include flex-parent-factory('lg-');
+}
+
+@include min($xl) {
+	@include flex-parent-factory('xl-');
+}
+
+// -----------------------------------------------------------------------------
+//! Child alignment
+// -----------------------------------------------------------------------------
+
+.align-top {
+    align-self: flex-start;
+}
+
+.align-left {
+    margin-right: auto;
+}
+
+.align-right {
+    margin-left: auto;
+}
+
+// -----------------------------------------------------------------------------
+//! Child Widths
+// -----------------------------------------------------------------------------
+
+@include min($sm) {
+	@include flex-width-factory('sm');
+}
+
+@include min($md) {
+	@include flex-width-factory('md');
+}
+
+@include min($lg) {
+	@include flex-width-factory('lg');
+}
+
+@include min($xl) {
+	@include flex-width-factory('xl');
+}
+
+// -----------------------------------------------------------------------------
+//! Child sizes
+// -----------------------------------------------------------------------------
+
+.grow {
+	flex-grow: 1;
+}
+
+.shrink {
+	flex-shrink: 1;
+}
+
+.no-shrink {
+	flex-shrink: 0;
+}
+
+.flex-100 {
+	flex: 0 0 100%;
+}
+
+.flex-auto {
+	flex: 0 0 auto;
+}

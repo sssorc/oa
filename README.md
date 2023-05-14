@@ -1,26 +1,12 @@
-# odds-arb
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+## Setup
+```sh
+nvm use
+npm install
+npm run dev
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+### Compile and Minify for Production
 
-### Lints and fixes files
+```sh
+npm run build
 ```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# sssorc.github.io
-# sssorc.github.io

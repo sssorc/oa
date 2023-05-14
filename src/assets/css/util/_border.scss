@@ -1,0 +1,41 @@
+.border {
+	border: 1px solid $border;
+}
+
+.border-top {
+	border-top: 1px solid $border;
+}
+
+.border-right {
+	border-right: 1px solid $border;
+}
+
+.border-bottom {
+	border-bottom: 1px solid $border;
+}
+
+.border-left {
+	border-left: 1px solid $border;
+}
+
+@include attr-x('bw', 'border-width', 1, 5);
+
+// -----------------------------------------------------------------------------
+//! Colors
+// -----------------------------------------------------------------------------
+
+@each $name, $hex in $colors {
+	.bc-#{$name} {
+		border-color: $hex;
+	}
+}
+
+// -----------------------------------------------------------------------------
+//! Radius
+// -----------------------------------------------------------------------------
+
+@include attr-x('br', 'border-radius', 1, 100);
+
+.round {
+	border-radius: 50%;
+}

@@ -1,0 +1,57 @@
+// -----------------------------------------------------------------------------
+//! Utility class generator
+// -----------------------------------------------------------------------------
+
+@mixin attr-x($name, $attr, $attr-steps: 10, $attr-count: 10, $unit: 'px', $attr2: false) {
+    $attr-list: null;
+
+	.#{$name}-0 {
+		#{$attr}: 0;
+
+		@if $attr2 {
+			#{$attr2}: 0;
+		}
+	}
+
+    @for $i from 1 through $attr-count {
+        $attr-value: $attr-steps * $i;
+
+        .#{$name}-#{$attr-value} {
+            #{$attr}: #{$attr-value}#{$unit};
+
+			@if $attr2 {
+				#{$attr2}: #{$attr-value}#{$unit};
+			}
+        }
+
+        $attr-list: append($attr-list, unquote(".#{$name}-#{$attr-value}"), comma);
+    }
+
+    #{$attr-list} {
+        //append style to all classes
+    }
+}
+
+// -----------------------------------------------------------------------------
+//! Media queries
+// -----------------------------------------------------------------------------
+
+	@mixin min( $breakpoint ) {
+		@media print, screen and ( min-width: $breakpoint ) {
+			@content;
+		}
+	}
+
+	@mixin max( $breakpoint ) {
+		$breakpoint: $breakpoint - 1;
+		@media screen and ( max-width: $breakpoint ) {
+			@content;
+		}
+	}
+
+	@mixin range( $start, $end ) {
+		$end: $end - 1;
+		@media screen and ( min-width: $start ) and ( max-width: $end ) {
+			@content;
+		}
+	}
