@@ -10,7 +10,6 @@ const router = createRouter({
 		},
 		{
 			path: '/oa',
-			component: () => import('../views/Devig.vue'),
 			children: [
 				{
 					path: '/arb',
