@@ -124,16 +124,18 @@ export default {
 		},
 		getJuice(data) {
 			let juice = 0;
+			let count = 0;
 
 			for (const key in data) {
 				let obj = data[key];
 
 				if (Object.hasOwnProperty.call(obj, 'MarketJuice')) {
 					juice += obj.MarketJuice;
+					count += 1;
 				}
 			}
 
-			return this.round(juice * 100);
+			return this.round((juice / count) * 100);
 		},
 		getFairOddsFromPercent() {
 			return 'todo';
