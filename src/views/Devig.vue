@@ -491,7 +491,7 @@ export default {
 					<label>Data Type</label>
 					<div class="radio">
 						<input v-model="importDataType" id="importDataTypeFirstBasket" type="radio" value="firstBasket"/>
-						<label for="importDataTypeFirstBasket">First Basket</label>
+						<label for="importDataTypeFirstBasket">First Basket/Goal</label>
 					</div>
 				</div>
 
