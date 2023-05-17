@@ -14,6 +14,9 @@ export default {
 			kellyMultiplier: .25,
 			kellyBankroll: 1000,
 			useBoost: 0,
+			showImport: true,
+			importData: '',
+			importDataType: 'firstBasket',
 			inputs: {
 				LegOdds: '',
 				FinalOdds: '',
@@ -44,6 +47,13 @@ export default {
 			return `Odds: ${this.results.finalOdds}; **EV: ${this.results.ev} **\r\`${this.results.inputLegs}\` (${this.results.juice}% juice)\rFV: ${this.results.fairOdds}; Method: ${this.results.method}; (FB = ${this.results.conversionPercentage})`
 		}
 	},
+	mounted() {
+		document.addEventListener('keydown', (event) => {
+			if (this.showImport && event.key === 'Escape') {
+				this.showImport = false;
+			}
+        });
+	},
 	methods: {
 		copyForReddit() {
 			const textarea = this.$refs.redditText;
@@ -55,6 +65,36 @@ export default {
 			setTimeout(() => {
 				this.copied = false;
 			}, 2000);
+		},
+		importFirstBasket() {
+			// let data = this.importData;
+			let data = this.importData;
+			console.log('starting data', data);
+
+			data = data.replace( /[\r\n]+/gm, "/" );
+			console.log('remove line breaks', data);
+
+			// Remove everything except numbers, +, and -
+			data = data.replace(/[^\d\-\+\/]/g, '');
+			console.log('remove non digets', data);
+
+			// Remove double "//"
+			data = data.replace(/\/\//g, '/');
+
+			// Remove "/" at start
+			data = data.replace(/^\//, '');
+
+			this.inputs.LegOdds = data;
+		},
+		importPastedData() {
+			if (this.importDataType == 'firstBasket') {
+				this.importFirstBasket();
+			}
+
+			this.showImport = false;
+		},
+		closeModal() {
+			this.showImport = false;
 		},
 		formatUSD(number) {
 			let dollarUS = Intl.NumberFormat("en-US", {
@@ -224,10 +264,12 @@ export default {
 							</div>
 							<div class="field grow">
 								<label for="">Leg Odds<div class="asterisk">*</div> <small>(Format: "+125/-130,+150/-180")</small></label>
-								<input v-model="inputs.LegOdds" type="text" required/>
+								<div class="flex wrap gap-8">
+									<input v-model="inputs.LegOdds" type="text" style="flex:1;" required/>
+									<button type="button" class="btn btn-gray btn-small btn-show-import" @click.prevent="showImport = true">Paste data</button>
+								</div>
 							</div>
 						</div>
-
 						<div class="flex-top wrap gap-y-16 gap-x-32" style="min-height:66px;">
 							<!-- Correlation -->
 							<div class="correlation">
@@ -436,5 +478,28 @@ export default {
 			</aside>
 					
 		</section>
+
+		<div v-if="showImport" class="modal">
+			<div class="modal-content">
+				<button @click="closeModal" class="close flex-center reset">
+					<svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg>
+				</button>
+				<h3 class="mb-24">Import Pasted data <small class="fs-14 op-60">(FanDuel)</small></h3>
+				
+				
+				<div class="field">
+					<label>Data Type</label>
+					<div class="radio">
+						<input v-model="importDataType" id="importDataTypeFirstBasket" type="radio" value="firstBasket"/>
+						<label for="importDataTypeFirstBasket">First Basket</label>
+					</div>
+				</div>
+
+				<textarea v-model="importData" class="mt-24" style="height:300px;"></textarea>
+				<div class="flex-right mt-24">
+					<button class="btn btn-blue" @click="importPastedData">Import lines</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>

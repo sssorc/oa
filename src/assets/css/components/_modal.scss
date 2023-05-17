@@ -1,0 +1,26 @@
+.modal {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	background-color: rgba(#000, .3);
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
+
+.modal-content {
+	position: relative;
+	background-color: #fff;
+	padding: 16px;
+	max-width: 700px;
+	width: calc(100% - $pad-x * 2);
+	margin-top: 20vh;
+}
+
+.close {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+}
