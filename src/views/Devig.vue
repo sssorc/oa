@@ -14,7 +14,7 @@ export default {
 			kellyMultiplier: .25,
 			kellyBankroll: 1000,
 			useBoost: 0,
-			showImport: true,
+			showImport: false,
 			importData: '',
 			importDataType: 'firstBasket',
 			inputs: {
