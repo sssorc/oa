@@ -2,9 +2,9 @@
 	<header class="masthead text-center">
 		<div class="logo flex-center">hedge calculators</div>
 		<nav>
-			<RouterLink to="/arb" class="flex-center">Arbitrage</RouterLink>
-			<RouterLink to="/free-bet" class="flex-center">Free bet</RouterLink>
-			<RouterLink to="/risk-free" class="flex-center">Risk-free</RouterLink>
+			<RouterLink :class="{'router-link-active': $route.fullPath == '/arb' }" to="/arb" class="flex-center">Arbitrage</RouterLink>
+			<RouterLink :class="{'router-link-active': $route.fullPath == '/free-bet' }" to="/free-bet" class="flex-center">Free bet</RouterLink>
+			<RouterLink :class="{'router-link-active': $route.fullPath == '/risk-free' }" to="/risk-free" class="flex-center">Risk-free</RouterLink>
 		</nav>
 	</header>
 </template>
