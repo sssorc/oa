@@ -57,7 +57,7 @@ export default {
 	methods: {
 		copyForReddit() {
 			const textarea = this.$refs.redditText;
-			textarea.select();
+			textarea.select();			
 			textarea.setSelectionRange(0, 99999);
 			document.execCommand('copy');
 			this.copied = true;
@@ -69,14 +69,11 @@ export default {
 		importFirstBasket() {
 			// let data = this.importData;
 			let data = this.importData;
-			console.log('starting data', data);
 
 			data = data.replace( /[\r\n]+/gm, "/" );
-			console.log('remove line breaks', data);
 
 			// Remove everything except numbers, +, and -
 			data = data.replace(/[^\d\-\+\/]/g, '');
-			console.log('remove non digets', data);
 
 			// Remove double "//"
 			data = data.replace(/\/\//g, '/');
@@ -92,6 +89,13 @@ export default {
 			}
 
 			this.showImport = false;
+			this.importData = '';
+		},
+		openModal() {
+			this.showImport = true;
+			setTimeout(() => {
+				this.$refs['importData'].focus();
+			}, 100);
 		},
 		closeModal() {
 			this.showImport = false;
@@ -266,7 +270,7 @@ export default {
 								<label for="">Leg Odds<div class="asterisk">*</div> <small>(Format: "+125/-130,+150/-180")</small></label>
 								<div class="flex wrap gap-8">
 									<input v-model="inputs.LegOdds" type="text" style="flex:1;" required/>
-									<button type="button" class="btn btn-gray btn-small btn-show-import" @click.prevent="showImport = true">Paste data</button>
+									<button type="button" class="btn btn-gray btn-small btn-show-import" @click.prevent="openModal">Paste data</button>
 								</div>
 							</div>
 						</div>
@@ -479,7 +483,7 @@ export default {
 					
 		</section>
 
-		<div v-if="showImport" class="modal">
+		<div v-show="showImport" class="modal">
 			<div class="modal-content">
 				<button @click="closeModal" class="close flex-center reset">
 					<svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg>
@@ -495,7 +499,7 @@ export default {
 					</div>
 				</div>
 
-				<textarea v-model="importData" class="mt-24" style="height:300px;"></textarea>
+				<textarea v-model="importData" ref="importData" id="importData" class="mt-24" style="height:300px;"></textarea>
 				<div class="flex-right mt-24">
 					<button class="btn btn-blue" @click="importPastedData">Import lines</button>
 				</div>
