@@ -278,7 +278,7 @@ export default {
 										<div>Final Odds: <strong>{{ results.finalOdds }}</strong></div>
 										<div>Fair Value: <strong>{{ results.fairOdds }} ({{ this.round(results.hitPercentage) }}%)</strong></div>
 										<div>Market Juice: <strong>{{ results.juice }}%</strong></div>
-										<div>Legs: <strong>{{ results.inputLegs }}%</strong></div>
+										<div>Legs: <strong>{{ results.inputLegs }}</strong></div>
 									</div>
 								</div>
 								<div class="flex wrap gap-x-20 gap-y-16 results-ev">
