@@ -330,13 +330,20 @@ export default {
 									</div>
 								</div>
 								<div class="flex wrap gap-x-20 gap-y-16 results-ev">
-									<div :class="{'bg-green-01': results.ev >= 0, 'bg-red-01': results.ev < 0}" class="item">
+									<div :class="{'bg-green-01': results.ev >= 0, 'bg-red-01': results.ev < 0}" class="item item-ev">
 										<div :class="{'color-green': results.ev >= 0, 'color-red': results.ev < 0}" class="number">{{ results.ev }}%</div>
 										<label>EV</label>
 									</div>
-									<div class="item" v-if="results.ev > 0">
-										<div class="number">{{ kelly }}</div>
-										<label>{{ kellyMultiplier }} Kelly</label>
+									<div class="item item-kelly flex gap-24" v-if="results.ev > 0">
+										<div>
+											<div class="number">{{ kelly }}</div>
+											<label>{{ kellyMultiplier }} Kelly</label>
+										</div>
+										<div class="grid gap-4 item-units fs-13">
+											<div class="lh-15"><span class="color-blue-07">Full:</span> {{ round(results.kellyFull)}}u</div>
+											<div class="lh-15"><span class="color-blue-07">Half:</span> {{ round(results.kellyFull/2)}}u</div>
+											<div class="lh-15"><span class="color-blue-07">Quarter:</span> {{ round(results.kellyFull/4)}}u</div>
+										</div>
 									</div>
 								</div>
 							</div>

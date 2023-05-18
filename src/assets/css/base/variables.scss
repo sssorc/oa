@@ -9,7 +9,8 @@ $green: #6ea67a;
 $border: rgb(212, 212, 212);
 
 $colors: (
-	'blue': #222D43,
+	'blue': $blue,
+	'blue-07': rgba($blue, .7),
 	'yellow': #f5a425,
 	'red': #E71D36,
 	'red-01': rgba(#E71D36, .1),
