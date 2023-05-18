@@ -322,6 +322,8 @@ export default {
 									<h3 class="mb-12">{{ results.method }}</h3>
 									<div class="grid gap-8 pad-4">
 										<div>Final Odds: <strong>{{ results.finalOdds }}</strong></div>
+										<div>FB Conversion: <strong :class="{'color-green': results.conversionPercentage > 75}">{{ results.conversionPercentage }}%</strong></div>
+										<hr>
 										<div>Fair Value: <strong>{{ results.fairOdds }} ({{ this.round(results.hitPercentage) }}%)</strong></div>
 										<div>Market Juice: <strong>{{ results.juice }}%</strong></div>
 										<div>Legs: <strong>{{ results.inputLegs }}</strong></div>
