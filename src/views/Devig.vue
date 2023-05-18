@@ -17,6 +17,7 @@ export default {
 			showImport: false,
 			importData: '',
 			importDataType: 'firstBasket',
+			sourceBook: '',
 			inputs: {
 				LegOdds: '',
 				FinalOdds: '',
@@ -224,6 +225,7 @@ export default {
 					conversionPercentage: this.round(data.FB_Percentage * 100),
 					ev: this.round(data.EV_Percentage * 100),
 					kellyFull: data.Kelly_Full, 
+					sourceBook: this.sourceBook,
 				};
 			}).catch((error) => {
 				console.log('@@error', error);
@@ -305,6 +307,12 @@ export default {
 								<input v-model="inputs.Boost_Text" type="text" id="boostPercent" style="width:80px;" />
 							</div>
 						</div>
+
+						<!-- Source book -->
+						<div class="field" style="max-width:200px">
+								<label for="">Source book</label>
+								<input v-model="sourceBook" type="text">
+							</div>
 					</div>
 					
 					<!-- Submit -->
@@ -319,7 +327,7 @@ export default {
 						<div :class="{ 'bc-red bg-red-01': results.ev < 0, 'bc-green bg-green-01': results.ev > 0 }" class="results pad-20 border">
 							<div class="results-top flex-split flex-top wrap gap-16">
 								<div class="fs-14">
-									<h3 class="mb-12">{{ results.method }}</h3>
+									<h3 class="mb-12">{{ results.method }} <small v-if="results.sourceBook" class="fs-16 op-50">(vs {{ sourceBook }})</small></h3>
 									<div class="grid gap-8 pad-4">
 										<div>Final Odds: <strong>{{ results.finalOdds }}</strong></div>
 										<div>FB Conversion: <strong :class="{'color-green': results.conversionPercentage > 75}">{{ results.conversionPercentage }}%</strong></div>
