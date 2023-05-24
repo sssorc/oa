@@ -56,6 +56,9 @@ export default {
         });
 	},
 	methods: {
+		formatLegOdds() {
+			this.inputs.LegOdds = this.inputs.LegOdds.replace(/\s+/g, ',');
+		},
 		copyForReddit() {
 			const textarea = this.$refs.redditText;
 			textarea.select();			
@@ -271,7 +274,7 @@ export default {
 							<div class="field grow">
 								<label for="">Leg Odds<div class="asterisk">*</div> <small>(Format: "+125/-130,+150/-180")</small></label>
 								<div class="flex wrap gap-8">
-									<input v-model="inputs.LegOdds" type="text" style="flex:1;" required/>
+									<input v-model="inputs.LegOdds" type="text" style="flex:1;" @blur="formatLegOdds" required/>
 									<button type="button" class="btn btn-gray btn-small btn-show-import" @click.prevent="openModal">Paste data</button>
 								</div>
 							</div>
