@@ -37,10 +37,9 @@ export default {
 		}
 	},
 	computed: {
-		kelly() {
+		kellyDollars() {
 			if (!this.results) return '';
-			
-			return this.formatUSD(this.results.kellyFull * this.kellyMultiplier);
+			return this.formatUSD(this.kellyBankroll * this.kellyMultiplier * this.results.kellyFull/100);
 		},
 		redditText() {
 			if (!this.results) return '';
@@ -347,7 +346,7 @@ export default {
 									</div>
 									<div class="item item-kelly flex gap-24" v-if="results.ev > 0">
 										<div>
-											<div class="number">{{ kelly }}</div>
+											<div class="number">{{ kellyDollars }}</div>
 											<label>{{ kellyMultiplier }} Kelly</label>
 										</div>
 										<div class="grid gap-4 item-units fs-13">
