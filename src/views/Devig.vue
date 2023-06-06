@@ -44,7 +44,7 @@ export default {
 		redditText() {
 			if (!this.results) return '';
 
-			return `Odds: ${this.results.finalOdds}; **EV: ${this.results.ev} **\r\`${this.results.inputLegs}\` (${this.results.juice}% juice)\rFV: ${this.results.fairOdds}; Method: ${this.results.method}; (FB = ${this.results.conversionPercentage})`
+			return `Odds: ${this.results.finalOdds}; **EV: ${this.results.ev}%**\r\r\`${this.results.inputLegs}\` (${this.results.juice}% juice)\r\rFV: ${this.results.fairOdds}; Method: ${this.results.method}; (Full=${this.round(this.results.kellyFull)}u, 1/2=${this.round(this.results.kellyFull / 2)}u, 1/4=${this.round(this.results.kellyFull / 4)}u, FB = ${this.results.conversionPercentage}%)`
 		}
 	},
 	mounted() {
