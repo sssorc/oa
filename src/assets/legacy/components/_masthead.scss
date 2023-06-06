@@ -56,6 +56,10 @@ $border-width: 5px;
 			&:nth-child(3):after {
 				background: $color-rfb;
 			}
+
+			&:nth-child(4):after {
+				background: #de5916;
+			}
 			
 			&:hover:after {
 				opacity: .3;	
