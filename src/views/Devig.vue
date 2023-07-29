@@ -6,7 +6,7 @@ axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded'
 export default {
 	data() {
 		return {
-			apiUrl: '//api.crazyninjaodds.com/api/devigger/v1/sportsbook_devigger.aspx?api=open&Args=ev_p,fb_p,fo_o,kelly&',
+			apiUrl: '//api.crazyninjaodds.com/api/devigger/v1/sportsbook_devigger.aspx?api=open&Args=ev_p,fb_p,fo_o,kelly,dm&',
 			showSettings: false,
 			results: false,
 			copied: false,
@@ -122,6 +122,17 @@ export default {
 				return Math.round(num * 100) / 100;
 			}
 		},
+		getWcMethod(code) {
+			if (code == 'wc:p') {
+				return 'Power';
+			}
+
+			if (code == 'wc:p,m') {
+				return 'Power + Multiplicative';
+			}
+
+			return false;
+		},
 		getMethod(num) {
 			switch (num) {
 				case 0:
@@ -232,6 +243,7 @@ export default {
 					ev: this.round(data.EV_Percentage * 100),
 					kellyFull: data.Kelly_Full, 
 					sourceBook: this.sourceBook,
+					wcMethod: this.getWcMethod(data.DevigMethod)
 				};
 			}).catch((error) => {
 				console.log('@@error', error);
