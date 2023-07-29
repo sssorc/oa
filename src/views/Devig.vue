@@ -73,13 +73,17 @@ export default {
 			// let data = this.importData;
 			let data = this.importData;
 
+			// Remove line breaks
 			data = data.replace( /[\r\n]+/gm, "/" );
+
+			// Remove numbers that don't have + or - in front
+			data = data.replace(/[^+-\d]\d+/g, '');
 
 			// Remove everything except numbers, +, and -
 			data = data.replace(/[^\d\-\+\/]/g, '');
 
-			// Remove double "//"
-			data = data.replace(/\/\//g, '/');
+			// Remove multiple slashes with single slash
+			data = data.replace(/\/{2,}/g, '/');
 
 			// Remove "/" at start
 			data = data.replace(/^\//, '');
@@ -507,16 +511,16 @@ export default {
 				<button @click="closeModal" class="close flex-center reset">
 					<svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg>
 				</button>
-				<h3 class="mb-24">Import Pasted data <small class="fs-14 op-60">(FanDuel)</small></h3>
+				<h3 class="mb-8">Import Pasted data <small class="fs-14 op-60">(FanDuel)</small></h3>
 				
 				
-				<div class="field">
+				<!-- <div class="field">
 					<label>Data Type</label>
 					<div class="radio">
 						<input v-model="importDataType" id="importDataTypeFirstBasket" type="radio" value="firstBasket"/>
 						<label for="importDataTypeFirstBasket">First Basket/Goal</label>
 					</div>
-				</div>
+				</div> -->
 
 				<textarea v-model="importData" ref="importData" id="importData" class="mt-24" style="height:300px;"></textarea>
 				<div class="flex-right mt-24">
