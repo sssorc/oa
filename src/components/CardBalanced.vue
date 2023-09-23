@@ -10,17 +10,17 @@
         <div class="card-body">
             <div class="flex split">
                 <div class="amount">
-                    <label>{{ this.$parent.labelA }} ({{ this.play.oddsA }})</label>
+                    <label>{{ labelA }} ({{ this.play.oddsA }})</label>
                     <div class="number">{{ formatUSD(play.stakeA) }}</div>
                     <small>stake</small>
                 </div>
                 <div class="amount">
-                    <label>{{ this.$parent.labelB }} ({{ this.play.oddsB }})</label>
+                    <label>{{ labelB }} ({{ this.play.oddsB }})</label>
                     <div class="number">{{ formatUSD(play.stakeB) }}</div>
                     <small>stake</small>
                 </div>
 				<div v-if="play.stakeC" class="amount">
-					<label>{{ this.$parent.labelC }} ({{ this.play.oddsC }})</label>
+					<label>{{ labelC }} ({{ this.play.oddsC }})</label>
                     <div class="number">{{ formatUSD(play.stakeC) }}</div>
                     <small>stake</small>
 				</div>
@@ -67,6 +67,9 @@ export default {
     name: 'CardBalanced',
     props: {
         play: Object,
+		labelA: String,
+		labelB: String,
+		labelC: String,
     },
 	computed: {
 		roi() {

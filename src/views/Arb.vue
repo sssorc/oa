@@ -293,7 +293,7 @@ export default {
 		<section class="card-section alt">
 			<transition name="fade">
 				<div v-if="arbBalanced && !loading" class="card-wrap">
-					<CardBalanced :play="arbBalanced" />
+					<CardBalanced :labelA="labelA" :labelB="labelB" :labelC="labelC" :play="arbBalanced" />
 				</div>
 			</transition>
 		</section>
