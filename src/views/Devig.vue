@@ -209,7 +209,7 @@ export default {
 
 			for (const key in this.inputs) {
 				let value = this.inputs[key];
-				if (value) {
+				if (value || value == 0) {
 					params.push(`${key}=${value}`);
 				}
 			}
