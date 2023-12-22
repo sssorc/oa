@@ -284,12 +284,12 @@ export default {
 						<div class="flex gap-16 wrap">
 							<div class="field">
 								<label for="">Final Odds<div class="asterisk">*</div></label>
-								<input v-model="inputs.FinalOdds" type="tel" required style="width:80px;"/>
+								<input v-model="inputs.FinalOdds" type="text" inputmode="numeric" required style="width:80px;"/>
 							</div>
 							<div class="field grow">
 								<label for="">Leg Odds<div class="asterisk">*</div> <small>(Format: "+125/-130,+150/-180")</small></label>
 								<div class="flex wrap gap-8">
-									<input v-model="inputs.LegOdds" type="tel" style="flex:1;" @blur="formatLegOdds" required/>
+									<input v-model="inputs.LegOdds" type="text" inputmode="numeric" style="flex:1;" @blur="formatLegOdds" required/>
 									<button type="button" class="btn btn-gray btn-small btn-show-import" @click.prevent="openModal">Paste data</button>
 								</div>
 							</div>
@@ -298,7 +298,7 @@ export default {
 							<!-- Correlation -->
 							<div class="correlation">
 								<label>Correlation <small>(Format: &quot;0.2&quot; OR &quot;+326=+112,+134&quot;)</small></label>
-								<input v-model="inputs.Correlation_Text" type="tel" id="TextBoxCorrelation" />
+								<input v-model="inputs.Correlation_Text" type="text" inputmode="numeric" id="TextBoxCorrelation" />
 							</div>
 
 							<!-- Boost -->
