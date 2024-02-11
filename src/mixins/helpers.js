@@ -9,8 +9,6 @@ const helpers = {
         labelA: 'Bet A',
         labelB: 'Bet B',
 		labelC: 'Bet 3',
-        winback: false,
-		winbackAmount: '',
         editingLabel: false,
         copyConfirmation: '',
       };
@@ -45,10 +43,6 @@ const helpers = {
 
 			if ( this.labelC !== 'Bet C') {
                 arr.push(`bookc=${encodeURIComponent(this.labelC)}`);
-            }
-
-            if ( this.winback ) {
-                arr.push(`wb=${this.winbackAmount}`);
             }
             
             if ( Number(this.conversionRate) !== 75 ) {
@@ -131,10 +125,6 @@ const helpers = {
             
             if ( field == 'xa' && this.stakeA ) {
                 this.stakeA = this.stakeA.replace(/[^\d]/, '');
-            }
-            
-            if ( field == 'wb' && this.winbackAmount ) {
-                this.winbackAmount = this.winbackAmount.replace(/[^\d]/, '');
             }
             
             if ( field == 'cr' && this.conversionRate ) {

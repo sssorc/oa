@@ -3,6 +3,42 @@ import axios from 'axios';
 import '@/assets/css/main.scss'
 axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
 
+
+function copyToClipboard(text) {
+  var textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = 0;
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    document.execCommand('copy');
+    console.log('Text copied to clipboard');
+  } catch (err) {
+    console.error('Unable to copy text to clipboard', err);
+  }
+
+  document.body.removeChild(textarea);
+}
+
+document.addEventListener('click', function(e) {
+	var row = e.target.nodeName == 'TR' ? e.target : e.target.closest('TR');
+	var out = 'AVG(';
+	var odds = [];
+	var cells = Array.from(row.children);
+
+	for (var i = 3; i < cells.length; i++) {
+		if (cells[i].innerHTML.match(/[+-]\d+/)) {
+			odds.push(cells[i].innerHTML);
+		}
+	}
+
+	out += odds.join(',') + ')';
+	console.log('out', out);
+	copyToClipboard(out);
+}, { once: true } );
+
 export default {
 	data() {
 		return {

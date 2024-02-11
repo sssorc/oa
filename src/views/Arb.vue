@@ -65,11 +65,6 @@ export default {
 			// Get payout
 			let payoutA = Number(this.getPayout(this.oddsA, this.stakeA));
 
-			// Add winback to payout if exists
-			if ( this.winback ) {
-				payoutA += Number(this.winbackAmount);
-			}
-
 			// stake B
 			let stakeB = this.getStake(this.oddsB, payoutA);
 			stakeB = this.round ? Math.round(stakeB) : stakeB;
@@ -102,7 +97,6 @@ export default {
 				profitB,
 				profitC,
 				ev: (profitA + profitB) / 2,
-				winback: this.winback ? this.winbackAmount : false
 			}
 
 			// Done loading
@@ -144,11 +138,6 @@ export default {
 
 			if ( labelC ) {
 				this.labelC = decodeURIComponent(labelC);
-			}
-			
-			if ( wb ) {
-				this.winback = true;
-				this.winbackAmount = decodeURIComponent(wb);
 			}
 
 			this.calculate();
@@ -231,32 +220,17 @@ export default {
 						<div class="knob"></div>
 					</div>
 				</div>
-				<div>
-					<label for="" style="display:block;">
-						Extra
-						<!-- <svg width="12" v-tooltip.right="'Additional winnings awarded only if the bet hits'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm0-338c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/></svg> -->
-					</label>
-					<div class="toggle toggle-round">
-						<input id="winback" v-model="winback" type="checkbox" value="true" tabindex="-1">
-						<label for="winback"></label>
-						<div class="knob"></div>
-					</div>
-				</div>
 			</div>
 			<div class="book">
 				<input type="text" v-model="labelA" class="label-input" tabindex="1" @focus="editingLabel = true" @blur="editingLabel = false">
 				<div class="field-wrap flex-center">
 					<div class="field">
-						<label for="" class="color-arb">Max stake</label>
+						<label for="" class="color-arb">Stake</label>
 						<input type="text" v-model="stakeA" required tabindex="3" @keyup="onKeyUp('xa')">
 					</div>
 					<div class="field">
 						<label for="">Odds</label>
 						<input type="text" v-model="oddsA" required tabindex="4" @keyup="onKeyUp('oa')">
-					</div>
-					<div v-if="winback" class="field">
-						<label for="">Extra</label>
-						<input type="text" v-model="winbackAmount" required tabindex="4" @keyup="onKeyUp('wb')">
 					</div>
 				</div>
 			</div>

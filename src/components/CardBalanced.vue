@@ -28,30 +28,20 @@
             <div class="flex-center mt-15 mb-25">
                 <div class="amount">
                     <div class="number sunk color-orange">{{ formatUSD(play.stakeA + play.stakeB + play.stakeC) }}</div>
-                    <small>sunk</small>
+                    <small>staked</small>
                 </div>
             </div>
             <div class="flex split card-bottom">
-                <div v-if="play.winback" class="amount">
-					<div class="number color-red small">{{ formatUSD(play.profitA - play.winback) }}</div>
-					<small>{{ formatUSD(play.payoutA - play.winback) }} payout</small>
-					
-					<div class="number color-blue small mt-10">+{{ formatUSD(play.winback) }}</div>
-					<small>Extra</small>
-					
-					<div class="number color-green mt-10">{{ formatUSD(play.profitA) }}</div>
-					<small>after extra</small>
-				</div>
-                <div v-else class="amount">
+                <div class="amount">
                     <div :class="{'color-green': play.profitA > 0, 'color-red': play.profitA < 0}" class="number">{{ formatUSD(play.profitA) }}</div>
                     <small>{{ formatUSD(play.payoutA) }} payout</small>
                 </div>
                 <span class="or">or</span>
-                <div :class="{'mt-a': play.winback }" class="amount">
+                <div class="amount">
                     <div :class="{'color-green': play.profitB > 0, 'color-red': play.profitB < 0}" class="number">{{ formatUSD(play.profitB) }}</div>
                     <small>{{ formatUSD(play.payoutB) }} payout</small>
                 </div>
-				<div v-if="play.stakeC" :class="{'mt-a': play.winback }" class="amount">
+				<div v-if="play.stakeC" class="amount">
 					<div :class="{'color-green': play.profitC > 0, 'color-red': play.profitC < 0}" class="number">{{ formatUSD(play.profitC) }}</div>
 					<small>{{ formatUSD(play.payoutC) }} payout</small>
 				</div>

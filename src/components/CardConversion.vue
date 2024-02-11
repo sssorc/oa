@@ -23,7 +23,7 @@
 			<div class="flex-center mt-15 mb-25">
 				<div class="amount">
 					<div class="number sunk color-orange">{{ formatUSD(play.stakeB) }}</div>
-					<small>sunk</small>
+					<small>staked</small>
 				</div>
 			</div>
 			<div class="flex split card-bottom">
