@@ -183,8 +183,8 @@ export default {
 		<section class="card-section alt">		
 			<transition>
 				<div v-if="rfbSafe && rfbRisky" class="card-wrap">
-					<CardRiskFree :play="rfbRisky"/>
-					<CardRiskFree :play="rfbSafe"/>
+					<CardRiskFree :play="rfbRisky" :bet-A="labelA" :bet-B="labelB"/>
+					<CardRiskFree :play="rfbSafe" :bet-A="labelA" :bet-B="labelB"/>
 				</div>
 			</transition>
 		</section>

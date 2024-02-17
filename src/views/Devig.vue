@@ -15,7 +15,6 @@ function copyToClipboard(text) {
 
   try {
     document.execCommand('copy');
-    console.log('Text copied to clipboard');
   } catch (err) {
     console.error('Unable to copy text to clipboard', err);
   }
@@ -36,7 +35,6 @@ document.addEventListener('click', function(e) {
 	}
 
 	out += odds.join(',') + ')';
-	console.log('out', out);
 	copyToClipboard(out);
 }, { once: true } );
 
@@ -286,7 +284,6 @@ export default {
 					wcMethod: this.getWcMethod(data.DevigMethod)
 				};
 			}).catch((error) => {
-				console.log('@@error', error);
 				if ('message' in error) {
 					this.errorMessage = error.message;
 				} else {

@@ -216,7 +216,7 @@ export default {
 		<section class="card-section alt">		
 			<transition>
 				<div v-if="!loading && conversion" class="card-wrap">
-					<CardConversion :play="conversion" />
+					<CardConversion :play="conversion" :bet-A="labelA" :bet-B="labelB"/>
 				</div>
 			</transition>
 		</section>

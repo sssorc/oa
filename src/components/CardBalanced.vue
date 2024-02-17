@@ -10,17 +10,17 @@
         <div class="card-body">
             <div class="flex split">
                 <div class="amount">
-                    <label>{{ labelA }} ({{ this.play.oddsA }})</label>
+                    <label>{{ labelA }} ({{ Number(this.play.oddsA) > 0 ? `+${this.play.oddsA}` : this.play.oddsA }})</label>
                     <div class="number">{{ formatUSD(play.stakeA) }}</div>
                     <small>stake</small>
                 </div>
                 <div class="amount">
-                    <label>{{ labelB }} ({{ this.play.oddsB }})</label>
+                    <label>{{ labelB }} ({{ Number(this.play.oddsB) > 0 ? `+${this.play.oddsB}` : this.play.oddsB }})</label>
                     <div class="number">{{ formatUSD(play.stakeB) }}</div>
                     <small>stake</small>
                 </div>
 				<div v-if="play.stakeC" class="amount">
-					<label>{{ labelC }} ({{ this.play.oddsC }})</label>
+					<label>{{ labelC }} ({{ Number(this.play.oddsC) > 0 ? `+${this.play.oddsC}` : this.play.oddsC }})</label>
                     <div class="number">{{ formatUSD(play.stakeC) }}</div>
                     <small>stake</small>
 				</div>

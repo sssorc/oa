@@ -10,12 +10,12 @@
 		<div class="card-body">
 			<div class="flex split">
 				<div class="amount">
-					<label>{{ this.$parent.labelA }} ({{ this.play.oddsA }})</label>
+					<label>{{ betA }} ({{ Number(this.play.oddsA) > 0 ? `+${this.play.oddsA}` : this.play.oddsA }})</label>
 					<div class="number">{{ formatUSD(play.stakeA) }}</div>
 					<small>free bet</small>
 				</div>
 				<div class="amount">
-					<label>{{ this.$parent.labelB }} ({{ this.play.oddsB }})</label>
+					<label>{{ betB }} ({{ Number(this.play.oddsB) > 0 ? `+${this.play.oddsB}` : this.play.oddsB }})</label>
 					<div class="number">{{ formatUSD(play.stakeB) }}</div>
 					<small>stake</small>
 				</div>
@@ -49,6 +49,8 @@ export default {
 	mixins: [helpers],
 	props: {
 		play: Object,
+		betA: String,
+		betB: String,
 	},
 }
 </script>

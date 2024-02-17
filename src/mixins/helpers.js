@@ -8,7 +8,7 @@ const helpers = {
         conversionRate: '75',
         labelA: 'Bet A',
         labelB: 'Bet B',
-		labelC: 'Bet 3',
+		labelC: 'Bet C',
         editingLabel: false,
         copyConfirmation: '',
       };
@@ -90,16 +90,12 @@ const helpers = {
           copyText.select();
           copyText.setSelectionRange(0, 99999);
           document.execCommand('copy');
-          console.log('copy', id);
           
           if ( id === 'shareLink' ) {
-            console.log('share');
             this.copyConfirmation = 'Copied share URL';
-            console.log(this.copyConfirmation);
           }
           
           if ( id === 'csv' ) {
-            console.log('csv');
             this.copyConfirmation = 'Copied CSV';
           }
 
@@ -109,7 +105,6 @@ const helpers = {
         },
         onKeyUp(field) {
             this.freshInput = true;
-            console.log('on keyup', field);
             
             if ( field == 'oa' && this.oddsA ) {
                 this.oddsA = this.oddsA.replace(/[^+-\d]/, '');                
