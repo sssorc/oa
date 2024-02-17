@@ -94,10 +94,12 @@ export default {
 	},
 	methods: {
 		formatFinalOdds() {
-			this.inputs.FinalOdds = this.inputs.FinalOdds.replace(/,$/,'');
+			// remove comma and slash dangle
+			this.inputs.FinalOdds = this.inputs.FinalOdds.replace(/[,/]$/,'');
 		},
 		formatLegOdds() {
-			this.inputs.LegOdds = this.inputs.LegOdds.replace(/\s+/g, ',').replace(/,$/,'');
+			// replace spaces with commas, remove comma and slash dangle
+			this.inputs.LegOdds = this.inputs.LegOdds.replace(/\s+/g, ',').replace(/[,/]$/,'');
 		},
 		copyForReddit() {
 			const textarea = this.$refs.redditText;
