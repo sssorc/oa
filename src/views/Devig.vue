@@ -93,6 +93,9 @@ export default {
         });
 	},
 	methods: {
+		formatFinalOdds() {
+			this.inputs.FinalOdds = this.inputs.FinalOdds.replace(/,$/,'');
+		},
 		formatLegOdds() {
 			this.inputs.LegOdds = this.inputs.LegOdds.replace(/\s+/g, ',').replace(/,$/,'');
 		},
@@ -315,7 +318,7 @@ export default {
 						<div class="flex gap-16 wrap">
 							<div class="field">
 								<label for="">Final Odds<div class="asterisk">*</div></label>
-								<input v-model="inputs.FinalOdds" type="text" required style="width:80px;"/>
+								<input v-model="inputs.FinalOdds" type="text" @blur="formatFinalOdds" required style="width:80px;"/>
 							</div>
 							<div class="field grow">
 								<label for="">Leg Odds<div class="asterisk">*</div> <small>(Format: "+125/-130,+150/-180")</small></label>
