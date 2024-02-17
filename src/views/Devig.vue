@@ -94,7 +94,7 @@ export default {
 	},
 	methods: {
 		formatLegOdds() {
-			this.inputs.LegOdds = this.inputs.LegOdds.replace(/\s+/g, ',');
+			this.inputs.LegOdds = this.inputs.LegOdds.replace(/\s+/g, ',').replace(/,$/,'');
 		},
 		copyForReddit() {
 			const textarea = this.$refs.redditText;
