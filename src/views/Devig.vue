@@ -252,7 +252,10 @@ export default {
 
 			for (const key in this.inputs) {
 				let value = this.inputs[key];
-				if (value || value == 0) {
+
+				if (key == 'FinalOdds') {
+					params.push(`${key}=${encodeURIComponent(value)}`);
+				} else if (value || value == 0) {
 					params.push(`${key}=${value}`);
 				}
 			}
@@ -266,6 +269,9 @@ export default {
 			}
 
 			let finalUrl = this.apiUrl + params.join('&');
+		
+			console.log('final url', finalUrl);
+			
 			
 			axios.get(finalUrl).then((response) => {
 				if ('message' in response.data) {
@@ -320,7 +326,7 @@ export default {
 						<div class="flex gap-16 wrap">
 							<div class="field">
 								<label for="">Final Odds<div class="asterisk">*</div></label>
-								<input v-model="inputs.FinalOdds" type="text" @blur="formatFinalOdds" required style="width:80px;"/>
+								<input v-model="inputs.FinalOdds" type="text" @blur="formatFinalOdds" required style="width:150px;"/>
 							</div>
 							<div class="field grow">
 								<label for="">Leg Odds<div class="asterisk">*</div> <small>(Format: "+125/-130,+150/-180")</small></label>
