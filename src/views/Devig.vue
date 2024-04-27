@@ -4,40 +4,6 @@ import '@/assets/css/main.scss'
 import Navigation from '@/components/Navigation.vue';
 axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
 
-
-function copyToClipboard(text) {
-  var textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.style.position = 'fixed';
-  textarea.style.opacity = 0;
-  document.body.appendChild(textarea);
-  textarea.select();
-
-  try {
-    document.execCommand('copy');
-  } catch (err) {
-    console.error('Unable to copy text to clipboard', err);
-  }
-
-  document.body.removeChild(textarea);
-}
-
-document.addEventListener('click', function(e) {
-	var row = e.target.nodeName == 'TR' ? e.target : e.target.closest('TR');
-	var out = 'AVG(';
-	var odds = [];
-	var cells = Array.from(row.children);
-
-	for (var i = 3; i < cells.length; i++) {
-		if (cells[i].innerHTML.match(/[+-]\d+/)) {
-			odds.push(cells[i].innerHTML);
-		}
-	}
-
-	out += odds.join(',') + ')';
-	copyToClipboard(out);
-}, { once: true } );
-
 export default {
 	components: {
 		Navigation
@@ -56,6 +22,9 @@ export default {
 			importData: '',
 			importDataType: 'firstBasket',
 			sourceBook: '',
+			freeBetType: 0,
+			freeBetPercentage: '50%',
+			conversionRate: '70%',
 			inputs: {
 				LegOdds: '',
 				FinalOdds: '',
@@ -93,6 +62,20 @@ export default {
         });
 	},
 	methods: {
+		getFinalOddsForRequest(value) {
+			if (this.freeBetType == 0) {
+				return encodeURIComponent(value);
+			}
+			
+			let freeBetPercentage = Number(this.freeBetPercentage.replace(/\D/g, ''));
+			let conversionRate = (Number(this.conversionRate.replace(/\D/g, '')) / 100);
+			let percentBack = (freeBetPercentage * conversionRate) / 100;
+			let type = this.freeBetType == 1 ? 'r' : 'n';
+
+			let out = `#=${value};${type}=${percentBack}x`;
+			console.log('out', out);
+			return encodeURIComponent(out);
+		},
 		formatFinalOdds() {
 			// remove comma and slash dangle
 			this.inputs.FinalOdds = this.inputs.FinalOdds.replace(/[,/]$/,'');
@@ -254,7 +237,8 @@ export default {
 				let value = this.inputs[key];
 
 				if (key == 'FinalOdds') {
-					params.push(`${key}=${encodeURIComponent(value)}`);
+					let formatted = this.getFinalOddsForRequest(value);
+					params.push(`${key}=${formatted}`);
 				} else if (value || value == 0) {
 					params.push(`${key}=${value}`);
 				}
@@ -292,7 +276,8 @@ export default {
 					ev: this.round(data.EV_Percentage * 100),
 					kellyFull: data.Kelly_Full, 
 					sourceBook: this.sourceBook,
-					wcMethod: this.getWcMethod(data.DevigMethod)
+					wcMethod: this.getWcMethod(data.DevigMethod),
+					includeConversion: this.freeBetType == 0
 				};
 			}).catch((error) => {
 				if ('message' in error) {
@@ -315,7 +300,7 @@ export default {
 		<section :class="{'show-settings': showSettings}" class="rel layout">
 			<main>
 				<div class="flex-split gap-16 mb-32">
-					<h1><a href="http://www.crazyninjamike.com/Public/sportsbooks/sportsbook_calculator.aspx" style="text-decoration:none">CNM Devigger</a></h1>
+					<h1><a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger.aspx" style="text-decoration:none">CNM Devigger</a></h1>
 					<button @click="showSettings = true" class="flex-center toggle-settings reset hide-md">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 512 512" fill="currentColor"><path d="M496 384H160v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h80v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160h-80v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h80c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160H288V48c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16C7.2 64 0 71.2 0 80v32c0 8.8 7.2 16 16 16h208v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h208c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16z"/></svg>
 					</button>
@@ -368,6 +353,32 @@ export default {
 							</div>
 						</div>
 
+						<div class="flex-top gap-y-16 gap-x-32">
+							<div>
+								<label>Free Bet Returned</label>
+								<div class="radio">
+									<input v-model="freeBetType" id="freeBet0" type="radio" :value="0"/>
+									<label class="" for="freeBet0">None</label>
+								</div>
+								<div class="radio">
+									<input v-model="freeBetType" id="freeBet1" type="radio" :value="1"/>
+									<label class="" for="freeBet1">On Loss</label>
+								</div>
+								<div class="radio">
+									<input v-model="freeBetType" id="freeBet2" type="radio" :value="2"/>
+									<label class="" for="freeBet2">Guaranteed</label>
+								</div>
+							</div>
+							<div v-if="freeBetType !== 0">
+								<label for="freeBetPercentage">Free Bet Amount <small>(% of stake)</small></label>
+								<input type="text" v-model="freeBetPercentage" id="freeBetPercentage" style="max-width:200px">
+							</div>
+							<div v-if="freeBetType !== 0">
+								<label for="conversionRate">Free Bet Conversion Rate <small>(in %)</small></label>
+								<input type="text" v-model="conversionRate" id="conversionRate" style="max-width:200px">
+							</div>
+						</div>
+
 						<!-- Source book -->
 						<div class="field" style="max-width:200px">
 								<label for="">Source book</label>
@@ -390,7 +401,7 @@ export default {
 									<h3 class="mb-12">{{ results.method }} <small v-if="results.sourceBook" class="fs-16 op-50">(vs {{ sourceBook }})</small></h3>
 									<div class="grid gap-8 pad-4">
 										<div>Final Odds: <strong>{{ results.finalOdds }}</strong></div>
-										<div>FB Conversion: <strong :class="{'color-green': results.conversionPercentage > 75}">{{ results.conversionPercentage }}%</strong></div>
+										<div v-if="results.includeConversion">FB Conversion: <strong :class="{'color-green': results.conversionPercentage > 75}">{{ results.conversionPercentage }}%</strong></div>
 										<hr>
 										<div>Fair Value: <strong>{{ results.fairOdds }} ({{ this.round(results.hitPercentage) }}%)</strong></div>
 										<div>Market Juice: <strong>{{ results.juice }}%</strong></div>
