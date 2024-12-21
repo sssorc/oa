@@ -1,35 +1,35 @@
 <script>
-import axios from 'axios';
-import '@/assets/css/main.scss'
-import Navigation from '@/components/Navigation.vue';
-axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
+import axios from "axios";
+import "@/assets/css/main.scss";
+import Navigation from "@/components/Navigation.vue";
+axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 export default {
 	components: {
-		Navigation
+		Navigation,
 	},
 	data() {
 		return {
-			apiUrl: '//api.crazyninjaodds.com/api/devigger/v1/sportsbook_devigger.aspx?api=open&Args=ev_p,fb_p,fo_o,kelly,dm&',
+			apiUrl: "//api.crazyninjaodds.com/api/devigger/v1/sportsbook_devigger.aspx?api=open&Args=ev_p,fb_p,fo_o,kelly,dm&",
 			showSettings: false,
 			results: false,
 			copied: false,
 			errorMessage: false,
-			kellyMultiplier: .25,
+			kellyMultiplier: 0.25,
 			kellyBankroll: 1000,
 			useBoost: 0,
 			showImport: false,
-			importData: '',
-			importDataType: 'firstBasket',
-			sourceBook: '',
+			importData: "",
+			importDataType: "firstBasket",
+			sourceBook: "",
 			freeBetType: 0,
-			freeBetPercentage: '50%',
-			conversionRate: '70%',
+			freeBetPercentage: "50%",
+			conversionRate: "70%",
 			inputs: {
-				LegOdds: '',
-				FinalOdds: '',
-				Correlation_Text: '',
-				Boost_Text: '',
+				LegOdds: "",
+				FinalOdds: "",
+				Correlation_Text: "",
+				Boost_Text: "",
 				Boost_Type: 0,
 				DevigMethod: 4,
 				WorstCase_Multiplicative: 1,
@@ -41,54 +41,60 @@ export default {
 				WeightedAverage_Power: 0,
 				WeightedAverage_Shin: 0,
 			},
-		}
+		};
 	},
 	computed: {
-		kellyDollars() {
-			if (!this.results) return '';
-			return this.formatUSD(this.kellyBankroll * this.kellyMultiplier * this.results.kellyFull/100);
+		kellyEvDollars() {
+			if (!this.results) return "";
+			return this.kellyStakeSize * (this.results.ev / 100);
+		},
+		kellyStakeSize() {
+			if (!this.results) return "";
+			return (this.kellyBankroll * this.kellyMultiplier * this.results.kellyFull) / 100;
 		},
 		redditText() {
-			if (!this.results) return '';
+			if (!this.results) return "";
 
-			return `Odds: ${this.results.finalOdds}; **EV: ${this.results.ev}%**\r\r\`${this.results.inputLegs}\` (${this.results.juice}% juice)\r\rFV: ${this.results.fairOdds}; Method: ${this.results.method}; (Full=${this.round(this.results.kellyFull)}u, 1/2=${this.round(this.results.kellyFull / 2)}u, 1/4=${this.round(this.results.kellyFull / 4)}u, FB = ${this.results.conversionPercentage}%)`
-		}
+			return `Odds: ${this.results.finalOdds}; **EV: ${this.results.ev}%**\r\r\`${this.results.inputLegs}\` (${this.results.juice}% juice)\r\rFV: ${this.results.fairOdds}; Method: ${this.results.method}; (Full=${this.round(this.results.kellyFull)}u, 1/2=${this.round(
+				this.results.kellyFull / 2
+			)}u, 1/4=${this.round(this.results.kellyFull / 4)}u, FB = ${this.results.conversionPercentage}%)`;
+		},
 	},
 	mounted() {
-		document.addEventListener('keydown', (event) => {
-			if (this.showImport && event.key === 'Escape') {
+		document.addEventListener("keydown", (event) => {
+			if (this.showImport && event.key === "Escape") {
 				this.showImport = false;
 			}
-        });
+		});
 	},
 	methods: {
 		getFinalOddsForRequest(value) {
 			if (this.freeBetType == 0) {
 				return encodeURIComponent(value);
 			}
-			
-			let freeBetPercentage = Number(this.freeBetPercentage.replace(/\D/g, ''));
-			let conversionRate = (Number(this.conversionRate.replace(/\D/g, '')) / 100);
+
+			let freeBetPercentage = Number(this.freeBetPercentage.replace(/\D/g, ""));
+			let conversionRate = Number(this.conversionRate.replace(/\D/g, "")) / 100;
 			let percentBack = (freeBetPercentage * conversionRate) / 100;
-			let type = this.freeBetType == 1 ? 'r' : 'n';
+			let type = this.freeBetType == 1 ? "r" : "n";
 
 			let out = `#=${value};${type}=${percentBack}x`;
-			console.log('out', out);
+			console.log("out", out);
 			return encodeURIComponent(out);
 		},
 		formatFinalOdds() {
 			// remove comma and slash dangle
-			this.inputs.FinalOdds = this.inputs.FinalOdds.replace(/[,/]$/,'');
+			this.inputs.FinalOdds = this.inputs.FinalOdds.replace(/[,/]$/, "");
 		},
 		formatLegOdds() {
 			// replace spaces with commas, remove comma and slash dangle
-			this.inputs.LegOdds = this.inputs.LegOdds.replace(/\s+/g, ',').replace(/[,/]$/,'');
+			this.inputs.LegOdds = this.inputs.LegOdds.replace(/\s+/g, ",").replace(/[,/]$/, "");
 		},
 		copyForReddit() {
 			const textarea = this.$refs.redditText;
-			textarea.select();			
+			textarea.select();
 			textarea.setSelectionRange(0, 99999);
-			document.execCommand('copy');
+			document.execCommand("copy");
 			this.copied = true;
 
 			setTimeout(() => {
@@ -100,34 +106,34 @@ export default {
 			let data = this.importData;
 
 			// Remove line breaks
-			data = data.replace( /[\r\n]+/gm, "/" );
+			data = data.replace(/[\r\n]+/gm, "/");
 
 			// Remove numbers that don't have + or - in front
-			data = data.replace(/[^+-\d]\d+/g, '');
+			data = data.replace(/[^+-\d]\d+/g, "");
 
 			// Remove everything except numbers, +, and -
-			data = data.replace(/[^\d\-\+\/]/g, '');
+			data = data.replace(/[^\d\-\+\/]/g, "");
 
 			// Remove multiple slashes with single slash
-			data = data.replace(/\/{2,}/g, '/');
+			data = data.replace(/\/{2,}/g, "/");
 
 			// Remove "/" at start
-			data = data.replace(/^\//, '');
+			data = data.replace(/^\//, "");
 
 			this.inputs.LegOdds = data;
 		},
 		importPastedData() {
-			if (this.importDataType == 'firstBasket') {
+			if (this.importDataType == "firstBasket") {
 				this.importFirstBasket();
 			}
 
 			this.showImport = false;
-			this.importData = '';
+			this.importData = "";
 		},
 		openModal() {
 			this.showImport = true;
 			setTimeout(() => {
-				this.$refs['importData'].focus();
+				this.$refs["importData"].focus();
 			}, 100);
 		},
 		closeModal() {
@@ -135,11 +141,11 @@ export default {
 		},
 		formatUSD(number) {
 			let dollarUS = Intl.NumberFormat("en-US", {
-    			style: "currency",
-    			currency: "USD",
+				style: "currency",
+				currency: "USD",
 			});
 
-			return dollarUS.format(number).replace('.00', '');;
+			return dollarUS.format(number).replace(".00", "");
 		},
 		round(num, wholeNumber) {
 			if (wholeNumber) {
@@ -149,12 +155,12 @@ export default {
 			}
 		},
 		getWcMethod(code) {
-			if (code == 'wc:p') {
-				return 'Power';
+			if (code == "wc:p") {
+				return "Power";
 			}
 
-			if (code == 'wc:p,m') {
-				return 'Power + Multiplicative';
+			if (code == "wc:p,m") {
+				return "Power + Multiplicative";
 			}
 
 			return false;
@@ -162,39 +168,39 @@ export default {
 		getMethod(num) {
 			switch (num) {
 				case 0:
-					return 'Multiplicative';
+					return "Multiplicative";
 					break;
 				case 1:
-					return 'Additive';
+					return "Additive";
 					break;
 				case 2:
-					return 'Power';
+					return "Power";
 					break;
 				case 3:
-					return 'Shin';
+					return "Shin";
 					break;
 				case 4:
-					return 'Worst Case'
+					return "Worst Case";
 					break;
 				case 5:
-					return 'Weighted Average';
+					return "Weighted Average";
 					break;
 				default:
-					return 'Multiplicative';
+					return "Multiplicative";
 					break;
 			}
 		},
 		getFairOdds(odds) {
-			let plus = odds > 0 ? '+' : ''; 
+			let plus = odds > 0 ? "+" : "";
 			return plus + this.round(odds, true);
 		},
 		getFinalOdds(data) {
-			if ('Odds' in data) {
+			if ("Odds" in data) {
 				return data.Odds;
 			}
-			
+
 			if (this.useBoost && this.inputs.Boost_Text && this.inputs.FinalOdds > 0) {
-				return '+' + this.inputs.FinalOdds * (1 + this.inputs.Boost_Text / 100);
+				return "+" + this.inputs.FinalOdds * (1 + this.inputs.Boost_Text / 100);
 			}
 		},
 		getLegData(data) {
@@ -203,8 +209,8 @@ export default {
 			for (const key in data) {
 				let obj = data[key];
 
-				if (Object.hasOwnProperty.call(obj, 'MarketJuice')) {
-					legs.push(obj)
+				if (Object.hasOwnProperty.call(obj, "MarketJuice")) {
+					legs.push(obj);
 				}
 			}
 
@@ -217,7 +223,7 @@ export default {
 			for (const key in data) {
 				let obj = data[key];
 
-				if (Object.hasOwnProperty.call(obj, 'MarketJuice')) {
+				if (Object.hasOwnProperty.call(obj, "MarketJuice")) {
 					juice += obj.MarketJuice;
 					count += 1;
 				}
@@ -226,7 +232,7 @@ export default {
 			return this.round((juice / count) * 100);
 		},
 		getFairOddsFromPercent() {
-			return 'todo';
+			return "todo";
 		},
 		onSubmit() {
 			this.errorMessage = false;
@@ -236,7 +242,7 @@ export default {
 			for (const key in this.inputs) {
 				let value = this.inputs[key];
 
-				if (key == 'FinalOdds') {
+				if (key == "FinalOdds") {
 					let formatted = this.getFinalOddsForRequest(value);
 					params.push(`${key}=${formatted}`);
 				} else if (value || value == 0) {
@@ -245,64 +251,69 @@ export default {
 			}
 
 			if (this.inputs.Correlation_Text) {
-				params.push('Correlation_Bool=1');
+				params.push("Correlation_Bool=1");
 			}
 
 			if (this.useBoost) {
-				params.push('Boost_Bool=1');
+				params.push("Boost_Bool=1");
 			}
 
-			let finalUrl = this.apiUrl + params.join('&');
-		
-			console.log('final url', finalUrl);
-			
-			
-			axios.get(finalUrl).then((response) => {
-				if ('message' in response.data) {
-					this.errorMessage = response.data.message;
-					return;
-				}
-				const data = response.data.Final;
-				
-				this.results = {
-					method: this.getMethod(this.inputs.DevigMethod),
-					inputLegs: this.inputs.LegOdds,
-					finalOdds: this.getFinalOdds(data),
-					fairOdds: this.getFairOdds(data.FairValue_Odds),
-					legs: this.getLegData(response.data),
-					juice: this.getJuice(response.data),
-					hitPercentage: data.FairValue * 100,
-					conversionPercentage: this.round(data.FB_Percentage * 100),
-					ev: this.round(data.EV_Percentage * 100),
-					kellyFull: data.Kelly_Full, 
-					sourceBook: this.sourceBook,
-					wcMethod: this.getWcMethod(data.DevigMethod),
-					includeConversion: this.freeBetType == 0
-				};
-			}).catch((error) => {
-				if ('message' in error) {
-					this.errorMessage = error.message;
-				} else {
-					this.errorMessage = 'Error devigging. Re-check inputs.';
-				}
-			})
+			let finalUrl = this.apiUrl + params.join("&");
+
+			console.log("final url", finalUrl);
+
+			axios
+				.get(finalUrl)
+				.then((response) => {
+					if ("message" in response.data) {
+						this.errorMessage = response.data.message;
+						return;
+					}
+					const data = response.data.Final;
+
+					this.results = {
+						method: this.getMethod(this.inputs.DevigMethod),
+						inputLegs: this.inputs.LegOdds,
+						finalOdds: this.getFinalOdds(data),
+						fairOdds: this.getFairOdds(data.FairValue_Odds),
+						legs: this.getLegData(response.data),
+						juice: this.getJuice(response.data),
+						hitPercentage: data.FairValue * 100,
+						conversionPercentage: this.round(data.FB_Percentage * 100),
+						ev: this.round(data.EV_Percentage * 100),
+						kellyFull: data.Kelly_Full,
+						sourceBook: this.sourceBook,
+						wcMethod: this.getWcMethod(data.DevigMethod),
+						includeConversion: this.freeBetType == 0,
+					};
+				})
+				.catch((error) => {
+					if ("message" in error) {
+						this.errorMessage = error.message;
+					} else {
+						this.errorMessage = "Error devigging. Re-check inputs.";
+					}
+				});
 		},
 	},
-}
-
+};
 </script>
 
 <template>
 	<div class="devig">
 		<div class="legacy">
-			<Navigation/>
+			<Navigation />
 		</div>
-		<section :class="{'show-settings': showSettings}" class="rel layout">
+		<section :class="{ 'show-settings': showSettings }" class="rel layout">
 			<main>
 				<div class="flex-split gap-16 mb-32">
-					<h1><a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger.aspx" style="text-decoration:none">CNM Devigger</a></h1>
+					<h1><a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger.aspx" style="text-decoration: none">CNM Devigger</a></h1>
 					<button @click="showSettings = true" class="flex-center toggle-settings reset hide-md">
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 512 512" fill="currentColor"><path d="M496 384H160v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h80v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160h-80v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h80c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160H288V48c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16C7.2 64 0 71.2 0 80v32c0 8.8 7.2 16 16 16h208v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h208c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 512 512" fill="currentColor">
+							<path
+								d="M496 384H160v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h80v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160h-80v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h80c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160H288V48c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16C7.2 64 0 71.2 0 80v32c0 8.8 7.2 16 16 16h208v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h208c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16z"
+							/>
+						</svg>
 					</button>
 				</div>
 				<form @submit.prevent="onSubmit">
@@ -310,18 +321,25 @@ export default {
 						<!-- Odds/legs -->
 						<div class="flex gap-16 wrap">
 							<div class="field">
-								<label for="">Final Odds<div class="asterisk">*</div></label>
-								<input v-model="inputs.FinalOdds" type="text" @blur="formatFinalOdds" required style="width:150px;"/>
+								<label for=""
+									>Final Odds
+									<div class="asterisk">*</div></label
+								>
+								<input v-model="inputs.FinalOdds" type="text" @blur="formatFinalOdds" required style="width: 150px" />
 							</div>
 							<div class="field grow">
-								<label for="">Leg Odds<div class="asterisk">*</div> <small>(Format: "+125/-130,+150/-180")</small></label>
+								<label for=""
+									>Leg Odds
+									<div class="asterisk">*</div>
+									<small>(Format: "+125/-130,+150/-180")</small></label
+								>
 								<div class="flex wrap gap-8">
-									<input v-model="inputs.LegOdds" type="text" style="flex:1;" @blur="formatLegOdds" required/>
+									<input v-model="inputs.LegOdds" type="text" style="flex: 1" @blur="formatLegOdds" required />
 									<button type="button" class="btn btn-gray btn-small btn-show-import" @click.prevent="openModal">Paste data</button>
 								</div>
 							</div>
 						</div>
-						<div class="flex-top wrap gap-y-16 gap-x-32" style="min-height:66px;">
+						<div class="flex-top wrap gap-y-16 gap-x-32" style="min-height: 66px">
 							<!-- Correlation -->
 							<div class="correlation">
 								<label>Correlation <small>(Format: &quot;0.2&quot; OR &quot;+326=+112,+134&quot;)</small></label>
@@ -332,24 +350,24 @@ export default {
 							<div>
 								<label>Boost</label>
 								<div class="checkbox">
-									<input v-model="useBoost" id="useBoost" type="checkbox" value="1"/>
+									<input v-model="useBoost" id="useBoost" type="checkbox" value="1" />
 									<label for="useBoost">Apply boost</label>
 								</div>
 							</div>
 							<div v-if="useBoost">
 								<label>Boost Type</label>
 								<div class="radio">
-									<input v-model="inputs.Boost_Type" id="RadioButtonBoostProfit" type="radio" value="0"/>
+									<input v-model="inputs.Boost_Type" id="RadioButtonBoostProfit" type="radio" value="0" />
 									<label class="" for="RadioButtonBoostProfit">Profit Boost</label>
 								</div>
 								<div class="radio mt-8">
-									<input v-model="inputs.Boost_Type" id="boostType" type="radio" value="1"/>
+									<input v-model="inputs.Boost_Type" id="boostType" type="radio" value="1" />
 									<label for="boostType">Profit + Stake</label>
 								</div>
 							</div>
 							<div v-if="useBoost">
 								<label for="boostPercent">Boost %</label>
-								<input v-model="inputs.Boost_Text" type="text" id="boostPercent" style="width:80px;" />
+								<input v-model="inputs.Boost_Text" type="text" id="boostPercent" style="width: 80px" />
 							</div>
 						</div>
 
@@ -357,38 +375,38 @@ export default {
 							<div>
 								<label>Free Bet Returned</label>
 								<div class="radio">
-									<input v-model="freeBetType" id="freeBet0" type="radio" :value="0"/>
+									<input v-model="freeBetType" id="freeBet0" type="radio" :value="0" />
 									<label class="" for="freeBet0">None</label>
 								</div>
 								<div class="radio">
-									<input v-model="freeBetType" id="freeBet1" type="radio" :value="1"/>
+									<input v-model="freeBetType" id="freeBet1" type="radio" :value="1" />
 									<label class="" for="freeBet1">On Loss</label>
 								</div>
 								<div class="radio">
-									<input v-model="freeBetType" id="freeBet2" type="radio" :value="2"/>
+									<input v-model="freeBetType" id="freeBet2" type="radio" :value="2" />
 									<label class="" for="freeBet2">Guaranteed</label>
 								</div>
 							</div>
 							<div v-if="freeBetType !== 0">
 								<label for="freeBetPercentage">Free Bet Amount <small>(% of stake)</small></label>
-								<input type="text" v-model="freeBetPercentage" id="freeBetPercentage" style="max-width:200px">
+								<input type="text" v-model="freeBetPercentage" id="freeBetPercentage" style="max-width: 200px" />
 							</div>
 							<div v-if="freeBetType !== 0">
 								<label for="conversionRate">Free Bet Conversion Rate <small>(in %)</small></label>
-								<input type="text" v-model="conversionRate" id="conversionRate" style="max-width:200px">
+								<input type="text" v-model="conversionRate" id="conversionRate" style="max-width: 200px" />
 							</div>
 						</div>
 
 						<!-- Source book -->
-						<div class="field" style="max-width:200px">
-								<label for="">Source book</label>
-								<input v-model="sourceBook" type="text">
-							</div>
+						<div class="field" style="max-width: 200px">
+							<label for="">Source book</label>
+							<input v-model="sourceBook" type="text" />
+						</div>
 					</div>
-					
+
 					<!-- Submit -->
-					<input type="submit" class="btn submit reset mt-24" name="ButtonCalculate" value="Calculate" style="min-width: 170px"/>
-					
+					<input type="submit" class="btn submit reset mt-24" name="ButtonCalculate" value="Calculate" style="min-width: 170px" />
+
 					<!-- Error -->
 					<div v-if="errorMessage" class="pad-20 mt-32 color-red border bc-red">{{ errorMessage }}</div>
 
@@ -398,30 +416,45 @@ export default {
 						<div :class="{ 'bc-red bg-red-01': results.ev < 0, 'bc-green bg-green-01': results.ev > 0 }" class="results pad-20 border">
 							<div class="results-top flex-split flex-top wrap gap-16">
 								<div class="fs-14">
-									<h3 class="mb-12">{{ results.method }} <small v-if="results.sourceBook" class="fs-16 op-50">(vs {{ sourceBook }})</small></h3>
+									<h3 class="mb-12">
+										{{ results.method }} <small v-if="results.sourceBook" class="fs-16 op-50">(vs {{ sourceBook }})</small>
+									</h3>
 									<div class="grid gap-8 pad-4">
-										<div>Final Odds: <strong>{{ results.finalOdds }}</strong></div>
-										<div v-if="results.includeConversion">FB Conversion: <strong :class="{'color-green': results.conversionPercentage > 75}">{{ results.conversionPercentage }}%</strong></div>
-										<hr>
-										<div>Fair Value: <strong>{{ results.fairOdds }} ({{ this.round(results.hitPercentage) }}%)</strong></div>
-										<div>Market Juice: <strong>{{ results.juice }}%</strong></div>
-										<div>Legs: <strong>{{ results.inputLegs }}</strong></div>
+										<div>
+											Final Odds: <strong>{{ results.finalOdds }}</strong>
+										</div>
+										<div v-if="results.includeConversion">
+											FB Conversion: <strong :class="{ 'color-green': results.conversionPercentage > 75 }">{{ results.conversionPercentage }}%</strong>
+										</div>
+										<hr />
+										<div>
+											Fair Value: <strong>{{ results.fairOdds }} ({{ this.round(results.hitPercentage) }}%)</strong>
+										</div>
+										<div>
+											Market Juice: <strong>{{ results.juice }}%</strong>
+										</div>
+										<div>
+											Legs: <strong>{{ results.inputLegs }}</strong>
+										</div>
 									</div>
 								</div>
 								<div class="flex wrap gap-x-20 gap-y-16 results-ev">
-									<div :class="{'bg-green-01': results.ev >= 0, 'bg-red-01': results.ev < 0}" class="item item-ev">
-										<div :class="{'color-green': results.ev >= 0, 'color-red': results.ev < 0}" class="number">{{ results.ev }}%</div>
-										<label>EV</label>
+									<div :class="{ 'bg-green-01': results.ev >= 0, 'bg-red-01': results.ev < 0 }" class="item item-ev">
+										<div :class="{ 'color-green': results.ev >= 0, 'color-red': results.ev < 0 }" style="text-align: right" class="number">{{ results.ev }}%</div>
+										<label class="flex gap-8">
+											<div v-if="results.ev > 0">{{ formatUSD(kellyEvDollars) }}</div>
+											<div class="align-right">EV</div>
+										</label>
 									</div>
 									<div class="item item-kelly flex gap-24" v-if="results.ev > 0">
 										<div>
-											<div class="number">{{ kellyDollars }}</div>
+											<div class="number">{{ formatUSD(kellyStakeSize) }}</div>
 											<label>{{ kellyMultiplier }} Kelly</label>
 										</div>
 										<div class="grid gap-4 item-units fs-13">
-											<div class="lh-15"><span class="color-blue-07">Full:</span> {{ round(results.kellyFull)}}u</div>
-											<div class="lh-15"><span class="color-blue-07">Half:</span> {{ round(results.kellyFull/2)}}u</div>
-											<div class="lh-15"><span class="color-blue-07">Quarter:</span> {{ round(results.kellyFull/4)}}u</div>
+											<div class="lh-15"><span class="color-blue-07">Full:</span> {{ round(results.kellyFull) }}u</div>
+											<div class="lh-15"><span class="color-blue-07">Half:</span> {{ round(results.kellyFull / 2) }}u</div>
+											<div class="lh-15"><span class="color-blue-07">Quarter:</span> {{ round(results.kellyFull / 4) }}u</div>
 										</div>
 									</div>
 								</div>
@@ -456,31 +489,19 @@ export default {
 				<div class="flex-split gap-16 mb-20">
 					<h3>Settings</h3>
 					<button @click="showSettings = false" class="flex-center toggle-settings reset hide-md">
-						<svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" /></svg>
 					</button>
 				</div>
-				
+
 				<!-- Method -->
 				<h5 class="mb-12">Devig Method</h5>
 				<div class="grid gap-8">
-					<div class="flex gap-8 radio">
-						<input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_0" type="radio" :value="0" /><label for="RadioButtonListDevigMethod_0">Multiplicative/Traditional</label>
-					</div>
-					<div class="flex gap-8 radio">
-						<input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_1" type="radio" :value="1" /><label for="RadioButtonListDevigMethod_1">Additive</label>
-					</div>
-					<div class="flex gap-8 radio">
-						<input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_2" type="radio" :value="2" /><label for="RadioButtonListDevigMethod_2">Power</label>
-					</div>
-					<div class="flex gap-8 radio">
-						<input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_3" type="radio" :value="3" /><label for="RadioButtonListDevigMethod_3">Shin</label>
-					</div>
-					<div class="flex gap-8 radio">
-						<input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_4" type="radio" :value="4" /><label for="RadioButtonListDevigMethod_4">Worst-case</label>
-					</div>
-					<div class="flex gap-8 radio">
-						<input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_5" type="radio" :value="5" /><label for="RadioButtonListDevigMethod_5">Weighted Average</label>
-					</div>
+					<div class="flex gap-8 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_0" type="radio" :value="0" /><label for="RadioButtonListDevigMethod_0">Multiplicative/Traditional</label></div>
+					<div class="flex gap-8 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_1" type="radio" :value="1" /><label for="RadioButtonListDevigMethod_1">Additive</label></div>
+					<div class="flex gap-8 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_2" type="radio" :value="2" /><label for="RadioButtonListDevigMethod_2">Power</label></div>
+					<div class="flex gap-8 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_3" type="radio" :value="3" /><label for="RadioButtonListDevigMethod_3">Shin</label></div>
+					<div class="flex gap-8 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_4" type="radio" :value="4" /><label for="RadioButtonListDevigMethod_4">Worst-case</label></div>
+					<div class="flex gap-8 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_5" type="radio" :value="5" /><label for="RadioButtonListDevigMethod_5">Weighted Average</label></div>
 					<!-- <div class="flex gap-8 radio">
 						<input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_6" type="radio" value="showall" /><label for="RadioButtonListDevigMethod_6">Show All</label>
 					</div> -->
@@ -490,7 +511,7 @@ export default {
 				<div class="flex gap-16 pt-16 mt-16 border-top">
 					<div>
 						<label for="kellyMultiplier">Kelly Multiplier</label>
-						<input v-model="kellyMultiplier" type="text" id="kellyMultiplier" class="small"/>
+						<input v-model="kellyMultiplier" type="text" id="kellyMultiplier" class="small" />
 					</div>
 					<div>
 						<label for="kellyBankroll">Kelly Bank Roll</label>
@@ -503,19 +524,19 @@ export default {
 					<h5 class="mb-12">Methods to check with</h5>
 					<div class="grid gap-8" id="CheckBoxListWorstCaseMethodSettings">
 						<div class="flex gap-8 checkbox">
-							<input v-model="inputs.WorstCase_Multiplicative" id="WorstCase_Multiplicative" type="checkbox" true-value="1" false-value="0"/>
+							<input v-model="inputs.WorstCase_Multiplicative" id="WorstCase_Multiplicative" type="checkbox" true-value="1" false-value="0" />
 							<label for="WorstCase_Multiplicative">Multiplicative/Traditional Method</label>
 						</div>
 						<div class="flex gap-8 checkbox">
-							<input v-model="inputs.WorstCase_Additive" id="WorstCase_Additive" type="checkbox" true-value="1" false-value="false"/>
+							<input v-model="inputs.WorstCase_Additive" id="WorstCase_Additive" type="checkbox" true-value="1" false-value="false" />
 							<label for="WorstCase_Additive">Additive Method</label>
 						</div>
 						<div class="flex gap-8 checkbox">
-							<input v-model="inputs.WorstCase_Power" id="WorstCase_Power" type="checkbox" true-value="1" false-value="false"/>
+							<input v-model="inputs.WorstCase_Power" id="WorstCase_Power" type="checkbox" true-value="1" false-value="false" />
 							<label for="WorstCase_Power">Power Method</label>
 						</div>
 						<div class="flex gap-8 checkbox">
-							<input v-model="inputs.WorstCase_Shin" id="WorstCase_Shin" type="checkbox" true-value="1" false-value="false"/>
+							<input v-model="inputs.WorstCase_Shin" id="WorstCase_Shin" type="checkbox" true-value="1" false-value="false" />
 							<label for="WorstCase_Shin">Shin Method</label>
 						</div>
 					</div>
@@ -527,25 +548,24 @@ export default {
 					<div class="grid sm-2s gap-8">
 						<div>
 							<label for="">Multiplicative/Traditional</label>
-							<input v-model="inputs.WeightedAverage_Multiplicative" type="text" id="TextBoxMultiplicativeWeight" class="small" style="width:80px;"/> %
+							<input v-model="inputs.WeightedAverage_Multiplicative" type="text" id="TextBoxMultiplicativeWeight" class="small" style="width: 80px" /> %
 						</div>
 						<div>
 							<label for="">Additive</label>
-							<input v-model="inputs.WeightedAverage_Additive" name="TextBoxAdditiveWeight" type="text" id="TextBoxAdditiveWeight" class="small" style="width:80px;"/> %
+							<input v-model="inputs.WeightedAverage_Additive" name="TextBoxAdditiveWeight" type="text" id="TextBoxAdditiveWeight" class="small" style="width: 80px" /> %
 						</div>
 						<div>
 							<label for="">Power</label>
-							<input v-model="inputs.WeightedAverage_Power" name="TextBoxPowerWeight" type="text" id="TextBoxPowerWeight" class="small" style="width:80px;"/> %
+							<input v-model="inputs.WeightedAverage_Power" name="TextBoxPowerWeight" type="text" id="TextBoxPowerWeight" class="small" style="width: 80px" /> %
 						</div>
 						<div>
 							<label for="">Shin</label>
-							<input v-model="inputs.WeightedAverage_Shin" name="TextBoxShinWeight" type="text" id="TextBoxShinWeight" class="small" style="width:80px;"/> %
+							<input v-model="inputs.WeightedAverage_Shin" name="TextBoxShinWeight" type="text" id="TextBoxShinWeight" class="small" style="width: 80px" /> %
 						</div>
 					</div>
 					<p class="mt-16">Weights do not need to add up to exactly 100%, the calculator will use the ratio of the sum of the weights. Set to 0 to exclude a method.</p>
 				</div>
-				
-				
+
 				<!-- Misc settings -->
 				<!-- <div class="mt-16 pt-16 border-top" id="CheckBoxListMiscSettings">
 					<h5 class="mb-12">Misc Settings</h5>
@@ -568,17 +588,15 @@ export default {
 					</ul>
 				</div>
 			</aside>
-					
 		</section>
 
 		<div v-show="showImport" class="modal">
 			<div class="modal-content">
 				<button @click="closeModal" class="close flex-center reset">
-					<svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg>
+					<svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" /></svg>
 				</button>
 				<h3 class="mb-8">Import Pasted data <small class="fs-14 op-60">(FanDuel)</small></h3>
-				
-				
+
 				<!-- <div class="field">
 					<label>Data Type</label>
 					<div class="radio">
@@ -587,7 +605,7 @@ export default {
 					</div>
 				</div> -->
 
-				<textarea v-model="importData" ref="importData" id="importData" class="mt-24" style="height:300px;"></textarea>
+				<textarea v-model="importData" ref="importData" id="importData" class="mt-24" style="height: 300px"></textarea>
 				<div class="flex-right mt-24">
 					<button class="btn btn-blue" @click="importPastedData">Import lines</button>
 				</div>
