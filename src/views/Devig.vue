@@ -307,7 +307,11 @@ export default {
 		<section :class="{ 'show-settings': showSettings }" class="rel layout">
 			<main>
 				<div class="flex-split gap-16 mb-32">
-					<h1><a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger.aspx" style="text-decoration: none">CNM Devigger</a></h1>
+					<h1 style="line-height: 23px">
+						<a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger.aspx" style="text-decoration: none">CNO Devigger</a><br />
+						<a class="fs-14 lh-14 inline-block" style="margin-top: -20px" href="https://crazyninjaodds.com/Default.aspx" target="_blank">crazyninjaodds.com</a>
+					</h1>
+
 					<button @click="showSettings = true" class="flex-center toggle-settings reset hide-md">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 512 512" fill="currentColor">
 							<path
