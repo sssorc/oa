@@ -79,7 +79,6 @@ export default {
 			let type = this.freeBetType == 1 ? "r" : "n";
 
 			let out = `#=${value};${type}=${percentBack}x`;
-			console.log("out", out);
 			return encodeURIComponent(out);
 		},
 		formatFinalOdds() {
@@ -235,6 +234,7 @@ export default {
 			return "todo";
 		},
 		onSubmit() {
+			this.formatFinalOdds();
 			this.errorMessage = false;
 			let params = [];
 			this.results = false;
@@ -329,7 +329,7 @@ export default {
 									>Final Odds
 									<div class="asterisk">*</div></label
 								>
-								<input v-model="inputs.FinalOdds" type="text" @blur="formatFinalOdds" required style="width: 150px" />
+								<input v-model="inputs.FinalOdds" type="text" required style="width: 150px" />
 							</div>
 							<div class="field grow">
 								<label for=""
