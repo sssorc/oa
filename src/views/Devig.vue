@@ -235,6 +235,7 @@ export default {
 		},
 		onSubmit() {
 			this.formatFinalOdds();
+			this.formatLegOdds();
 			this.errorMessage = false;
 			let params = [];
 			this.results = false;
@@ -338,7 +339,7 @@ export default {
 									<small>(Format: "+125/-130,+150/-180")</small></label
 								>
 								<div class="flex wrap gap-8">
-									<input v-model="inputs.LegOdds" type="text" style="flex: 1" @blur="formatLegOdds" required />
+									<input v-model="inputs.LegOdds" type="text" style="flex: 1" required />
 									<button type="button" class="btn btn-gray btn-small btn-show-import" @click.prevent="openModal">Paste data</button>
 								</div>
 							</div>
