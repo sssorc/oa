@@ -66,6 +66,39 @@ export default {
 				this.showImport = false;
 			}
 		});
+
+		// Get the full hash portion including query params
+		const hashAndParams = window.location.hash;
+		// Split on ? to get just the query string
+		const queryString = hashAndParams.split("?")[1];
+
+		if (queryString) {
+			const urlParams = new URLSearchParams(queryString);
+			console.log("params", urlParams);
+			let shouldAutoSubmit = false;
+
+			const finalOdds = urlParams.get("finalOdds");
+			if (finalOdds) {
+				this.inputs.FinalOdds = decodeURIComponent(finalOdds);
+				shouldAutoSubmit = true;
+			}
+
+			const legOdds = urlParams.get("legOdds");
+			if (legOdds) {
+				this.inputs.LegOdds = decodeURIComponent(legOdds);
+				shouldAutoSubmit = true;
+			}
+
+			const boostPct = urlParams.get("boost");
+			if (boostPct && !isNaN(boostPct)) {
+				this.useBoost = true;
+				this.inputs.Boost_Text = boostPct;
+			}
+
+			if (shouldAutoSubmit && this.inputs.FinalOdds && this.inputs.LegOdds) {
+				this.onSubmit();
+			}
+		}
 	},
 	methods: {
 		getFinalOddsForRequest(value) {
