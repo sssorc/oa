@@ -343,7 +343,7 @@ export default {
 				<div class="flex-split gap-16 mb-32">
 					<h1 style="line-height: 30px">
 						<a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger.aspx" style="text-decoration: none">CNO Devigger</a>
-						<div class="fs-14 lh-14 mt-8">h/t <a href="https://crazyninjaodds.com/Default.aspx" target="_blank">crazyninjaodds.com</a></div>
+						<div class="fs-14 lh-14 mt-8">via <a href="https://crazyninjaodds.com/Default.aspx" target="_blank">crazyninjaodds.com</a></div>
 					</h1>
 
 					<button @click="showSettings = true" class="flex-center toggle-settings reset hide-md">
