@@ -52,12 +52,30 @@ export default {
 			if (!this.results) return "";
 			return (this.kellyBankroll * this.kellyMultiplier * this.results.kellyFull) / 100;
 		},
-		redditText() {
+		shareUrl() {
+			const baseUrl = window.location.origin + window.location.pathname;
+			const params = new URLSearchParams();
+
+			if (this.inputs.FinalOdds) {
+				params.append("finalOdds", encodeURIComponent(this.inputs.FinalOdds));
+			}
+
+			if (this.inputs.LegOdds) {
+				params.append("legOdds", encodeURIComponent(this.inputs.LegOdds));
+			}
+
+			if (this.useBoost && this.inputs.Boost_Text) {
+				params.append("boost", this.inputs.Boost_Text);
+			}
+
+			return `${baseUrl}#/devig?${params.toString()}`;
+		},
+		discordText() {
 			if (!this.results) return "";
 
-			return `Odds: ${this.results.finalOdds}; **EV: ${this.results.ev}%**\r\r\`${this.results.inputLegs}\` (${this.results.juice}% juice)\r\rFV: ${this.results.fairOdds}; Method: ${this.results.method}; (Full=${this.round(this.results.kellyFull)}u, 1/2=${this.round(
-				this.results.kellyFull / 2
-			)}u, 1/4=${this.round(this.results.kellyFull / 4)}u, FB = ${this.results.conversionPercentage}%)`;
+			return `Odds: ${this.results.finalOdds}; **EV: ${this.results.ev}%**\n\n\`${this.results.inputLegs}\` (${this.results.juice}% juice)\n\nFV: ${this.results.fairOdds}; Method: ${this.results.method.toLowerCase()} (${
+				this.results.wcMethod ? this.results.wcMethod.toLowerCase() : "m"
+			}); (FB = ${this.results.conversionPercentage}%)\n\n[View/Edit Devig](${this.shareUrl})`;
 		},
 	},
 	mounted() {
@@ -122,8 +140,8 @@ export default {
 			// replace spaces with commas, remove comma and slash dangle
 			this.inputs.LegOdds = this.inputs.LegOdds.replace(/\s+/g, ",").replace(/[,/]$/, "");
 		},
-		copyForReddit() {
-			const textarea = this.$refs.redditText;
+		copyForDiscord() {
+			const textarea = this.$refs.discordText;
 			textarea.select();
 			textarea.setSelectionRange(0, 99999);
 			document.execCommand("copy");
@@ -516,8 +534,8 @@ export default {
 
 						<div class="mt-16 flex-right gap-16">
 							<div v-if="copied" class="fs-14 color-blue">Copied to clipboard</div>
-							<button class="btn btn-small btn-gray" @click.prevent="copyForReddit">Copy for reddit</button>
-							<textarea class="reddit-text" ref="redditText" :value="redditText"></textarea>
+							<button class="btn btn-small btn-gray" @click.prevent="copyForDiscord">Copy for discord</button>
+							<textarea class="discord-text" ref="discordText" :value="discordText"></textarea>
 						</div>
 					</div>
 				</form>
