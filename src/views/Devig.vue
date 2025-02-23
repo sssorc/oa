@@ -1,354 +1,371 @@
-<script>
+<script setup>
+import { ref, computed, onMounted } from "vue";
 import axios from "axios";
-import "@/assets/css/main.scss";
 import Navigation from "@/components/Navigation.vue";
+
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
-export default {
-	components: {
-		Navigation,
-	},
-	data() {
-		return {
-			apiUrl: "//api.crazyninjaodds.com/api/devigger/v1/sportsbook_devigger.aspx?api=open&Args=ev_p,fb_p,fo_o,kelly,dm&",
-			showSettings: false,
-			results: false,
-			copied: false,
-			errorMessage: false,
-			kellyMultiplier: 0.25,
-			kellyBankroll: 1000,
-			useBoost: 0,
-			showImport: false,
-			importData: "",
-			importDataType: "firstBasket",
-			sourceBook: "",
-			freeBetType: 0,
-			freeBetPercentage: "50%",
-			conversionRate: "70%",
-			inputs: {
-				LegOdds: "",
-				FinalOdds: "",
-				Correlation_Text: "",
-				Boost_Text: "",
-				Boost_Type: 0,
-				DevigMethod: 4,
-				WorstCase_Multiplicative: 1,
-				WorstCase_Additive: 1,
-				WorstCase_Power: 1,
-				WorstCase_Shin: 1,
-				WeightedAverage_Multiplicative: 0,
-				WeightedAverage_Additive: 0,
-				WeightedAverage_Power: 0,
-				WeightedAverage_Shin: 0,
-			},
-		};
-	},
-	computed: {
-		kellyEvDollars() {
-			if (!this.results) return "";
-			return this.kellyStakeSize * (this.results.ev / 100);
-		},
-		kellyStakeSize() {
-			if (!this.results) return "";
-			return (this.kellyBankroll * this.kellyMultiplier * this.results.kellyFull) / 100;
-		},
-		shareUrl() {
-			const baseUrl = window.location.origin + window.location.pathname;
-			const params = new URLSearchParams();
+// State
+const apiUrl = ref("//api.crazyninjaodds.com/api/devigger/v1/sportsbook_devigger.aspx?api=open&Args=ev_p,fb_p,fo_o,kelly,dm&");
+const showSettings = ref(false);
+const results = ref(false);
+const copied = ref(false);
+const errorMessage = ref(false);
+const kellyMultiplier = ref(0.25);
+const kellyBankroll = ref(1000);
+const useBoost = ref(0);
+const showImport = ref(false);
+const importData = ref("");
+const importDataType = ref("firstBasket");
+const sourceBook = ref("");
+const freeBetType = ref(0);
+const freeBetPercentage = ref("50%");
+const conversionRate = ref("70%");
+const discordText = ref(null);
 
-			if (this.inputs.FinalOdds) {
-				params.append("finalOdds", encodeURIComponent(this.inputs.FinalOdds));
+const inputs = ref({
+	LegOdds: "",
+	FinalOdds: "",
+	Correlation_Text: "",
+	Boost_Text: "",
+	Boost_Type: 0,
+	DevigMethod: 4,
+	WorstCase_Multiplicative: 1,
+	WorstCase_Additive: 1,
+	WorstCase_Power: 1,
+	WorstCase_Shin: 1,
+	WeightedAverage_Multiplicative: 0,
+	WeightedAverage_Additive: 0,
+	WeightedAverage_Power: 0,
+	WeightedAverage_Shin: 0,
+});
+
+// Computed properties
+const kellyEvDollars = computed(() => {
+	if (!results.value) return "";
+	return kellyStakeSize.value * (results.value.ev / 100);
+});
+
+const kellyStakeSize = computed(() => {
+	if (!results.value) return "";
+	return (kellyBankroll.value * kellyMultiplier.value * results.value.kellyFull) / 100;
+});
+
+const shareUrl = computed(() => {
+	const baseUrl = window.location.origin + window.location.pathname;
+	const params = new URLSearchParams();
+
+	if (inputs.value.FinalOdds) {
+		params.append("finalOdds", encodeURIComponent(inputs.value.FinalOdds));
+	}
+
+	if (inputs.value.LegOdds) {
+		params.append("legOdds", encodeURIComponent(inputs.value.LegOdds));
+	}
+
+	if (useBoost.value && inputs.value.Boost_Text) {
+		params.append("boost", inputs.value.Boost_Text);
+	}
+
+	return `${baseUrl}#/devig?${params.toString()}`;
+});
+
+const discordTextComputed = computed(() => {
+	if (!results.value) return "";
+
+	return `Odds: ${results.value.finalOdds}; **EV: ${results.value.ev}%**\n\n\`${results.value.inputLegs}\` (${results.value.juice}% juice)\n\nFV: ${results.value.fairOdds}; Method: ${results.value.method.toLowerCase()} (${
+		results.value.wcMethod ? results.value.wcMethod.toLowerCase() : "m"
+	}); (FB = ${results.value.conversionPercentage}%)\n\n[View/Edit Devig](${shareUrl.value})`;
+});
+
+// Methods
+const getFinalOddsForRequest = (value) => {
+	if (freeBetType.value == 0) {
+		return encodeURIComponent(value);
+	}
+
+	let fbPercentage = Number(freeBetPercentage.value.replace(/\D/g, ""));
+	let convRate = Number(conversionRate.value.replace(/\D/g, "")) / 100;
+	let percentBack = (fbPercentage * convRate) / 100;
+	let type = freeBetType.value == 1 ? "r" : "n";
+
+	let out = `#=${value};${type}=${percentBack}x`;
+	return encodeURIComponent(out);
+};
+
+const formatFinalOdds = () => {
+	// remove comma and slash dangle
+	inputs.value.FinalOdds = inputs.value.FinalOdds.replace(/[,/]$/, "");
+};
+
+const formatLegOdds = () => {
+	// replace spaces with commas, remove comma and slash dangle
+	inputs.value.LegOdds = inputs.value.LegOdds.replace(/\s+/g, ",").replace(/[,/]$/, "");
+};
+
+const copyForDiscord = () => {
+	const textarea = discordText.value;
+	textarea.select();
+	textarea.setSelectionRange(0, 99999);
+	document.execCommand("copy");
+	copied.value = true;
+
+	setTimeout(() => {
+		copied.value = false;
+	}, 2000);
+};
+
+const importFirstBasket = () => {
+	// let data = this.importData;
+	let data = importData.value;
+
+	// Remove line breaks
+	data = data.replace(/[\r\n]+/gm, "/");
+
+	// Remove numbers that don't have + or - in front
+	data = data.replace(/[^+-\d]\d+/g, "");
+
+	// Remove everything except numbers, +, and -
+	data = data.replace(/[^\d\-\+\/]/g, "");
+
+	// Remove multiple slashes with single slash
+	data = data.replace(/\/{2,}/g, "/");
+
+	// Remove "/" at start
+	data = data.replace(/^\//, "");
+
+	inputs.value.LegOdds = data;
+};
+
+const importPastedData = () => {
+	if (importDataType.value == "firstBasket") {
+		importFirstBasket();
+	}
+
+	showImport.value = false;
+	importData.value = "";
+};
+
+const openModal = () => {
+	showImport.value = true;
+	setTimeout(() => {
+		importData.value.focus();
+	}, 100);
+};
+
+const closeModal = () => {
+	showImport.value = false;
+};
+
+const formatUSD = (number) => {
+	let dollarUS = Intl.NumberFormat("en-US", {
+		style: "currency",
+		currency: "USD",
+	});
+
+	return dollarUS.format(number).replace(".00", "");
+};
+
+const round = (num, wholeNumber) => {
+	if (wholeNumber) {
+		return Math.round(num);
+	} else {
+		return Math.round(num * 100) / 100;
+	}
+};
+
+const getWcMethod = (code) => {
+	if (code == "wc:p") {
+		return "Power";
+	}
+
+	if (code == "wc:p,m") {
+		return "Power + Multiplicative";
+	}
+
+	return false;
+};
+
+const getMethod = (num) => {
+	switch (num) {
+		case 0:
+			return "Multiplicative";
+			break;
+		case 1:
+			return "Additive";
+			break;
+		case 2:
+			return "Power";
+			break;
+		case 3:
+			return "Shin";
+			break;
+		case 4:
+			return "Worst Case";
+			break;
+		case 5:
+			return "Weighted Average";
+			break;
+		default:
+			return "Multiplicative";
+			break;
+	}
+};
+
+const getFairOdds = (odds) => {
+	let plus = odds > 0 ? "+" : "";
+	return plus + round(odds, true);
+};
+
+const getFinalOdds = (data) => {
+	if ("Odds" in data) {
+		return data.Odds;
+	}
+
+	if (useBoost.value && inputs.value.Boost_Text && inputs.value.FinalOdds > 0) {
+		return "+" + inputs.value.FinalOdds * (1 + inputs.value.Boost_Text / 100);
+	}
+};
+
+const getLegData = (data) => {
+	let legs = [];
+
+	for (const key in data) {
+		let obj = data[key];
+
+		if (Object.hasOwnProperty.call(obj, "MarketJuice")) {
+			legs.push(obj);
+		}
+	}
+
+	return legs;
+};
+
+const getJuice = (data) => {
+	let juice = 0;
+	let count = 0;
+
+	for (const key in data) {
+		let obj = data[key];
+
+		if (Object.hasOwnProperty.call(obj, "MarketJuice")) {
+			juice += obj.MarketJuice;
+			count += 1;
+		}
+	}
+
+	return round((juice / count) * 100);
+};
+
+const getFairOddsFromPercent = () => {
+	return "todo";
+};
+
+const onSubmit = () => {
+	formatFinalOdds();
+	formatLegOdds();
+	errorMessage.value = false;
+	let params = [];
+	results.value = false;
+
+	for (const key in inputs.value) {
+		let value = inputs.value[key];
+
+		if (key == "FinalOdds") {
+			let formatted = getFinalOddsForRequest(value);
+			params.push(`${key}=${formatted}`);
+		} else if (value || value == 0) {
+			params.push(`${key}=${value}`);
+		}
+	}
+
+	if (inputs.value.Correlation_Text) {
+		params.push("Correlation_Bool=1");
+	}
+
+	if (useBoost.value) {
+		params.push("Boost_Bool=1");
+	}
+
+	let finalUrl = apiUrl.value + params.join("&");
+
+	console.log("final url", finalUrl);
+
+	axios
+		.get(finalUrl)
+		.then((response) => {
+			if ("message" in response.data) {
+				errorMessage.value = response.data.message;
+				return;
 			}
+			const data = response.data.Final;
 
-			if (this.inputs.LegOdds) {
-				params.append("legOdds", encodeURIComponent(this.inputs.LegOdds));
-			}
-
-			if (this.useBoost && this.inputs.Boost_Text) {
-				params.append("boost", this.inputs.Boost_Text);
-			}
-
-			return `${baseUrl}#/devig?${params.toString()}`;
-		},
-		discordText() {
-			if (!this.results) return "";
-
-			return `Odds: ${this.results.finalOdds}; **EV: ${this.results.ev}%**\n\n\`${this.results.inputLegs}\` (${this.results.juice}% juice)\n\nFV: ${this.results.fairOdds}; Method: ${this.results.method.toLowerCase()} (${
-				this.results.wcMethod ? this.results.wcMethod.toLowerCase() : "m"
-			}); (FB = ${this.results.conversionPercentage}%)\n\n[View/Edit Devig](${this.shareUrl})`;
-		},
-	},
-	mounted() {
-		document.addEventListener("keydown", (event) => {
-			if (this.showImport && event.key === "Escape") {
-				this.showImport = false;
+			results.value = {
+				method: getMethod(inputs.value.DevigMethod),
+				inputLegs: inputs.value.LegOdds,
+				finalOdds: getFinalOdds(data),
+				fairOdds: getFairOdds(data.FairValue_Odds),
+				legs: getLegData(response.data),
+				juice: getJuice(response.data),
+				hitPercentage: data.FairValue * 100,
+				conversionPercentage: round(data.FB_Percentage * 100),
+				ev: round(data.EV_Percentage * 100),
+				kellyFull: data.Kelly_Full,
+				sourceBook: sourceBook.value,
+				wcMethod: getWcMethod(data.DevigMethod),
+				includeConversion: freeBetType.value == 0,
+			};
+		})
+		.catch((error) => {
+			if ("message" in error) {
+				errorMessage.value = error.message;
+			} else {
+				errorMessage.value = "Error devigging. Re-check inputs.";
 			}
 		});
-
-		// Get the full hash portion including query params
-		const hashAndParams = window.location.hash;
-		// Split on ? to get just the query string
-		const queryString = hashAndParams.split("?")[1];
-
-		if (queryString) {
-			const urlParams = new URLSearchParams(queryString);
-			console.log("params", urlParams);
-			let shouldAutoSubmit = false;
-
-			const finalOdds = urlParams.get("finalOdds");
-			if (finalOdds) {
-				this.inputs.FinalOdds = decodeURIComponent(finalOdds);
-				shouldAutoSubmit = true;
-			}
-
-			const legOdds = urlParams.get("legOdds");
-			if (legOdds) {
-				this.inputs.LegOdds = decodeURIComponent(legOdds);
-				shouldAutoSubmit = true;
-			}
-
-			const boostPct = urlParams.get("boost");
-			if (boostPct && !isNaN(boostPct)) {
-				this.useBoost = true;
-				this.inputs.Boost_Text = boostPct;
-			}
-
-			if (shouldAutoSubmit && this.inputs.FinalOdds && this.inputs.LegOdds) {
-				this.onSubmit();
-			}
-		}
-	},
-	methods: {
-		getFinalOddsForRequest(value) {
-			if (this.freeBetType == 0) {
-				return encodeURIComponent(value);
-			}
-
-			let freeBetPercentage = Number(this.freeBetPercentage.replace(/\D/g, ""));
-			let conversionRate = Number(this.conversionRate.replace(/\D/g, "")) / 100;
-			let percentBack = (freeBetPercentage * conversionRate) / 100;
-			let type = this.freeBetType == 1 ? "r" : "n";
-
-			let out = `#=${value};${type}=${percentBack}x`;
-			return encodeURIComponent(out);
-		},
-		formatFinalOdds() {
-			// remove comma and slash dangle
-			this.inputs.FinalOdds = this.inputs.FinalOdds.replace(/[,/]$/, "");
-		},
-		formatLegOdds() {
-			// replace spaces with commas, remove comma and slash dangle
-			this.inputs.LegOdds = this.inputs.LegOdds.replace(/\s+/g, ",").replace(/[,/]$/, "");
-		},
-		copyForDiscord() {
-			const textarea = this.$refs.discordText;
-			textarea.select();
-			textarea.setSelectionRange(0, 99999);
-			document.execCommand("copy");
-			this.copied = true;
-
-			setTimeout(() => {
-				this.copied = false;
-			}, 2000);
-		},
-		importFirstBasket() {
-			// let data = this.importData;
-			let data = this.importData;
-
-			// Remove line breaks
-			data = data.replace(/[\r\n]+/gm, "/");
-
-			// Remove numbers that don't have + or - in front
-			data = data.replace(/[^+-\d]\d+/g, "");
-
-			// Remove everything except numbers, +, and -
-			data = data.replace(/[^\d\-\+\/]/g, "");
-
-			// Remove multiple slashes with single slash
-			data = data.replace(/\/{2,}/g, "/");
-
-			// Remove "/" at start
-			data = data.replace(/^\//, "");
-
-			this.inputs.LegOdds = data;
-		},
-		importPastedData() {
-			if (this.importDataType == "firstBasket") {
-				this.importFirstBasket();
-			}
-
-			this.showImport = false;
-			this.importData = "";
-		},
-		openModal() {
-			this.showImport = true;
-			setTimeout(() => {
-				this.$refs["importData"].focus();
-			}, 100);
-		},
-		closeModal() {
-			this.showImport = false;
-		},
-		formatUSD(number) {
-			let dollarUS = Intl.NumberFormat("en-US", {
-				style: "currency",
-				currency: "USD",
-			});
-
-			return dollarUS.format(number).replace(".00", "");
-		},
-		round(num, wholeNumber) {
-			if (wholeNumber) {
-				return Math.round(num);
-			} else {
-				return Math.round(num * 100) / 100;
-			}
-		},
-		getWcMethod(code) {
-			if (code == "wc:p") {
-				return "Power";
-			}
-
-			if (code == "wc:p,m") {
-				return "Power + Multiplicative";
-			}
-
-			return false;
-		},
-		getMethod(num) {
-			switch (num) {
-				case 0:
-					return "Multiplicative";
-					break;
-				case 1:
-					return "Additive";
-					break;
-				case 2:
-					return "Power";
-					break;
-				case 3:
-					return "Shin";
-					break;
-				case 4:
-					return "Worst Case";
-					break;
-				case 5:
-					return "Weighted Average";
-					break;
-				default:
-					return "Multiplicative";
-					break;
-			}
-		},
-		getFairOdds(odds) {
-			let plus = odds > 0 ? "+" : "";
-			return plus + this.round(odds, true);
-		},
-		getFinalOdds(data) {
-			if ("Odds" in data) {
-				return data.Odds;
-			}
-
-			if (this.useBoost && this.inputs.Boost_Text && this.inputs.FinalOdds > 0) {
-				return "+" + this.inputs.FinalOdds * (1 + this.inputs.Boost_Text / 100);
-			}
-		},
-		getLegData(data) {
-			let legs = [];
-
-			for (const key in data) {
-				let obj = data[key];
-
-				if (Object.hasOwnProperty.call(obj, "MarketJuice")) {
-					legs.push(obj);
-				}
-			}
-
-			return legs;
-		},
-		getJuice(data) {
-			let juice = 0;
-			let count = 0;
-
-			for (const key in data) {
-				let obj = data[key];
-
-				if (Object.hasOwnProperty.call(obj, "MarketJuice")) {
-					juice += obj.MarketJuice;
-					count += 1;
-				}
-			}
-
-			return this.round((juice / count) * 100);
-		},
-		getFairOddsFromPercent() {
-			return "todo";
-		},
-		onSubmit() {
-			this.formatFinalOdds();
-			this.formatLegOdds();
-			this.errorMessage = false;
-			let params = [];
-			this.results = false;
-
-			for (const key in this.inputs) {
-				let value = this.inputs[key];
-
-				if (key == "FinalOdds") {
-					let formatted = this.getFinalOddsForRequest(value);
-					params.push(`${key}=${formatted}`);
-				} else if (value || value == 0) {
-					params.push(`${key}=${value}`);
-				}
-			}
-
-			if (this.inputs.Correlation_Text) {
-				params.push("Correlation_Bool=1");
-			}
-
-			if (this.useBoost) {
-				params.push("Boost_Bool=1");
-			}
-
-			let finalUrl = this.apiUrl + params.join("&");
-
-			console.log("final url", finalUrl);
-
-			axios
-				.get(finalUrl)
-				.then((response) => {
-					if ("message" in response.data) {
-						this.errorMessage = response.data.message;
-						return;
-					}
-					const data = response.data.Final;
-
-					this.results = {
-						method: this.getMethod(this.inputs.DevigMethod),
-						inputLegs: this.inputs.LegOdds,
-						finalOdds: this.getFinalOdds(data),
-						fairOdds: this.getFairOdds(data.FairValue_Odds),
-						legs: this.getLegData(response.data),
-						juice: this.getJuice(response.data),
-						hitPercentage: data.FairValue * 100,
-						conversionPercentage: this.round(data.FB_Percentage * 100),
-						ev: this.round(data.EV_Percentage * 100),
-						kellyFull: data.Kelly_Full,
-						sourceBook: this.sourceBook,
-						wcMethod: this.getWcMethod(data.DevigMethod),
-						includeConversion: this.freeBetType == 0,
-					};
-				})
-				.catch((error) => {
-					if ("message" in error) {
-						this.errorMessage = error.message;
-					} else {
-						this.errorMessage = "Error devigging. Re-check inputs.";
-					}
-				});
-		},
-	},
 };
+
+// Mounted logic
+onMounted(() => {
+	document.addEventListener("keydown", (event) => {
+		if (showImport.value && event.key === "Escape") {
+			showImport.value = false;
+		}
+	});
+
+	// Get the full hash portion including query params
+	const hashAndParams = window.location.hash;
+	// Split on ? to get just the query string
+	const queryString = hashAndParams.split("?")[1];
+
+	if (queryString) {
+		const urlParams = new URLSearchParams(queryString);
+		console.log("params", urlParams);
+		let shouldAutoSubmit = false;
+
+		const finalOdds = urlParams.get("finalOdds");
+		if (finalOdds) {
+			inputs.value.FinalOdds = decodeURIComponent(finalOdds);
+			shouldAutoSubmit = true;
+		}
+
+		const legOdds = urlParams.get("legOdds");
+		if (legOdds) {
+			inputs.value.LegOdds = decodeURIComponent(legOdds);
+			shouldAutoSubmit = true;
+		}
+
+		const boostPct = urlParams.get("boost");
+		if (boostPct && !isNaN(boostPct)) {
+			useBoost.value = true;
+			inputs.value.Boost_Text = boostPct;
+		}
+
+		if (shouldAutoSubmit && inputs.value.FinalOdds && inputs.value.LegOdds) {
+			onSubmit();
+		}
+	}
+});
 </script>
 
 <template>
@@ -535,7 +552,7 @@ export default {
 						<div class="mt-16 flex-right gap-16">
 							<div v-if="copied" class="fs-14 color-blue">Copied to clipboard</div>
 							<button class="btn btn-small btn-gray" @click.prevent="copyForDiscord">Copy for discord</button>
-							<textarea class="discord-text" ref="discordText" :value="discordText"></textarea>
+							<textarea class="discord-text" ref="discordText" :value="discordTextComputed"></textarea>
 						</div>
 					</div>
 				</form>
