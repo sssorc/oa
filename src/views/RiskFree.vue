@@ -152,11 +152,11 @@ export default {
 				<div class="field-wrap flex-center">
 					<div class="field">
 						<label for="" class="color-rfb">Risk-free stake</label>
-						<input type="text" v-model="stakeA" tabindex="3" required @keyup="onKeyUp('xa')" />
+						<input type="text" v-model="stakeA" tabindex="3" required @keyup="onKeyUp('xa')" class="bg-white" />
 					</div>
 					<div class="field">
 						<label for="">Odds</label>
-						<input type="text" v-model="oddsA" tabindex="4" required @keyup="onKeyUp('oa')" />
+						<input type="text" v-model="oddsA" tabindex="4" required @keyup="onKeyUp('oa')" class="bg-white" />
 					</div>
 				</div>
 			</div>
@@ -165,7 +165,7 @@ export default {
 				<div class="field-wrap flex-center">
 					<div class="field">
 						<label for="">Odds</label>
-						<input type="text" v-model="oddsB" tabindex="5" required @keyup="onKeyUp('ob')" />
+						<input type="text" v-model="oddsB" tabindex="5" required @keyup="onKeyUp('ob')" class="bg-white" />
 					</div>
 				</div>
 			</div>

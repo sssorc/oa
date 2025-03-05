@@ -1,6 +1,6 @@
 <template>
 	<div class="card">
-		<div :class="{ show: copyConfirmation }" class="copy-confirmation flex">{{ copyConfirmation }}</div>
+		<div :class="{ show: copyConfirmation }" class="copy-confirmation flex items-center">{{ copyConfirmation }}</div>
 		<div class="util">
 			<button @click="copyToClipboard('csv')" class="copy-to-clipboard">
 				<svg xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 384 512">
@@ -21,7 +21,7 @@
 		</div>
 		<h2>{{ play.percent }}%</h2>
 		<div class="card-body">
-			<div class="flex split">
+			<div class="flex items-center justify-between">
 				<div class="amount">
 					<label>{{ betA }} ({{ Number(this.play.oddsA) > 0 ? `+${this.play.oddsA}` : this.play.oddsA }})</label>
 					<div class="number">{{ formatUSD(play.stakeA) }}</div>
@@ -33,13 +33,13 @@
 					<small>stake</small>
 				</div>
 			</div>
-			<div class="flex-center mt-4 mb-6">
+			<div class="flex items-center justify-center mt-4 mb-6">
 				<div class="amount">
 					<div class="number sunk color-orange">{{ formatUSD(play.stakeB) }}</div>
 					<small>staked</small>
 				</div>
 			</div>
-			<div class="flex split card-bottom">
+			<div class="flex items-center justify-between card-bottom">
 				<div class="amount">
 					<div class="number color-green">{{ formatUSD(play.profitA) }}</div>
 					<small>{{ formatUSD(play.payoutA) }} payout</small>

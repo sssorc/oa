@@ -1,7 +1,7 @@
 <template>
 	<div class="card" :class="{ threeway: play.stakeC }">
-		<div :class="{ show: copyConfirmation }" class="copy-confirmation flex">{{ copyConfirmation }}</div>
-		<div class="util flex">
+		<div :class="{ show: copyConfirmation }" class="copy-confirmation flex items-center">{{ copyConfirmation }}</div>
+		<div class="util flex items-center">
 			<button tabindex="-1" @click="copyToClipboard('csv')" class="copy-to-clipboard">
 				<svg xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 384 512">
 					<path
@@ -21,7 +21,7 @@
 		</div>
 		<h2>{{ roi.toFixed(2) }}%</h2>
 		<div class="card-body">
-			<div class="flex split">
+			<div class="flex items-center justify-between">
 				<div class="amount">
 					<label>{{ labelA }} ({{ Number(this.play.oddsA) > 0 ? `+${this.play.oddsA}` : this.play.oddsA }})</label>
 					<div class="number">{{ formatUSD(play.stakeA) }}</div>
@@ -38,13 +38,13 @@
 					<small>stake</small>
 				</div>
 			</div>
-			<div class="flex-center mt-4 mb-6">
+			<div class="flex items-center justify-center mt-4 mb-6">
 				<div class="amount">
 					<div class="number sunk color-orange">{{ formatUSD(play.stakeA + play.stakeB + play.stakeC) }}</div>
 					<small>staked</small>
 				</div>
 			</div>
-			<div class="flex split card-bottom">
+			<div class="flex items-center justify-center card-bottom">
 				<div class="amount">
 					<div :class="{ 'color-green': play.profitA > 0, 'color-red': play.profitA < 0 }" class="number">{{ formatUSD(play.profitA) }}</div>
 					<small>{{ formatUSD(play.payoutA) }} payout</small>

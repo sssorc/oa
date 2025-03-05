@@ -3,7 +3,7 @@ import CardBalanced from '@/components/CardBalanced.vue';
 import Navigation from '@/components/Navigation.vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers.js';
-import '@/assets/legacy/style.scss'
+import '@/assets/legacy/style.scss';
 
 export default {
 	name: 'Arb',
@@ -41,27 +41,27 @@ export default {
 	},
 	methods: {
 		bindShortcuts() {
-			document.addEventListener( 'keydown', (event) => {
-				if ( this.editingLabel ) {
+			document.addEventListener('keydown', (event) => {
+				if (this.editingLabel) {
 					return;
 				}
 
 				event = event || window.event;
 
-				if ( event.keyCode === 83 ) {
+				if (event.keyCode === 83) {
 					this.bookmarkPlay();
 				}
 			});
 		},
 		calculate() {
-			if ( !this.freshInput ) return;
-			if ( !this.oddsA || !this.stakeA || !this.oddsB ) return;
+			if (!this.freshInput) return;
+			if (!this.oddsA || !this.stakeA || !this.oddsB) return;
 
 			// Reset stuff
 			this.loading = true;
 			this.freshInput = false;
 			let stakeC = 0;
-			
+
 			// Get payout
 			let payoutA = Number(this.getPayout(this.oddsA, this.stakeA));
 
@@ -81,7 +81,7 @@ export default {
 			const profitB = payoutB - sunk;
 			const profitA = payoutA - sunk;
 			const profitC = payoutC - sunk;
-			
+
 			// Push our card data
 			this.arbBalanced = {
 				stakeA: Number(this.stakeA),
@@ -97,14 +97,14 @@ export default {
 				profitB,
 				profitC,
 				ev: (profitA + profitB) / 2,
-			}
+			};
 
 			// Done loading
 			this.loading = false;
 			this.hasSearched = true;
-			
+
 			// Are we viewing a bookmark?
-			if ( _.find(this.bookmarks, { 'id': `${this.oddsA}${this.oddsB}` }) ) {
+			if (_.find(this.bookmarks, { id: `${this.oddsA}${this.oddsB}` })) {
 				this.viewingBookmark = true;
 			} else {
 				this.viewingBookmark = false;
@@ -113,7 +113,7 @@ export default {
 		calcFromUrl() {
 			const a = this.getQueryString('oddsa');
 			const ax = this.getQueryString('stakea');
-			const b = this.getQueryString('oddsb');			
+			const b = this.getQueryString('oddsb');
 			const c = this.getQueryString('oddsc');
 			const labelA = this.getQueryString('booka');
 			const labelB = this.getQueryString('bookb');
@@ -127,42 +127,42 @@ export default {
 				this.threeway = true;
 				this.oddsC = c;
 			}
-			
-			if ( labelA ) {
+
+			if (labelA) {
 				this.labelA = decodeURIComponent(labelA);
 			}
-			
-			if ( labelB ) {
+
+			if (labelB) {
 				this.labelB = decodeURIComponent(labelB);
 			}
 
-			if ( labelC ) {
+			if (labelC) {
 				this.labelC = decodeURIComponent(labelC);
 			}
 
 			this.calculate();
 		},
 		bookmarkPlay() {
-			if ( !this.hasSearched ) {
+			if (!this.hasSearched) {
 				return;
 			}
-			
+
 			// Remove?
-			if ( this.viewingBookmark ) {
+			if (this.viewingBookmark) {
 				_.remove(this.bookmarks, (obj) => {
 					return obj.id == `${this.oddsA}${this.oddsB}`;
 				});
-				
+
 				this.viewingBookmark = false;
 				return;
 			}
-			
+
 			// Create
-			const bookmark = _.clone(this.arbBalanced)
-			bookmark.id = `${this.oddsA}${this.oddsB}`
+			const bookmark = _.clone(this.arbBalanced);
+			bookmark.id = `${this.oddsA}${this.oddsB}`;
 			bookmark.labelA = this.labelA;
 			bookmark.labelB = this.labelB;
-			
+
 			this.bookmarks.push(bookmark);
 			this.resetState();
 		},
@@ -182,88 +182,91 @@ export default {
 		},
 		threeway() {
 			this.freshInput = true;
-		}
+		},
 	},
-}
+};
 </script>
 
 <template>
 	<div class="page legacy arb">
-		<Navigation/>
-		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
-		<input id="csv" class="copy-input" type="text" :value="csv">
-	
-		<form @submit.prevent="calculate" :class="{'threeway': threeway}">
+		<Navigation />
+		<input id="shareLink" class="copy-input" type="text" :value="shareLink" />
+		<input id="csv" class="copy-input" type="text" :value="csv" />
+
+		<form @submit.prevent="calculate" :class="{ threeway: threeway }">
 			<div v-if="bookmarks.length" class="bookmarks">
-				<div v-for="(play, i) in bookmarks" class="bookmark flex-stretch" :key="i" @click="loadBookmark(play)">
-					<div :class="{'color-green': play.ev > 0, 'color-red': play.ev < 0}" class="ev flex-center">{{ formatUSD(play.ev) }}</div>
+				<div v-for="(play, i) in bookmarks" class="bookmark flex items-stretch" :key="i" @click="loadBookmark(play)">
+					<div :class="{ 'color-green': play.ev > 0, 'color-red': play.ev < 0 }" class="ev flex items-center">{{ formatUSD(play.ev) }}</div>
 					<div class="games">
-						{{ play.labelA }} <strong>{{ play.oddsA }}</strong><br>
+						{{ play.labelA }} <strong>{{ play.oddsA }}</strong
+						><br />
 						{{ play.labelB }} <strong>{{ play.oddsB }}</strong>
 					</div>
 				</div>
 			</div>
 			<div class="settings">
 				<div>
-					<label for="" style="display:block;">Rounding</label>
+					<label for="" style="display: block">Rounding</label>
 					<div class="toggle toggle-round">
-						<input id="round" v-model="round" type="checkbox" value="true" tabindex="-1">
+						<input id="round" v-model="round" type="checkbox" value="true" tabindex="-1" />
 						<label for="round"></label>
 						<div class="knob"></div>
 					</div>
 				</div>
 				<div>
-					<label for="" style="display:block;">Three-way</label>
+					<label for="" style="display: block">Three-way</label>
 					<div class="toggle toggle-round">
-						<input id="threeway" v-model="threeway" type="checkbox" value="false" tabindex="-1">
+						<input id="threeway" v-model="threeway" type="checkbox" value="false" tabindex="-1" />
 						<label for="threeway"></label>
 						<div class="knob"></div>
 					</div>
 				</div>
 			</div>
 			<div class="book">
-				<input type="text" v-model="labelA" class="label-input" tabindex="1" @focus="editingLabel = true" @blur="editingLabel = false">
-				<div class="field-wrap flex-center">
+				<input type="text" v-model="labelA" class="label-input" tabindex="1" @focus="editingLabel = true" @blur="editingLabel = false" />
+				<div class="field-wrap flex items-center justify-center">
 					<div class="field">
 						<label for="" class="color-arb">Stake</label>
-						<input type="text" v-model="stakeA" required tabindex="3" @keyup="onKeyUp('xa')">
+						<input type="text" v-model="stakeA" required tabindex="3" @keyup="onKeyUp('xa')" class="bg-white" />
 					</div>
 					<div class="field">
 						<label for="">Odds</label>
-						<input type="text" v-model="oddsA" required tabindex="4" @keyup="onKeyUp('oa')">
+						<input type="text" v-model="oddsA" required tabindex="4" @keyup="onKeyUp('oa')" class="bg-white" />
 					</div>
 				</div>
 			</div>
 			<div class="book">
-				<input type="text" v-model="labelB" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false">
-				<div class="field-wrap flex-center">
+				<input type="text" v-model="labelB" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false" />
+				<div class="field-wrap flex items-center justify-center">
 					<div class="field">
 						<label for="">Odds</label>
-						<input type="text" v-model="oddsB" required tabindex="5" @keyup="onKeyUp('ob')">
+						<input type="text" v-model="oddsB" required tabindex="5" @keyup="onKeyUp('ob')" class="bg-white" />
 					</div>
 				</div>
 			</div>
 			<div v-if="threeway" class="book">
-				<input type="text" v-model="labelC" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false">
-				<div class="field-wrap flex-center">
+				<input type="text" v-model="labelC" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false" />
+				<div class="field-wrap flex items-center justify-center">
 					<div class="field">
 						<label for="">Odds</label>
-						<input type="text" v-model="oddsC" required tabindex="6" @keyup="onKeyUp('oc')">
+						<input type="text" v-model="oddsC" required tabindex="6" @keyup="onKeyUp('oc')" class="bg-white" />
 					</div>
 				</div>
 			</div>
-			<div class="flex-center button-wrap">
+			<div class="flex items-center justify-center button-wrap">
 				<div>
 					<button class="btn btn-calculate" type="submit" tabindex="6" name="button">Calculate hedge</button>
-					<button v-if="arbBalanced && !loading" :class="{ 'viewing-bookmark': viewingBookmark }" tabindex="-1" class="save-play btn-util" @click.prevent="bookmarkPlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor"><path d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z"/></svg></button>
+					<button v-if="arbBalanced && !loading" :class="{ 'viewing-bookmark': viewingBookmark }" tabindex="-1" class="save-play btn-util" @click.prevent="bookmarkPlay">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor"><path d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z" /></svg>
+					</button>
 				</div>
 			</div>
 		</form>
-	
-		<section v-if="loading" class="loading flex-center">
+
+		<section v-if="loading" class="loading flex items-center">
 			<div class="spinner"></div>
 		</section>
-	
+
 		<section class="card-section alt">
 			<transition name="fade">
 				<div v-if="arbBalanced && !loading" class="card-wrap">

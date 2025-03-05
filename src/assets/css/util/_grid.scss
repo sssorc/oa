@@ -2,10 +2,10 @@
 //! Mixin
 // -----------------------------------------------------------------------------
 
-@mixin symmetrical-layout( $breakpoint, $columns ) {
-	@include min( $breakpoint ) {
+@mixin symmetrical-layout($breakpoint, $columns) {
+	@include min($breakpoint) {
 		display: grid;
-        grid-template-columns: repeat($columns, minmax(0, 1fr));
+		grid-template-columns: repeat($columns, minmax(0, 1fr));
 	}
 }
 
@@ -14,60 +14,60 @@
 // -----------------------------------------------------------------------------
 
 .grid {
-    display: grid;
-    grid-template-columns: 100%;
+	display: grid;
+	grid-template-columns: 100%;
 }
 
 .sm-2s {
-    @include symmetrical-layout($sm, 2);
+	@include symmetrical-layout($sm, 2);
 }
 
 .sm-3s {
-    @include symmetrical-layout($sm, 3);
+	@include symmetrical-layout($sm, 3);
 }
 
 .sm-4s {
-    @include symmetrical-layout($sm, 4);
+	@include symmetrical-layout($sm, 4);
 }
 
 .md-2s {
-    @include symmetrical-layout($md, 2);
+	@include symmetrical-layout($md, 2);
 }
 
 .md-3s {
-    @include symmetrical-layout($md, 3);
+	@include symmetrical-layout($md, 3);
 }
 
 .md-4s {
-    @include symmetrical-layout($md, 4);
+	@include symmetrical-layout($md, 4);
 }
 
 .lg-2s {
-    @include symmetrical-layout($lg, 2);
+	@include symmetrical-layout($lg, 2);
 }
 
 .lg-3s {
-    @include symmetrical-layout($lg, 3);
+	@include symmetrical-layout($lg, 3);
 }
 
 .lg-4s {
-    @include symmetrical-layout($lg, 4);
+	@include symmetrical-layout($lg, 4);
 }
 
 .xl-2s {
-    @include symmetrical-layout($xl, 2);
+	@include symmetrical-layout($xl, 2);
 }
 
 .xl-3s {
-    @include symmetrical-layout($xl, 3);
+	@include symmetrical-layout($xl, 3);
 }
 
 .xl-4s {
-    @include symmetrical-layout($xl, 4);
+	@include symmetrical-layout($xl, 4);
 }
 
 .xl-5s {
-    @include symmetrical-layout($xl, 5);
+	@include symmetrical-layout($xl, 5);
 }
 
 // ----------------------------------------o-------------------------------------
@@ -88,32 +88,6 @@
 
 @include min($lg) {
 	.lg-order-last {
-		order :10;
-	}	
-}
-
-// -----------------------------------------------------------------------------
-//! Gaps
-// -----------------------------------------------------------------------------
-
-@include attr-x('gap', 'gap', 4, 30);
-@include attr-x('gap-x', 'column-gap', 4, 30);
-@include attr-x('gap-y', 'row-gap', 4, 30);
-
-@include min( $md ) {
-    @include attr-x('md-gap', 'gap', 4, 30);
-    @include attr-x('md-gap-x', 'column-gap', 4, 30);
-    @include attr-x('md-gap-y', 'row-gap', 4, 30);
-}
-
-@include min( $lg ) {
-    @include attr-x('lg-gap', 'gap', 4, 30);
-    @include attr-x('lg-gap-x', 'column-gap', 4, 30);
-    @include attr-x('lg-gap-y', 'row-gap', 4, 30);
-}
-
-@include min( $xl ) {
-    @include attr-x('xl-gap', 'gap', 4, 30);
-    @include attr-x('xl-gap-x', 'column-gap', 4, 30);
-    @include attr-x('xl-gap-y', 'row-gap', 4, 30);
+		order: 10;
+	}
 }

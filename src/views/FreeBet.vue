@@ -3,7 +3,7 @@ import CardConversion from '@/components/CardConversion.vue';
 import Navigation from '@/components/Navigation.vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers';
-import '@/assets/legacy/style.scss'
+import '@/assets/legacy/style.scss';
 
 export default {
 	name: 'FreeBet',
@@ -35,50 +35,50 @@ export default {
 		calcFromUrl() {
 			const a = this.getQueryString('oddsa');
 			const ax = this.getQueryString('stakea');
-			const b = this.getQueryString('oddsb');			
+			const b = this.getQueryString('oddsb');
 			const labelA = this.getQueryString('booka');
 			const labelB = this.getQueryString('bookb');
 			this.oddsA = a;
 			this.stakeA = ax;
 			this.oddsB = b;
-			
-			if ( labelA ) {
+
+			if (labelA) {
 				this.labelA = decodeURIComponent(labelA);
 			}
-			
-			if ( labelB ) {
+
+			if (labelB) {
 				this.labelB = decodeURIComponent(labelB);
 			}
 
 			this.calculate();
 		},
 		bindShortcuts() {
-			document.addEventListener( 'keydown', (event) => {
-				if ( this.editingLabel ) {
+			document.addEventListener('keydown', (event) => {
+				if (this.editingLabel) {
 					return;
 				}
-	
+
 				event = event || window.event;
-	
-				if ( event.keyCode === 83 ) {
+
+				if (event.keyCode === 83) {
 					this.bookmarkPlay();
 				}
 			});
 		},
 		calculate() {
-			if ( !this.oddsA || !this.stakeA || !this.oddsB ) return;
-			
+			if (!this.oddsA || !this.stakeA || !this.oddsB) return;
+
 			const payoutA = this.stakeA * (this.oddsA / 100);
 			const o = (this.oddsB * -1) / 100;
 			let stakeB = (payoutA * o) / (1 + o);
-			if ( this.round ) {
+			if (this.round) {
 				stakeB = Math.round(stakeB);
 			}
 			const payoutB = Number(this.getPayout(Number(this.oddsB), stakeB));
 			const profitA = payoutA - stakeB;
 			const profitB = payoutB - stakeB;
 			const profitAvg = (profitA + profitB) / 2;
-			
+
 			const conversion = {
 				stakeA: Number(this.stakeA),
 				oddsA: this.oddsA,
@@ -90,7 +90,7 @@ export default {
 				profitB: Number(profitB.toFixed(2)),
 				percent: this.percentOf(this.stakeA, profitAvg),
 			};
-			
+
 			this.loading = false;
 			this.hasSearched = true;
 			this.conversion = conversion;
@@ -99,25 +99,25 @@ export default {
 			const prop = `isEditingLabel${l}`;
 			const ref = `labelInput${l}`;
 			this[prop] = true;
-	
+
 			this.$nextTick(() => {
 				this.$refs[ref].focus();
-			})
+			});
 		},
 		bookmarkPlay() {
-			if ( !this.hasSearched ) {
+			if (!this.hasSearched) {
 				return;
 			}
-			
-			if ( this.viewingBookmark ) {
+
+			if (this.viewingBookmark) {
 				_.remove(this.bookmarks, (obj) => {
 					return obj.id == `${this.oddsA}${this.oddsB}`;
 				});
-				
+
 				this.viewingBookmark = false;
 				return;
 			}
-	
+
 			const play = {
 				id: `${this.oddsA}${this.oddsB}`,
 				labelA: this.labelA,
@@ -141,20 +141,20 @@ export default {
 			this.labelB = play.labelB;
 			this.freshInput = true;
 			this.calculate();
-		}
+		},
 	},
 	watch: {
 		round() {
 			this.calculate();
-		}
+		},
 	},
-}
+};
 </script>
 
 <template>
 	<div class="page legacy free-bet">
-		<Navigation/>
-		<input id="shareLink" class="copy-input" type="text" :value="shareLink">
+		<Navigation />
+		<input id="shareLink" class="copy-input" type="text" :value="shareLink" />
 
 		<form @submit.prevent="calculate">
 			<div v-if="bookmarks.length" class="bookmarks">
@@ -165,58 +165,58 @@ export default {
 			</div>
 			<div class="settings">
 				<div>
-					<label for="" style="display:block;">Rounding</label>
+					<label for="" style="display: block">Rounding</label>
 					<div class="toggle toggle-round">
-						<input id="round" v-model="round" type="checkbox" value="true">
+						<input id="round" v-model="round" type="checkbox" value="true" />
 						<label for="round"></label>
 						<div class="knob"></div>
 					</div>
 				</div>
 			</div>
 			<div class="book">
-				<input type="text" v-model="labelA" class="label-input" tabindex="1" @focus="editingLabel = true" @blur="editingLabel = false">
+				<input type="text" v-model="labelA" class="label-input" tabindex="1" @focus="editingLabel = true" @blur="editingLabel = false" />
 				<div class="field-wrap flex-center">
 					<div class="field">
 						<label for="" class="color-fb">Free bet</label>
-						<input type="text" v-model="stakeA" tabindex="3" @keyup="onKeyUp('xa')" required>
+						<input type="text" v-model="stakeA" tabindex="3" @keyup="onKeyUp('xa')" required class="bg-white" />
 					</div>
 					<div class="field">
 						<label for="">Odds</label>
-						<input type="text" v-model="oddsA" required tabindex="4" @keyup="onKeyUp('oa')">
+						<input type="text" v-model="oddsA" required tabindex="4" @keyup="onKeyUp('oa')" class="bg-white" />
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="book">
-				<input type="text" v-model="labelB" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false">
+				<input type="text" v-model="labelB" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false" />
 				<div class="field-wrap flex-center">
 					<div class="field">
 						<label for="">Odds</label>
-						<input type="text" v-model="oddsB" required tabindex="5" @keyup="onKeyUp('ob')">
+						<input type="text" v-model="oddsB" required tabindex="5" @keyup="onKeyUp('ob')" class="bg-white" />
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="flex-center button-wrap">
 				<div>
 					<button class="btn btn-calculate" type="submit" tabindex="6" name="button">Calculate hedge</button>
-					<button v-if="conversion && !loading" tabindex="-1" :class="{ 'viewing-bookmark': viewingBookmark }" class="save-play" @click.prevent="bookmarkPlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor"><path d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z"/></svg></button>
+					<button v-if="conversion && !loading" tabindex="-1" :class="{ 'viewing-bookmark': viewingBookmark }" class="save-play" @click.prevent="bookmarkPlay">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor"><path d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z" /></svg>
+					</button>
 				</div>
 			</div>
 		</form>
-		
-		
+
 		<!-- Loading -->
 		<section v-if="loading" class="loading flex-center">
 			<div class="spinner"></div>
 		</section>
-		
-		
+
 		<!-- Results -->
-		<section class="card-section alt">		
+		<section class="card-section alt">
 			<transition>
 				<div v-if="!loading && conversion" class="card-wrap">
-					<CardConversion :play="conversion" :bet-A="labelA" :bet-B="labelB"/>
+					<CardConversion :play="conversion" :bet-A="labelA" :bet-B="labelB" />
 				</div>
 			</transition>
 		</section>

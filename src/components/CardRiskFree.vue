@@ -1,6 +1,6 @@
 <template>
 	<div class="card risk-free">
-		<div :class="{ show: copyConfirmation }" class="copy-confirmation flex">{{ copyConfirmation }}</div>
+		<div :class="{ show: copyConfirmation }" class="copy-confirmation flex items-center">{{ copyConfirmation }}</div>
 		<div class="util">
 			<button @click="copyToClipboard('shareLink')" class="ml-2 copy-to-clipboard">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -16,7 +16,7 @@
 			<p>Place risk-free bet on positive odds and hedge on negative</p>
 		</div>
 		<div v-else class="card-body">
-			<div class="flex split">
+			<div class="flex items-center justify-between">
 				<div class="amount">
 					<label>{{ betA }} ({{ Number(this.play.oddsA) > 0 ? `+${this.play.oddsA}` : this.play.oddsA }})</label>
 					<div class="number">{{ formatUSD(play.stakeA) }}</div>
@@ -28,13 +28,13 @@
 					<small>stake</small>
 				</div>
 			</div>
-			<div class="flex-center mt-4 mb-6">
+			<div class="flex items-center justify-center mt-4 mb-6">
 				<div class="amount">
 					<div class="number sunk color-orange">{{ formatUSD(Number(play.stakeA) + Number(play.stakeB)) }}</div>
 					<small>staked</small>
 				</div>
 			</div>
-			<div class="flex split card-bottom flex-bottom">
+			<div class="flex items-end justify-between card-bottom">
 				<div class="amount">
 					<div class="number color-green">{{ formatUSD(play.profitA) }}</div>
 					<small>{{ formatUSD(play.payoutA) }} payout</small>
