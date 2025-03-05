@@ -359,7 +359,7 @@ onMounted(() => {
 		</div>
 		<section :class="{ 'show-settings': showSettings }" class="rel layout">
 			<main>
-				<div class="flex-split gap-16 mb-32">
+				<div class="flex-split gap-16 mb-8">
 					<h1 style="line-height: 30px">
 						<a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger.aspx" style="text-decoration: none">CNO Devigger</a>
 						<div class="fs-14 lh-14 mt-2">via <a href="https://crazyninjaodds.com/Default.aspx" target="_blank">crazyninjaodds.com</a></div>
@@ -439,11 +439,11 @@ onMounted(() => {
 
 					<!-- Results -->
 					<div v-if="results" class="mt-10">
-						<h2 class="mb-16">Results</h2>
+						<h2 class="mb-4">Results</h2>
 						<div :class="{ 'bc-red bg-red-01': results.ev < 0, 'bc-green bg-green-01': results.ev > 0 }" class="results pad-20 border">
 							<div class="results-top flex-split flex-top wrap gap-16">
 								<div class="fs-14">
-									<h3 class="mb-12">
+									<h3 class="mb-3">
 										{{ results.method }} <small v-if="results.sourceBook" class="fs-16 op-50">(vs {{ sourceBook }})</small>
 									</h3>
 									<div class="grid gap-8 pad-4">
@@ -498,7 +498,7 @@ onMounted(() => {
 			</main>
 
 			<aside>
-				<div class="flex-split gap-16 mb-20">
+				<div class="flex-split gap-16 mb-5">
 					<h3>Settings</h3>
 					<button @click="showSettings = false" class="flex-center toggle-settings reset hide-md">
 						<svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" /></svg>
@@ -506,7 +506,7 @@ onMounted(() => {
 				</div>
 
 				<!-- Method -->
-				<h5 class="mb-12">Devig Method</h5>
+				<h5 class="mb-3">Devig Method</h5>
 				<div class="grid gap-8">
 					<div class="flex gap-8 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_0" type="radio" :value="0" /><label for="RadioButtonListDevigMethod_0">Multiplicative/Traditional</label></div>
 					<div class="flex gap-8 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_1" type="radio" :value="1" /><label for="RadioButtonListDevigMethod_1">Additive</label></div>
@@ -533,7 +533,7 @@ onMounted(() => {
 
 				<!-- Worst-case settings -->
 				<div v-if="inputs.DevigMethod == 4" class="mt-4 border-top pt-16">
-					<h5 class="mb-12">Methods to check with</h5>
+					<h5 class="mb-3">Methods to check with</h5>
 					<div class="grid gap-8" id="CheckBoxListWorstCaseMethodSettings">
 						<div class="flex gap-8 checkbox">
 							<input v-model="inputs.WorstCase_Multiplicative" id="WorstCase_Multiplicative" type="checkbox" true-value="1" false-value="0" />
@@ -556,7 +556,7 @@ onMounted(() => {
 
 				<!-- Weighted average settings -->
 				<div v-if="inputs.DevigMethod == 5" class="mt-4 border-top pt-16">
-					<h5 class="mb-12">Method Weights</h5>
+					<h5 class="mb-3">Method Weights</h5>
 					<div class="grid sm-2s gap-8">
 						<div>
 							<label for="">Multiplicative/Traditional</label>
@@ -580,7 +580,7 @@ onMounted(() => {
 
 				<!-- Quick tips -->
 				<div class="mt-4 pt-16 border-top">
-					<h5 class="mb-12">Quick Tips</h5>
+					<h5 class="mb-3">Quick Tips</h5>
 					<ul>
 						<li>- A comma separates legs</li>
 						<li>- A &quot;/&quot; symbol separates sides of a market</li>
@@ -597,7 +597,7 @@ onMounted(() => {
 				<button @click="closeModal" class="close flex-center reset">
 					<svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" /></svg>
 				</button>
-				<h3 class="mb-8">Import Pasted data <small class="fs-14 op-60">(FanDuel)</small></h3>
+				<h3 class="mb-2">Import Pasted data <small class="fs-14 op-60">(FanDuel)</small></h3>
 
 				<!-- <div class="field">
 					<label>Data Type</label>

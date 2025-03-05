@@ -28,7 +28,7 @@
 					<small>stake</small>
 				</div>
 			</div>
-			<div class="flex-center mt-4 mb-25">
+			<div class="flex-center mt-4 mb-6">
 				<div class="amount">
 					<div class="number sunk color-orange">{{ formatUSD(Number(play.stakeA) + Number(play.stakeB)) }}</div>
 					<small>staked</small>
