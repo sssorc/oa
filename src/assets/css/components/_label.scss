@@ -3,17 +3,17 @@ label {
 	align-items: center;
 	font-weight: 600;
 	font-size: 14px;
-	color: $blue;
+	color: var(--color-blue);
 	margin-bottom: 5px;
 
 	small {
-		color: rgba($blue, .7);
+		color: color-mix(in srgb, var(--color-blue) 70%, transparent);
 		margin-left: 12px;
 	}
 
 	.asterisk {
 		display: inline-block;
-		color: $yellow;
+		color: var(--color-yellow);
 		padding: 0 3px;
 		font-size: 15px;
 	}

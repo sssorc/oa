@@ -1,12 +1,11 @@
-@include attr-x('mt', 'margin-top', 4, 25);
 @include attr-x('mr', 'margin-right', 4, 25);
 @include attr-x('mb', 'margin-bottom', 4, 25);
 @include attr-x('ml', 'margin-left', 4, 25);
 @include attr-x('mx', 'margin-left', 4, 25, 'px', 'margin-right');
 @include attr-x('my', 'margin-top', 4, 25, 'px', 'margin-bottom');
 
-@include min( $lg ) {
-    @include attr-x('lg-mt', 'margin-top', 4, 25);
+@include min($lg) {
+	@include attr-x('lg-mt', 'margin-top', 4, 25);
 	@include attr-x('lg-mr', 'margin-right', 4, 25);
 	@include attr-x('lg-mb', 'margin-bottom', 4, 25);
 	@include attr-x('lg-ml', 'margin-left', 4, 25);
