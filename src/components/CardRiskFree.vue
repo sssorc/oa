@@ -2,7 +2,7 @@
 	<div class="card risk-free">
 		<div :class="{ show: copyConfirmation }" class="copy-confirmation flex">{{ copyConfirmation }}</div>
 		<div class="util">
-			<button @click="copyToClipboard('shareLink')" class="ml-10 copy-to-clipboard">
+			<button @click="copyToClipboard('shareLink')" class="ml-2 copy-to-clipboard">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
 					<path
 						fill="currentColor"

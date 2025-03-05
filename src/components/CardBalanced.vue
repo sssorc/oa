@@ -10,7 +10,7 @@
 					/>
 				</svg>
 			</button>
-			<button tabindex="-1" @click="copyToClipboard('shareLink')" class="ml-10 copy-to-clipboard">
+			<button tabindex="-1" @click="copyToClipboard('shareLink')" class="ml-2 copy-to-clipboard">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
 					<path
 						fill="currentColor"
