@@ -14,29 +14,13 @@ textarea {
 	line-height: 19px;
 	box-shadow: none;
 	-webkit-appearance: none;
-	border: 1px solid rgba($blue, 0.3);
 
 	@include min($lg) {
 		font-size: 15px;
 	}
 
-	&:hover,
-	&:focus {
-		outline: 0;
-	}
-
-	&:focus {
-		border-color: $yellow;
-	}
-
 	&.small {
 		height: 36px;
 		padding: 8px;
-	}
-}
-
-.correlation {
-	@include max($md) {
-		flex: 0 0 100%;
 	}
 }

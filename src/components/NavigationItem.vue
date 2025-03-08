@@ -18,15 +18,8 @@ const isActive = computed(() => route.fullPath === props.to);
 </script>
 
 <template>
-	<RouterLink
-		:to="to"
-		class="text-primary flex items-center justify-center h-10 flex-1 no-underline uppercase text-[13px] tracking-[0.5px] font-medium font-roboto transition-colors relative group"
-		:class="{ 'text-primary': isActive }"
-		:style="{
-			'--border-color': borderColor,
-		}"
-	>
-		<slot />
-		<div :class="{ '!opacity-100': isActive }" :style="`background-color: ${borderColor}`" class="absolute bottom-[-5px] inset-x-0 h-[5px] opacity-0 group-hover:opacity-30"></div>
+	<RouterLink :to="to" :class="{ 'hover:bg-ice-blue/30': !isActive }" class="py-3 px-4 relative transition-all duration-600 bg-linear-65" to="/devig">
+		<span class="relative z-10"><slot></slot></span>
+		<div :class="{ 'opacity-100': isActive }" class="pointer-events-none opacity-0 absolute inset-0 bg-linear-65 from-green to-ice-blue transition-all duration-400"></div>
 	</RouterLink>
 </template>

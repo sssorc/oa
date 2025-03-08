@@ -358,11 +358,6 @@ onMounted(() => {
 		<section class="relative px-5 py-8 gap-8 md:grid md:grid-cols-10 max-w-7xl mx-auto">
 			<main class="md:col-span-6 lg:col-span-7">
 				<div class="flex justify-between items-cstart gap-4 mb-8">
-					<h1 style="line-height: 30px">
-						<a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger.aspx" style="text-decoration: none">CNO Devigger</a>
-						<div class="fs-14 lh-14 mt-2">via <a href="https://crazyninjaodds.com/Default.aspx" target="_blank">crazyninjaodds.com</a></div>
-					</h1>
-
 					<button @click="showSettings = true" class="flex h-10 w-10 items-center justify-center toggle-settings reset md:hidden cursor-pointer hover:opacity-70">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 512 512" fill="currentColor">
 							<path
@@ -440,7 +435,7 @@ onMounted(() => {
 
 					<!-- Submit -->
 					<div class="mt-2">
-						<input type="submit" class="btn submit reset mt-2" name="ButtonCalculate" value="Calculate" style="min-width: 170px" />
+						<input type="submit" class="btn submit reset mt-2 bg-[#A1CDA8]" name="ButtonCalculate" value="Calculate" style="min-width: 170px" />
 					</div>
 					<!-- Error -->
 					<div v-if="errorMessage" class="pad-20 mt-8 color-red border bc-red">{{ errorMessage }}</div>

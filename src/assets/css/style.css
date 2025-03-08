@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-:root {
+@theme {
 	--color-primary: hsl(49, 100%, 7%);
 	--color-blue: #222d43;
 	--color-yellow: #f5a425;
@@ -11,4 +11,12 @@
 	--color-arb: #136da5;
 	--color-rfb: #695489;
 	--color-fb: #417c57;
+
+	--font-mono: 'Space Mono', monospace;
+
+	--color-pink: #e8aeb7;
+	--color-pale-blue: #b8e1ff;
+	--color-ice-blue: #a9fff7;
+	--color-green: #94fbab;
+	--color-slate: #82aba1;
 }
