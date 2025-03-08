@@ -405,7 +405,7 @@ onMounted(() => {
 						</div>
 					</div>
 
-					<div class="flex items-start gap-y-4 gap-x-8">
+					<div class="flex flex-col lg:flex-row items-start gap-y-4 gap-x-8">
 						<div>
 							<label>Free Bet Returned</label>
 							<div class="grid gap-1">
