@@ -1,17 +1,6 @@
 @import 'tailwindcss';
 
 @theme {
-	--color-primary: hsl(49, 100%, 7%);
-	--color-blue: #222d43;
-	--color-yellow: #f5a425;
-	--color-red: #e71d36;
-	--color-green: #6ea67a;
-	--color-border: rgb(212, 212, 212);
-	--color-gray: #e5e4e4;
-	--color-arb: #136da5;
-	--color-rfb: #695489;
-	--color-fb: #417c57;
-
 	--font-mono: 'Space Mono', monospace;
 
 	--color-pink: #e8aeb7;
@@ -19,4 +8,5 @@
 	--color-ice-blue: #a9fff7;
 	--color-green: #94fbab;
 	--color-slate: #82aba1;
+	--color-jet: #02040f;
 }

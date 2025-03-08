@@ -379,7 +379,7 @@ onMounted(() => {
 							<label for="odds">Boost %</label>
 							<div class="relative">
 								<InputField v-model="inputs.Boost_Text" type="tel" id="boostPercent" class="pr-12" />
-								<div class="absolute inset-y-0 w-10 right-0 flex text-center justify-center items-center font-semibold text-sm bg-gray-100 border border-gray/50 rounded-r-sm">%</div>
+								<div class="absolute inset-y-0 w-10 right-0 flex text-center justify-center items-center font-semibold text-sm bg-gray-100 border border-gray/50">%</div>
 							</div>
 						</div>
 					</div>
@@ -414,14 +414,14 @@ onMounted(() => {
 								<label for="freeBetPercentage">Free Bet Amount <small>(% of stake)</small></label>
 								<div class="relative">
 									<InputField v-model="freeBetPercentage" id="freeBetPercentage" class="max-w-[200px]" />
-									<div class="absolute inset-y-0 w-10 right-0 flex text-center justify-center items-center font-semibold text-sm bg-gray-100 border border-gray/50 rounded-r-sm">%</div>
+									<div class="absolute inset-y-0 w-10 right-0 flex text-center justify-center items-center font-semibold text-sm bg-gray-100 border border-gray/50">%</div>
 								</div>
 							</div>
 							<div v-if="freeBetType !== 0">
 								<label for="conversionRate">Free Bet Conversion Rate <small>(in %)</small></label>
 								<div class="relative">
 									<InputField v-model="conversionRate" id="conversionRate" style="max-width: 200px" />
-									<div class="absolute inset-y-0 w-10 right-0 flex text-center justify-center items-center font-semibold text-sm bg-gray-100 border border-gray/50 rounded-r-sm">%</div>
+									<div class="absolute inset-y-0 w-10 right-0 flex text-center justify-center items-center font-semibold text-sm bg-gray-100 border border-gray/50">%</div>
 								</div>
 							</div>
 						</div>
