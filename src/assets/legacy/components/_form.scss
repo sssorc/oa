@@ -1,7 +1,7 @@
 .legacy {
-// -----------------------------------------------------------------------------
-//! Book
-// -----------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------
+	//! Book
+	// -----------------------------------------------------------------------------
 
 	form {
 		padding: 80px 1rem 3rem;
@@ -12,7 +12,7 @@
 		padding: 2rem 1rem;
 		position: relative;
 
-		@include min( 640px ) {
+		@include min(640px) {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;
@@ -26,7 +26,6 @@
 		}
 	}
 
-
 	.book {
 		max-width: 304px;
 		flex: 1 1 auto;
@@ -37,7 +36,7 @@
 			margin-top: 2.5rem;
 		}
 
-		@include min( 640px ) {
+		@include min(640px) {
 			max-width: 355px;
 			margin: 0;
 			padding: 0 2rem;
@@ -48,7 +47,6 @@
 		}
 	}
 
-
 	// -----------------------------------------------------------------------------
 	//! Label input
 	// -----------------------------------------------------------------------------
@@ -57,10 +55,10 @@
 		margin-bottom: 10px;
 		padding: 5px 10px;
 		height: 43px;
-		cursor: text;	
+		cursor: text;
 	}
 
-	input[type=text].label-input {
+	input[type='text'].label-input {
 		display: block;
 		height: 43px;
 		width: 100%;
@@ -74,21 +72,20 @@
 		font-weight: 700;
 		background: transparent;
 
-		@include min( 640px ) {
+		@include min(640px) {
 			max-width: none;
 		}
 
 		&:hover {
-			background: rgba($gray, .3);
+			background: rgba($gray, 0.3);
 		}
 
 		&:focus {
 			outline: 0;
 			border: 0;
-			background: rgba($gray, .5);
+			background: rgba($gray, 0.5);
 		}
 	}
-
 
 	// -----------------------------------------------------------------------------
 	//! Button
@@ -98,7 +95,7 @@
 		flex: 1 0 100%;
 		position: relative;
 		margin-top: 3rem;
-		
+
 		div {
 			display: inline-block;
 			position: relative;
@@ -110,10 +107,9 @@
 		font-family: 'Roboto', sans-serif;
 
 		&:hover {
-			opacity: .9;
+			opacity: 0.9;
 		}
 	}
-
 
 	// -----------------------------------------------------------------------------
 	//! Save play
@@ -130,8 +126,8 @@
 		border: 0;
 		cursor: pointer;
 		border-radius: 50%;
-		color: rgba(#000, .2);
-		
+		color: rgba(#000, 0.2);
+
 		svg {
 			color: inherit;
 			width: 13px;
@@ -140,9 +136,9 @@
 
 	.arb {
 		.save-play:hover {
-			color: rgba($color-arb, .5);
+			color: rgba($color-arb, 0.5);
 		}
-		
+
 		.viewing-bookmark {
 			color: $color-arb;
 		}
@@ -150,9 +146,9 @@
 
 	.free-bet {
 		.save-play:hover {
-			color: rgba($color-fb, .5);
+			color: rgba($color-fb, 0.5);
 		}
-		
+
 		.viewing-bookmark {
 			color: $color-fb;
 		}
@@ -160,14 +156,13 @@
 
 	.risk-free {
 		.save-play:hover {
-			color: rgba($color-rfb, .5);
+			color: rgba($color-rfb, 0.5);
 		}
-		
+
 		.viewing-bookmark {
 			color: $color-rfb;
 		}
 	}
-
 
 	// -----------------------------------------------------------------------------
 	//! Input
@@ -184,7 +179,6 @@
 		}
 	}
 
-
 	// -----------------------------------------------------------------------------
 	//! Bookmarks
 	// -----------------------------------------------------------------------------
@@ -193,9 +187,9 @@
 		position: absolute;
 		top: 1rem;
 		right: 0;
-		box-shadow: rgba(0, 0, 0, .16) 0px 2px 8px 0px;
+		box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 8px 0px;
 		z-index: 5;
-		
+
 		@include max($md) {
 			top: 40px;
 		}
@@ -205,17 +199,17 @@
 		position: relative;
 		cursor: pointer;
 		font-size: 14px;
-		border-top: 1px solid rgba($darkblue, .3);
+		border-top: 1px solid rgba($darkblue, 0.3);
 
 		&:hover:before {
-			content: "";
+			content: '';
 			pointer-events: none;
 			position: absolute;
 			top: 0;
 			right: 0;
 			left: 0;
 			bottom: 0;
-			background: rgba($teal, .1);
+			background: rgba($teal, 0.1);
 		}
 
 		.games {
@@ -235,13 +229,12 @@
 			font-weight: 600;
 			color: $green;
 		}
-		
+
 		&.conversion .games {
 			color: $purple;
 			font-weight: bold;
 		}
 	}
-
 
 	// -----------------------------------------------------------------------------
 	//! Settings
@@ -251,10 +244,8 @@
 		position: absolute;
 		top: 1rem;
 		left: 0;
-		background: $gray;
-		padding: 1rem;
-		
-		input[type=text] {
+
+		input[type='text'] {
 			border: 1px solid #bec2c5;
 			-webkit-appearance: none;
 			appearance: none;
@@ -280,13 +271,13 @@
 			align-items: flex-start;
 			justify-content: center;
 			padding: 10px 0;
-			
+
 			> div {
 				margin: 0;
 				padding: 0 16px;
 			}
 		}
-		
+
 		form {
 			padding-top: 100px;
 		}
@@ -297,19 +288,19 @@
 	// -----------------------------------------------------------------------------
 
 	.arb form {
-		input[type=text]:focus {
+		input[type='text']:focus {
 			border-color: $color-arb;
 		}
 	}
 
 	.free-bet form {
-		input[type=text]:focus {
+		input[type='text']:focus {
 			border-color: $color-fb;
 		}
 	}
 
 	.risk-free form {
-		input[type=text]:focus {
+		input[type='text']:focus {
 			border-color: $color-rfb;
 		}
 	}

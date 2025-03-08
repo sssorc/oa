@@ -1,6 +1,7 @@
 <script>
 import CardRiskFree from '@/components/CardRiskFree.vue';
 import Navigation from '@/components/Navigation.vue';
+import ToggleField from '@/components/ToggleField.vue';
 import helpers from '@/mixins/helpers';
 import '@/assets/legacy/style.scss';
 
@@ -10,6 +11,7 @@ export default {
 	components: {
 		CardRiskFree,
 		Navigation,
+		ToggleField,
 	},
 	data() {
 		return {
@@ -133,23 +135,19 @@ export default {
 		<input id="shareLink" class="copy-input" type="text" :value="shareLink" />
 
 		<form @submit.prevent="calculate">
-			<div class="settings">
+			<div class="settings bg-gray-200 ring-1 ring-gray-300 p-4 rounded-sm space-y-4">
 				<div>
 					<label for="" style="display: block">Rounding</label>
-					<div class="toggle toggle-round">
-						<input id="round" v-model="round" type="checkbox" value="true" />
-						<label for="round"></label>
-						<div class="knob"></div>
-					</div>
+					<ToggleField v-model="round" @change="calculate" />
 				</div>
 				<div class="field mt-1.5">
 					<label for="">Conversion %</label>
-					<input type="text" v-model="conversionRate" @keyup="onKeyUp('cr')" />
+					<input type="text" v-model="conversionRate" @keyup="onKeyUp('cr')" class="bg-white" />
 				</div>
 			</div>
 			<div class="book">
 				<input type="text" v-model="labelA" class="label-input" tabindex="1" @focus="editingLabel = true" @blur="editingLabel = false" />
-				<div class="field-wrap flex-center">
+				<div class="field-wrap flex items-center justify-center">
 					<div class="field">
 						<label for="" class="color-rfb">Risk-free stake</label>
 						<input type="text" v-model="stakeA" tabindex="3" required @keyup="onKeyUp('xa')" class="bg-white" />
@@ -162,23 +160,23 @@ export default {
 			</div>
 			<div class="book">
 				<input type="text" v-model="labelB" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false" />
-				<div class="field-wrap flex-center">
+				<div class="field-wrap flex items-center justify-center">
 					<div class="field">
 						<label for="">Odds</label>
 						<input type="text" v-model="oddsB" tabindex="5" required @keyup="onKeyUp('ob')" class="bg-white" />
 					</div>
 				</div>
 			</div>
-			<div class="flex-center button-wrap">
+			<div class="flex items-center justify-center button-wrap">
 				<button class="btn btn-calculate" type="submit" tabindex="6" name="button">Calculate hedge</button>
 			</div>
 		</form>
 
-		<section v-if="loading" class="loading flex-center">
+		<section v-if="loading" class="loading flex items-center justify-center px-5 py-8">
 			<div class="spinner"></div>
 		</section>
 
-		<section class="card-section alt">
+		<section class="card-section alt px-5 py-8">
 			<transition>
 				<div v-if="rfbSafe && rfbRisky" class="card-wrap">
 					<CardRiskFree :play="rfbRisky" :bet-A="labelA" :bet-B="labelB" />

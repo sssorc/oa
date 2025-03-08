@@ -1,12 +1,12 @@
 /*! purgecss start ignore */
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html,
 body {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 	min-width: 320px;
 	overflow-x: hidden;
 	-webkit-text-size-adjust: 100%;
@@ -20,34 +20,9 @@ img {
 	max-width: 100%;
 }
 
-
-// -----------------------------------------------------------------------------
-//! Margins
-// -----------------------------------------------------------------------------
-
-*:first-child {
-    margin-top: 0;
-}
-
-*:last-child {
-    margin-bottom: 0;
-}
-
 // -----------------------------------------------------------------------------
 //! Sections
 // -----------------------------------------------------------------------------
-
-section,
-.section {
-	padding: 32px $pad-x;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: $contain-with-pad;
-
-	&.full-width {
-		max-width: none;
-	}
-}
 
 .contain {
 	position: relative;
@@ -66,9 +41,8 @@ h3,
 h4,
 h5,
 h6 {
-   margin: 0;
-   font-weight: 700;
-   line-height: 1.2;
+	font-weight: 700;
+	line-height: 1.2;
 }
 
 h1 {
@@ -114,7 +88,7 @@ ul {
 
 a,
 button {
-	transition: .1s;
+	transition: 0.1s;
 	color: $blue;
 
 	&:hover {

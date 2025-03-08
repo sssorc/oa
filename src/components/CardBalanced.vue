@@ -44,7 +44,7 @@
 					<small>staked</small>
 				</div>
 			</div>
-			<div class="flex items-center justify-center card-bottom">
+			<div class="flex items-center justify-between card-bottom">
 				<div class="amount">
 					<div :class="{ 'color-green': play.profitA > 0, 'color-red': play.profitA < 0 }" class="number">{{ formatUSD(play.profitA) }}</div>
 					<small>{{ formatUSD(play.payoutA) }} payout</small>

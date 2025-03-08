@@ -1,6 +1,7 @@
 <script>
 import CardBalanced from '@/components/CardBalanced.vue';
 import Navigation from '@/components/Navigation.vue';
+import ToggleField from '@/components/ToggleField.vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers.js';
 import '@/assets/legacy/style.scss';
@@ -11,6 +12,7 @@ export default {
 	components: {
 		CardBalanced,
 		Navigation,
+		ToggleField,
 	},
 	data() {
 		return {
@@ -204,22 +206,14 @@ export default {
 					</div>
 				</div>
 			</div>
-			<div class="settings">
+			<div class="settings bg-gray-200 ring-1 ring-gray-300 p-4 rounded-sm space-y-4">
 				<div>
-					<label for="" style="display: block">Rounding</label>
-					<div class="toggle toggle-round">
-						<input id="round" v-model="round" type="checkbox" value="true" tabindex="-1" />
-						<label for="round"></label>
-						<div class="knob"></div>
-					</div>
+					<label for="" class="block mb-2">Rounding</label>
+					<ToggleField v-model="round" @change="calculate" />
 				</div>
 				<div>
-					<label for="" style="display: block">Three-way</label>
-					<div class="toggle toggle-round">
-						<input id="threeway" v-model="threeway" type="checkbox" value="false" tabindex="-1" />
-						<label for="threeway"></label>
-						<div class="knob"></div>
-					</div>
+					<label for="" class="block mb-2">Three-way</label>
+					<ToggleField v-model="threeway" />
 				</div>
 			</div>
 			<div class="book">
@@ -263,11 +257,11 @@ export default {
 			</div>
 		</form>
 
-		<section v-if="loading" class="loading flex items-center">
+		<section v-if="loading" class="loading flex items-center px-5 py-8">
 			<div class="spinner"></div>
 		</section>
 
-		<section class="card-section alt">
+		<section class="card-section alt px-5 py-8">
 			<transition name="fade">
 				<div v-if="arbBalanced && !loading" class="card-wrap">
 					<CardBalanced :labelA="labelA" :labelB="labelB" :labelC="labelC" :play="arbBalanced" />

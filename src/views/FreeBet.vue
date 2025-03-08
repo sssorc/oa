@@ -3,6 +3,7 @@ import CardConversion from '@/components/CardConversion.vue';
 import Navigation from '@/components/Navigation.vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers';
+import ToggleField from '@/components/ToggleField.vue';
 import '@/assets/legacy/style.scss';
 
 export default {
@@ -11,6 +12,7 @@ export default {
 	components: {
 		CardConversion,
 		Navigation,
+		ToggleField,
 	},
 	data() {
 		return {
@@ -159,23 +161,19 @@ export default {
 		<form @submit.prevent="calculate">
 			<div v-if="bookmarks.length" class="bookmarks">
 				<div v-for="(play, i) in bookmarks" class="bookmark conversion flex-stretch" :key="i" @click="loadBookmark(play)">
-					<div :class="getConversionColor(play.percent)" class="ev flex-center">{{ play.percent }}%</div>
+					<div :class="getConversionColor(play.percent)" class="ev flex items-center justify-center">{{ play.percent }}%</div>
 					<div class="games">${{ play.hedge.toLocaleString('en-US') }}</div>
 				</div>
 			</div>
-			<div class="settings">
+			<div class="settings bg-gray-200 ring-1 ring-gray-300 p-4 rounded-sm">
 				<div>
 					<label for="" style="display: block">Rounding</label>
-					<div class="toggle toggle-round">
-						<input id="round" v-model="round" type="checkbox" value="true" />
-						<label for="round"></label>
-						<div class="knob"></div>
-					</div>
+					<ToggleField v-model="round" @change="calculate" />
 				</div>
 			</div>
 			<div class="book">
 				<input type="text" v-model="labelA" class="label-input" tabindex="1" @focus="editingLabel = true" @blur="editingLabel = false" />
-				<div class="field-wrap flex-center">
+				<div class="field-wrap flex items-center justify-center">
 					<div class="field">
 						<label for="" class="color-fb">Free bet</label>
 						<input type="text" v-model="stakeA" tabindex="3" @keyup="onKeyUp('xa')" required class="bg-white" />
@@ -189,7 +187,7 @@ export default {
 
 			<div class="book">
 				<input type="text" v-model="labelB" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false" />
-				<div class="field-wrap flex-center">
+				<div class="field-wrap flex items-center justify-center">
 					<div class="field">
 						<label for="">Odds</label>
 						<input type="text" v-model="oddsB" required tabindex="5" @keyup="onKeyUp('ob')" class="bg-white" />
@@ -197,7 +195,7 @@ export default {
 				</div>
 			</div>
 
-			<div class="flex-center button-wrap">
+			<div class="flex items-center justify-center button-wrap">
 				<div>
 					<button class="btn btn-calculate" type="submit" tabindex="6" name="button">Calculate hedge</button>
 					<button v-if="conversion && !loading" tabindex="-1" :class="{ 'viewing-bookmark': viewingBookmark }" class="save-play" @click.prevent="bookmarkPlay">
@@ -208,12 +206,12 @@ export default {
 		</form>
 
 		<!-- Loading -->
-		<section v-if="loading" class="loading flex-center">
+		<section v-if="loading" class="loading flex items-center justify-center px-5 py-8">
 			<div class="spinner"></div>
 		</section>
 
 		<!-- Results -->
-		<section class="card-section alt">
+		<section class="card-section alt px-5 py-8">
 			<transition>
 				<div v-if="!loading && conversion" class="card-wrap">
 					<CardConversion :play="conversion" :bet-A="labelA" :bet-B="labelB" />

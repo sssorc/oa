@@ -354,18 +354,16 @@ onMounted(() => {
 
 <template>
 	<div class="devig">
-		<div class="legacy">
-			<Navigation />
-		</div>
-		<section :class="{ 'show-settings': showSettings }" class="rel layout">
-			<main>
-				<div class="flex justify-between items-center gap-4 mb-8">
+		<Navigation />
+		<section class="relative px-5 py-8 gap-8 md:grid md:grid-cols-10 max-w-7xl mx-auto">
+			<main class="md:col-span-6 lg:col-span-7">
+				<div class="flex justify-between items-cstart gap-4 mb-8">
 					<h1 style="line-height: 30px">
 						<a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger.aspx" style="text-decoration: none">CNO Devigger</a>
 						<div class="fs-14 lh-14 mt-2">via <a href="https://crazyninjaodds.com/Default.aspx" target="_blank">crazyninjaodds.com</a></div>
 					</h1>
 
-					<button @click="showSettings = true" class="flex items-center justify-center toggle-settings reset md:hidden">
+					<button @click="showSettings = true" class="flex h-10 w-10 items-center justify-center toggle-settings reset md:hidden cursor-pointer hover:opacity-70">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 512 512" fill="currentColor">
 							<path
 								d="M496 384H160v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h80v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160h-80v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h80c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160H288V48c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16C7.2 64 0 71.2 0 80v32c0 8.8 7.2 16 16 16h208v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h208c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16z"
@@ -384,12 +382,15 @@ onMounted(() => {
 						</div>
 						<div>
 							<label for="odds">Boost %</label>
-							<InputField v-model="inputs.Boost_Text" type="tel" id="boostPercent" />
+							<div class="relative">
+								<InputField v-model="inputs.Boost_Text" type="tel" id="boostPercent" class="pr-12" />
+								<div class="absolute inset-y-0 w-10 right-0 flex text-center justify-center items-center font-semibold text-sm bg-gray-100 border border-gray/50 rounded-r-sm">%</div>
+							</div>
 						</div>
 					</div>
 
-					<div class="flex flex-col sm:flex-row gap-4">
-						<div class="sm:max-w-sm flex-grow">
+					<div class="flex flex-col lg:flex-row gap-4">
+						<div class="lg:max-w-sm flex-grow">
 							<label for=""
 								>Leg Odds
 								<div class="text-sm color-yellow pl-1 inline-block">*</div>
@@ -416,11 +417,17 @@ onMounted(() => {
 						<div v-if="freeBetType !== 0" class="flex items-center gap-4">
 							<div v-if="freeBetType !== 0">
 								<label for="freeBetPercentage">Free Bet Amount <small>(% of stake)</small></label>
-								<input type="text" v-model="freeBetPercentage" id="freeBetPercentage" style="max-width: 200px" />
+								<div class="relative">
+									<InputField v-model="freeBetPercentage" id="freeBetPercentage" class="max-w-[200px]" />
+									<div class="absolute inset-y-0 w-10 right-0 flex text-center justify-center items-center font-semibold text-sm bg-gray-100 border border-gray/50 rounded-r-sm">%</div>
+								</div>
 							</div>
 							<div v-if="freeBetType !== 0">
 								<label for="conversionRate">Free Bet Conversion Rate <small>(in %)</small></label>
-								<input type="text" v-model="conversionRate" id="conversionRate" style="max-width: 200px" />
+								<div class="relative">
+									<InputField v-model="conversionRate" id="conversionRate" style="max-width: 200px" />
+									<div class="absolute inset-y-0 w-10 right-0 flex text-center justify-center items-center font-semibold text-sm bg-gray-100 border border-gray/50 rounded-r-sm">%</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -428,7 +435,7 @@ onMounted(() => {
 					<!-- Source book -->
 					<div class="max-w-sm">
 						<label for="">Source book(s)</label>
-						<input v-model="sourceBook" type="text" />
+						<InputField v-model="sourceBook" type="text" />
 					</div>
 
 					<!-- Submit -->
@@ -442,7 +449,27 @@ onMounted(() => {
 				<!-- Results -->
 				<div v-if="results" class="mt-10">
 					<h2 class="mb-4">Results</h2>
-					<div :class="{ 'bc-red bg-red-01': results.ev < 0, 'bc-green bg-green-01': results.ev > 0 }" class="results pad-20 border">
+					<div :class="{ 'bc-red bg-red-01': results.ev < 0, 'bc-green bg-green-01': results.ev > 0 }" class="results border p-6 flex flex-col lg:flex-row gap-6 lg:justify-between lg:items-start">
+						<div class="flex flex-wrap gap-x-5 gap-y-4 results-ev lg:order-last">
+							<div :class="{ 'bg-green-01': results.ev >= 0, 'bg-red-01': results.ev < 0 }" class="item item-ev">
+								<div :class="{ 'color-green': results.ev >= 0, 'color-red': results.ev < 0 }" class="number text-right">{{ results.ev }}%</div>
+								<div class="flex items-center gap-2 text-xs font-semibold justify-between mt-1">
+									<div v-if="results.ev > 0">{{ formatUSD(kellyEvDollars) }}</div>
+									<div class="align-right">EV</div>
+								</div>
+							</div>
+							<div class="item item-kelly flex items-center gap-6" v-if="results.ev > 0">
+								<div>
+									<div class="number">{{ formatUSD(kellyStakeSize) }}</div>
+									<div class="text-xs font-semibold mt-1">{{ kellyMultiplier }} Kelly</div>
+								</div>
+								<div class="grid gap-1 item-units fs-13">
+									<div class="lh-15"><span class="text-slate-800">Full:</span> {{ round(results.kellyFull) }}u</div>
+									<div class="lh-15"><span class="text-slate-800">Half:</span> {{ round(results.kellyFull / 2) }}u</div>
+									<div class="lh-15"><span class="text-slate-800">Quarter:</span> {{ round(results.kellyFull / 4) }}u</div>
+								</div>
+							</div>
+						</div>
 						<div class="results-top flex justify-between items-start flex-wrap gap-4">
 							<div class="fs-14">
 								<h3 class="mb-3">
@@ -467,61 +494,40 @@ onMounted(() => {
 									</div>
 								</div>
 							</div>
-							<div class="flex flex-wrap items-center gap-x-5 gap-y-4 results-ev">
-								<div :class="{ 'bg-green-01': results.ev >= 0, 'bg-red-01': results.ev < 0 }" class="item item-ev">
-									<div :class="{ 'color-green': results.ev >= 0, 'color-red': results.ev < 0 }" style="text-align: right" class="number">{{ results.ev }}%</div>
-									<label class="flex items-center gap-2">
-										<div v-if="results.ev > 0">{{ formatUSD(kellyEvDollars) }}</div>
-										<div class="align-right">EV</div>
-									</label>
-								</div>
-								<div class="item item-kelly flex items-center gap-6" v-if="results.ev > 0">
-									<div>
-										<div class="number">{{ formatUSD(kellyStakeSize) }}</div>
-										<label>{{ kellyMultiplier }} Kelly</label>
-									</div>
-									<div class="grid gap-4 item-units fs-13">
-										<div class="lh-15"><span class="color-blue-07">Full:</span> {{ round(results.kellyFull) }}u</div>
-										<div class="lh-15"><span class="color-blue-07">Half:</span> {{ round(results.kellyFull / 2) }}u</div>
-										<div class="lh-15"><span class="color-blue-07">Quarter:</span> {{ round(results.kellyFull / 4) }}u</div>
-									</div>
-								</div>
-							</div>
 						</div>
 					</div>
 
-					<div class="mt-4 flex justify-end gap-4">
-						<div v-if="copied" class="fs-14 color-blue">Copied to clipboard</div>
-						<button class="btn btn-small btn-gray" @click.prevent="copyForDiscord">Copy for discord</button>
+					<div class="mt-4 flex justify-end gap-4 items-center">
+						<div v-if="copied" class="fs-14 text-slate-700">Copied to clipboard</div>
+						<button class="bg-gray-200 py-2 px-4 rounded-sm font-semibold text-sm ring-1 ring-gray-300 hover:bg-slate-100 cursor-pointer hover:ring-slate-300" @click.prevent="copyForDiscord">Copy for discord</button>
 						<textarea class="discord-text" ref="discordText" :value="discordTextComputed"></textarea>
 					</div>
 				</div>
 			</main>
 
-			<aside>
+			<aside :class="{ 'max-md:hidden': !showSettings }" class="fixed top-11 left-0 py-8 px-5 right-0 bottom-0 z-20 md:static bg-gray-100 md:col-span-4 lg:col-span-3 md:rounded-sm md:ring-1 md:ring-gray-300">
 				<div class="flex justify-between items-center gap-4 mb-5">
 					<h3>Settings</h3>
-					<button @click="showSettings = false" class="flex items-center justify-center h-9 w-9 p-2 rounded-sm bg-[#eeeaea] text-primary md:hidden">
-						<svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" /></svg>
+					<button @click="showSettings = false" class="flex items-center justify-center h-10 w-10 text-primary md:hidden cursor-pointer hover:opacity-70">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+							<path d="M3 3L13 13M3 13L13 3" />
+						</svg>
 					</button>
 				</div>
 
 				<!-- Method -->
-				<h5 class="mb-3">Devig Method</h5>
+				<!-- <h5 class="mb-3">Devig Method</h5>
 				<div class="grid gap-2">
-					<div class="flex items-center gap-2 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_0" type="radio" :value="0" /><label for="RadioButtonListDevigMethod_0">Multiplicative/Traditional</label></div>
-					<div class="flex items-center gap-2 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_1" type="radio" :value="1" /><label for="RadioButtonListDevigMethod_1">Additive</label></div>
-					<div class="flex items-center gap-2 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_2" type="radio" :value="2" /><label for="RadioButtonListDevigMethod_2">Power</label></div>
-					<div class="flex items-center gap-2 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_3" type="radio" :value="3" /><label for="RadioButtonListDevigMethod_3">Shin</label></div>
-					<div class="flex items-center gap-2 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_4" type="radio" :value="4" /><label for="RadioButtonListDevigMethod_4">Worst-case</label></div>
-					<div class="flex items-center gap-2 radio"><input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_5" type="radio" :value="5" /><label for="RadioButtonListDevigMethod_5">Weighted Average</label></div>
-					<!-- <div class="flex items-center gap-2 radio">
-						<input v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_6" type="radio" value="showall" /><label for="RadioButtonListDevigMethod_6">Show All</label>
-					</div> -->
-				</div>
+					<RadioField v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_0" :value="0">Multiplicative/Traditional</RadioField>
+					<RadioField v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_1" :value="1">Additive</RadioField>
+					<RadioField v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_2" :value="2">Power</RadioField>
+					<RadioField v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_3" :value="3">Shin</RadioField>
+					<RadioField v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_4" :value="4">Worst-case</RadioField>
+					<RadioField v-model="inputs.DevigMethod" id="RadioButtonListDevigMethod_5" :value="5">Weighted Average</RadioField>
+				</div> -->
 
 				<!-- Kelly -->
-				<div class="flex items-center gap-4 pt-16 mt-4 border-top">
+				<div class="flex items-center gap-4 pt-4 mt-4 border-top">
 					<div>
 						<label for="kellyMultiplier">Kelly Multiplier</label>
 						<InputField v-model="kellyMultiplier" type="text" id="kellyMultiplier" class="small" />
@@ -533,31 +539,31 @@ onMounted(() => {
 				</div>
 
 				<!-- Weighted average settings -->
-				<div v-if="inputs.DevigMethod == 5" class="mt-4 border-top pt-16">
+				<div v-if="inputs.DevigMethod == 5" class="mt-4 border-top pt-4">
 					<h5 class="mb-3">Method Weights</h5>
 					<div class="grid sm-2s gap-2">
 						<div>
 							<label for="">Multiplicative/Traditional</label>
-							<input v-model="inputs.WeightedAverage_Multiplicative" type="text" id="TextBoxMultiplicativeWeight" class="small" style="width: 80px" /> %
+							<InputField v-model="inputs.WeightedAverage_Multiplicative" type="text" id="TextBoxMultiplicativeWeight" class="small" style="width: 80px" /> %
 						</div>
 						<div>
 							<label for="">Additive</label>
-							<input v-model="inputs.WeightedAverage_Additive" name="TextBoxAdditiveWeight" type="text" id="TextBoxAdditiveWeight" class="small" style="width: 80px" /> %
+							<InputField v-model="inputs.WeightedAverage_Additive" name="TextBoxAdditiveWeight" type="text" id="TextBoxAdditiveWeight" class="small" style="width: 80px" /> %
 						</div>
 						<div>
 							<label for="">Power</label>
-							<input v-model="inputs.WeightedAverage_Power" name="TextBoxPowerWeight" type="text" id="TextBoxPowerWeight" class="small" style="width: 80px" /> %
+							<InputField v-model="inputs.WeightedAverage_Power" name="TextBoxPowerWeight" type="text" id="TextBoxPowerWeight" class="small" style="width: 80px" /> %
 						</div>
 						<div>
 							<label for="">Shin</label>
-							<input v-model="inputs.WeightedAverage_Shin" name="TextBoxShinWeight" type="text" id="TextBoxShinWeight" class="small" style="width: 80px" /> %
+							<InputField v-model="inputs.WeightedAverage_Shin" name="TextBoxShinWeight" type="text" id="TextBoxShinWeight" class="small" style="width: 80px" /> %
 						</div>
 					</div>
 					<p class="mt-4">Weights do not need to add up to exactly 100%, the calculator will use the ratio of the sum of the weights. Set to 0 to exclude a method.</p>
 				</div>
 
 				<!-- Quick tips -->
-				<div class="mt-4 pt-16 border-top">
+				<div class="mt-4 pt-4 border-top">
 					<h5 class="mb-3">Quick Tips</h5>
 					<ul>
 						<li>- A comma separates legs</li>
