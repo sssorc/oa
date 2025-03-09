@@ -6,17 +6,15 @@ import InputField from '@/components/InputField.vue';
 import RadioField from '@/components/RadioField.vue';
 import InputLabel from '@/components/InputLabel.vue';
 import SubmitButton from '@/components/SubmitButton.vue';
+import DevigResults from '@/components/DevigResults.vue';
 
 // State
-const showSettings = ref(false);
+const isSubmitting = ref(false);
 const results = ref(false);
 const copied = ref(false);
 const errorMessage = ref(false);
-const kellyMultiplier = ref(0.25);
 const kellyBankroll = ref(1000);
 const showImport = ref(false);
-const importData = ref('');
-const importDataType = ref('firstBasket');
 const sourceBook = ref('');
 const freeBetType = ref(0);
 const freeBetPercentage = ref('50');
@@ -38,17 +36,6 @@ const inputs = ref({
     WeightedAverage_Additive: 0,
     WeightedAverage_Power: 0,
     WeightedAverage_Shin: 0,
-});
-
-// Computed properties
-const kellyEvDollars = computed(() => {
-    if (!results.value) return '';
-    return kellyStakeSize.value * (results.value.ev / 100);
-});
-
-const kellyStakeSize = computed(() => {
-    if (!results.value) return '';
-    return (kellyBankroll.value * kellyMultiplier.value * results.value.kellyFull) / 100;
 });
 
 const shareUrl = computed(() => {
@@ -113,57 +100,6 @@ const copyForDiscord = () => {
     setTimeout(() => {
         copied.value = false;
     }, 2000);
-};
-
-const importFirstBasket = () => {
-    // let data = this.importData;
-    let data = importData.value;
-
-    // Remove line breaks
-    data = data.replace(/[\r\n]+/gm, '/');
-
-    // Remove numbers that don't have + or - in front
-    data = data.replace(/[^+-\d]\d+/g, '');
-
-    // Remove everything except numbers, +, and -
-    data = data.replace(/[^\d\-\+\/]/g, '');
-
-    // Remove multiple slashes with single slash
-    data = data.replace(/\/{2,}/g, '/');
-
-    // Remove "/" at start
-    data = data.replace(/^\//, '');
-
-    inputs.value.LegOdds = data;
-};
-
-const importPastedData = () => {
-    if (importDataType.value == 'firstBasket') {
-        importFirstBasket();
-    }
-
-    showImport.value = false;
-    importData.value = '';
-};
-
-const openModal = () => {
-    showImport.value = true;
-    setTimeout(() => {
-        importData.value.focus();
-    }, 100);
-};
-
-const closeModal = () => {
-    showImport.value = false;
-};
-
-const formatUSD = (number) => {
-    let dollarUS = Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    });
-
-    return dollarUS.format(number).replace('.00', '');
 };
 
 const round = (num, wholeNumber) => {
@@ -257,11 +193,9 @@ const getJuice = (data) => {
     return round((juice / count) * 100);
 };
 
-const getFairOddsFromPercent = () => {
-    return 'todo';
-};
-
 const onSubmit = async () => {
+    if (isSubmitting.value) return;
+
     formatFinalOdds();
     formatLegOdds();
     errorMessage.value = false;
@@ -270,6 +204,8 @@ const onSubmit = async () => {
     if (!inputs.value.FinalOdds || !inputs.value.LegOdds) {
         return;
     }
+
+    isSubmitting.value = true;
 
     const params = [];
 
@@ -313,6 +249,8 @@ const onSubmit = async () => {
         };
     } catch (error) {
         errorMessage.value = error.message;
+    } finally {
+        isSubmitting.value = false;
     }
 };
 
@@ -359,154 +297,74 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="pb-10">
-        <Navigation />
-        <section class="relative mx-auto max-w-7xl gap-8 px-5 py-8 md:grid md:grid-cols-10">
-            <main class="md:col-span-6 lg:col-span-7">
-                <form @submit.prevent="onSubmit" class="grid grid-cols-12 gap-6">
-                    <div class="flex items-center gap-4">
-                        <div>
-                            <InputLabel for="odds" required>Odds</InputLabel>
-                            <InputField v-model="inputs.FinalOdds" type="text" id="odds" />
-                        </div>
-                        <div>
-                            <label for="boost" class="font-mono text-sm">Boost %</label>
-                            <InputField v-model="inputs.Boost_Text" type="tel" id="boost" class="mt-1" addon="%" />
-                        </div>
+    <div>
+        <section class="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 py-8 md:flex-row md:justify-between">
+            <form @submit.prevent="onSubmit" class="grid max-w-xl grid-cols-12 gap-6 md:flex-1">
+                <div class="flex items-center gap-4">
+                    <div>
+                        <InputLabel for="odds" required>Odds</InputLabel>
+                        <InputField v-model="inputs.FinalOdds" type="text" id="odds" />
                     </div>
-
-                    <div class="flex flex-col gap-4 lg:flex-row">
-                        <div class="flex-grow lg:max-w-sm">
-                            <InputLabel for="legOdds" required>Leg Odds</InputLabel>
-                            <InputField v-model="inputs.LegOdds" id="legOdds" type="text" required />
-                        </div>
-
-                        <div>
-                            <InputLabel for="correlation">Correlation</InputLabel>
-                            <InputField v-model="inputs.Correlation_Text" type="text" id="TextBoxCorrelation" />
-                        </div>
-                    </div>
-                    <hr class="border-space/10" />
-
-                    <div class="flex flex-col items-start gap-x-8 gap-y-4 lg:flex-row">
-                        <div>
-                            <InputLabel for="freeBetCheckbox">Bonus Bet Returned</InputLabel>
-                            <div class="mt-1 grid gap-2">
-                                <RadioField v-model="freeBetType" id="freeBet0" :value="0">None</RadioField>
-                                <RadioField v-model="freeBetType" id="freeBet1" :value="1">On Loss</RadioField>
-                                <RadioField v-model="freeBetType" id="freeBet2" :value="2">Guaranteed</RadioField>
-                            </div>
-                        </div>
-                        <div v-if="freeBetType !== 0" class="flex flex-wrap items-start gap-x-6 gap-y-4">
-                            <div v-if="freeBetType !== 0">
-                                <InputLabel for="freeBetPercentage">Amount (% of stake)</InputLabel>
-                                <InputField v-model="freeBetPercentage" id="freeBetPercentage" class="mt-1 w-32" addon="%" />
-                            </div>
-                            <div v-if="freeBetType !== 0">
-                                <InputLabel for="conversionRate">Conversion %</InputLabel>
-                                <InputField v-model="conversionRate" id="conversionRate" class="mt-1 w-32" addon="%" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Submit -->
-                    <div class="mt-2">
-                        <SubmitButton :disabled="!inputs.FinalOdds || !inputs.LegOdds" class="max-sm:w-full">Calculate EV</SubmitButton>
-                    </div>
-                    <!-- Error -->
-                    <div v-if="errorMessage" class="text-red">{{ errorMessage }}</div>
-                </form>
-
-                <!-- Results -->
-                <div v-if="results" class="mt-10">
-                    <h2 class="mb-4">Results</h2>
-                    <div
-                        :class="{ 'bc-red bg-red-01': results.ev < 0, 'bc-green bg-green-01': results.ev > 0 }"
-                        class="results flex flex-col gap-6 border p-6 lg:flex-row lg:items-start lg:justify-between"
-                    >
-                        <div class="results-ev flex flex-wrap gap-x-5 gap-y-4 lg:order-last">
-                            <div :class="{ 'bg-green-01': results.ev >= 0, 'bg-red-01': results.ev < 0 }" class="item item-ev">
-                                <div :class="{ 'color-green': results.ev >= 0, 'color-red': results.ev < 0 }" class="number text-right">{{ results.ev }}%</div>
-                                <div class="mt-1 flex items-center justify-between gap-2 text-xs font-semibold">
-                                    <div v-if="results.ev > 0">{{ formatUSD(kellyEvDollars) }}</div>
-                                    <div class="align-right">EV</div>
-                                </div>
-                            </div>
-                            <div class="item item-kelly flex items-center gap-6" v-if="results.ev > 0">
-                                <div>
-                                    <div class="number">{{ formatUSD(kellyStakeSize) }}</div>
-                                    <div class="mt-1 text-xs font-semibold">{{ kellyMultiplier }} Kelly</div>
-                                </div>
-                                <div class="item-units fs-13 grid gap-1">
-                                    <div class="lh-15"><span class="text-slate-800">Full:</span> {{ round(results.kellyFull) }}u</div>
-                                    <div class="lh-15"><span class="text-slate-800">Half:</span> {{ round(results.kellyFull / 2) }}u</div>
-                                    <div class="lh-15"><span class="text-slate-800">Quarter:</span> {{ round(results.kellyFull / 4) }}u</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="results-top flex flex-wrap items-start justify-between gap-4">
-                            <div class="fs-14">
-                                <h3 class="mb-3">
-                                    {{ results.method }}
-                                </h3>
-                                <div class="pad-4 grid gap-2">
-                                    <div>
-                                        Final Odds: <strong>{{ results.finalOdds }}</strong>
-                                    </div>
-                                    <div v-if="results.includeConversion">
-                                        FB Conversion: <strong :class="{ 'color-green': results.conversionPercentage > 75 }">{{ results.conversionPercentage }}%</strong>
-                                    </div>
-                                    <hr />
-                                    <div>
-                                        Fair Value: <strong>{{ results.fairOdds }} ({{ round(results.hitPercentage) }}%)</strong>
-                                    </div>
-                                    <div>
-                                        Market Juice: <strong>{{ results.juice }}%</strong>
-                                    </div>
-                                    <div>
-                                        Legs: <strong>{{ results.inputLegs }}</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 flex items-center justify-end gap-4">
-                        <div v-if="copied" class="fs-14 text-slate-700">Copied to clipboard</div>
-                        <button
-                            class="cursor-pointer rounded-sm bg-gray-200 px-4 py-2 text-sm font-semibold ring-1 ring-gray-300 hover:bg-slate-100 hover:ring-slate-300"
-                            @click.prevent="copyForDiscord"
-                        >
-                            Copy for discord
-                        </button>
-                        <textarea class="discord-text" ref="discordText" :value="discordTextComputed"></textarea>
+                    <div>
+                        <label for="boost" class="font-mono text-sm">Boost %</label>
+                        <InputField v-model="inputs.Boost_Text" type="tel" id="boost" class="mt-1" addon="%" />
                     </div>
                 </div>
-            </main>
 
-            <div class="lg:col-span-3">
-                <div class="border-jet bg-ice-blue/40 border p-6">
-                    <h3>Settings</h3>
-                    <button @click="showSettings = false" class="text-primary flex h-10 w-10 cursor-pointer items-center justify-center hover:opacity-70 md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M3 3L13 13M3 13L13 3" />
-                        </svg>
-                    </button>
+                <div class="flex flex-col gap-4 lg:flex-row">
+                    <div class="flex-grow lg:max-w-sm">
+                        <InputLabel for="legOdds" required>Leg Odds</InputLabel>
+                        <InputField v-model="inputs.LegOdds" id="legOdds" type="text" required />
+                    </div>
+
+                    <div>
+                        <InputLabel for="correlation">Correlation</InputLabel>
+                        <InputField v-model="inputs.Correlation_Text" type="text" id="TextBoxCorrelation" />
+                    </div>
                 </div>
+                <hr class="border-space/10" />
+
+                <div class="flex flex-col items-start gap-x-8 gap-y-4 lg:flex-row">
+                    <div>
+                        <InputLabel for="freeBetCheckbox">Bonus Bet Returned</InputLabel>
+                        <div class="mt-1 grid gap-2">
+                            <RadioField v-model="freeBetType" id="freeBet0" :value="0">None</RadioField>
+                            <RadioField v-model="freeBetType" id="freeBet1" :value="1">On Loss</RadioField>
+                            <RadioField v-model="freeBetType" id="freeBet2" :value="2">Guaranteed</RadioField>
+                        </div>
+                    </div>
+                    <div v-if="freeBetType !== 0" class="flex flex-wrap items-start gap-x-6 gap-y-4">
+                        <div v-if="freeBetType !== 0">
+                            <InputLabel for="freeBetPercentage">Amount (% of stake)</InputLabel>
+                            <InputField v-model="freeBetPercentage" id="freeBetPercentage" class="mt-1 w-32" addon="%" />
+                        </div>
+                        <div v-if="freeBetType !== 0">
+                            <InputLabel for="conversionRate">Conversion %</InputLabel>
+                            <InputField v-model="conversionRate" id="conversionRate" class="mt-1 w-32" addon="%" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="mt-2">
+                    <SubmitButton :disabled="!inputs.FinalOdds || !inputs.LegOdds" class="max-sm:w-full">Calculate EV</SubmitButton>
+                </div>
+                <!-- Error -->
+                <div v-if="errorMessage" class="text-red">{{ errorMessage }}</div>
+            </form>
+
+            <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
+                <DevigResults v-if="results" :results="results" :bankroll="kellyBankroll" />
             </div>
         </section>
 
-        <section class="mx-auto mt-5 max-w-7xl px-5">
-            <div class="bg-slate/10 flex gap-4 p-3">
-                <div class="w-32">
+        <section class="mx-auto mt-5 max-w-7xl px-5 text-right">
+            <div class="bg-slate/10 inline-flex gap-4 p-3 shadow">
+                <div class="w-32 text-left">
                     <InputLabel for="bankroll">Bankroll</InputLabel>
                     <div class="relative">
                         <InputField v-model="kellyBankroll" type="text" id="bankroll" addon="$" />
                     </div>
-                </div>
-                <div class="w-20">
-                    <InputLabel for="multiplier">Kelly</InputLabel>
-                    <InputField v-model="kellyMultiplier" type="text" id="multiplier" />
                 </div>
             </div>
         </section>
@@ -518,7 +376,15 @@ onMounted(() => {
                 <li>A &quot;/&quot; symbol separates sides of a market</li>
                 <li>The first number in a leg is the side of the market you are wagering on.</li>
                 <li>If a leg has multiple sides in its market (e.g. superbowl winner), then separate all sides by a &quot;/&quot; symbol like this: +500/+250/+2000</li>
-                <li>More tips and help <a href="http://www.crazyninjamike.com/Public/sportsbooks/sportsbook_devigger_help.aspx" target="_blank" class="text-pale-blue">here</a></li>
+                <li>
+                    More tips and help on the
+                    <a
+                        href="http://www.crazyninjamike.com/Public/sportsbooks/sportsbook_devigger_help.aspx"
+                        target="_blank"
+                        class="decoration-pink hover:decoration-pale-blue underline decoration-2 underline-offset-2 transition-colors duration-100"
+                        >devigger help page</a
+                    >
+                </li>
             </ul>
         </section>
     </div>

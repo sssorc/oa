@@ -1,7 +1,10 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 @theme {
     --font-mono: 'Space Mono', monospace;
+    --font-sans: 'Oxygen', sans-serif;
+    --font-oswald: 'Oswald', sans-serif;
 
     --color-pink: #e8aeb7;
     --color-red: #a63d40;

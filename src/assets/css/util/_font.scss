@@ -2,33 +2,30 @@
 //! Font-size / Line height
 // -----------------------------------------------------------------------------
 
-@include attr-x('fs', 'font-size', 1, 100, 'px');
-@include attr-x('lh', 'line-height', 1, 100, 'px');
-
-@include min($md) {
-	@include attr-x('md-fs', 'font-size', 1, 100, 'px');
-	@include attr-x('md-lh', 'line-height', 1, 100, 'px');
-}
-
-@include min($lg) {
-	@include attr-x('lg-fs', 'font-size', 1, 100, 'px');
-	@include attr-x('lg-lh', 'line-height', 1, 100, 'px');
-}
-
 // -----------------------------------------------------------------------------
 //! Font weight
 // -----------------------------------------------------------------------------
 
-.fw-400 { font-weight: 400; }
-.fw-500 { font-weight: 500; }
-.fw-600 { font-weight: 600; }
-.fw-700 { font-weight: 700; }
-.fw-800 { font-weight: 800; }
+.fw-400 {
+    font-weight: 400;
+}
+.fw-500 {
+    font-weight: 500;
+}
+.fw-600 {
+    font-weight: 600;
+}
+.fw-700 {
+    font-weight: 700;
+}
+.fw-800 {
+    font-weight: 800;
+}
 
 // -----------------------------------------------------------------------------
 //! Other styles
 // -----------------------------------------------------------------------------
 
 .caps {
-	text-transform: uppercase;
+    text-transform: uppercase;
 }

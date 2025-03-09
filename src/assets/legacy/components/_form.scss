@@ -189,10 +189,6 @@
         right: 0;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 8px 0px;
         z-index: 5;
-
-        @include max($md) {
-            top: 40px;
-        }
     }
 
     .bookmark {

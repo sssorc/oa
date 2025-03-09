@@ -2,72 +2,13 @@
 //! Mixin
 // -----------------------------------------------------------------------------
 
-@mixin symmetrical-layout($breakpoint, $columns) {
-	@include min($breakpoint) {
-		display: grid;
-		grid-template-columns: repeat($columns, minmax(0, 1fr));
-	}
-}
-
 // -----------------------------------------------------------------------------
 //! Symmetrical layouts
 // -----------------------------------------------------------------------------
 
 .grid {
-	display: grid;
-	grid-template-columns: 100%;
-}
-
-.sm-2s {
-	@include symmetrical-layout($sm, 2);
-}
-
-.sm-3s {
-	@include symmetrical-layout($sm, 3);
-}
-
-.sm-4s {
-	@include symmetrical-layout($sm, 4);
-}
-
-.md-2s {
-	@include symmetrical-layout($md, 2);
-}
-
-.md-3s {
-	@include symmetrical-layout($md, 3);
-}
-
-.md-4s {
-	@include symmetrical-layout($md, 4);
-}
-
-.lg-2s {
-	@include symmetrical-layout($lg, 2);
-}
-
-.lg-3s {
-	@include symmetrical-layout($lg, 3);
-}
-
-.lg-4s {
-	@include symmetrical-layout($lg, 4);
-}
-
-.xl-2s {
-	@include symmetrical-layout($xl, 2);
-}
-
-.xl-3s {
-	@include symmetrical-layout($xl, 3);
-}
-
-.xl-4s {
-	@include symmetrical-layout($xl, 4);
-}
-
-.xl-5s {
-	@include symmetrical-layout($xl, 5);
+    display: grid;
+    grid-template-columns: 100%;
 }
 
 // ----------------------------------------o-------------------------------------
@@ -75,7 +16,7 @@
 // -----------------------------------------------------------------------------
 
 .grid.align-start {
-	align-items: start;
+    align-items: start;
 }
 
 // -----------------------------------------------------------------------------
@@ -83,11 +24,5 @@
 // -----------------------------------------------------------------------------
 
 .gw-100 {
-	grid-column: 1 / -1;
-}
-
-@include min($lg) {
-	.lg-order-last {
-		order: 10;
-	}
+    grid-column: 1 / -1;
 }
