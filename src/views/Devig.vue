@@ -5,6 +5,7 @@ import Navigation from '@/components/Navigation.vue';
 import InputField from '@/components/InputField.vue';
 import RadioField from '@/components/RadioField.vue';
 import InputLabel from '@/components/InputLabel.vue';
+import SubmitButton from '@/components/SubmitButton.vue';
 
 // State
 const showSettings = ref(false);
@@ -266,6 +267,10 @@ const onSubmit = async () => {
     errorMessage.value = false;
     results.value = false;
 
+    if (!inputs.value.FinalOdds || !inputs.value.LegOdds) {
+        return;
+    }
+
     const params = [];
 
     for (const key in inputs.value) {
@@ -354,11 +359,11 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="devig">
+    <div class="pb-10">
         <Navigation />
         <section class="relative mx-auto max-w-7xl gap-8 px-5 py-8 md:grid md:grid-cols-10">
             <main class="md:col-span-6 lg:col-span-7">
-                <form @submit.prevent="onSubmit" class="grid gap-6">
+                <form @submit.prevent="onSubmit" class="grid grid-cols-12 gap-6">
                     <div class="flex items-center gap-4">
                         <div>
                             <InputLabel for="odds" required>Odds</InputLabel>
@@ -392,7 +397,7 @@ onMounted(() => {
                                 <RadioField v-model="freeBetType" id="freeBet2" :value="2">Guaranteed</RadioField>
                             </div>
                         </div>
-                        <div v-if="freeBetType !== 0" class="flex items-start gap-x-6 gap-y-4">
+                        <div v-if="freeBetType !== 0" class="flex flex-wrap items-start gap-x-6 gap-y-4">
                             <div v-if="freeBetType !== 0">
                                 <InputLabel for="freeBetPercentage">Amount (% of stake)</InputLabel>
                                 <InputField v-model="freeBetPercentage" id="freeBetPercentage" class="mt-1 w-32" addon="%" />
@@ -406,16 +411,10 @@ onMounted(() => {
 
                     <!-- Submit -->
                     <div class="mt-2">
-                        <input
-                            type="submit"
-                            class="from-pale-blue to-ice-blue text-jet cursor-pointer bg-linear-65 from-40% px-8 py-3 font-mono tracking-wide shadow transition-all duration-100 hover:from-10% active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
-                            name="ButtonCalculate"
-                            value="Calculate EV"
-                            style="min-width: 170px"
-                        />
+                        <SubmitButton :disabled="!inputs.FinalOdds || !inputs.LegOdds" class="max-sm:w-full">Calculate EV</SubmitButton>
                     </div>
                     <!-- Error -->
-                    <div v-if="errorMessage" class="pad-20 color-red bc-red mt-8 border">{{ errorMessage }}</div>
+                    <div v-if="errorMessage" class="text-red">{{ errorMessage }}</div>
                 </form>
 
                 <!-- Results -->
@@ -485,11 +484,8 @@ onMounted(() => {
                 </div>
             </main>
 
-            <aside
-                :class="{ 'max-md:hidden': !showSettings }"
-                class="fixed top-11 right-0 bottom-0 left-0 z-20 bg-gray-100 px-5 py-8 md:static md:col-span-4 md:rounded-sm md:ring-1 md:ring-gray-300 lg:col-span-3"
-            >
-                <div class="mb-5 flex items-center justify-between gap-4">
+            <div class="lg:col-span-3">
+                <div class="border-jet bg-ice-blue/40 border p-6">
                     <h3>Settings</h3>
                     <button @click="showSettings = false" class="text-primary flex h-10 w-10 cursor-pointer items-center justify-center hover:opacity-70 md:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -497,47 +493,11 @@ onMounted(() => {
                         </svg>
                     </button>
                 </div>
-
-                <!-- Weighted average settings -->
-                <div v-if="inputs.DevigMethod == 5" class="border-top mt-4 pt-4">
-                    <h5 class="mb-3">Method Weights</h5>
-                    <div class="sm-2s grid gap-2">
-                        <div>
-                            <label for="">Multiplicative/Traditional</label>
-                            <InputField v-model="inputs.WeightedAverage_Multiplicative" type="text" id="TextBoxMultiplicativeWeight" class="small" style="width: 80px" /> %
-                        </div>
-                        <div>
-                            <label for="">Additive</label>
-                            <InputField v-model="inputs.WeightedAverage_Additive" name="TextBoxAdditiveWeight" type="text" id="TextBoxAdditiveWeight" class="small" style="width: 80px" /> %
-                        </div>
-                        <div>
-                            <label for="">Power</label>
-                            <InputField v-model="inputs.WeightedAverage_Power" name="TextBoxPowerWeight" type="text" id="TextBoxPowerWeight" class="small" style="width: 80px" /> %
-                        </div>
-                        <div>
-                            <label for="">Shin</label>
-                            <InputField v-model="inputs.WeightedAverage_Shin" name="TextBoxShinWeight" type="text" id="TextBoxShinWeight" class="small" style="width: 80px" /> %
-                        </div>
-                    </div>
-                    <p class="mt-4">Weights do not need to add up to exactly 100%, the calculator will use the ratio of the sum of the weights. Set to 0 to exclude a method.</p>
-                </div>
-
-                <!-- Quick tips -->
-                <div class="border-top mt-4 pt-4">
-                    <h5 class="mb-3">Quick Tips</h5>
-                    <ul>
-                        <li>- A comma separates legs</li>
-                        <li>- A &quot;/&quot; symbol separates sides of a market</li>
-                        <li>- The first number in a leg is the side of the market you are wagering on.</li>
-                        <li>- If a leg has multiple sides in its market (e.g. superbowl winner), then separate all sides by a &quot;/&quot; symbol like this: +500/+250/+2000</li>
-                        <li>- More tips and help <a href="http://www.crazyninjamike.com/Public/sportsbooks/sportsbook_devigger_help.aspx" target="_blank">here</a></li>
-                    </ul>
-                </div>
-            </aside>
+            </div>
         </section>
 
-        <section class="mx-auto my-6 max-w-7xl px-5">
-            <div class="bg-space/10 flex gap-4 p-3">
+        <section class="mx-auto mt-5 max-w-7xl px-5">
+            <div class="bg-slate/10 flex gap-4 p-3">
                 <div class="w-32">
                     <InputLabel for="bankroll">Bankroll</InputLabel>
                     <div class="relative">
@@ -549,6 +509,17 @@ onMounted(() => {
                     <InputField v-model="kellyMultiplier" type="text" id="multiplier" />
                 </div>
             </div>
+        </section>
+
+        <section class="mx-auto mt-10 max-w-7xl px-5">
+            <h5 class="border-jet text-space mb-3 border-b pb-2 font-mono">Quick Tips</h5>
+            <ul class="marker:text-slate list-disc space-y-2 pl-4 text-sm marker:text-xs">
+                <li>A comma separates legs</li>
+                <li>A &quot;/&quot; symbol separates sides of a market</li>
+                <li>The first number in a leg is the side of the market you are wagering on.</li>
+                <li>If a leg has multiple sides in its market (e.g. superbowl winner), then separate all sides by a &quot;/&quot; symbol like this: +500/+250/+2000</li>
+                <li>More tips and help <a href="http://www.crazyninjamike.com/Public/sportsbooks/sportsbook_devigger_help.aspx" target="_blank" class="text-pale-blue">here</a></li>
+            </ul>
         </section>
     </div>
 </template>

@@ -13,6 +13,6 @@ import NavigationItem from './NavigationItem.vue';
                 <NavigationItem to="/devig">Devig</NavigationItem>
             </nav>
         </div>
-        <hr class="border-space mt-6" />
+        <hr class="border-jet mt-6" />
     </header>
 </template>

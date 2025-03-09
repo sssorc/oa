@@ -1,31 +1,31 @@
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html,
 body {
-	padding: 0;
-	margin: 0;
-	min-width: 320px;
-	overflow-x: hidden;
-	-webkit-text-size-adjust: 100%;
-	-webkit-font-smoothing: antialiased;
-	-mos-osx-font-smoothing: grayscale;
-	font-family: Avenir, Helvetica, Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+    min-width: 320px;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -mos-osx-font-smoothing: grayscale;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
 #app {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 img {
-	max-width: 100%;
+    max-width: 100%;
 }
 
 .page {
-	flex-grow: 1;
+    flex-grow: 1;
 }
 
 // -----------------------------------------------------------------------------
@@ -33,37 +33,18 @@ img {
 // -----------------------------------------------------------------------------
 
 .contain {
-	position: relative;
-	max-width: $page-width;
-	margin: auto;
+    position: relative;
+    max-width: $page-width;
+    margin: auto;
 }
 
 // -----------------------------------------------------------------------------
 //! Paragraphs
 // -----------------------------------------------------------------------------
 
-p {
-	margin: 15px 0;
-	font-size: 16px;
-	line-height: 24px;
-
-	@include min($md) {
-		margin: 25px 0;
-	}
-}
-
 // -----------------------------------------------------------------------------
 //! Lists
 // -----------------------------------------------------------------------------
-
-// -----------------------------------------------------------------------------
-//! Links
-// -----------------------------------------------------------------------------
-
-a,
-button {
-	transition: 0.1s;
-}
 
 // -----------------------------------------------------------------------------
 //! Tables
