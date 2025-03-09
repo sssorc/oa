@@ -7,7 +7,7 @@ import helpers from '@/mixins/helpers.js';
 import '@/assets/legacy/style.scss';
 
 export default {
-    name: 'Arb',
+    name: 'PageArbitrage',
     mixins: [helpers],
     components: {
         CardBalanced,
@@ -248,26 +248,11 @@ export default {
             </div>
             <div class="button-wrap flex items-center justify-center">
                 <div>
-                    <button class="btn btn-calculate" type="submit" tabindex="6" name="button">Calculate hedge</button>
-                    <button v-if="arbBalanced && !loading" :class="{ 'viewing-bookmark': viewingBookmark }" tabindex="-1" class="save-play btn-util" @click.prevent="bookmarkPlay">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor">
-                            <path d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z" />
-                        </svg>
-                    </button>
+                    <button type="submit" class="button" :disabled="loading">Calculate</button>
                 </div>
             </div>
         </form>
 
-        <section v-if="loading" class="loading flex items-center px-5 py-8">
-            <div class="spinner"></div>
-        </section>
-
-        <section class="card-section alt px-5 py-8">
-            <transition name="fade">
-                <div v-if="arbBalanced && !loading" class="card-wrap">
-                    <CardBalanced :labelA="labelA" :labelB="labelB" :labelC="labelC" :play="arbBalanced" />
-                </div>
-            </transition>
-        </section>
+        <CardBalanced v-if="arbBalanced" :data="arbBalanced" />
     </div>
 </template>
