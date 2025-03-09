@@ -1,5 +1,7 @@
 <script setup>
 import { computed, nextTick, ref, watch, onMounted } from 'vue';
+import CopyUrlButton from './CopyUrlButton.vue';
+import CopyForDiscordButton from './CopyForDiscordButton.vue';
 
 const props = defineProps({
     results: {
@@ -20,7 +22,6 @@ const emit = defineEmits(['update-inputs']);
 
 const isAnimating = ref(false);
 const isDoneAnimating = ref(false);
-const copySuccess = ref(false);
 
 const backgroundColor = computed(() => {
     if (props.results.ev >= 0) {
@@ -86,35 +87,6 @@ function formatUSD(number) {
     });
 
     return dollarUS.format(number).replace('.00', '');
-}
-
-async function copyForDiscord() {
-    if (copySuccess.value == 'discord') return;
-    try {
-        await navigator.clipboard.writeText(discordText.value);
-        copySuccess.value = 'discord';
-
-        setTimeout(() => {
-            copySuccess.value = false;
-        }, 1000);
-    } catch (err) {
-        console.error('Failed to copy text: ', err);
-    }
-}
-
-async function copyUrl() {
-    if (copySuccess.value == 'url') return;
-
-    try {
-        await navigator.clipboard.writeText(shareUrl.value);
-        copySuccess.value = 'url';
-
-        setTimeout(() => {
-            copySuccess.value = false;
-        }, 1000);
-    } catch (err) {
-        console.error('Failed to copy URL: ', err);
-    }
 }
 
 watch(
@@ -216,40 +188,8 @@ onMounted(() => {
             </div>
         </div>
         <div class="mt-2 flex justify-between gap-4">
-            <button
-                @click="copyUrl"
-                type="button"
-                :class="{ 'hover:decoration-pale-blue cursor-pointer': copySuccess !== 'url' }"
-                class="p-1 font-mono text-sm tracking-tighter underline decoration-transparent decoration-2 underline-offset-2 transition-colors duration-100"
-            >
-                <span v-if="copySuccess == 'url'" class="flex items-center gap-1">
-                    copied!
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="12" class="text-slate">
-                        <path
-                            fill="currentColor"
-                            d="M435.848 83.466L172.804 346.51l-96.652-96.652c-4.686-4.686-12.284-4.686-16.971 0l-28.284 28.284c-4.686 4.686-4.686 12.284 0 16.971l133.421 133.421c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-28.284-28.284c-4.686-4.686-12.284-4.686-16.97 0z"
-                        />
-                    </svg>
-                </span>
-                <span v-else>copy url </span>
-            </button>
-            <button
-                @click="copyForDiscord"
-                type="button"
-                :class="{ 'hover:decoration-pale-blue cursor-pointer': copySuccess !== 'discord' }"
-                class="p-1 font-mono text-sm tracking-tighter underline decoration-transparent decoration-2 underline-offset-2 transition-colors duration-100"
-            >
-                <span v-if="copySuccess === 'discord'" class="flex items-center gap-1">
-                    copied!
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="12" class="text-slate">
-                        <path
-                            fill="currentColor"
-                            d="M435.848 83.466L172.804 346.51l-96.652-96.652c-4.686-4.686-12.284-4.686-16.971 0l-28.284 28.284c-4.686 4.686-4.686 12.284 0 16.971l133.421 133.421c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-28.284-28.284c-4.686-4.686-12.284-4.686-16.97 0z"
-                        />
-                    </svg>
-                </span>
-                <span v-else>copy output</span>
-            </button>
+            <CopyUrlButton :content="shareUrl" />
+            <CopyForDiscordButton :content="discordText" />
         </div>
     </div>
 </template>

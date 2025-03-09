@@ -28,7 +28,7 @@ onBeforeRouteUpdate(() => {
             </button>
 
             <nav :class="{ 'max-sm:hidden': !showNav }" class="z-40 flex gap-2 font-mono max-sm:fixed max-sm:inset-0 max-sm:flex-col max-sm:bg-white max-sm:pt-6">
-                <NavigationItem to="/arb">Arbitrage</NavigationItem>
+                <NavigationItem to="/arbitrage">Arbitrage</NavigationItem>
                 <NavigationItem to="/free-bet">Free bet</NavigationItem>
                 <NavigationItem to="/risk-free">Risk-free</NavigationItem>
                 <NavigationItem to="/devig">Devig</NavigationItem>

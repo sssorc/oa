@@ -6,16 +6,20 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            redirect: { name: 'arb' },
+            redirect: { name: 'arbitrage' },
         },
         {
             path: '/oa',
-            redirect: { name: 'oa-arb' },
+            redirect: { name: 'oa-arbitrage' },
             children: [
                 {
-                    path: '/arb',
-                    name: 'oa-arb',
+                    path: '/arbitrage',
+                    name: 'oa-arbitrage',
                     component: () => import('../pages/PageArbitrage.vue'),
+                },
+                {
+                    path: '/arb',
+                    redirect: { name: 'oa-arbitrage' },
                 },
                 {
                     path: '/free-bet',
@@ -35,9 +39,13 @@ const router = createRouter({
             ],
         },
         {
-            path: '/arb',
-            name: 'arb',
+            path: '/arbitrage',
+            name: 'arbitrage',
             component: () => import('../pages/PageArbitrage.vue'),
+        },
+        {
+            path: '/arb',
+            redirect: { name: 'arbitrage' },
         },
         {
             path: '/free-bet',

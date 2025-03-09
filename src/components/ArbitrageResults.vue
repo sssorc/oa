@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import CopyUrlButton from './CopyUrlButton.vue';
 
 const props = defineProps({
     results: {
@@ -46,6 +47,20 @@ const borderColor = computed(() => {
     }
 });
 
+const shareUrl = computed(() => {
+    if (!props.results) return window.location.href;
+
+    const baseUrl = window.location.origin + window.location.pathname;
+    const { oddsA, oddsB, oddsC } = props.results;
+
+    const params = new URLSearchParams();
+    if (oddsA) params.set('oddsA', oddsA);
+    if (oddsB) params.set('oddsB', oddsB);
+    if (oddsC) params.set('oddsC', oddsC);
+
+    return `${baseUrl}#/arbitrage?${params.toString()}`;
+});
+
 function formatUSD(number) {
     let dollarUS = Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -66,31 +81,31 @@ function formatOdds(odds) {
                 <div class="flex flex-wrap items-start justify-between gap-6">
                     <div class="text-left">
                         <div class="text-jet font-mono text-sm">ROI</div>
-                        <div :class="roiColor" class="flex items-end text-4xl font-bold">
-                            <div class="tracking-tight">{{ roi.toFixed(2) }}</div>
+                        <div :class="roiColor" class="mt-1 flex items-end text-4xl font-bold">
+                            <div class="font-numbers tracking-tight">{{ roi.toFixed(2) }}</div>
                             <span class="ml-1 pb-1 text-2xl">%</span>
                         </div>
                     </div>
                     <div class="flex flex-col items-end">
                         <div class="text-left">
                             <div class="text-jet font-mono text-sm">Total Stake</div>
-                            <div class="text-3xl font-semibold">{{ formatUSD(totalStake) }}</div>
+                            <div class="font-numbers mt-1 text-3xl font-semibold">{{ formatUSD(totalStake) }}</div>
                         </div>
                     </div>
                 </div>
                 <hr class="border-space/40 mt-8 border-t" />
                 <div class="mt-8 flex items-start justify-between gap-4">
                     <div>
-                        <div class="font-mono text-xs">Bet A ({{ formatOdds(results.oddsA) }})</div>
-                        <div class="text-2xl">{{ formatUSD(results.stakeA) }}</div>
+                        <div class="font-mono text-sm">Bet A ({{ formatOdds(results.oddsA) }})</div>
+                        <div class="font-numbers mt-1 text-3xl font-bold">{{ formatUSD(results.stakeA) }}</div>
                     </div>
                     <div>
-                        <div class="font-mono text-xs">Bet B ({{ formatOdds(results.oddsB) }})</div>
-                        <div class="text-2xl">{{ formatUSD(results.stakeB) }}</div>
+                        <div class="font-mono text-sm">Bet B ({{ formatOdds(results.oddsB) }})</div>
+                        <div class="font-numbers mt-1 text-3xl font-bold">{{ formatUSD(results.stakeB) }}</div>
                     </div>
                     <div v-if="results.oddsC">
-                        <div class="font-mono text-xs">Bet C ({{ formatOdds(results.oddsC) }})</div>
-                        <div class="text-2xl">{{ formatUSD(results.stakeC) }}</div>
+                        <div class="font-mono text-sm">Bet C ({{ formatOdds(results.oddsC) }})</div>
+                        <div class="font-numbers text-3xl font-bold">{{ formatUSD(results.stakeC) }}</div>
                     </div>
                 </div>
 
@@ -98,24 +113,27 @@ function formatOdds(odds) {
                 <div class="mt-8 flex items-start justify-between gap-4">
                     <div>
                         <div class="font-mono text-sm">{{ formatUSD(results.payoutA) }} payout</div>
-                        <div :class="{ 'text-red': results.profitA < 0 }" class="mt-1 text-2xl font-bold">
+                        <div :class="{ 'text-red': results.profitA < 0 }" class="font-numbers mt-1 text-2xl font-bold">
                             {{ formatUSD(results.profitA) }}
                         </div>
                     </div>
                     <div>
                         <div class="font-mono text-sm">{{ formatUSD(results.payoutB) }} payout</div>
-                        <div :class="{ 'text-red': results.profitB < 0 }" class="mt-1 text-2xl font-bold">
+                        <div :class="{ 'text-red': results.profitB < 0 }" class="font-numbers mt-1 text-2xl font-bold">
                             {{ formatUSD(results.profitB) }}
                         </div>
                     </div>
                     <div v-if="results.oddsC">
                         <div class="font-mono text-sm">{{ formatUSD(results.payoutC) }} payout</div>
-                        <div :class="{ 'text-red': results.profitC < 0 }" class="mt-1 text-2xl font-bold">
+                        <div :class="{ 'text-red': results.profitC < 0 }" class="font-numbers mt-1 text-2xl font-bold">
                             {{ formatUSD(results.profitC) }}
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mt-2">
+            <CopyUrlButton :content="shareUrl" />
         </div>
     </div>
 </template>
