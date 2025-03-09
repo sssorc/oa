@@ -1,12 +1,17 @@
 @import 'tailwindcss';
 
 @theme {
-	--font-mono: 'Space Mono', monospace;
-
-	--color-pink: #e8aeb7;
-	--color-pale-blue: #b8e1ff;
-	--color-ice-blue: #a9fff7;
-	--color-green: #94fbab;
-	--color-slate: #82aba1;
-	--color-jet: #02040f;
+    --font-mono: 'Space Mono', monospace;
+    --color-pink: #e8aeb7;
+    --color-red: #a63d40;
+    --color-pale-blue: #b8e1ff;
+    --color-ice-blue: #a9fff7;
+    --color-green: #94fbab;
+    --color-slate: #82aba1;
+    --color-jet: #02040f;
+    --color-regal-blue: #243c5a;
+    --color-space: #474a48;
 }
+
+/* 5E6973 */
+/* C78283 */

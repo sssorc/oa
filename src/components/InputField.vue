@@ -1,21 +1,30 @@
 <script setup>
 const model = defineModel();
 const props = defineProps({
-	type: {
-		type: String,
-		default: 'text',
-	},
-	error: {
-		type: Boolean,
-		default: false,
-	},
+    type: {
+        type: String,
+        default: 'text',
+    },
+    error: {
+        type: Boolean,
+        default: false,
+    },
+    addon: {
+        type: String,
+        default: '',
+    },
 });
 </script>
 <template>
-	<input
-		:type="type"
-		v-model="model"
-		:class="{ 'shadow-error border-red': error }"
-		class="h-12 bg-white border border-[#A3B18A] px-4 py-3 leading-[1.5] text-charcoal outline-none transition-colors duration-100 [appearance:textfield] placeholder:text-slate hover:bg-white hover:shadow focus:border-[#344E41] focus:bg-white focus:shadow-md disabled:border-gray/50 disabled:bg-gray/20 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-	/>
+    <div class="relative">
+        <input
+            :type="type"
+            v-model="model"
+            :class="{ 'border-red': error, 'pr-12': addon }"
+            class="text-jet placeholder:text-slate disabled:border-gray/50 disabled:bg-gray/20 border-jet/30 focus:border-jet h-11 w-full border bg-white px-4 py-3 text-base leading-[1.5] transition-colors duration-100 outline-none focus:shadow-sm"
+        />
+        <div v-if="addon" class="bg-pale-blue/50 absolute inset-y-[1px] right-[1px] flex w-10 items-center justify-center text-center text-sm font-semibold">
+            {{ addon }}
+        </div>
+    </div>
 </template>
