@@ -7,10 +7,6 @@ const props = defineProps({
         type: String,
         required: true,
     },
-    borderColor: {
-        type: String,
-        required: true,
-    },
 });
 
 const route = useRoute();

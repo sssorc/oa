@@ -11,7 +11,6 @@ import DevigResults from '@/components/DevigResults.vue';
 // State
 const isSubmitting = ref(false);
 const results = ref(false);
-const copied = ref(false);
 const errorMessage = ref(false);
 const kellyBankroll = ref(1000);
 const showImport = ref(false);
@@ -19,7 +18,6 @@ const sourceBook = ref('');
 const freeBetType = ref(0);
 const freeBetPercentage = ref('50');
 const conversionRate = ref('70');
-const discordText = ref(null);
 
 const inputs = ref({
     LegOdds: '',
@@ -57,14 +55,6 @@ const shareUrl = computed(() => {
     return `${baseUrl}#/devig?${params.toString()}`;
 });
 
-const discordTextComputed = computed(() => {
-    if (!results.value) return '';
-
-    return `Odds: ${results.value.finalOdds}; **EV: ${results.value.ev}%**\n\n\`${results.value.inputLegs}\` (${results.value.juice}% juice)\n\nFV: ${results.value.fairOdds}; Method: ${results.value.method.toLowerCase()} (${
-        results.value.wcMethod ? results.value.wcMethod.toLowerCase() : 'm'
-    }); (FB = ${results.value.conversionPercentage}%)\n\n[View/Edit Devig](${shareUrl.value})`;
-});
-
 // Methods
 const getFinalOddsForRequest = (value) => {
     if (freeBetType.value == 0) {
@@ -90,18 +80,6 @@ const formatLegOdds = () => {
     inputs.value.LegOdds = inputs.value.LegOdds.replace(/\s+/g, ',').replace(/[,/]$/, '');
 };
 
-const copyForDiscord = () => {
-    const textarea = discordText.value;
-    textarea.select();
-    textarea.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-    copied.value = true;
-
-    setTimeout(() => {
-        copied.value = false;
-    }, 2000);
-};
-
 const round = (num, wholeNumber) => {
     if (wholeNumber) {
         return Math.round(num);
@@ -120,32 +98,6 @@ const getWcMethod = (code) => {
     }
 
     return false;
-};
-
-const getMethod = (num) => {
-    switch (num) {
-        case 0:
-            return 'Multiplicative';
-            break;
-        case 1:
-            return 'Additive';
-            break;
-        case 2:
-            return 'Power';
-            break;
-        case 3:
-            return 'Shin';
-            break;
-        case 4:
-            return 'Worst Case';
-            break;
-        case 5:
-            return 'Weighted Average';
-            break;
-        default:
-            return 'Multiplicative';
-            break;
-    }
 };
 
 const getFairOdds = (odds) => {
@@ -199,7 +151,6 @@ const onSubmit = async () => {
     formatFinalOdds();
     formatLegOdds();
     errorMessage.value = false;
-    results.value = false;
 
     if (!inputs.value.FinalOdds || !inputs.value.LegOdds) {
         return;
@@ -233,7 +184,6 @@ const onSubmit = async () => {
         const finalData = data.Final;
 
         results.value = {
-            method: getMethod(inputs.value.DevigMethod),
             inputLegs: inputs.value.LegOdds,
             finalOdds: getFinalOdds(finalData),
             fairOdds: getFairOdds(finalData.FairValue_Odds),
@@ -244,7 +194,7 @@ const onSubmit = async () => {
             ev: round(finalData.EV_Percentage * 100),
             kellyFull: finalData.Kelly_Full,
             sourceBook: sourceBook.value,
-            wcMethod: getWcMethod(finalData.DevigMethod),
+            wcMethod: finalData.DevigMethod.split(':')[1] || finalData.DevigMethod,
             includeConversion: freeBetType.value === 0,
         };
     } catch (error) {
@@ -347,14 +297,14 @@ onMounted(() => {
 
                 <!-- Submit -->
                 <div class="mt-2">
-                    <SubmitButton :disabled="!inputs.FinalOdds || !inputs.LegOdds" class="max-sm:w-full">Calculate EV</SubmitButton>
+                    <SubmitButton :disabled="!inputs.FinalOdds || !inputs.LegOdds" class="max-sm:w-full" :is-submitting="isSubmitting">Calculate EV</SubmitButton>
                 </div>
                 <!-- Error -->
                 <div v-if="errorMessage" class="text-red">{{ errorMessage }}</div>
             </form>
 
             <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
-                <DevigResults v-if="results" :results="results" :bankroll="kellyBankroll" />
+                <DevigResults :results="results" :bankroll="kellyBankroll" />
             </div>
         </section>
 
