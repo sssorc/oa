@@ -148,24 +148,24 @@ onMounted(() => {
 <template>
     <div>
         <section class="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 py-8 lg:flex-row lg:justify-between">
-            <form @submit.prevent="calculate" class="grid max-w-xl grid-cols-12 gap-6 md:flex-1">
-                <div class="flex items-center gap-4">
-                    <div class="w-40">
+            <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
+                <div class="grid grid-cols-2 items-center gap-4 sm:flex">
+                    <div class="sm:w-40">
                         <InputLabel for="oddsA" required>Odds A</InputLabel>
                         <InputField v-model="oddsA" type="text" id="oddsA" />
                     </div>
-                    <div>
+                    <div class="sm:w-44">
                         <InputLabel for="stakeA" required>Stake A</InputLabel>
                         <InputField v-model="stakeA" type="text" id="stakeA" addon="$" />
                     </div>
                 </div>
 
-                <div class="w-40">
+                <div class="sm:w-40">
                     <InputLabel for="oddsB" required>Odds B</InputLabel>
                     <InputField v-model="oddsB" type="text" id="oddsB" required />
                 </div>
 
-                <div class="w-40">
+                <div class="sm:w-40">
                     <InputLabel for="oddsC">Odds C</InputLabel>
                     <InputField v-model="oddsC" type="text" id="oddsC" />
                 </div>

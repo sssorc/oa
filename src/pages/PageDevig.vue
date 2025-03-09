@@ -298,7 +298,7 @@ onMounted(() => {
 <template>
     <div>
         <section class="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 py-8 md:flex-row md:justify-between">
-            <form @submit.prevent="onSubmit" class="grid max-w-xl grid-cols-12 gap-6 md:flex-1">
+            <form @submit.prevent="onSubmit" class="grid max-w-xl gap-6 md:flex-1">
                 <div class="flex items-center gap-4">
                     <div>
                         <InputLabel for="odds" required>Odds</InputLabel>
