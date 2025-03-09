@@ -80,11 +80,12 @@ const formatLegOdds = () => {
     inputs.value.LegOdds = inputs.value.LegOdds.replace(/\s+/g, ',').replace(/[,/]$/, '');
 };
 
-const round = (num, wholeNumber) => {
+const round = (num, wholeNumber, decimals = 2) => {
     if (wholeNumber) {
         return Math.round(num);
     } else {
-        return Math.round(num * 100) / 100;
+        const factor = Math.pow(10, decimals);
+        return Math.round(num * factor) / factor;
     }
 };
 
@@ -145,8 +146,26 @@ const getJuice = (data) => {
     return round((juice / count) * 100);
 };
 
+const areInputsUnchanged = () => {
+    if (!results.value?.inputData) return false;
+
+    const prevInputs = results.value.inputData;
+    return (
+        prevInputs.finalOdds === inputs.value.FinalOdds &&
+        prevInputs.legOdds === inputs.value.LegOdds &&
+        prevInputs.boost === (inputs.value.Boost_Text || null) &&
+        prevInputs.correlation === (inputs.value.Correlation_Text || null) &&
+        prevInputs.freeBetType === freeBetType.value &&
+        prevInputs.freeBetPercentage === (freeBetType.value !== 0 ? freeBetPercentage.value : null) &&
+        prevInputs.conversionRate === (freeBetType.value !== 0 ? conversionRate.value : null)
+    );
+};
+
 const onSubmit = async () => {
     if (isSubmitting.value) return;
+
+    // Return early if all inputs are the same as last submission
+    if (areInputsUnchanged()) return;
 
     formatFinalOdds();
     formatLegOdds();
@@ -191,11 +210,20 @@ const onSubmit = async () => {
             juice: getJuice(data),
             hitPercentage: finalData.FairValue * 100,
             conversionPercentage: round(finalData.FB_Percentage * 100),
-            ev: round(finalData.EV_Percentage * 100),
+            ev: round(finalData.EV_Percentage * 100, false, 1),
             kellyFull: finalData.Kelly_Full,
             sourceBook: sourceBook.value,
             wcMethod: finalData.DevigMethod.split(':')[1] || finalData.DevigMethod,
             includeConversion: freeBetType.value === 0,
+            inputData: {
+                finalOdds: inputs.value.FinalOdds,
+                legOdds: inputs.value.LegOdds,
+                boost: inputs.value.Boost_Text || null,
+                correlation: inputs.value.Correlation_Text || null,
+                freeBetType: freeBetType.value,
+                freeBetPercentage: freeBetType.value !== 0 ? freeBetPercentage.value : null,
+                conversionRate: freeBetType.value !== 0 ? conversionRate.value : null,
+            },
         };
     } catch (error) {
         errorMessage.value = error.message;
@@ -219,7 +247,6 @@ onMounted(() => {
 
     if (queryString) {
         const urlParams = new URLSearchParams(queryString);
-        console.log('params', urlParams);
         let shouldAutoSubmit = false;
 
         const finalOdds = urlParams.get('finalOdds');
@@ -237,6 +264,28 @@ onMounted(() => {
         const boostPct = urlParams.get('boost');
         if (boostPct && !isNaN(boostPct)) {
             inputs.value.Boost_Text = boostPct;
+            inputs.value.Boost_Bool = 1;
+        }
+
+        const correlation = urlParams.get('correlation');
+        if (correlation) {
+            inputs.value.Correlation_Text = correlation;
+            inputs.value.Correlation_Bool = 1;
+        }
+
+        const fbType = urlParams.get('freeBetType');
+        if (fbType && !isNaN(fbType)) {
+            freeBetType.value = parseInt(fbType);
+        }
+
+        const fbPercentage = urlParams.get('freeBetPercentage');
+        if (fbPercentage && !isNaN(fbPercentage)) {
+            freeBetPercentage.value = fbPercentage;
+        }
+
+        const convRate = urlParams.get('conversionRate');
+        if (convRate && !isNaN(convRate)) {
+            conversionRate.value = convRate;
         }
 
         if (shouldAutoSubmit && inputs.value.FinalOdds && inputs.value.LegOdds) {
@@ -261,12 +310,12 @@ onMounted(() => {
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-4 lg:flex-row">
-                    <div class="flex-grow lg:max-w-sm">
-                        <InputLabel for="legOdds" required>Leg Odds</InputLabel>
-                        <InputField v-model="inputs.LegOdds" id="legOdds" type="text" required />
-                    </div>
+                <div>
+                    <InputLabel for="legOdds" required>Leg Odds</InputLabel>
+                    <InputField v-model="inputs.LegOdds" id="legOdds" type="text" required />
+                </div>
 
+                <div class="flex flex-col gap-4 lg:flex-row">
                     <div>
                         <InputLabel for="correlation">Correlation</InputLabel>
                         <InputField v-model="inputs.Correlation_Text" type="text" id="TextBoxCorrelation" />
@@ -320,7 +369,7 @@ onMounted(() => {
         </section>
 
         <section class="mx-auto mt-10 max-w-7xl px-5">
-            <h5 class="border-jet text-space mb-3 border-b pb-2 font-mono">Quick Tips</h5>
+            <h5 class="border-jet text-space text-jet mb-3 border-b pb-2 font-mono font-bold">Usage Tips</h5>
             <ul class="marker:text-slate list-disc space-y-2 pl-4 text-sm marker:text-xs">
                 <li>A comma separates legs</li>
                 <li>A &quot;/&quot; symbol separates sides of a market</li>
