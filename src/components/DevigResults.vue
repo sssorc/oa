@@ -146,22 +146,22 @@ onMounted(() => {
                     <div class="text-left">
                         <div class="text-jet font-mono text-sm">EV</div>
                         <div :class="evColor" class="flex items-end text-6xl font-bold">
-                            <div class="tracking-tight">{{ results.ev }}</div>
+                            <div class="font-numbers tracking-tight">{{ results.ev }}</div>
                             <span class="ml-1 pb-1 text-2xl">% </span>
                         </div>
                     </div>
                     <div v-if="results.ev >= 0" class="flex flex-col items-end">
                         <div class="text-left">
                             <div class="text-jet font-mono text-sm">QK</div>
-                            <div class="text-3xl font-semibold">{{ round(results.kellyFull / 4) }}u</div>
+                            <div class="font-numbers text-3xl font-semibold">{{ round(results.kellyFull / 4) }}u</div>
                         </div>
-                        <div class="text-right text-2xl">{{ kellyStakeSize }}</div>
+                        <div class="font-numbers text-right text-2xl">{{ kellyStakeSize }}</div>
                     </div>
                 </div>
 
                 <div class="mt-4">
                     <div class="font-mono text-xs">BB Conversion</div>
-                    <div class="text-lg font-bold">{{ results.conversionPercentage }}%</div>
+                    <div class="font-numbers text-lg font-bold">{{ results.conversionPercentage }}%</div>
                 </div>
                 <div class="mt-4">
                     <div class="font-mono text-xs">Input Legs</div>
@@ -169,19 +169,19 @@ onMounted(() => {
                 </div>
                 <div class="mt-8 flex flex-wrap justify-between gap-4">
                     <div class="text-left">
-                        <div class="font-bold">{{ results.finalOdds }}</div>
+                        <div class="font-numbers font-bold">{{ results.finalOdds }}</div>
                         <div class="font-mono text-xs tracking-tight">Final Odds</div>
                     </div>
                     <div class="text-left">
-                        <div class="font-bold">{{ results.fairOdds }}</div>
+                        <div class="font-numbers font-bold">{{ results.fairOdds }}</div>
                         <div class="font-mono text-xs tracking-tight">Fair Odds</div>
                     </div>
                     <div class="text-left">
-                        <div class="font-bold">{{ round(results.hitPercentage) }}%</div>
+                        <div class="font-numbers font-bold">{{ round(results.hitPercentage) }}%</div>
                         <div class="font-mono text-xs tracking-tight">Hit %</div>
                     </div>
                     <div class="text-left">
-                        <div class="font-bold">{{ results.juice }}%</div>
+                        <div class="font-numbers font-bold">{{ results.juice }}%</div>
                         <div class="font-mono text-xs tracking-tight">Juice</div>
                     </div>
                 </div>

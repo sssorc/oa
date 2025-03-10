@@ -24,90 +24,61 @@ const bookmarks = ref([]);
 
 // Computed
 const shareUrl = computed(() => {
-    const baseUrl = window.location.origin + window.location.pathname;
+    const basePath = window.location.hash.split('?')[0] || '/#/risk-free';
     const params = new URLSearchParams();
 
-    if (oddsA.value) params.set('oddsa', oddsA.value);
-    if (stakeA.value) params.set('stakea', stakeA.value);
-    if (oddsB.value) params.set('oddsb', oddsB.value);
-    if (conversionPercent.value !== 100) params.set('refund', conversionPercent.value);
+    if (oddsA.value) params.set('oddsA', oddsA.value);
+    if (stakeA.value) params.set('stakeA', stakeA.value);
+    if (oddsB.value) params.set('oddsB', oddsB.value);
+    if (conversionPercent.value !== 70) params.set('conversion', conversionPercent.value);
 
-    return `${baseUrl}?${params.toString()}`;
+    return `${window.location.origin}${basePath}?${params.toString()}`;
 });
 
 // Methods
 function calculate() {
     if (!oddsA.value || !stakeA.value || !oddsB.value) return;
 
-    const stake = Number(stakeA.value);
-    const odds = Number(oddsA.value);
-    const hedgeOdds = Number(oddsB.value);
-    const refundAmount = (stake * conversionPercent.value) / 100;
-    const payoutA = getPayout(odds, stake);
+    const conversion = Number(stakeA.value * (conversionPercent.value / 100));
+    const payoutA = getPayout(Number(oddsA.value), Number(stakeA.value));
+    const o = (Number(oddsB.value) * -1) / 100;
+    let stakeB = Number(((payoutA - conversion) / (1 + 1 / o)).toFixed(2));
 
-    // Calculate stakeB such that profits are equal:
-    // If A wins: payoutA - stakeA - stakeB
-    // If A loses: (stakeB * 100/|oddsB|) + stakeB - stakeB + refundAmount
-    // So: payoutA - stakeA - stakeB = (stakeB * 100/|oddsB|) + refundAmount
-
-    const oddsB_decimal = Math.abs(hedgeOdds) / 100;
-    let stakeB = Math.round((payoutA - stake - refundAmount) / (1 + 100 / Math.abs(hedgeOdds)));
-
-    const payoutB = getPayout(hedgeOdds, stakeB);
-    const profitA = payoutA - stake - stakeB;
-    const profitB = payoutB - stakeB + refundAmount;
-    const profitAvg = (profitA + profitB) / 2;
+    stakeB = Math.round(stakeB);
+    const payoutB = Number(getPayout(oddsB.value, stakeB));
+    const profitB = Number(payoutB - stakeA.value - stakeB);
 
     result.value = {
-        stakeA: stake,
+        stakeA: stakeA.value,
         oddsA: oddsA.value,
         payoutA,
-        profitA: Number(profitA.toFixed(2)),
+        profitA: payoutA - stakeA.value - stakeB,
         stakeB,
         oddsB: oddsB.value,
         payoutB,
-        profitB: Number(profitB.toFixed(2)),
-        percent: percentOf(stake, profitAvg),
+        profitB,
+        conversion,
+        converstionRate: conversionPercent.value,
+        profitAfterConversion: Number((profitB + conversion).toFixed(2)),
+        conversionRate: conversionPercent.value,
     };
-
-    loading.value = false;
-    hasSearched.value = true;
-}
-
-function bookmarkPlay() {
-    if (!hasSearched.value) return;
-
-    if (viewingBookmark.value) {
-        _.remove(bookmarks.value, (obj) => {
-            return obj.id == `${oddsA.value}${oddsB.value}`;
-        });
-
-        viewingBookmark.value = false;
-        return;
-    }
-
-    const bookmark = {
-        id: `${oddsA.value}${oddsB.value}`,
-        oddsA: oddsA.value,
-        oddsB: oddsB.value,
-        percent: result.value ? result.value.percent : 0,
-        hedge: result.value ? result.value.stakeB : 0,
-    };
-    bookmarks.value.push(bookmark);
-    viewingBookmark.value = true;
 }
 
 function calcFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    const a = params.get('oddsa');
-    const ax = params.get('stakea');
-    const b = params.get('oddsb');
-    const r = params.get('refund');
+    // Get the part after the hash and extract the query string
+    const hashParts = window.location.hash.split('?');
+    const queryString = hashParts.length > 1 ? hashParts[1] : '';
+    const params = new URLSearchParams(queryString);
+
+    const a = params.get('oddsA');
+    const ax = params.get('stakeA');
+    const b = params.get('oddsB');
+    const c = params.get('conversion');
 
     if (a) oddsA.value = a;
     if (ax) stakeA.value = ax;
     if (b) oddsB.value = b;
-    if (r) conversionPercent.value = r;
+    if (c) conversionPercent.value = c;
 
     if (oddsA.value && stakeA.value && oddsB.value) {
         calculate();
@@ -124,7 +95,7 @@ calcFromUrl();
 </script>
 
 <template>
-    <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:flex-row md:items-start md:justify-between">
+    <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 lg:flex-row lg:items-start lg:justify-between">
         <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <div class="sm:w-44">
@@ -156,7 +127,7 @@ calcFromUrl();
             </div>
         </form>
 
-        <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
+        <div class="max-w-[500px] md:min-w-[400px] md:flex-1">
             <RiskFreeResult :result="result" />
         </div>
     </section>

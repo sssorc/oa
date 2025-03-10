@@ -114,7 +114,7 @@ function percentOf(a, b) {
 </script>
 
 <template>
-    <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:flex-row md:items-start md:justify-between">
+    <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:flex-row md:items-start md:justify-between lg:items-start">
         <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <div class="sm:w-44">

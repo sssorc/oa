@@ -51,9 +51,10 @@ const shareUrl = computed(() => {
     if (!props.results) return window.location.href;
 
     const baseUrl = window.location.origin + window.location.pathname;
-    const { oddsA, oddsB, oddsC } = props.results;
+    const { oddsA, oddsB, oddsC, stakeA } = props.results;
 
     const params = new URLSearchParams();
+    if (stakeA) params.set('stakeA', stakeA);
     if (oddsA) params.set('oddsA', oddsA);
     if (oddsB) params.set('oddsB', oddsB);
     if (oddsC) params.set('oddsC', oddsC);

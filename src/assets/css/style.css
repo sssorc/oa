@@ -3,7 +3,7 @@
 @theme {
     --font-mono: 'Space Mono', monospace;
     --font-oswald: 'Oswald', sans-serif;
-    --font-numbers: 'JetBrains Mono', cursive;
+    --font-numbers: 'JetBrains Mono', monospace;
 
     --color-pink: #e8aeb7;
     --color-red: #a63d40;

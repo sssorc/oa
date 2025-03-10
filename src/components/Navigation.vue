@@ -1,21 +1,27 @@
 <script setup>
-import { ref } from 'vue';
-import { onBeforeRouteUpdate, useRouter } from 'vue-router';
+import { ref, watch } from 'vue';
+import { onBeforeRouteUpdate, useRouter, useRoute } from 'vue-router';
 import NavigationItem from './NavigationItem.vue';
 
 const showNav = ref(false);
+const route = useRoute();
 
-onBeforeRouteUpdate(() => {
-    showNav.value = false;
-});
+// Watch for route changes to close mobile nav
+watch(
+    () => route.path,
+    () => {
+        showNav.value = false;
+    }
+);
 </script>
 
 <template>
     <header class="mx-auto w-full max-w-7xl px-5 pt-8 pb-6">
         <div class="flex items-center justify-end">
             <div class="mr-auto flex items-center gap-3 font-mono text-xl font-bold lg:pt-2">
-                <div class="bg-green h-8 w-10"></div>
-                <h1 class="hidden font-normal lg:block">sssorc betting tools</h1>
+                <!-- <div class="from-ice-blue to-green h-8 w-10 bg-radial from-10%"></div> -->
+                <h1 class="hidden font-normal lg:block">sssorc sports betting tools</h1>
+                <h1 class="font-normal lg:hidden">SSBT</h1>
             </div>
 
             <button type="button" class="z-50 -mr-3 cursor-pointer p-3 sm:hidden" aria-label="Toggle navigation" @click="showNav = !showNav">

@@ -125,10 +125,10 @@ const calculate = () => {
 };
 
 const calcFromUrl = () => {
-    const a = getQueryString('oddsa');
-    const ax = getQueryString('stakea');
-    const b = getQueryString('oddsb');
-    const c = getQueryString('oddsc');
+    const a = getQueryString('oddsA');
+    const ax = getQueryString('stakeA');
+    const b = getQueryString('oddsB');
+    const c = getQueryString('oddsC');
 
     oddsA.value = a;
     stakeA.value = ax;
@@ -147,7 +147,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 lg:flex-row lg:justify-between">
+        <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 lg:flex-row lg:items-start lg:justify-between">
             <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
                 <div class="grid grid-cols-2 items-center gap-4 sm:flex">
                     <div class="sm:w-44">
