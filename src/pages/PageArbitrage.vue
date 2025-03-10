@@ -10,9 +10,13 @@ import ArbitrageResults from '@/components/ArbitrageResults.vue';
 import InputField from '@/components/InputField.vue';
 import InputLabel from '@/components/InputLabel.vue';
 import SubmitButton from '@/components/SubmitButton.vue';
+import { usePageTitle } from '@/composables/usePageTitle';
 
 // Extract helper methods we need
 const { getPayout, getStake, getQueryString } = helpers.methods;
+
+// Set page title immediately
+usePageTitle('Arbitrage');
 
 // State
 const results = ref(false);

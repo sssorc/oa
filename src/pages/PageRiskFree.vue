@@ -7,9 +7,13 @@ import InputLabel from '@/components/InputLabel.vue';
 import SubmitButton from '@/components/SubmitButton.vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers.js';
+import { usePageTitle } from '@/composables/usePageTitle';
 
 // Extract helper methods we need
 const { getPayout } = helpers.methods;
+
+// Set page title immediately
+usePageTitle('Risk-free');
 
 // State
 const viewingBookmark = ref(false);

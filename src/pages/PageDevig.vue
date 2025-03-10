@@ -7,6 +7,10 @@ import RadioField from '@/components/RadioField.vue';
 import InputLabel from '@/components/InputLabel.vue';
 import SubmitButton from '@/components/SubmitButton.vue';
 import DevigResults from '@/components/DevigResults.vue';
+import { usePageTitle } from '@/composables/usePageTitle';
+
+// Set page title immediately
+usePageTitle('Devig');
 
 // State
 const isSubmitting = ref(false);

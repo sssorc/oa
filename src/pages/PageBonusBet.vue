@@ -7,6 +7,10 @@ import InputLabel from '@/components/InputLabel.vue';
 import SubmitButton from '@/components/SubmitButton.vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers';
+import { usePageTitle } from '@/composables/usePageTitle';
+
+// Set page title immediately
+usePageTitle('Bonus Bet');
 
 // State
 const viewingBookmark = ref(false);

@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.0.1",
+		"@vueuse/head": "^2.0.0",
 		"axios": "^1.4.0",
 		"execa": "^7.1.1",
 		"fs": "^0.0.1-security",
@@ -24,10 +25,10 @@
 		"@vitejs/plugin-vue": "^4.0.0",
 		"autoprefixer": "^10.4.20",
 		"postcss": "^8.5.3",
-		"sass": "^1.58.3",
-		"tailwindcss": "^4.0.8",
 		"prettier": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.5",
+		"sass": "^1.58.3",
+		"tailwindcss": "^4.0.8",
 		"vite": "^6.0.11"
 	}
 }

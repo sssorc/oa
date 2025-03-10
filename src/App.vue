@@ -1,5 +1,9 @@
 <script setup>
 import Navigation from '@/components/Navigation.vue';
+import { usePageTitle } from '@/composables/usePageTitle';
+
+// Set default title
+usePageTitle();
 </script>
 
 <template>

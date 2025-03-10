@@ -94,7 +94,7 @@ function formatOdds(odds) {
                     <div>
                         <div class="font-mono text-sm">Bet A ({{ formatOdds(result.oddsA) }})</div>
                         <div class="font-numbers mt-1 text-3xl font-bold">{{ formatUSD(result.stakeA) }}</div>
-                        <div class="font-mono text-sm text-gray-600">free bet</div>
+                        <div class="font-mono text-sm text-gray-600">bonus bet</div>
                     </div>
                     <div>
                         <div class="font-mono text-sm">Bet B ({{ formatOdds(result.oddsB) }})</div>

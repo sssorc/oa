@@ -23,7 +23,11 @@ const router = createRouter({
                 },
                 {
                     path: '/free-bet',
-                    name: 'oa-free-bet',
+                    redirect: { name: 'oa-bonus-bet' },
+                },
+                {
+                    path: '/bonus-bet',
+                    name: 'oa-bonus-bet',
                     component: () => import('../pages/PageBonusBet.vue'),
                 },
                 {
