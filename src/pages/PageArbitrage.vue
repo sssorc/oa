@@ -170,8 +170,6 @@ onMounted(() => {
                     <InputField v-model="oddsC" type="text" id="oddsC" />
                 </div>
 
-                <hr class="border-space/10" />
-
                 <div class="mt-2">
                     <SubmitButton :disabled="!oddsA || !stakeA || !oddsB" class="max-sm:w-full" :is-submitting="loading">Calculate Hedge</SubmitButton>
                 </div>

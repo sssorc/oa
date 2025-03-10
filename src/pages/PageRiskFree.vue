@@ -120,8 +120,6 @@ calcFromUrl();
                 <InputField v-model="conversionPercent" type="text" id="conversionPercent" addon="%" />
             </div>
 
-            <hr class="border-space/10" />
-
             <div class="mt-2">
                 <SubmitButton :disabled="!oddsA || !stakeA || !oddsB" class="max-sm:w-full" :is-submitting="loading">Calculate Hedge</SubmitButton>
             </div>

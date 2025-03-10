@@ -297,7 +297,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:flex-row md:justify-between">
+        <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-x-8 gap-y-10 px-5 py-8 md:flex-row md:justify-between">
             <form @submit.prevent="onSubmit" class="grid max-w-xl gap-6 md:flex-1">
                 <div class="flex items-center gap-4">
                     <div>
@@ -321,6 +321,7 @@ onMounted(() => {
                         <InputField v-model="inputs.Correlation_Text" type="text" id="TextBoxCorrelation" />
                     </div>
                 </div>
+
                 <hr class="border-space/10" />
 
                 <div class="flex flex-col items-start gap-x-8 gap-y-4 lg:flex-row">

@@ -16,7 +16,7 @@ watch(
 </script>
 
 <template>
-    <header class="mx-auto w-full max-w-7xl px-5 pt-8 pb-6">
+    <header class="mx-auto w-full max-w-7xl px-5 py-4 lg:pt-8 lg:pb-6">
         <div class="flex items-center justify-end">
             <div class="mr-auto flex items-center gap-3 font-mono text-xl font-bold lg:pt-2">
                 <!-- <div class="from-ice-blue to-green h-8 w-10 bg-radial from-10%"></div> -->
