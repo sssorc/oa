@@ -1,188 +1,163 @@
-<script>
-import CardRiskFree from '@/components/CardRiskFree.vue';
+<script setup>
+import { ref, computed } from 'vue';
 import Navigation from '@/components/Navigation.vue';
-import ToggleField from '@/components/ToggleField.vue';
-import helpers from '@/mixins/helpers';
-import '@/assets/legacy/style.scss';
+import RiskFreeResult from '@/components/RiskFreeResult.vue';
+import InputField from '@/components/InputField.vue';
+import InputLabel from '@/components/InputLabel.vue';
+import SubmitButton from '@/components/SubmitButton.vue';
+import _ from 'lodash';
+import helpers from '@/mixins/helpers.js';
 
-export default {
-    name: 'PageRiskFree',
-    mixins: [helpers],
-    components: {
-        CardRiskFree,
-        Navigation,
-        ToggleField,
-    },
-    data() {
-        return {
-            viewingBookmark: false,
-            stakeA: '',
-            oddsA: '',
-            oddsB: '',
-            loading: false,
-            freshInput: true,
-            hasSearched: false,
-            rfbSafe: false,
-            rfbRisky: false,
-            conversionRate: 75,
-        };
-    },
-    created() {
-        this.calcFromUrl();
-    },
-    computed: {},
-    methods: {
-        calcFromUrl() {
-            const a = this.getQueryString('oddsa');
-            const labelA = this.getQueryString('booka');
-            const labelB = this.getQueryString('bookb');
-            const ax = this.getQueryString('stakea');
-            const b = this.getQueryString('oddsb');
-            const cr = this.getQueryString('cr');
-            this.oddsA = a;
-            this.stakeA = ax;
-            this.oddsB = b;
-            if (cr) {
-                this.conversionRate = cr;
-            }
+// Extract helper methods we need
+const { getPayout } = helpers.methods;
 
-            if (labelA) {
-                this.labelA = decodeURIComponent(labelA);
-            }
+// State
+const viewingBookmark = ref(false);
+const oddsA = ref('');
+const stakeA = ref('');
+const oddsB = ref('');
+const conversionPercent = ref(70);
+const result = ref(false);
+const loading = ref(false);
+const hasSearched = ref(false);
+const bookmarks = ref([]);
 
-            if (labelB) {
-                this.labelB = decodeURIComponent(labelB);
-            }
+// Computed
+const shareUrl = computed(() => {
+    const baseUrl = window.location.origin + window.location.pathname;
+    const params = new URLSearchParams();
 
-            this.calculate();
-        },
-        calculate() {
-            if (!this.oddsA || !this.stakeA || !this.oddsB) return;
-            this.calculateRisky();
-            this.calculateSafe();
-        },
-        calculateRisky() {
-            const conversion = Number(this.stakeA * (this.conversionRate / 100));
-            const payoutA = this.getPayout(this.oddsA, this.stakeA);
-            const stakeB = payoutA - this.stakeA;
-            const payoutB = Number(this.getPayout(this.oddsB, stakeB));
-            const profitB = payoutB - stakeB - this.stakeA;
+    if (oddsA.value) params.set('oddsa', oddsA.value);
+    if (stakeA.value) params.set('stakea', stakeA.value);
+    if (oddsB.value) params.set('oddsb', oddsB.value);
+    if (conversionPercent.value !== 100) params.set('refund', conversionPercent.value);
 
-            this.rfbRisky = {
-                safe: false,
-                stakeA: this.stakeA,
-                oddsA: this.oddsA,
-                payoutA,
-                profitA: 0,
-                stakeB,
-                oddsB: this.oddsB,
-                payoutB,
-                profitB: Number(profitB.toFixed(2)),
-                conversion,
-                profitAfterConversion: Number((profitB + conversion).toFixed(2)),
-                conversionRate: this.conversionRate,
-            };
-        },
-        calculateSafe() {
-            const conversion = Number(this.stakeA * (this.conversionRate / 100));
-            const payoutA = this.getPayout(Number(this.oddsA), Number(this.stakeA));
-            const o = (this.oddsB * -1) / 100;
-            let stakeB = Number(((payoutA - conversion) / (1 + 1 / o)).toFixed(2));
+    return `${baseUrl}?${params.toString()}`;
+});
 
-            if (this.round) {
-                stakeB = Math.round(stakeB);
-            }
-            const payoutB = Number(this.getPayout(this.oddsB, stakeB));
-            const profitB = Number(payoutB - this.stakeA - stakeB);
+// Methods
+function calculate() {
+    if (!oddsA.value || !stakeA.value || !oddsB.value) return;
 
-            this.rfbSafe = {
-                safe: true,
-                stakeA: this.stakeA,
-                oddsA: this.oddsA,
-                payoutA,
-                profitA: payoutA - this.stakeA - stakeB,
-                stakeB,
-                oddsB: this.oddsB,
-                payoutB,
-                profitB,
-                conversion,
-                profitAfterConversion: Number((profitB + conversion).toFixed(2)),
-                conversionRate: this.conversionRate,
-            };
-        },
-        editLabel(l) {
-            const prop = `isEditingLabel${l}`;
-            const ref = `labelInput${l}`;
-            this[prop] = true;
+    const stake = Number(stakeA.value);
+    const odds = Number(oddsA.value);
+    const hedgeOdds = Number(oddsB.value);
+    const refundAmount = (stake * conversionPercent.value) / 100;
+    const payoutA = getPayout(odds, stake);
 
-            this.$nextTick(() => {
-                this.$refs[ref].focus();
-            });
-        },
-    },
-    watch: {
-        round() {
-            this.freshInput = true;
-            this.calculate();
-        },
-    },
-};
+    // Calculate stakeB such that profits are equal:
+    // If A wins: payoutA - stakeA - stakeB
+    // If A loses: (stakeB * 100/|oddsB|) + stakeB - stakeB + refundAmount
+    // So: payoutA - stakeA - stakeB = (stakeB * 100/|oddsB|) + refundAmount
+
+    const oddsB_decimal = Math.abs(hedgeOdds) / 100;
+    let stakeB = Math.round((payoutA - stake - refundAmount) / (1 + 100 / Math.abs(hedgeOdds)));
+
+    const payoutB = getPayout(hedgeOdds, stakeB);
+    const profitA = payoutA - stake - stakeB;
+    const profitB = payoutB - stakeB + refundAmount;
+    const profitAvg = (profitA + profitB) / 2;
+
+    result.value = {
+        stakeA: stake,
+        oddsA: oddsA.value,
+        payoutA,
+        profitA: Number(profitA.toFixed(2)),
+        stakeB,
+        oddsB: oddsB.value,
+        payoutB,
+        profitB: Number(profitB.toFixed(2)),
+        percent: percentOf(stake, profitAvg),
+    };
+
+    loading.value = false;
+    hasSearched.value = true;
+}
+
+function bookmarkPlay() {
+    if (!hasSearched.value) return;
+
+    if (viewingBookmark.value) {
+        _.remove(bookmarks.value, (obj) => {
+            return obj.id == `${oddsA.value}${oddsB.value}`;
+        });
+
+        viewingBookmark.value = false;
+        return;
+    }
+
+    const bookmark = {
+        id: `${oddsA.value}${oddsB.value}`,
+        oddsA: oddsA.value,
+        oddsB: oddsB.value,
+        percent: result.value ? result.value.percent : 0,
+        hedge: result.value ? result.value.stakeB : 0,
+    };
+    bookmarks.value.push(bookmark);
+    viewingBookmark.value = true;
+}
+
+function calcFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const a = params.get('oddsa');
+    const ax = params.get('stakea');
+    const b = params.get('oddsb');
+    const r = params.get('refund');
+
+    if (a) oddsA.value = a;
+    if (ax) stakeA.value = ax;
+    if (b) oddsB.value = b;
+    if (r) conversionPercent.value = r;
+
+    if (oddsA.value && stakeA.value && oddsB.value) {
+        calculate();
+    }
+}
+
+// Helper functions
+function percentOf(a, b) {
+    return (b / a) * 100;
+}
+
+// Initialize
+calcFromUrl();
 </script>
 
 <template>
-    <div class="page legacy risk-free">
-        <Navigation />
-        <input id="shareLink" class="copy-input" type="text" :value="shareLink" />
+    <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:flex-row md:items-start md:justify-between">
+        <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+                <div class="sm:w-44">
+                    <InputLabel for="stakeA" required>Risk-free Stake</InputLabel>
+                    <InputField v-model="stakeA" type="text" id="stakeA" addon="$" />
+                </div>
+                <div class="sm:w-44">
+                    <InputLabel for="oddsA" required>Odds</InputLabel>
+                    <InputField v-model="oddsA" type="text" id="oddsA" />
+                </div>
+            </div>
 
-        <form @submit.prevent="calculate">
-            <div class="settings space-y-4 rounded-sm bg-gray-200 p-4 ring-1 ring-gray-300">
-                <div>
-                    <label for="" style="display: block">Rounding</label>
-                    <ToggleField v-model="round" @change="calculate" />
-                </div>
-                <div class="field mt-1.5">
-                    <label for="">Conversion %</label>
-                    <input type="text" v-model="conversionRate" @keyup="onKeyUp('cr')" class="bg-white" />
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+                <div class="sm:w-44">
+                    <InputLabel for="oddsB" required>Hedge Odds</InputLabel>
+                    <InputField v-model="oddsB" type="text" id="oddsB" />
                 </div>
             </div>
-            <div class="book">
-                <input type="text" v-model="labelA" class="label-input" tabindex="1" @focus="editingLabel = true" @blur="editingLabel = false" />
-                <div class="field-wrap flex items-center justify-center">
-                    <div class="field">
-                        <label for="" class="color-rfb">Risk-free stake</label>
-                        <input type="text" v-model="stakeA" tabindex="3" required @keyup="onKeyUp('xa')" class="bg-white" />
-                    </div>
-                    <div class="field">
-                        <label for="">Odds</label>
-                        <input type="text" v-model="oddsA" tabindex="4" required @keyup="onKeyUp('oa')" class="bg-white" />
-                    </div>
-                </div>
+
+            <div class="sm:w-44">
+                <InputLabel for="conversionPercent">Assumed Conversion %</InputLabel>
+                <InputField v-model="conversionPercent" type="text" id="conversionPercent" addon="%" />
             </div>
-            <div class="book">
-                <input type="text" v-model="labelB" class="label-input" tabindex="2" @focus="editingLabel = true" @blur="editingLabel = false" />
-                <div class="field-wrap flex items-center justify-center">
-                    <div class="field">
-                        <label for="">Odds</label>
-                        <input type="text" v-model="oddsB" tabindex="5" required @keyup="onKeyUp('ob')" class="bg-white" />
-                    </div>
-                </div>
-            </div>
-            <div class="button-wrap flex items-center justify-center">
-                <button class="btn btn-calculate" type="submit" tabindex="6" name="button">Calculate hedge</button>
+
+            <hr class="border-space/10" />
+
+            <div class="mt-2">
+                <SubmitButton :disabled="!oddsA || !stakeA || !oddsB" class="max-sm:w-full" :is-submitting="loading">Calculate Hedge</SubmitButton>
             </div>
         </form>
 
-        <section v-if="loading" class="loading flex items-center justify-center px-5 py-8">
-            <div class="spinner"></div>
-        </section>
-
-        <section class="card-section alt px-5 py-8">
-            <transition>
-                <div v-if="rfbSafe && rfbRisky" class="card-wrap">
-                    <CardRiskFree :play="rfbRisky" :bet-A="labelA" :bet-B="labelB" />
-                    <CardRiskFree :play="rfbSafe" :bet-A="labelA" :bet-B="labelB" />
-                </div>
-            </transition>
-        </section>
-    </div>
+        <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
+            <RiskFreeResult :result="result" />
+        </div>
+    </section>
 </template>

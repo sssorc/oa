@@ -13,8 +13,6 @@ const viewingBookmark = ref(false);
 const oddsA = ref('');
 const stakeA = ref('');
 const oddsB = ref('');
-const labelA = ref('Book A');
-const labelB = ref('Book B');
 const conversion = ref(false);
 const loading = ref(false);
 const hasSearched = ref(false);
@@ -74,8 +72,6 @@ function bookmarkPlay() {
 
     const play = {
         id: `${oddsA.value}${oddsB.value}`,
-        labelA: labelA.value,
-        labelB: labelB.value,
         oddsA: oddsA.value,
         oddsB: oddsB.value,
         percent: conversion.value ? conversion.value.percent : 0,
@@ -83,14 +79,6 @@ function bookmarkPlay() {
     };
     bookmarks.value.push(play);
     viewingBookmark.value = true;
-}
-
-function loadBookmark(play) {
-    oddsA.value = play.oddsA;
-    oddsB.value = play.oddsB;
-    labelA.value = play.labelA;
-    labelB.value = play.labelB;
-    calculate();
 }
 
 function calcFromUrl() {
@@ -126,20 +114,20 @@ function percentOf(a, b) {
 </script>
 
 <template>
-    <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:flex-row md:justify-between">
+    <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:flex-row md:items-start md:justify-between">
         <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
-                <div class="sm:w-40">
-                    <InputLabel for="oddsA" required>Bonus Bet Odds</InputLabel>
-                    <InputField v-model="oddsA" type="text" id="oddsA" />
-                </div>
                 <div class="sm:w-44">
                     <InputLabel for="stakeA" required>Bonus Bet Amount</InputLabel>
                     <InputField v-model="stakeA" type="text" id="stakeA" addon="$" />
                 </div>
+                <div class="sm:w-44">
+                    <InputLabel for="oddsA" required>Bonus Bet Odds</InputLabel>
+                    <InputField v-model="oddsA" type="text" id="oddsA" />
+                </div>
             </div>
 
-            <div class="sm:w-40">
+            <div class="sm:w-44">
                 <InputLabel for="oddsB" required>Hedge Odds</InputLabel>
                 <InputField v-model="oddsB" type="text" id="oddsB" required />
             </div>
@@ -152,7 +140,7 @@ function percentOf(a, b) {
         </form>
 
         <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
-            <ConversionResult :play="conversion" :bet-a="labelA" :bet-b="labelB" />
+            <ConversionResult :result="conversion" />
         </div>
     </section>
 </template>

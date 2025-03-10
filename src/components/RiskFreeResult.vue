@@ -16,7 +16,7 @@ const roi = computed(() => {
 
 const totalStake = computed(() => {
     if (!props.result) return 0;
-    return props.result.stakeB;
+    return props.result.stakeA + props.result.stakeB;
 });
 
 const backgroundColor = computed(() => {
@@ -71,12 +71,12 @@ function formatOdds(odds) {
 </script>
 
 <template>
-    <div v-if="play" class="max-w-[420px] md:min-w-[300px]">
+    <div v-if="result" class="max-w-[420px] md:min-w-[300px]">
         <div :class="borderColor" class="relative border font-mono shadow-md">
             <div :class="backgroundColor" class="relative z-20 bg-linear-65 p-6">
                 <div class="flex flex-wrap items-start justify-between gap-6">
                     <div class="text-left">
-                        <div class="text-jet font-mono text-sm">Conversion</div>
+                        <div class="text-jet font-mono text-sm">Return</div>
                         <div :class="roiColor" class="mt-1 flex items-end text-4xl font-bold">
                             <div class="font-numbers tracking-tight">{{ roi.toFixed(2) }}</div>
                             <span class="ml-1 pb-1 text-2xl">%</span>
@@ -84,7 +84,7 @@ function formatOdds(odds) {
                     </div>
                     <div class="flex flex-col items-end">
                         <div class="text-left">
-                            <div class="text-jet font-mono text-sm">Hedge Amount</div>
+                            <div class="text-jet font-mono text-sm">Total Stake</div>
                             <div class="font-numbers mt-1 text-3xl font-semibold">{{ formatUSD(totalStake) }}</div>
                         </div>
                     </div>
@@ -92,14 +92,14 @@ function formatOdds(odds) {
                 <hr class="border-space/40 mt-8 border-t" />
                 <div class="mt-8 flex items-start justify-between gap-4">
                     <div>
-                        <div class="font-mono text-sm">Bet A ({{ formatOdds(result.oddsA) }})</div>
+                        <div class="font-mono text-sm">{{ betA }} ({{ formatOdds(result.oddsA) }})</div>
                         <div class="font-numbers mt-1 text-3xl font-bold">{{ formatUSD(result.stakeA) }}</div>
-                        <div class="font-mono text-sm text-gray-600">free bet</div>
+                        <div class="font-mono text-sm text-gray-600">initial bet</div>
                     </div>
                     <div>
-                        <div class="font-mono text-sm">Bet B ({{ formatOdds(result.oddsB) }})</div>
+                        <div class="font-mono text-sm">{{ betB }} ({{ formatOdds(result.oddsB) }})</div>
                         <div class="font-numbers mt-1 text-3xl font-bold">{{ formatUSD(result.stakeB) }}</div>
-                        <div class="font-mono text-sm text-gray-600">hedge</div>
+                        <div class="font-mono text-sm text-gray-600">refund hedge</div>
                     </div>
                 </div>
 
