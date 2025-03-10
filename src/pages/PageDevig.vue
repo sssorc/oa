@@ -22,7 +22,7 @@ const sourceBook = ref('');
 const freeBetType = ref(0);
 const freeBetPercentage = ref('50');
 const conversionRate = ref('70');
-
+const sharp = ref('');
 const inputs = ref({
     LegOdds: '',
     FinalOdds: '',
@@ -220,6 +220,7 @@ const onSubmit = async () => {
             wcMethod: finalData.DevigMethod.split(':')[1] || finalData.DevigMethod,
             includeConversion: freeBetType.value === 0,
             inputData: {
+                sharp: sharp.value,
                 finalOdds: inputs.value.FinalOdds,
                 legOdds: inputs.value.LegOdds,
                 boost: inputs.value.Boost_Text || null,
@@ -323,6 +324,10 @@ onMounted(() => {
                     <div>
                         <InputLabel for="correlation">Correlation</InputLabel>
                         <InputField v-model="inputs.Correlation_Text" type="text" id="TextBoxCorrelation" />
+                    </div>
+                    <div class="lg:flex-1">
+                        <InputLabel for="sharp">Devigged To</InputLabel>
+                        <InputField v-model="sharp" type="text" id="sharp" />
                     </div>
                 </div>
 

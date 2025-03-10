@@ -163,9 +163,15 @@ onMounted(() => {
                     <div class="font-mono text-xs">BB Conversion</div>
                     <div class="font-numbers text-lg font-bold">{{ results.conversionPercentage }}%</div>
                 </div>
-                <div class="mt-4">
-                    <div class="font-mono text-xs">Input Legs</div>
-                    <div class="font-mono text-sm leading-normal font-bold break-words">{{ results.inputLegs }}</div>
+                <div class="mt-4 flex flex-wrap items-start gap-x-8 gap-y-4">
+                    <div v-if="results.inputData.sharp">
+                        <div class="font-mono text-xs">Devigged To</div>
+                        <div class="font-mono text-sm leading-normal font-bold">{{ results.inputData.sharp }}</div>
+                    </div>
+                    <div>
+                        <div class="font-mono text-xs">Input Legs</div>
+                        <div class="font-mono text-sm leading-normal font-bold break-all">{{ results.inputLegs }}</div>
+                    </div>
                 </div>
                 <div class="mt-8 flex flex-wrap justify-between gap-4">
                     <div class="text-left">
