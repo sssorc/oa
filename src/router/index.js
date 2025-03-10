@@ -6,7 +6,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            redirect: { name: 'arbitrage' },
+            redirect: { name: 'devig' },
         },
         {
             path: '/oa',
