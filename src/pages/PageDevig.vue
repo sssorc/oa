@@ -205,6 +205,7 @@ const onSubmit = async () => {
         params.push('Correlation_Bool=1');
     }
 
+    // Only add Boost_Bool once
     if (inputs.value.Boost_Text) {
         params.push('Boost_Bool=1');
     }
@@ -309,7 +310,6 @@ onMounted(() => {
         const boostPct = urlParams.get('boost');
         if (boostPct && !isNaN(boostPct)) {
             inputs.value.Boost_Text = boostPct;
-            inputs.value.Boost_Bool = 1;
         }
 
         const correlation = urlParams.get('correlation');
