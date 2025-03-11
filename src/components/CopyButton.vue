@@ -10,6 +10,11 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    mobileLabel: {
+        type: String,
+        required: false,
+        default: '',
+    },
 });
 
 const copySuccess = ref(false);
@@ -47,7 +52,8 @@ async function copyContent() {
             </svg>
         </span>
         <span v-else class="flex items-center gap-1">
-            {{ label }}
+            <span class="hidden sm:inline">{{ label }}</span>
+            <span class="sm:hidden">{{ mobileLabel || label }}</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="17" fill="none" viewBox="0 0 24 24">
                 <path
                     fill="currentColor"

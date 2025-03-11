@@ -10,5 +10,5 @@ defineProps({
 </script>
 
 <template>
-    <CopyButton :content="content" label="copy url" />
+    <CopyButton :content="content" label="copy url" mobile-label="url" />
 </template>

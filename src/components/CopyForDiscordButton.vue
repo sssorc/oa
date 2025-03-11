@@ -10,5 +10,5 @@ defineProps({
 </script>
 
 <template>
-    <CopyButton :content="content" label="copy for discord" />
+    <CopyButton :content="content" label="copy for discord" mobile-label="discord" />
 </template>
