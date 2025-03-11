@@ -75,6 +75,15 @@ const evColor = computed(() => {
     }
 });
 
+const evDollars = computed(() => {
+    if (!props.results) return '';
+
+    const unit = props.bankroll / 100;
+    const amount = unit * (props.results.kellyFull * 0.25) * (props.results.ev / 100);
+
+    return formatUSD(amount);
+});
+
 function round(num, wholeNumber) {
     if (wholeNumber) {
         return Math.round(num);
@@ -127,7 +136,10 @@ watch(
                         <div class="text-jet font-mono text-sm">EV</div>
                         <div :class="evColor" class="flex items-end text-6xl font-bold">
                             <div class="font-numbers tracking-tight">{{ results.ev }}</div>
-                            <span class="ml-1 pb-1 text-2xl">% </span>
+                            <span class="ml-1 pb-1 text-2xl">%</span>
+                        </div>
+                        <div :class="evColor" class="flex items-end text-lg font-bold">
+                            <div class="font-numbers tracking-tight">{{ evDollars }}</div>
                         </div>
                     </div>
                     <div v-if="results.ev >= 0" class="flex flex-col items-end">
