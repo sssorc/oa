@@ -1,6 +1,7 @@
 <script setup>
 import { computed, nextTick, ref, watch, onMounted } from 'vue';
 import CopyUrlButton from './CopyUrlButton.vue';
+const emit = defineEmits(['toggle-bookmark']);
 import CopyForDiscordButton from './CopyForDiscordButton.vue';
 
 const props = defineProps({
@@ -16,9 +17,11 @@ const props = defineProps({
         type: Number,
         required: true,
     },
+    isBookmarked: {
+        type: Boolean,
+        default: false,
+    },
 });
-
-const emit = defineEmits(['update-inputs']);
 
 const isAnimating = ref(false);
 const isDoneAnimating = ref(false);
@@ -105,29 +108,6 @@ watch(
     },
     { immediate: true, deep: true }
 );
-
-// Parse URL parameters on mount
-onMounted(() => {
-    const url = new URL(window.location.href);
-    const params = url.searchParams;
-
-    const inputData = {
-        finalOdds: params.get('finalOdds'),
-        legOdds: params.get('legOdds'),
-        boost: params.get('boost'),
-        correlation: params.get('correlation'),
-        freeBetType: params.get('freeBetType'),
-        freeBetPercentage: params.get('freeBetPercentage'),
-        conversionRate: params.get('conversionRate'),
-    };
-
-    // Only emit if we have at least one parameter
-    if (Object.values(inputData).some((value) => value !== null)) {
-        // Clean up the object by removing null values
-        const cleanInputData = Object.fromEntries(Object.entries(inputData).filter(([_, value]) => value !== null));
-        emit('update-inputs', cleanInputData);
-    }
-});
 </script>
 
 <template>
@@ -196,6 +176,19 @@ onMounted(() => {
         <div class="mt-2 flex justify-between gap-4">
             <CopyUrlButton :content="shareUrl" />
             <CopyForDiscordButton :content="discordText" />
+            <button
+                @click="emit('toggle-bookmark')"
+                type="button"
+                class="group hover:decoration-pale-blue flex cursor-pointer items-center gap-1 p-1 font-mono text-sm tracking-tighter underline decoration-transparent decoration-2 underline-offset-2 transition-colors duration-100"
+            >
+                Bookmark
+                <svg v-if="!isBookmarked" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                    <path d="M6.01 2c-1.096 0-2 .903-2 1.998L4 22l8-3 8 3V4c0-1.093-.907-2-2-2H6.01zm0 2H18v15.113l-6-2.25-5.998 2.25L6.01 4z" />
+                </svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                    <path d="M6 2a2.002 2.002 0 0 0-2 2v18l8-3 8 3V4a2.003 2.003 0 0 0-2-2H6z" fill="currentColor" />
+                </svg>
+            </button>
         </div>
     </div>
 </template>

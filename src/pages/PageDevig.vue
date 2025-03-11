@@ -23,6 +23,7 @@ const freeBetType = ref(0);
 const freeBetPercentage = ref('50');
 const conversionRate = ref('70');
 const sharp = ref('');
+const bookmarks = ref([]);
 const inputs = ref({
     LegOdds: '',
     FinalOdds: '',
@@ -57,6 +58,12 @@ const shareUrl = computed(() => {
     }
 
     return `${baseUrl}#/devig?${params.toString()}`;
+});
+
+const isCurrentResultBookmarked = computed(() => {
+    if (!results.value || !bookmarks.value.length) return false;
+
+    return bookmarks.value.some((b) => b.inputData.finalOdds === results.value.inputData.finalOdds && b.inputData.legOdds === results.value.inputData.legOdds);
 });
 
 // Methods
@@ -237,6 +244,39 @@ const onSubmit = async () => {
     }
 };
 
+const onToggleBookmark = () => {
+    if (!results.value) return;
+
+    const index = bookmarks.value.findIndex((b) => b.inputData.finalOdds === results.value.inputData.finalOdds && b.inputData.legOdds === results.value.inputData.legOdds);
+
+    if (index === -1) {
+        // Add bookmark
+        bookmarks.value.push({ ...results.value });
+    } else {
+        // Remove bookmark
+        bookmarks.value.splice(index, 1);
+    }
+};
+
+const restoreBookmark = (bookmark) => {
+    // Restore all inputs from the bookmark
+    inputs.value.FinalOdds = bookmark.inputData.finalOdds;
+    inputs.value.LegOdds = bookmark.inputData.legOdds;
+    inputs.value.Boost_Text = bookmark.inputData.boost;
+    inputs.value.Correlation_Text = bookmark.inputData.correlation;
+    freeBetType.value = bookmark.inputData.freeBetType;
+
+    if (bookmark.inputData.freeBetPercentage) {
+        freeBetPercentage.value = bookmark.inputData.freeBetPercentage;
+    }
+    if (bookmark.inputData.conversionRate) {
+        conversionRate.value = bookmark.inputData.conversionRate;
+    }
+
+    // Set the results to the bookmark's results
+    results.value = { ...bookmark };
+};
+
 // Mounted logic
 onMounted(() => {
     document.addEventListener('keydown', (event) => {
@@ -363,7 +403,23 @@ onMounted(() => {
             </form>
 
             <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
-                <DevigResults :results="results" :bankroll="kellyBankroll" />
+                <DevigResults :results="results" :bankroll="kellyBankroll" :is-bookmarked="isCurrentResultBookmarked" @toggle-bookmark="onToggleBookmark" />
+            </div>
+        </section>
+
+        <section v-if="bookmarks.length" class="mx-auto max-w-7xl px-5">
+            <div class="font-mono">Bookmarks</div>
+            <div class="mt-2 flex flex-wrap gap-4">
+                <button
+                    v-for="bookmark in bookmarks"
+                    :key="`${bookmark.inputData.finalOdds}-${bookmark.inputData.legOdds}`"
+                    @click="restoreBookmark(bookmark)"
+                    class="bg-slate/10 cursor-pointer p-4 shadow hover:shadow-md"
+                    aria-label="Restore bookmark"
+                >
+                    <div class="font-numbers text-lg font-bold">{{ bookmark.ev }}%</div>
+                    <div class="font-numbers mt-1">{{ bookmark.finalOdds }}</div>
+                </button>
             </div>
         </section>
 
