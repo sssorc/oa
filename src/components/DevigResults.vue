@@ -23,6 +23,7 @@ const props = defineProps({
     },
 });
 
+const resultsContainer = ref(null);
 const isAnimating = ref(false);
 const isDoneAnimating = ref(false);
 
@@ -103,7 +104,7 @@ function formatUSD(number) {
 
 watch(
     () => props.results,
-    (newVal) => {
+    async (newVal) => {
         if (!newVal) return;
 
         setTimeout(() => {
@@ -114,13 +115,23 @@ watch(
             isDoneAnimating.value = true;
             isAnimating.value = false;
         }, 400);
+
+        // Wait for the next tick to ensure the component is rendered
+        await nextTick();
+        // Scroll the results into view with smooth behavior
+        if (resultsContainer.value) {
+            resultsContainer.value.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+            });
+        }
     },
     { immediate: true, deep: true }
 );
 </script>
 
 <template>
-    <div v-if="results">
+    <div v-if="results" ref="resultsContainer">
         <div class="border-jet relative border font-mono shadow-md">
             <input type="hidden" ref="discordText" />
             <div
