@@ -20,7 +20,7 @@ const kellyBankroll = ref(1000);
 const showImport = ref(false);
 const sourceBook = ref('');
 const freeBetType = ref(0);
-const freeBetPercentage = ref('50');
+const freeBetPercentage = ref('100');
 const conversionRate = ref('70');
 const sharp = ref('');
 const bookmarks = ref([]);
@@ -70,6 +70,12 @@ const isCurrentResultBookmarked = computed(() => {
 const getFinalOddsForRequest = (value) => {
     if (freeBetType.value == 0) {
         return encodeURIComponent(value);
+    }
+
+    if (freeBetType.value == 4) {
+        const numLegs = inputs.value.LegOdds.split(',').length;
+        const conversion = Number(conversionRate.value.replace(/\D/g, '')) / 100;
+        return encodeURIComponent(`#=${value};${numLegs - 1}=${conversion}x`);
     }
 
     let fbPercentage = Number(freeBetPercentage.value.replace(/\D/g, ''));
@@ -380,6 +386,7 @@ onMounted(() => {
                             <RadioField v-model="freeBetType" id="freeBet0" :value="0">None</RadioField>
                             <RadioField v-model="freeBetType" id="freeBet1" :value="1">On Loss</RadioField>
                             <RadioField v-model="freeBetType" id="freeBet2" :value="2">Guaranteed</RadioField>
+                            <RadioField v-model="freeBetType" id="freeBet3" :value="4">1-leg Miss</RadioField>
                         </div>
                     </div>
                     <div v-if="freeBetType !== 0" class="flex flex-wrap items-start gap-x-6 gap-y-4">
@@ -435,7 +442,7 @@ onMounted(() => {
         </section>
 
         <section class="mx-auto mt-10 max-w-7xl px-5">
-            <h5 class="border-jet text-space text-jet mb-3 border-b pb-2 font-mono font-bold">Usage Tips</h5>
+            <h5 class="border-jet font-space text-jet mb-3 border-b pb-2 font-mono font-bold">Usage Tips</h5>
             <ul class="marker:text-slate list-disc space-y-2 pl-4 text-sm marker:text-xs">
                 <li>A comma separates legs</li>
                 <li>A &quot;/&quot; symbol separates sides of a market</li>
