@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { devig } from '@/api/cno';
 import Navigation from '@/components/Navigation.vue';
 import InputField from '@/components/InputField.vue';
@@ -64,6 +64,35 @@ const isCurrentResultBookmarked = computed(() => {
     if (!results.value || !bookmarks.value.length) return false;
 
     return bookmarks.value.some((b) => b.inputData.finalOdds === results.value.inputData.finalOdds && b.inputData.legOdds === results.value.inputData.legOdds);
+});
+
+// Cookie management functions
+const setCookie = (name, value, days = 365) => {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value};${expires};path=/`;
+};
+
+const getCookie = (name) => {
+    const cookieName = `${name}=`;
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.indexOf(cookieName) === 0) {
+            return cookie.substring(cookieName.length, cookie.length);
+        }
+    }
+    return null;
+};
+
+// Save values to cookies when they change
+watch(conversionRate, (newValue) => {
+    setCookie('conversionRate', newValue);
+});
+
+watch(kellyBankroll, (newValue) => {
+    setCookie('kellyBankroll', newValue);
 });
 
 // Methods
@@ -286,6 +315,17 @@ const restoreBookmark = (bookmark) => {
 
 // Mounted logic
 onMounted(() => {
+    // Load saved values from cookies
+    const savedConversionRate = getCookie('conversionRate');
+    const savedKellyBankroll = getCookie('kellyBankroll');
+
+    if (savedConversionRate) {
+        conversionRate.value = savedConversionRate;
+    }
+    if (savedKellyBankroll) {
+        kellyBankroll.value = Number(savedKellyBankroll);
+    }
+
     document.addEventListener('keydown', (event) => {
         if (showImport.value && event.key === 'Escape') {
             showImport.value = false;
