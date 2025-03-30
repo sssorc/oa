@@ -105,7 +105,7 @@ function formatUSD(number) {
 watch(
     () => props.results,
     async (newVal) => {
-        if (!newVal) return;
+        if (!newVal || newVal.ev < 0) return;
 
         setTimeout(() => {
             isAnimating.value = true;
@@ -137,7 +137,7 @@ watch(
             <div
                 class="outline-green pointer-events-none absolute inset-0 z-10 opacity-100 outline-0 transition-all duration-400"
                 :class="{
-                    '-top-2 -right-2 -bottom-2 -left-2 !opacity-0 outline-8': isAnimating,
+                    '-top-2 -right-2 -bottom-2 -left-2 !opacity-0 outline-16': isAnimating,
                     hidden: isDoneAnimating,
                 }"
             ></div>
