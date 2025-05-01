@@ -71,7 +71,7 @@ function formatOdds(odds) {
 </script>
 
 <template>
-    <div v-if="play" class="max-w-[420px] md:min-w-[300px]">
+    <div v-if="result" class="max-w-[420px] md:min-w-[300px]">
         <div :class="borderColor" class="relative border font-mono shadow-md">
             <div :class="backgroundColor" class="relative z-20 bg-linear-65 p-6">
                 <div class="flex flex-wrap items-start justify-between gap-6">

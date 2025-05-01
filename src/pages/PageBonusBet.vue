@@ -1,12 +1,10 @@
 <script setup>
 import { ref, computed } from 'vue';
-import Navigation from '@/components/Navigation.vue';
 import ConversionResult from '@/components/ConversionResult.vue';
 import InputField from '@/components/InputField.vue';
 import InputLabel from '@/components/InputLabel.vue';
 import SubmitButton from '@/components/SubmitButton.vue';
 import _ from 'lodash';
-import helpers from '@/mixins/helpers';
 import { usePageTitle } from '@/composables/usePageTitle';
 
 // Set page title immediately
@@ -36,6 +34,7 @@ const shareUrl = computed(() => {
 
 // Methods
 function calculate() {
+    console.log('calculate', oddsA.value, stakeA.value, oddsB.value);
     if (!oddsA.value || !stakeA.value || !oddsB.value) return;
 
     const payoutA = stakeA.value * (oddsA.value / 100);
@@ -60,29 +59,6 @@ function calculate() {
 
     loading.value = false;
     hasSearched.value = true;
-}
-
-function bookmarkPlay() {
-    if (!hasSearched.value) return;
-
-    if (viewingBookmark.value) {
-        _.remove(bookmarks.value, (obj) => {
-            return obj.id == `${oddsA.value}${oddsB.value}`;
-        });
-
-        viewingBookmark.value = false;
-        return;
-    }
-
-    const play = {
-        id: `${oddsA.value}${oddsB.value}`,
-        oddsA: oddsA.value,
-        oddsB: oddsB.value,
-        percent: conversion.value ? conversion.value.percent : 0,
-        hedge: conversion.value ? conversion.value.stakeB : 0,
-    };
-    bookmarks.value.push(play);
-    viewingBookmark.value = true;
 }
 
 function calcFromUrl() {
