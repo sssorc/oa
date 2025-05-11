@@ -33,7 +33,7 @@ watch(
                 </div>
             </button>
 
-            <nav :class="{ 'max-sm:hidden': !showNav }" class="z-40 flex gap-2 font-mono max-sm:fixed max-sm:inset-0 max-sm:flex-col max-sm:bg-white max-sm:pt-6">
+            <nav :class="{ 'max-sm:hidden': !showNav }" class="z-40 flex gap-2 font-mono max-sm:fixed max-sm:inset-0 max-sm:flex-col max-sm:bg-white max-sm:pt-16">
                 <NavigationItem to="/arbitrage">Arbitrage</NavigationItem>
                 <NavigationItem to="/bonus-bet">Bonus bet</NavigationItem>
                 <NavigationItem to="/risk-free">Risk-free</NavigationItem>
