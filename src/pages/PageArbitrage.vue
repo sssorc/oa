@@ -181,5 +181,14 @@ onMounted(() => {
 
             <ArbitrageResults :results="results" class="md:flex-1" />
         </section>
+        <section class="mx-auto mt-10 max-w-7xl px-5">
+            <h5 class="border-jet font-space text-jet mb-3 border-b pb-2 font-mono font-bold">How to use</h5>
+            <p>Use the arbitrage calculator to find the optimal amount to place on a hedge or arbitrage bet.</p>
+            <ul class="marker:text-slate mt-3 list-disc space-y-2 pl-4 text-sm marker:text-xs">
+                <li>Enter your original bet amount and odds as <em>Stake A</em> and <em>Odds A</em></li>
+                <li>Enter the odds of your hedge bet as <em>Odds B</em></li>
+                <li>Enter additional odds as <em>Odds C</em> for a three-way hedge</li>
+            </ul>
+        </section>
     </div>
 </template>
