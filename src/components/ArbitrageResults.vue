@@ -71,7 +71,7 @@ function formatUSD(number) {
 }
 
 function formatOdds(odds) {
-    return Number(odds) > 0 ? `+${odds}` : odds;
+    return odds.toString().startsWith('+') ? odds : Number(odds) > 0 ? `+${odds}` : odds;
 }
 </script>
 
@@ -102,11 +102,11 @@ function formatOdds(odds) {
                     </div>
                     <div>
                         <div class="font-mono text-sm">Bet B ({{ formatOdds(results.oddsB) }})</div>
-                        <div class="font-numbers mt-1 text-3xl font-bold">{{ formatUSD(results.stakeB) }}</div>
+                        <div class="font-numbers decoration-pink mt-1 text-3xl font-bold underline decoration-4 underline-offset-2">{{ formatUSD(results.stakeB) }}</div>
                     </div>
                     <div v-if="results.oddsC">
                         <div class="font-mono text-sm">Bet C ({{ formatOdds(results.oddsC) }})</div>
-                        <div class="font-numbers text-3xl font-bold">{{ formatUSD(results.stakeC) }}</div>
+                        <div class="font-numbers decoration-pink mt-1 text-3xl font-bold underline decoration-4 underline-offset-2">{{ formatUSD(results.stakeC) }}</div>
                     </div>
                 </div>
 
