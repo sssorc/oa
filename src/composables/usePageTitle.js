@@ -1,7 +1,7 @@
 import { useHead } from '@vueuse/head';
 
 export function usePageTitle(title) {
-    const siteName = 'sports betting tools';
+    const siteName = 'HedgeCalc';
     const fullTitle = title ? `${title} - ${siteName}` : siteName;
 
     console.log('Setting page title to:', fullTitle); // Debug log
@@ -12,6 +12,10 @@ export function usePageTitle(title) {
             {
                 name: 'title',
                 content: fullTitle,
+            },
+            {
+                name: 'description',
+                content: 'Free sports betting calculators for arbitrage, bonus bets, risk-free bets, and devigging.',
             },
         ],
     });
