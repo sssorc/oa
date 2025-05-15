@@ -1,46 +1,12 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: [
         {
             path: '/',
             name: 'home',
             redirect: { name: 'devig' },
-        },
-        {
-            path: '/oa',
-            redirect: { name: 'oa-arbitrage' },
-            children: [
-                {
-                    path: '/arbitrage',
-                    name: 'oa-arbitrage',
-                    component: () => import('../pages/PageArbitrage.vue'),
-                },
-                {
-                    path: '/arb',
-                    redirect: { name: 'oa-arbitrage' },
-                },
-                {
-                    path: '/free-bet',
-                    redirect: { name: 'oa-bonus-bet' },
-                },
-                {
-                    path: '/bonus-bet',
-                    name: 'oa-bonus-bet',
-                    component: () => import('../pages/PageBonusBet.vue'),
-                },
-                {
-                    path: '/risk-free',
-                    name: 'oa-risk-free',
-                    component: () => import('../pages/PageRiskFree.vue'),
-                },
-                {
-                    path: '/devig',
-                    name: 'oa-devig',
-                    component: () => import('../pages/PageDevig.vue'),
-                },
-            ],
         },
         {
             path: '/arbitrage',
@@ -52,9 +18,13 @@ const router = createRouter({
             redirect: { name: 'arbitrage' },
         },
         {
-            path: '/free-bet',
-            name: 'free-bet',
+            path: '/bonus-bet',
+            name: 'bonus-bet',
             component: () => import('../pages/PageBonusBet.vue'),
+        },
+        {
+            path: '/free-bet',
+            redirect: { name: 'bonus-bet' },
         },
         {
             path: '/risk-free',
