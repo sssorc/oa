@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Sports Betting Tools</title>
+        <script>
+            // Get the hash part of the URL (e.g., #/devig)
+            const hash = window.location.hash;
+
+            // Remove the # and get the path
+            const path = hash.replace('#', '');
+
+            // Get query parameters if any
+            const search = window.location.search;
+
+            // Construct the new URL
+            const newUrl = 'https://hedgecalc.com' + path + search;
+
+            // Redirect immediately
+            window.location.replace(newUrl);
+        </script>
+        <meta http-equiv="refresh" content="0;url=https://hedgecalc.com" />
+        <link rel="canonical" href="https://hedgecalc.com" />
+    </head>
+    <body>
+        <a href="https://hedgecalc.com">Click here if not redirected automatically</a>
+    </body>
+</html>
