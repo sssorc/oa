@@ -1,26 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="utf-8" />
+        <title>Sports Betting Tools</title>
+        <script>
+            // Get the hash part of the URL (e.g., #/devig)
+            const hash = window.location.hash;
 
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+            // Remove the # and get the path
+            const path = hash.replace('#', '');
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+            // Get query parameters if any
+            const search = window.location.search;
 
-        <link
-            href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;700&display=swap"
-            rel="stylesheet"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Sports betting tools for profitable bettors." />
-        <title>sports betting tools</title>
+            // Construct the new URL
+            const newUrl = 'https://hedgecalc.com' + path + search;
+
+            // Redirect immediately
+            window.location.replace(newUrl);
+        </script>
+        <meta http-equiv="refresh" content="0;url=https://hedgecalc.com" />
+        <link rel="canonical" href="https://hedgecalc.com" />
     </head>
     <body>
-        <div id="app" class="min-h-screen"></div>
-        <script type="module" src="/src/main.js"></script>
+        <a href="https://hedgecalc.com">Click here if not redirected automatically</a>
     </body>
 </html>
