@@ -17,7 +17,7 @@
         "fs": "^0.0.1-security",
         "lodash": "^4.17.21",
         "vue": "^3.5.0",
-        "vue-gtag-next": "^1.16.1",
+        "vue-gtag": "^3.5.0",
         "vue-router": "^4.1.6",
         "vuex": "^4.1.0"
     },

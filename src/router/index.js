@@ -6,7 +6,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            redirect: { name: 'devig' },
+            component: () => import('../pages/PageHome.vue'),
         },
         {
             path: '/arbitrage',
@@ -16,6 +16,11 @@ const router = createRouter({
         {
             path: '/arb',
             redirect: { name: 'arbitrage' },
+        },
+        {
+            path: '/hedge',
+            name: 'hedge',
+            component: () => import('../pages/PageArbitrage.vue'),
         },
         {
             path: '/bonus-bet',

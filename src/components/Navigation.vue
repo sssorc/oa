@@ -16,11 +16,11 @@ watch(
 </script>
 
 <template>
-    <header class="mx-auto w-full max-w-7xl px-5 py-4 lg:pt-8 lg:pb-6">
+    <header class="border-pale-blue mx-auto w-full max-w-7xl border-b px-5 py-4 lg:pt-8 lg:pb-6">
         <div class="flex items-center justify-end">
-            <div class="mr-auto flex items-center gap-3 font-mono font-bold lg:pt-2">
+            <RouterLink to="/" class="mr-auto flex items-center gap-3 font-mono font-bold lg:pt-2">
                 <h1 class="block text-base font-normal lg:block lg:text-xl">Sports Betting Tools</h1>
-            </div>
+            </RouterLink>
 
             <button type="button" class="z-50 -mr-3 cursor-pointer p-3 md:hidden" aria-label="Toggle navigation" @click="showNav = !showNav">
                 <div class="relative h-4 w-[22px]">
