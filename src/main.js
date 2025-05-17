@@ -13,9 +13,11 @@ app.use(router);
 app.use(store);
 app.use(head);
 
-// Initialize Google Analytics
-configure({
-    tagId: 'G-LPV4BWE4E7',
-});
+// Initialize Google Analytics only in production
+if (import.meta.env.PROD) {
+    configure({
+        tagId: 'G-LPV4BWE4E7',
+    });
+}
 
 app.mount('#app');
