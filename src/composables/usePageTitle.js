@@ -5,10 +5,8 @@ const siteUrl = 'https://hedgecalc.com';
 
 export function usePageTitle(title, description = defaultDescription) {
     const siteName = 'HedgeCalc';
-    const fullTitle = title ? `${title} - ${siteName}` : siteName;
+    const fullTitle = title ? `${title}` : siteName;
     const currentUrl = typeof window !== 'undefined' ? window.location.href : siteUrl;
-
-    console.log('Setting page title to:', fullTitle); // Debug log
 
     useHead({
         title: fullTitle,

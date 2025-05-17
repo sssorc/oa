@@ -4,7 +4,7 @@ import AppFooter from '@/components/core/AppFooter.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
 
 // Set default title
-usePageTitle();
+usePageTitle('Sports Betting Calculators');
 </script>
 
 <template>
