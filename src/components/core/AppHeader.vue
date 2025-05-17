@@ -19,7 +19,7 @@ watch(
     <header class="border-pale-blue mx-auto w-full max-w-7xl border-b px-5 py-4 lg:pt-8 lg:pb-6" style="box-shadow: 0 4px 5px -5px #bebebe">
         <div class="flex items-center justify-end">
             <RouterLink to="/" class="mr-auto flex items-center gap-3 font-mono font-bold lg:pt-2">
-                <h1 class="block text-base font-normal lg:block lg:text-xl">Sports Betting Tools</h1>
+                <h1 class="block text-base font-normal lg:block lg:text-xl">HedgeCalc Betting Tools</h1>
             </RouterLink>
 
             <button type="button" class="z-50 -mr-3 cursor-pointer p-3 md:hidden" aria-label="Toggle navigation" @click="showNav = !showNav">

@@ -8,7 +8,7 @@ import LandingLink from '@/components/LandingLink.vue';
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-8">
                 <LandingLink to="/arbitrage">
                     <p>get bet size for
-						<div class="flex items-end gap-2">
+						<div class="flex items-end gap-x-2 gap-y-1 sm:max-md:flex-col sm:max-md:items-center">
 							<strong class="font-mono text-2xl sm:text-3xl">Arbitrage</strong>
 							or
 							<strong class="font-mono text-2xl sm:text-3xl">Hedge</strong>
