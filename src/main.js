@@ -6,6 +6,14 @@ import store from './store';
 import { configure } from 'vue-gtag';
 import './assets/css/main.css';
 
+// Initialize theme
+const theme = localStorage.theme || 'system';
+if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+} else {
+    document.documentElement.classList.remove('dark');
+}
+
 const app = createApp(App);
 const head = createHead();
 
