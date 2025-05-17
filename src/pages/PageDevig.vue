@@ -475,7 +475,7 @@ onMounted(() => {
         </section>
 
         <section class="mx-auto max-w-7xl px-5 text-right">
-            <div class="bg-slate/10 inline-flex gap-4 p-3 shadow">
+            <div class="bg-slate/10 inline-flex gap-4 p-3 shadow dark:bg-gray-700">
                 <div class="w-32 text-left">
                     <InputLabel for="bankroll">Bankroll</InputLabel>
                     <div class="relative">

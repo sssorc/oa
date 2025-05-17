@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-mono: 'Space Mono', monospace;
     --font-numbers: 'JetBrains Mono', monospace;
@@ -21,5 +23,27 @@ html {
 }
 
 @layer components {
-    @import './components/prose.css';
+    .prose h1 {
+        @apply mb-4 text-3xl font-bold;
+    }
+
+    .prose h2 {
+        @apply border-jet text-jet mb-4 border-b pb-2 font-mono font-bold dark:border-gray-400 dark:text-white;
+    }
+
+    .prose h2:not(:first-child) {
+        @apply mt-6 lg:mt-8;
+    }
+
+    .prose ul {
+        @apply marker:text-slate dark:marker:text-pale-blue my-4 list-disc space-y-2 pl-4 marker:text-xs;
+    }
+
+    .prose a {
+        @apply decoration-pink hover:decoration-pale-blue dark:decoration-pale-blue dark:hover:decoration-green underline decoration-2 underline-offset-2 transition-colors duration-100;
+    }
+
+    .prose p {
+        @apply my-4 lg:my-6;
+    }
 }

@@ -25,9 +25,9 @@ const totalStake = computed(() => {
 
 const backgroundColor = computed(() => {
     if (roi.value >= 0) {
-        return 'from-green/40 to-ice-blue/40';
+        return 'from-green/40 to-ice-blue/40 dark:from-ice-blue dark:to-pale-blue';
     } else {
-        return 'bg-pink/20';
+        return 'bg-pink/20 dark:bg-gray-300';
     }
 });
 
@@ -77,7 +77,7 @@ function formatOdds(odds) {
 
 <template>
     <div v-if="results" :class="results.oddsC ? 'max-w-[500px] md:min-w-[340px]' : 'max-w-[420px] md:min-w-[300px]'">
-        <div :class="borderColor" class="relative border font-mono shadow-md">
+        <div :class="borderColor" class="dark:text-jet relative border font-mono shadow-md">
             <div :class="backgroundColor" class="relative z-20 bg-linear-65 p-6">
                 <div class="flex flex-wrap items-start justify-between gap-6">
                     <div class="text-left">

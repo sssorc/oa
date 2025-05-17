@@ -29,9 +29,9 @@ const isDoneAnimating = ref(false);
 
 const backgroundColor = computed(() => {
     if (props.results.ev >= 0) {
-        return 'from-green/40 to-ice-blue/40';
+        return 'from-green/40 to-ice-blue/40 dark:from-ice-blue dark:to-pale-blue';
     } else {
-        return 'bg-red/10 border-red';
+        return 'bg-red/10 border-red dark:bg-gray-300 dark:border-pink';
     }
 });
 
@@ -132,7 +132,7 @@ watch(
 
 <template>
     <div v-if="results" ref="resultsContainer">
-        <div class="border-jet relative border font-mono shadow-md">
+        <div class="border-jet dark:text-jet relative border font-mono shadow-md">
             <input type="hidden" ref="discordText" />
             <div
                 class="outline-green pointer-events-none absolute inset-0 z-10 opacity-100 outline-0 transition-all duration-400"

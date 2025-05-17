@@ -58,7 +58,7 @@ function formatOdds(odds) {
 <template>
     <div v-if="result">
         <div class="border-jet relative border font-mono shadow-md">
-            <div class="bg-ice-blue/40 relative z-20 bg-linear-65 p-6">
+            <div class="bg-ice-blue/40 dark:from-ice-blue dark:to-pale-blue dark:text-jet relative z-20 bg-linear-65 p-6">
                 <div class="flex flex-wrap items-start justify-between gap-6">
                     <div class="text-left">
                         <div class="text-jet font-mono text-sm">Return</div>
