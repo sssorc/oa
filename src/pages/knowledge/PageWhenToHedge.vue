@@ -5,7 +5,10 @@ import KnowledgeArticle from '@/components/knowledge/KnowledgeArticle.vue';
 import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
 
 // Set page title
-usePageTitle('When Should I Hedge a Bet?');
+usePageTitle(
+    'When Should I Hedge a Bet?',
+    'Learn when it makes sense to hedge your sports bets. Understand the pros and cons of hedging, including bankroll management, EV considerations, and promotional opportunities.'
+);
 </script>
 
 <template>

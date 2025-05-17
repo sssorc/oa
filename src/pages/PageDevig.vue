@@ -10,7 +10,7 @@ import DevigResults from '@/components/DevigResults.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
 
 // Set page title immediately
-usePageTitle('Devig');
+usePageTitle('Devig Calculator', 'Calculate the fair odds expected value of your bets with the devig calculator.');
 
 // State
 const isSubmitting = ref(false);

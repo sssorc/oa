@@ -5,7 +5,10 @@ import KnowledgeArticle from '@/components/knowledge/KnowledgeArticle.vue';
 import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
 
 // Set page title
-usePageTitle('When Should I Hedge a Bet?');
+usePageTitle(
+    'What is a Zero Hold?',
+    'Discover what a zero hold market is in sports betting. Learn how to identify zero hold opportunities and use them to your advantage for risk-free betting and promotional requirements.'
+);
 </script>
 
 <template>

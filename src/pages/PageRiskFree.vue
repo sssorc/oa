@@ -13,7 +13,10 @@ import { usePageTitle } from '@/composables/usePageTitle';
 const { getPayout } = helpers.methods;
 
 // Set page title immediately
-usePageTitle('Risk-free');
+usePageTitle(
+    'Risk-Free Bet Calculator',
+    'Calculate the optimal hedge amount for your risk-free bets. Our free calculator helps you maximize the value of your risk-free bet promotions while minimizing potential losses.'
+);
 
 // State
 const viewingBookmark = ref(false);

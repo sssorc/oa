@@ -5,7 +5,7 @@ import KnowledgeArticle from '@/components/knowledge/KnowledgeArticle.vue';
 import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
 
 // Set page title
-usePageTitle('What is Positive EV?');
+usePageTitle('What is Positive EV?', 'Understand positive expected value (EV) in sports betting. Learn how to calculate EV, identify +EV opportunities, and make profitable betting decisions.');
 </script>
 
 <template>

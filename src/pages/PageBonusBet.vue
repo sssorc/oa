@@ -7,8 +7,8 @@ import SubmitButton from '@/components/SubmitButton.vue';
 import _ from 'lodash';
 import { usePageTitle } from '@/composables/usePageTitle';
 
-// Set page title immediately
-usePageTitle('Bonus Bet');
+// Set page title
+usePageTitle('Bonus Bet Calculator', 'Find the optimal hedge amount to conver your free bets or bonus bets into cash.');
 
 // State
 const viewingBookmark = ref(false);

@@ -11,8 +11,8 @@ import { usePageTitle } from '@/composables/usePageTitle';
 // Extract helper methods we need
 const { getPayout, getStake, getQueryString } = helpers.methods;
 
-// Set page title immediately
-usePageTitle('Arbitrage');
+// Set page title
+usePageTitle('Arbitrage Calculator', 'Calculate optimal bet sizes for arbitrage opportunities and hedges. Find the perfect stake amounts for guaranteed profits or risk management.');
 
 // State
 const results = ref(false);
