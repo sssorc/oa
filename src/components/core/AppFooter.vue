@@ -15,7 +15,7 @@ import ThemeToggle from '@/components/ThemeToggle.vue';
                     >
                     <AppFooterLink href="https://discord.com/users/956734805033250826" target="_blank">contact</AppFooterLink>
                 </nav>
-                <ThemeToggle class="mr-2 mr-auto sm:order-1" />
+                <ThemeToggle class="mr-auto sm:order-1" />
             </div>
         </div>
     </footer>
