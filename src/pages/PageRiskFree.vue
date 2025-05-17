@@ -134,7 +134,7 @@ calcFromUrl();
                 </div>
             </form>
 
-            <div class="max-w-[500px] md:min-w-[400px] md:flex-1">
+            <div v-if="result" class="max-w-[500px] md:min-w-[400px] md:flex-1">
                 <RiskFreeResult :result="result" />
             </div>
         </div>

@@ -119,7 +119,7 @@ function percentOf(a, b) {
                 </div>
             </form>
 
-            <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
+            <div v-if="conversion" class="max-w-[420px] md:min-w-[320px] md:flex-1">
                 <ConversionResult :result="conversion" />
             </div>
         </div>
