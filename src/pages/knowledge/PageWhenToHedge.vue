@@ -10,7 +10,7 @@ usePageTitle('When Should I Hedge a Bet?');
 
 <template>
     <KnowledgeArticle>
-        <KnowledgeHeader>When Should I Hedge a Bet?</KnowledgeHeader>
+        <KnowledgeHeader>When should I hedge a bet?</KnowledgeHeader>
         <p>The short answer is: usually never.</p>
         <p>
             If you're placing <router-link to="/knowledge/what-is-positive-ev">positive EV bets</router-link>, you will - in the long run - be more profitable if you don't hedge. This is because the
@@ -23,7 +23,7 @@ usePageTitle('When Should I Hedge a Bet?');
         <ul>
             <li>You're building a bankroll and don't have the liquidity to handle variance</li>
             <li>Lines have moved and your hedge bet is actually +EV now</li>
-            <li>You're placing a zero-hold bet to quality for bet-and-get promo</li>
+            <li>You're placing a zero hold bet to quality for bet-and-get promo</li>
             <li>A boost maximum is above your quarter kelly, and you want to hedge out some of the risk while maxing the promo</li>
             <li>You accidentally bet too much and can't cashout at full value</li>
         </ul>

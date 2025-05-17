@@ -333,9 +333,10 @@ onMounted(() => {
     });
 
     // Get the full hash portion including query params
-    const hashAndParams = window.location.hash;
+    const hashAndParams = window.location.search;
     // Split on ? to get just the query string
-    const queryString = hashAndParams.split('?')[1];
+    const queryString = hashAndParams.substring(1); // Remove the leading ?
+    console.log(queryString);
 
     if (queryString) {
         const urlParams = new URLSearchParams(queryString);

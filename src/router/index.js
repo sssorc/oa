@@ -57,6 +57,11 @@ const router = createRouter({
             name: 'what-is-positive-ev',
             component: () => import('../pages/knowledge/PageWhatIsPlusEV.vue'),
         },
+        {
+            path: '/knowledge/what-is-a-zero-hold',
+            name: 'what-is-a-zero-hold',
+            component: () => import('../pages/knowledge/PageWhatIsZeroHold.vue'),
+        },
     ],
 });
 
