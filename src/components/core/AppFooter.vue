@@ -3,7 +3,7 @@ import AppFooterLink from '@/components/ui/AppFooterLink.vue';
 </script>
 <template>
     <footer class="mx-auto mt-auto w-full max-w-7xl px-5 pt-20 pb-10">
-        <div class="border-jet relative mx-auto flex justify-end gap-6 border-t pt-3 font-mono text-sm">
+        <div class="border-jet relative mx-auto flex flex-wrap justify-center gap-x-6 gap-y-2 border-t pt-3 font-mono text-sm sm:justify-end">
             <div class="bg-pale-blue absolute inset-x-0 top-[2px] h-[1px]"></div>
             <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">support</AppFooterLink>
             <AppFooterLink href="/knowledge" target="_blank">knowledge</AppFooterLink>
