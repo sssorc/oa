@@ -41,6 +41,22 @@ const router = createRouter({
             name: 'devig',
             component: () => import('../pages/PageDevig.vue'),
         },
+        // Knowledge base routes
+        {
+            path: '/knowledge',
+            name: 'knowledge-home',
+            component: () => import('../pages/knowledge/PageKnowledgeHome.vue'),
+        },
+        {
+            path: '/knowledge/when-to-hedge',
+            name: 'when-to-hedge',
+            component: () => import('../pages/knowledge/PageWhenToHedge.vue'),
+        },
+        {
+            path: '/knowledge/what-is-positive-ev',
+            name: 'what-is-positive-ev',
+            component: () => import('../pages/knowledge/PageWhatIsPlusEV.vue'),
+        },
     ],
 });
 

@@ -50,7 +50,7 @@ const borderColor = computed(() => {
 const shareUrl = computed(() => {
     if (!props.results) return window.location.href;
 
-    const baseUrl = window.location.origin + window.location.pathname;
+    const baseUrl = window.location.origin + '/arbitrage';
     const { oddsA, oddsB, oddsC, stakeA } = props.results;
 
     const params = new URLSearchParams();
@@ -59,7 +59,7 @@ const shareUrl = computed(() => {
     if (oddsB) params.set('oddsB', oddsB);
     if (oddsC) params.set('oddsC', oddsC);
 
-    return `${baseUrl}#/arbitrage?${params.toString()}`;
+    return `${baseUrl}?${params.toString()}`;
 });
 
 function formatUSD(number) {

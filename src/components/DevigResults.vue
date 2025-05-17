@@ -38,7 +38,7 @@ const backgroundColor = computed(() => {
 const shareUrl = computed(() => {
     if (!props.results || !props.results.inputData) return window.location.href;
 
-    const baseUrl = window.location.origin + window.location.pathname;
+    const baseUrl = window.location.origin + '/devig';
     const { finalOdds, legOdds, boost, correlation, freeBetType, freeBetPercentage, conversionRate } = props.results.inputData;
 
     const params = new URLSearchParams();
@@ -50,7 +50,7 @@ const shareUrl = computed(() => {
     if (freeBetPercentage) params.set('freeBetPercentage', freeBetPercentage);
     if (conversionRate) params.set('conversionRate', conversionRate);
 
-    return `${baseUrl}#/devig?${params.toString()}`;
+    return `${baseUrl}?${params.toString()}`;
 });
 
 const discordText = computed(() => {

@@ -22,7 +22,7 @@ const bookmarks = ref([]);
 
 // Computed
 const shareUrl = computed(() => {
-    const baseUrl = window.location.origin + window.location.pathname;
+    const baseUrl = window.location.origin + '/bonus-bet';
     const params = new URLSearchParams();
 
     if (oddsA.value) params.set('oddsa', oddsA.value);

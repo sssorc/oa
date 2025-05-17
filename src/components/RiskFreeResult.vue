@@ -30,7 +30,7 @@ const borderColor = computed(() => {
 const shareUrl = computed(() => {
     if (!props.result) return window.location.href;
 
-    const baseUrl = window.location.origin + window.location.pathname;
+    const baseUrl = window.location.origin + '/risk-free';
     const { stakeA, oddsA, oddsB, conversionRate } = props.result;
 
     const params = new URLSearchParams();
@@ -39,7 +39,7 @@ const shareUrl = computed(() => {
     if (oddsB) params.set('oddsB', oddsB);
     if (conversionRate) params.set('conversion', conversionRate);
 
-    return `${baseUrl}#/risk-free?${params.toString()}`;
+    return `${baseUrl}?${params.toString()}`;
 });
 
 function formatUSD(number) {

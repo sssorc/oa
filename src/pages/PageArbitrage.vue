@@ -1,11 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import CardBalanced from '@/components/CardBalanced.vue';
-import Navigation from '@/components/Navigation.vue';
-import ToggleField from '@/components/ToggleField.vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers.js';
-import '@/assets/legacy/style.scss';
 import ArbitrageResults from '@/components/ArbitrageResults.vue';
 import InputField from '@/components/InputField.vue';
 import InputLabel from '@/components/InputLabel.vue';

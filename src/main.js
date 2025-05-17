@@ -4,8 +4,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import { configure } from 'vue-gtag';
-import '@/assets/css/main.scss';
-import './assets/css/style.css';
+import './assets/css/main.css';
 
 const app = createApp(App);
 const head = createHead();

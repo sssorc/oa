@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import { devig } from '@/api/cno';
-import Navigation from '@/components/Navigation.vue';
+import AppHeader from '@/components/core/AppHeader.vue';
 import InputField from '@/components/InputField.vue';
 import RadioField from '@/components/RadioField.vue';
 import InputLabel from '@/components/InputLabel.vue';
@@ -42,7 +42,7 @@ const inputs = ref({
 });
 
 const shareUrl = computed(() => {
-    const baseUrl = window.location.origin + window.location.pathname;
+    const baseUrl = window.location.origin + '/devig';
     const params = new URLSearchParams();
 
     if (inputs.value.FinalOdds) {
@@ -57,7 +57,7 @@ const shareUrl = computed(() => {
         params.append('boost', inputs.value.Boost_Text);
     }
 
-    return `${baseUrl}#/devig?${params.toString()}`;
+    return `${baseUrl}?${params.toString()}`;
 });
 
 const isCurrentResultBookmarked = computed(() => {
@@ -481,21 +481,16 @@ onMounted(() => {
             </div>
         </section>
 
-        <section class="mx-auto mt-10 max-w-7xl px-5">
-            <h5 class="border-jet font-space text-jet mb-3 border-b pb-2 font-mono font-bold">Usage Tips</h5>
-            <ul class="marker:text-slate list-disc space-y-2 pl-4 text-sm marker:text-xs">
+        <section class="prose mx-auto mt-10 max-w-7xl px-5">
+            <h2 class="font-space">Usage Tips</h2>
+            <ul>
                 <li>A comma separates legs</li>
                 <li>A &quot;/&quot; symbol separates sides of a market</li>
                 <li>The first number in a leg is the side of the market you are wagering on.</li>
                 <li>If a leg has multiple sides in its market (e.g. superbowl winner), then separate all sides by a &quot;/&quot; symbol like this: +500/+250/+2000</li>
                 <li>
                     More tips and help on the
-                    <a
-                        href="http://www.crazyninjamike.com/Public/sportsbooks/sportsbook_devigger_help.aspx"
-                        target="_blank"
-                        class="decoration-pink hover:decoration-pale-blue underline decoration-2 underline-offset-2 transition-colors duration-100"
-                        >devigger help page</a
-                    >
+                    <a href="http://www.crazyninjamike.com/Public/sportsbooks/sportsbook_devigger_help.aspx" target="_blank">devigger help page</a>
                 </li>
             </ul>
         </section>

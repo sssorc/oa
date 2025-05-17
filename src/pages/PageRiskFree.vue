@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-import Navigation from '@/components/Navigation.vue';
+import AppHeader from '@/components/core/AppHeader.vue';
 import RiskFreeResult from '@/components/RiskFreeResult.vue';
 import InputField from '@/components/InputField.vue';
 import InputLabel from '@/components/InputLabel.vue';
@@ -28,7 +28,7 @@ const bookmarks = ref([]);
 
 // Computed
 const shareUrl = computed(() => {
-    const basePath = window.location.hash.split('?')[0] || '/#/risk-free';
+    const baseUrl = window.location.origin + '/risk-free';
     const params = new URLSearchParams();
 
     if (oddsA.value) params.set('oddsA', oddsA.value);
@@ -36,7 +36,7 @@ const shareUrl = computed(() => {
     if (oddsB.value) params.set('oddsB', oddsB.value);
     if (conversionPercent.value !== 70) params.set('conversion', conversionPercent.value);
 
-    return `${window.location.origin}${basePath}?${params.toString()}`;
+    return `${baseUrl}?${params.toString()}`;
 });
 
 // Methods

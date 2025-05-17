@@ -2,7 +2,6 @@
 
 @theme {
     --font-mono: 'Space Mono', monospace;
-    --font-oswald: 'Oswald', sans-serif;
     --font-numbers: 'JetBrains Mono', monospace;
 
     --color-pink: #e8aeb7;
@@ -16,5 +15,9 @@
     --color-space: #474a48;
 }
 
-/* 5E6973 */
-/* C78283 */
+html {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+@layer components {
+    @import './components/prose.css';
+}

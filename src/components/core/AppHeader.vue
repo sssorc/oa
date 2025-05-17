@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { onBeforeRouteUpdate, useRouter, useRoute } from 'vue-router';
-import NavigationItem from './NavigationItem.vue';
+import AppHeaderLink from '@/components/ui/AppHeaderLink.vue';
 
 const showNav = ref(false);
 const route = useRoute();
@@ -16,7 +16,7 @@ watch(
 </script>
 
 <template>
-    <header class="border-pale-blue mx-auto w-full max-w-7xl border-b px-5 py-4 lg:pt-8 lg:pb-6">
+    <header class="border-pale-blue mx-auto w-full max-w-7xl border-b px-5 py-4 lg:pt-8 lg:pb-6" style="box-shadow: 0 4px 5px -5px #bebebe">
         <div class="flex items-center justify-end">
             <RouterLink to="/" class="mr-auto flex items-center gap-3 font-mono font-bold lg:pt-2">
                 <h1 class="block text-base font-normal lg:block lg:text-xl">Sports Betting Tools</h1>
@@ -32,18 +32,12 @@ watch(
             </button>
 
             <nav :class="{ 'max-md:hidden': !showNav }" class="z-40 flex gap-2 font-mono max-md:fixed max-md:inset-0 max-md:flex-col max-md:bg-white max-md:pt-16">
-                <NavigationItem to="/arbitrage">Arbitrage</NavigationItem>
-                <NavigationItem to="/bonus-bet">Bonus bet</NavigationItem>
-                <NavigationItem to="/risk-free">Risk-free</NavigationItem>
-                <NavigationItem to="/devig">Devig</NavigationItem>
+                <AppHeaderLink to="/arbitrage">Arbitrage</AppHeaderLink>
+                <AppHeaderLink to="/bonus-bet">Bonus bet</AppHeaderLink>
+                <AppHeaderLink to="/risk-free">Risk-free</AppHeaderLink>
+                <AppHeaderLink to="/devig">Devig</AppHeaderLink>
             </nav>
         </div>
         <!-- <hr class="border-jet mt-6" /> -->
     </header>
 </template>
-
-<style>
-header {
-    box-shadow: 0 4px 5px -5px #bebebe;
-}
-</style>
