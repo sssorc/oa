@@ -17,7 +17,9 @@
 
 html {
     font-family: Avenir, Helvetica, Arial, sans-serif;
+    scrollbar-gutter: stable;
 }
+
 @layer components {
     @import './components/prose.css';
 }
