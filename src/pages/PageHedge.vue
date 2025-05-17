@@ -12,7 +12,7 @@ import { usePageTitle } from '@/composables/usePageTitle';
 const { getPayout, getStake, getQueryString } = helpers.methods;
 
 // Set page title
-usePageTitle('Sports Betting Arbitrage Calculator', 'Calculate optimal bet sizes for arbitrage opportunities and hedges. Find the perfect stake amounts for guaranteed profits or risk management.');
+usePageTitle('Sports Betting Hedge Calculator', 'Calculate optimal bet size for your hedge. Find the perfect stake amounts for guaranteed profits.');
 
 // State
 const results = ref(false);
@@ -134,7 +134,7 @@ onMounted(() => {
 <template>
     <div>
         <section class="relative mx-auto w-full max-w-7xl px-5 py-8">
-            <h1 class="mb-6 font-mono text-xl">Arbitrage Calculator</h1>
+            <h1 class="mb-6 font-mono text-xl">Hedge Calculator</h1>
             <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
                 <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
                     <div class="grid grid-cols-2 items-center gap-4 sm:flex">

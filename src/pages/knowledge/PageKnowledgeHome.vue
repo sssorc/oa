@@ -3,7 +3,7 @@ import { usePageTitle } from '@/composables/usePageTitle';
 import KnowledgeLink from '@/components/knowledge/KnowledgeLink.vue';
 
 // Set page title
-usePageTitle('Knowledge Base', 'Beginner-friendly explanations of key topics and terms related to sports betting that are necessary to be a profitable bettor.');
+usePageTitle('Sports Betting Knowledge Base', 'Beginner-friendly explanations of key topics and terms related to sports betting that are necessary to be a profitable bettor.');
 </script>
 
 <template>

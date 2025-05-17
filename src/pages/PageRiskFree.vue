@@ -102,38 +102,41 @@ calcFromUrl();
 </script>
 
 <template>
-    <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 lg:flex-row lg:items-start lg:justify-between">
-        <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
-            <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
-                <div class="sm:w-44">
-                    <InputLabel for="stakeA" required>Risk-free Stake</InputLabel>
-                    <InputField v-model="stakeA" type="text" id="stakeA" addon="$" />
+    <section class="relative mx-auto w-full max-w-7xl px-5 py-8">
+        <h1 class="mb-6 font-mono text-xl">Risk-free Bet Calculator</h1>
+        <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+            <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <div class="sm:w-44">
+                        <InputLabel for="stakeA" required>Risk-free Stake</InputLabel>
+                        <InputField v-model="stakeA" type="text" id="stakeA" addon="$" />
+                    </div>
+                    <div class="sm:w-44">
+                        <InputLabel for="oddsA" required>Odds</InputLabel>
+                        <InputField v-model="oddsA" type="text" id="oddsA" />
+                    </div>
                 </div>
-                <div class="sm:w-44">
-                    <InputLabel for="oddsA" required>Odds</InputLabel>
-                    <InputField v-model="oddsA" type="text" id="oddsA" />
+
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <div class="sm:w-44">
+                        <InputLabel for="oddsB" required>Hedge Odds</InputLabel>
+                        <InputField v-model="oddsB" type="text" id="oddsB" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <div class="sm:w-44">
-                    <InputLabel for="oddsB" required>Hedge Odds</InputLabel>
-                    <InputField v-model="oddsB" type="text" id="oddsB" />
+                    <InputLabel for="conversionPercent">Assumed Conversion %</InputLabel>
+                    <InputField v-model="conversionPercent" type="text" id="conversionPercent" addon="%" />
                 </div>
-            </div>
 
-            <div class="sm:w-44">
-                <InputLabel for="conversionPercent">Assumed Conversion %</InputLabel>
-                <InputField v-model="conversionPercent" type="text" id="conversionPercent" addon="%" />
-            </div>
+                <div class="mt-2">
+                    <SubmitButton :disabled="!oddsA || !stakeA || !oddsB" class="max-sm:w-full" :is-submitting="loading">Calculate Hedge</SubmitButton>
+                </div>
+            </form>
 
-            <div class="mt-2">
-                <SubmitButton :disabled="!oddsA || !stakeA || !oddsB" class="max-sm:w-full" :is-submitting="loading">Calculate Hedge</SubmitButton>
+            <div class="max-w-[500px] md:min-w-[400px] md:flex-1">
+                <RiskFreeResult :result="result" />
             </div>
-        </form>
-
-        <div class="max-w-[500px] md:min-w-[400px] md:flex-1">
-            <RiskFreeResult :result="result" />
         </div>
     </section>
 </template>

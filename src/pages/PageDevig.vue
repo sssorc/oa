@@ -10,7 +10,7 @@ import DevigResults from '@/components/DevigResults.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
 
 // Set page title immediately
-usePageTitle('Devig Calculator', 'Calculate the fair odds expected value of your bets with the devig calculator powered by crazy ninja odds.');
+usePageTitle('Sports Betting Devig Calculator', 'Calculate the fair odds expected value of your bets with the devig calculator powered by crazy ninja odds.');
 
 // State
 const isSubmitting = ref(false);
@@ -389,69 +389,72 @@ onMounted(() => {
 
 <template>
     <div>
-        <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-x-8 gap-y-10 px-5 py-8 md:flex-row md:justify-between">
-            <form @submit.prevent="onSubmit" class="grid max-w-xl gap-6 md:flex-1">
-                <div class="flex items-center gap-4">
-                    <div>
-                        <InputLabel for="odds" required>Odds</InputLabel>
-                        <InputField v-model="inputs.FinalOdds" type="text" id="odds" />
-                    </div>
-                    <div>
-                        <label for="boost" class="font-mono text-sm">Boost %</label>
-                        <InputField v-model="inputs.Boost_Text" type="tel" id="boost" class="mt-1" addon="%" />
-                    </div>
-                </div>
-
-                <div>
-                    <InputLabel for="legOdds" required>Leg Odds</InputLabel>
-                    <InputField v-model="inputs.LegOdds" id="legOdds" type="text" required />
-                </div>
-
-                <div class="flex flex-col gap-4 lg:flex-row">
-                    <div>
-                        <InputLabel for="correlation">Correlation</InputLabel>
-                        <InputField v-model="inputs.Correlation_Text" type="text" id="TextBoxCorrelation" />
-                    </div>
-                    <div class="lg:flex-1">
-                        <InputLabel for="sharp">Devigged To</InputLabel>
-                        <InputField v-model="sharp" type="text" id="sharp" />
-                    </div>
-                </div>
-
-                <hr class="border-space/10" />
-
-                <div class="flex flex-col items-start gap-x-8 gap-y-4 lg:flex-row">
-                    <div>
-                        <InputLabel for="freeBetCheckbox">Bonus Bet Returned</InputLabel>
-                        <div class="mt-1 grid gap-2">
-                            <RadioField v-model="freeBetType" id="freeBet0" :value="0">None</RadioField>
-                            <RadioField v-model="freeBetType" id="freeBet1" :value="1">On Loss</RadioField>
-                            <RadioField v-model="freeBetType" id="freeBet2" :value="2">Guaranteed</RadioField>
-                            <RadioField v-model="freeBetType" id="freeBet3" :value="4">1-leg Miss</RadioField>
+        <section class="relative mx-auto w-full max-w-7xl px-5 py-8">
+            <h1 class="mb-6 font-mono text-xl">Devig Calculator</h1>
+            <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+                <form @submit.prevent="onSubmit" class="grid max-w-xl gap-6 md:flex-1">
+                    <div class="flex items-center gap-4">
+                        <div>
+                            <InputLabel for="odds" required>Odds</InputLabel>
+                            <InputField v-model="inputs.FinalOdds" type="text" id="odds" />
+                        </div>
+                        <div>
+                            <label for="boost" class="font-mono text-sm">Boost %</label>
+                            <InputField v-model="inputs.Boost_Text" type="tel" id="boost" class="mt-1" addon="%" />
                         </div>
                     </div>
-                    <div v-if="freeBetType !== 0" class="flex flex-wrap items-start gap-x-6 gap-y-4">
-                        <div v-if="freeBetType !== 0">
-                            <InputLabel for="freeBetPercentage">Amount (% of stake)</InputLabel>
-                            <InputField v-model="freeBetPercentage" id="freeBetPercentage" class="mt-1 w-32" addon="%" />
+
+                    <div>
+                        <InputLabel for="legOdds" required>Leg Odds</InputLabel>
+                        <InputField v-model="inputs.LegOdds" id="legOdds" type="text" required />
+                    </div>
+
+                    <div class="flex flex-col gap-4 lg:flex-row">
+                        <div>
+                            <InputLabel for="correlation">Correlation</InputLabel>
+                            <InputField v-model="inputs.Correlation_Text" type="text" id="TextBoxCorrelation" />
                         </div>
-                        <div v-if="freeBetType !== 0">
-                            <InputLabel for="conversionRate">Conversion %</InputLabel>
-                            <InputField v-model="conversionRate" id="conversionRate" class="mt-1 w-32" addon="%" />
+                        <div class="lg:flex-1">
+                            <InputLabel for="sharp">Devigged To</InputLabel>
+                            <InputField v-model="sharp" type="text" id="sharp" />
                         </div>
                     </div>
-                </div>
 
-                <!-- Submit -->
-                <div class="mt-2">
-                    <SubmitButton :disabled="!inputs.FinalOdds || !inputs.LegOdds" class="max-sm:w-full" :is-submitting="isSubmitting">Calculate EV</SubmitButton>
-                </div>
-                <!-- Error -->
-                <div v-if="errorMessage" class="text-red">{{ errorMessage }}</div>
-            </form>
+                    <hr class="border-space/10" />
 
-            <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
-                <DevigResults :results="results" :bankroll="kellyBankroll" :is-bookmarked="isCurrentResultBookmarked" @toggle-bookmark="onToggleBookmark" />
+                    <div class="flex flex-col items-start gap-x-8 gap-y-4 lg:flex-row">
+                        <div>
+                            <InputLabel for="freeBetCheckbox">Bonus Bet Returned</InputLabel>
+                            <div class="mt-1 grid gap-2">
+                                <RadioField v-model="freeBetType" id="freeBet0" :value="0">None</RadioField>
+                                <RadioField v-model="freeBetType" id="freeBet1" :value="1">On Loss</RadioField>
+                                <RadioField v-model="freeBetType" id="freeBet2" :value="2">Guaranteed</RadioField>
+                                <RadioField v-model="freeBetType" id="freeBet3" :value="4">1-leg Miss</RadioField>
+                            </div>
+                        </div>
+                        <div v-if="freeBetType !== 0" class="flex flex-wrap items-start gap-x-6 gap-y-4">
+                            <div v-if="freeBetType !== 0">
+                                <InputLabel for="freeBetPercentage">Amount (% of stake)</InputLabel>
+                                <InputField v-model="freeBetPercentage" id="freeBetPercentage" class="mt-1 w-32" addon="%" />
+                            </div>
+                            <div v-if="freeBetType !== 0">
+                                <InputLabel for="conversionRate">Conversion %</InputLabel>
+                                <InputField v-model="conversionRate" id="conversionRate" class="mt-1 w-32" addon="%" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="mt-2">
+                        <SubmitButton :disabled="!inputs.FinalOdds || !inputs.LegOdds" class="max-sm:w-full" :is-submitting="isSubmitting">Calculate EV</SubmitButton>
+                    </div>
+                    <!-- Error -->
+                    <div v-if="errorMessage" class="text-red">{{ errorMessage }}</div>
+                </form>
+
+                <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
+                    <DevigResults :results="results" :bankroll="kellyBankroll" :is-bookmarked="isCurrentResultBookmarked" @toggle-bookmark="onToggleBookmark" />
+                </div>
             </div>
         </section>
 

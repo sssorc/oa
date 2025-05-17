@@ -20,7 +20,7 @@ const router = createRouter({
         {
             path: '/hedge',
             name: 'hedge',
-            component: () => import('../pages/PageArbitrage.vue'),
+            component: () => import('../pages/PageHedge.vue'),
         },
         {
             path: '/bonus-bet',

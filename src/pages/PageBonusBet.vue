@@ -8,7 +8,7 @@ import _ from 'lodash';
 import { usePageTitle } from '@/composables/usePageTitle';
 
 // Set page title
-usePageTitle('Bonus Bet Calculator', 'Find the optimal hedge amount to conver your free bets or bonus bets into cash.');
+usePageTitle('Sports Betting Bonus Bet Calculator', 'Find the optimal hedge amount to conver your free bets or bonus bets into cash.');
 
 // State
 const viewingBookmark = ref(false);
@@ -94,31 +94,34 @@ function percentOf(a, b) {
 </script>
 
 <template>
-    <section class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:flex-row md:items-start md:justify-between lg:items-start">
-        <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
-            <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
-                <div class="sm:w-44">
-                    <InputLabel for="stakeA" required>Bonus Bet Amount</InputLabel>
-                    <InputField v-model="stakeA" type="text" id="stakeA" addon="$" />
+    <section class="relative mx-auto w-full max-w-7xl px-5 py-8">
+        <h1 class="mb-6 font-mono text-xl">Bonus Bet Conversion Calculator</h1>
+        <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+            <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <div class="sm:w-44">
+                        <InputLabel for="stakeA" required>Bonus Bet Amount</InputLabel>
+                        <InputField v-model="stakeA" type="text" id="stakeA" addon="$" />
+                    </div>
+                    <div class="sm:w-44">
+                        <InputLabel for="oddsA" required>Bonus Bet Odds</InputLabel>
+                        <InputField v-model="oddsA" type="text" id="oddsA" />
+                    </div>
                 </div>
+
                 <div class="sm:w-44">
-                    <InputLabel for="oddsA" required>Bonus Bet Odds</InputLabel>
-                    <InputField v-model="oddsA" type="text" id="oddsA" />
+                    <InputLabel for="oddsB" required>Hedge Odds</InputLabel>
+                    <InputField v-model="oddsB" type="text" id="oddsB" required />
                 </div>
-            </div>
 
-            <div class="sm:w-44">
-                <InputLabel for="oddsB" required>Hedge Odds</InputLabel>
-                <InputField v-model="oddsB" type="text" id="oddsB" required />
-            </div>
+                <div class="mt-2">
+                    <SubmitButton :disabled="!oddsA || !stakeA || !oddsB" class="max-sm:w-full" :is-submitting="loading">Calculate Hedge</SubmitButton>
+                </div>
+            </form>
 
-            <div class="mt-2">
-                <SubmitButton :disabled="!oddsA || !stakeA || !oddsB" class="max-sm:w-full" :is-submitting="loading">Calculate Hedge</SubmitButton>
+            <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
+                <ConversionResult :result="conversion" />
             </div>
-        </form>
-
-        <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
-            <ConversionResult :result="conversion" />
         </div>
     </section>
 </template>
