@@ -1,12 +1,12 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import { devig } from '@/api/cno';
-import AppHeader from '@/components/core/AppHeader.vue';
 import InputField from '@/components/InputField.vue';
 import RadioField from '@/components/RadioField.vue';
 import InputLabel from '@/components/InputLabel.vue';
 import SubmitButton from '@/components/SubmitButton.vue';
 import DevigResults from '@/components/DevigResults.vue';
+import MonoText from '@/components/ui/MonoText.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
 
 // Set page title immediately
@@ -389,7 +389,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <section class="relative mx-auto w-full max-w-7xl px-5 py-8">
+        <section class="relative mx-auto w-full max-w-7xl px-5 pt-8 pb-6">
             <h1 class="mb-6 font-mono text-xl">Devig Calculator</h1>
             <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
                 <form @submit.prevent="onSubmit" class="grid max-w-xl gap-6 md:flex-1">
@@ -425,7 +425,7 @@ onMounted(() => {
                     <div class="flex flex-col items-start gap-x-8 gap-y-4 lg:flex-row">
                         <div>
                             <InputLabel for="freeBetCheckbox">Bonus Bet Returned</InputLabel>
-                            <div class="mt-1 grid gap-2">
+                            <div class="mt-1 grid gap-2 lg:gap-3">
                                 <RadioField v-model="freeBetType" id="freeBet0" :value="0">None</RadioField>
                                 <RadioField v-model="freeBetType" id="freeBet1" :value="1">On Loss</RadioField>
                                 <RadioField v-model="freeBetType" id="freeBet2" :value="2">Guaranteed</RadioField>
@@ -486,17 +486,36 @@ onMounted(() => {
         </section>
 
         <section class="prose mx-auto mt-10 max-w-7xl px-5">
-            <h2 class="font-space">Usage Tips</h2>
+            <h2 class="font-space">How to use</h2>
+            <p>
+                Use the devig calculator powered by <a href="https://crazyninjaodds.com/" target="_blank">Crazy Ninja Odds</a> to find the fair odds for a bet and the expected value for the odds
+                you're getting.
+            </p>
             <ul>
-                <li>A comma separates legs</li>
-                <li>A &quot;/&quot; symbol separates sides of a market</li>
-                <li>The first number in a leg is the side of the market you are wagering on.</li>
-                <li>If a leg has multiple sides in its market (e.g. superbowl winner), then separate all sides by a &quot;/&quot; symbol like this: +500/+250/+2000</li>
+                <li><em>Odds</em> - Enter the odds of your bet (without any boosts)</li>
+                <li><em>Boost %</em> - If using a profit boost, indicate that here (without the %)</li>
                 <li>
-                    More tips and help on the
-                    <a href="http://www.crazyninjamike.com/Public/sportsbooks/sportsbook_devigger_help.aspx" target="_blank">devigger help page</a>
+                    <em>Leg Odds</em> - Enter the odds for each side of the market separated by a <MonoText>/</MonoText>. Use a sharp book or an average of multiple books
+                    <ul>
+                        <li>Separate legs of a parlay with a <MonoText>,</MonoText></li>
+                        <li>The side you're betting on should be the first number in the <em>Leg Odds</em> field.</li>
+                        <li>If you already know the fair value, you can just enter those odds for the <em>Leg Odds</em></li>
+                    </ul>
                 </li>
+                <li><em>Correlation</em> - Enter correlation coefficient for SGPs if known and applicable e.g. <MonoText>0.2</MonoText></li>
+                <li><em>Devigged To</em> - Enter which book(s) you used in the <em>Leg Odds field</em>. This is purely informational for when sharing the devig</li>
+                <li><em>Bonus Bet Returned</em> - If this bet earns you a bonus bet through any condition, indicate that here</li>
             </ul>
+            <h2>Example Leg Odds inputs</h2>
+            <ul>
+                <li>Single sharp book: <MonoText>157/175</MonoText></li>
+                <li>Single sharp with multiple legs: <MonoText>-178/146,-144/119</MonoText></li>
+                <li>Average of two books: <MonoText>avg(-150,-145)/avg(+135,+125)</MonoText></li>
+                <li>Single sharp 4-sided market: <MonoText>413/252/-104/763</MonoText></li>
+            </ul>
+            <p>
+                Detailed documentation of input syntax can be found on the <a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger_help.aspx" target="blank">devigger help guide</a>.
+            </p>
         </section>
     </div>
 </template>
