@@ -1,4 +1,5 @@
 import { ref, watch } from 'vue';
+import { trackThemeChange } from '@/utils/analytics';
 
 export function useTheme() {
     const theme = ref(localStorage.theme || 'system');
@@ -6,6 +7,7 @@ export function useTheme() {
     const setTheme = (newTheme) => {
         theme.value = newTheme;
         localStorage.theme = newTheme;
+        trackThemeChange(newTheme);
 
         // Update the document class
         if (newTheme === 'dark' || (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {

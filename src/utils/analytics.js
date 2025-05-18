@@ -1,7 +1,7 @@
 import { event } from 'vue-gtag';
 
 export const trackCalculatorSubmit = (calculatorType) => {
-    event('calculator_submit', {
+    event('submit_calculator', {
         calculator: calculatorType,
     });
 };
@@ -18,4 +18,10 @@ export const trackDiscordCopy = (calculatorType) => {
 
 export const trackBookmark = (calculatorType) => {
     event('bookmark_devig');
+};
+
+export const trackThemeChange = (theme) => {
+    event('change_theme', {
+        theme,
+    });
 };
