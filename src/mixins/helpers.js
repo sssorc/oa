@@ -81,24 +81,6 @@ const helpers = {
             this.hasSearched = false;
             this.arbBalanced = false;
         },
-        copyToClipboard(id) {
-            const copyText = document.getElementById(id);
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            document.execCommand('copy');
-
-            if (id === 'shareLink') {
-                this.copyConfirmation = 'Copied share URL';
-            }
-
-            if (id === 'csv') {
-                this.copyConfirmation = 'Copied CSV';
-            }
-
-            setTimeout(() => {
-                this.copyConfirmation = false;
-            }, 600);
-        },
         onKeyUp(field) {
             this.freshInput = true;
 
@@ -157,13 +139,6 @@ const helpers = {
 
             const o = odds / 100;
             return Number((payout / (1 + o)).toFixed(2));
-        },
-        getQueryString(field) {
-            const href = window.location.href;
-            const reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
-            const string = reg.exec(href);
-
-            return string ? string[1] : null;
         },
     },
 };

@@ -115,10 +115,14 @@ const calculate = () => {
 };
 
 const calcFromUrl = () => {
-    const a = getQueryString('oddsA');
-    const ax = getQueryString('stakeA');
-    const b = getQueryString('oddsB');
-    const c = getQueryString('oddsC');
+    const hashAndParams = window.location.search;
+    const queryString = hashAndParams.substring(1); // Remove the leading ?
+    const params = new URLSearchParams(queryString);
+
+    const a = params.get('oddsA');
+    const ax = params.get('stakeA');
+    const b = params.get('oddsB');
+    const c = params.get('oddsC');
 
     oddsA.value = a;
     stakeA.value = ax;

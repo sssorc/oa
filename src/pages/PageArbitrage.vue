@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers.js';
 import ArbitrageResults from '@/components/ArbitrageResults.vue';
@@ -10,7 +10,7 @@ import { usePageTitle } from '@/composables/usePageTitle';
 import { trackCalculatorSubmit } from '@/utils/analytics';
 
 // Extract helper methods we need
-const { getPayout, getStake, getQueryString } = helpers.methods;
+const { getPayout, getStake } = helpers.methods;
 
 // Set page title
 usePageTitle('Sports Betting Arbitrage Calculator', 'Calculate optimal bet sizes for arbitrage opportunities and hedges. Find the perfect stake amounts for guaranteed profits or risk management.');
@@ -22,14 +22,6 @@ const stakeA = ref('');
 const oddsA = ref('');
 const oddsB = ref('');
 const oddsC = ref('');
-
-// Add resetState function that was missing
-const resetState = () => {
-    oddsA.value = '';
-    stakeA.value = '';
-    oddsB.value = '';
-    results.value = false;
-};
 
 // Add this with other computed properties
 const isDirty = computed(() => {
@@ -115,10 +107,14 @@ const calculate = () => {
 };
 
 const calcFromUrl = () => {
-    const a = getQueryString('oddsA');
-    const ax = getQueryString('stakeA');
-    const b = getQueryString('oddsB');
-    const c = getQueryString('oddsC');
+    const hashAndParams = window.location.search;
+    const queryString = hashAndParams.substring(1); // Remove the leading ?
+    const params = new URLSearchParams(queryString);
+
+    const a = params.get('oddsA');
+    const ax = params.get('stakeA');
+    const b = params.get('oddsB');
+    const c = params.get('oddsC');
 
     oddsA.value = a;
     stakeA.value = ax;

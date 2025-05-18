@@ -1,6 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
-import AppHeader from '@/components/core/AppHeader.vue';
+import { ref, onMounted } from 'vue';
 import RiskFreeResult from '@/components/RiskFreeResult.vue';
 import InputField from '@/components/InputField.vue';
 import InputLabel from '@/components/InputLabel.vue';
@@ -20,28 +19,12 @@ usePageTitle(
 );
 
 // State
-const viewingBookmark = ref(false);
 const oddsA = ref('');
 const stakeA = ref('');
 const oddsB = ref('');
 const conversionPercent = ref(70);
 const result = ref(false);
 const loading = ref(false);
-const hasSearched = ref(false);
-const bookmarks = ref([]);
-
-// Computed
-const shareUrl = computed(() => {
-    const baseUrl = window.location.origin + '/risk-free';
-    const params = new URLSearchParams();
-
-    if (oddsA.value) params.set('oddsA', oddsA.value);
-    if (stakeA.value) params.set('stakeA', stakeA.value);
-    if (oddsB.value) params.set('oddsB', oddsB.value);
-    if (conversionPercent.value !== 70) params.set('conversion', conversionPercent.value);
-
-    return `${baseUrl}?${params.toString()}`;
-});
 
 // Methods
 function calculate() {
@@ -76,9 +59,8 @@ function calculate() {
 }
 
 function calcFromUrl() {
-    // Get the part after the hash and extract the query string
-    const hashParts = window.location.hash.split('?');
-    const queryString = hashParts.length > 1 ? hashParts[1] : '';
+    const hashAndParams = window.location.search;
+    const queryString = hashAndParams.substring(1); // Remove the leading ?
     const params = new URLSearchParams(queryString);
 
     const a = params.get('oddsA');
@@ -96,13 +78,9 @@ function calcFromUrl() {
     }
 }
 
-// Helper functions
-function percentOf(a, b) {
-    return (b / a) * 100;
-}
-
-// Initialize
-calcFromUrl();
+onMounted(() => {
+    calcFromUrl();
+});
 </script>
 
 <template>
