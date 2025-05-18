@@ -5,9 +5,11 @@ export function useTheme() {
     const theme = ref(localStorage.theme || 'system');
 
     const setTheme = (newTheme) => {
+        if (theme.value !== newTheme) {
+            trackThemeChange(newTheme);
+        }
         theme.value = newTheme;
         localStorage.theme = newTheme;
-        trackThemeChange(newTheme);
 
         // Update the document class
         if (newTheme === 'dark' || (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
