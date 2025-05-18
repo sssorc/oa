@@ -18,7 +18,6 @@ const results = ref(false);
 const errorMessage = ref(false);
 const kellyBankroll = ref(1000);
 const showImport = ref(false);
-const sourceBook = ref('');
 const freeBetType = ref(0);
 const freeBetPercentage = ref('100');
 const conversionRate = ref('70');
@@ -211,7 +210,11 @@ const onSubmit = async () => {
     if (isSubmitting.value) return;
 
     // Return early if all inputs are the same as last submission
-    if (areInputsUnchanged()) return;
+    if (areInputsUnchanged()) {
+        if (results.value?.inputData?.sharp !== sharp.value) {
+            results.value.inputData.sharp = sharp.value;
+        }
+    }
 
     formatFinalOdds();
     formatLegOdds();
@@ -259,7 +262,6 @@ const onSubmit = async () => {
             conversionPercentage: round(finalData.FB_Percentage * 100),
             ev: round(finalData.EV_Percentage * 100, false, 1),
             kellyFull: finalData.Kelly_Full,
-            sourceBook: sourceBook.value,
             wcMethod: finalData.DevigMethod.split(':')[1] || finalData.DevigMethod,
             includeConversion: freeBetType.value === 0,
             inputData: {
@@ -288,6 +290,17 @@ const onToggleBookmark = () => {
     if (index === -1) {
         // Add bookmark
         bookmarks.value.push({ ...results.value });
+
+        // Clear inputs
+        inputs.value.FinalOdds = '';
+        inputs.value.LegOdds = '';
+        inputs.value.Boost_Text = '';
+        inputs.value.Correlation_Text = '';
+        freeBetType.value = 0;
+        freeBetPercentage.value = '100';
+        conversionRate.value = '70';
+        sharp.value = '';
+        results.value = false;
     } else {
         // Remove bookmark
         bookmarks.value.splice(index, 1);

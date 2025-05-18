@@ -202,11 +202,11 @@ watch(
             <button
                 @click="emit('toggle-bookmark')"
                 type="button"
-                class="group hover:decoration-pale-blue flex cursor-pointer items-center gap-1 p-1 font-mono text-sm tracking-tighter underline decoration-transparent decoration-2 underline-offset-2 transition-colors duration-100"
+                class="group hover:decoration-pale-blue flex cursor-pointer items-center gap-1 p-1 font-mono text-sm tracking-tighter underline decoration-transparent decoration-2 underline-offset-2 transition-colors duration-100 dark:text-white/90"
             >
                 bookmark
                 <svg v-if="!isBookmarked" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24">
-                    <path d="M6.01 2c-1.096 0-2 .903-2 1.998L4 22l8-3 8 3V4c0-1.093-.907-2-2-2H6.01zm0 2H18v15.113l-6-2.25-5.998 2.25L6.01 4z" />
+                    <path d="M6.01 2c-1.096 0-2 .903-2 1.998L4 22l8-3 8 3V4c0-1.093-.907-2-2-2H6.01zm0 2H18v15.113l-6-2.25-5.998 2.25L6.01 4z" fill="currentColor" />
                 </svg>
                 <svg v-else xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24">
                     <path d="M6 2a2.002 2.002 0 0 0-2 2v18l8-3 8 3V4a2.003 2.003 0 0 0-2-2H6z" fill="currentColor" />
