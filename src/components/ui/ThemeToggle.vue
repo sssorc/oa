@@ -1,3 +1,13 @@
+<script setup>
+import { useTheme } from '@/composables/useTheme';
+
+const { theme, setTheme } = useTheme();
+const options = [
+    { value: 'light', label: 'Light' },
+    { value: 'dark', label: 'Dark' },
+    { value: 'system', label: 'System' },
+];
+</script>
 <template>
     <div class="flex items-center gap-1">
         <button
@@ -35,15 +45,3 @@
         </button>
     </div>
 </template>
-
-<script setup>
-import { useTheme } from '../composables/useTheme';
-
-const { theme, setTheme } = useTheme();
-
-const options = [
-    { value: 'light', label: 'Light' },
-    { value: 'dark', label: 'Dark' },
-    { value: 'system', label: 'System' },
-];
-</script>

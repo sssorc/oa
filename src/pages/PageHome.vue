@@ -1,5 +1,5 @@
 <script setup>
-import LandingLink from '@/components/LandingLink.vue';
+import LandingLink from '@/components/ui/LandingLink.vue';
 </script>
 
 <template>

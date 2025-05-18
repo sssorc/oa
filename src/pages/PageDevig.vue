@@ -1,11 +1,11 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import { devig } from '@/api/cno';
-import InputField from '@/components/InputField.vue';
-import RadioField from '@/components/RadioField.vue';
-import InputLabel from '@/components/InputLabel.vue';
-import SubmitButton from '@/components/SubmitButton.vue';
-import DevigResults from '@/components/DevigResults.vue';
+import InputField from '@/components/ui/InputField.vue';
+import RadioField from '@/components/ui/RadioField.vue';
+import InputLabel from '@/components/ui/InputLabel.vue';
+import SubmitButton from '@/components/ui/SubmitButton.vue';
+import DevigResult from '@/components/result/DevigResult.vue';
 import MonoText from '@/components/ui/MonoText.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
 import { trackCalculatorSubmit, trackBookmark } from '@/utils/analytics';
@@ -472,7 +472,7 @@ onMounted(() => {
                 </form>
 
                 <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
-                    <DevigResults :results="results" :bankroll="kellyBankroll" :is-bookmarked="isCurrentResultBookmarked" @toggle-bookmark="onToggleBookmark" />
+                    <DevigResult :results="results" :bankroll="kellyBankroll" :is-bookmarked="isCurrentResultBookmarked" @toggle-bookmark="onToggleBookmark" />
                 </div>
             </div>
         </section>

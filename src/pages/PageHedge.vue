@@ -1,16 +1,12 @@
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
-import _ from 'lodash';
-import helpers from '@/mixins/helpers.js';
-import ArbitrageResults from '@/components/ArbitrageResults.vue';
-import InputField from '@/components/InputField.vue';
-import InputLabel from '@/components/InputLabel.vue';
-import SubmitButton from '@/components/SubmitButton.vue';
+import { ref, computed, onMounted } from 'vue';
+import ArbitrageResult from '@/components/result/ArbitrageResult.vue';
+import InputField from '@/components/ui/InputField.vue';
+import InputLabel from '@/components/ui/InputLabel.vue';
+import SubmitButton from '@/components/ui/SubmitButton.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
 import { trackCalculatorSubmit } from '@/utils/analytics';
-
-// Extract helper methods we need
-const { getPayout, getStake, getQueryString } = helpers.methods;
+import { getPayout, getStake } from '@/utils/helpers';
 
 // Set page title
 usePageTitle('Sports Betting Hedge Calculator', 'Calculate optimal bet size for your hedge. Find the perfect stake amounts for guaranteed profits.');
@@ -22,14 +18,6 @@ const stakeA = ref('');
 const oddsA = ref('');
 const oddsB = ref('');
 const oddsC = ref('');
-
-// Add resetState function that was missing
-const resetState = () => {
-    oddsA.value = '';
-    stakeA.value = '';
-    oddsB.value = '';
-    results.value = false;
-};
 
 // Add this with other computed properties
 const isDirty = computed(() => {
@@ -43,13 +31,6 @@ const isDirty = computed(() => {
         !!oddsC.value === !!results.value.stakeC
     );
 });
-
-// Methods
-const bindShortcuts = () => {
-    document.addEventListener('keydown', (event) => {
-        event = event || window.event;
-    });
-};
 
 const calculate = () => {
     if (!oddsA.value || !stakeA.value || !oddsB.value) return;
@@ -134,7 +115,6 @@ const calcFromUrl = () => {
 
 // Lifecycle hooks
 onMounted(() => {
-    bindShortcuts();
     calcFromUrl();
 });
 </script>
@@ -171,7 +151,7 @@ onMounted(() => {
                     </div>
                 </form>
 
-                <ArbitrageResults :results="results" class="md:flex-1" />
+                <ArbitrageResult :results="results" class="md:flex-1" />
             </div>
         </section>
         <section class="mx-auto mt-10 max-w-7xl px-5">

@@ -1,16 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import RiskFreeResult from '@/components/RiskFreeResult.vue';
-import InputField from '@/components/InputField.vue';
-import InputLabel from '@/components/InputLabel.vue';
-import SubmitButton from '@/components/SubmitButton.vue';
-import _ from 'lodash';
-import helpers from '@/mixins/helpers.js';
+import RiskFreeResult from '@/components/result/RiskFreeResult.vue';
+import InputField from '@/components/ui/InputField.vue';
+import InputLabel from '@/components/ui/InputLabel.vue';
+import SubmitButton from '@/components/ui/SubmitButton.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
 import { trackCalculatorSubmit } from '@/utils/analytics';
-
-// Extract helper methods we need
-const { getPayout } = helpers.methods;
+import { getPayout } from '@/utils/helpers';
 
 // Set page title immediately
 usePageTitle(

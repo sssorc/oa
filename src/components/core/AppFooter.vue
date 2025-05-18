@@ -1,6 +1,6 @@
 <script setup>
 import AppFooterLink from '@/components/ui/AppFooterLink.vue';
-import ThemeToggle from '@/components/ThemeToggle.vue';
+import ThemeToggle from '@/components/ui/ThemeToggle.vue';
 </script>
 <template>
     <footer class="mx-auto mt-auto w-full max-w-7xl px-5 pt-10 pb-8 sm:pb-10 md:pt-20">

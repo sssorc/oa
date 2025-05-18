@@ -1,8 +1,8 @@
 <script setup>
-import { computed, nextTick, ref, watch, onMounted } from 'vue';
-import CopyUrlButton from './CopyUrlButton.vue';
+import { computed, nextTick, ref, watch } from 'vue';
+import CopyUrlButton from '@/components/copy/CopyUrlButton.vue';
 import { trackUrlCopy, trackDiscordCopy } from '@/utils/analytics';
-import CopyForDiscordButton from './CopyForDiscordButton.vue';
+import CopyForDiscordButton from '@/components/copy/CopyForDiscordButton.vue';
 
 const emit = defineEmits(['toggle-bookmark']);
 const props = defineProps({

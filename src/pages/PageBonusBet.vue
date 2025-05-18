@@ -1,37 +1,23 @@
 <script setup>
-import { ref, computed } from 'vue';
-import ConversionResult from '@/components/ConversionResult.vue';
-import InputField from '@/components/InputField.vue';
-import InputLabel from '@/components/InputLabel.vue';
-import SubmitButton from '@/components/SubmitButton.vue';
-import _ from 'lodash';
+import { ref, onMounted } from 'vue';
+import ConversionResult from '@/components/result/ConversionResult.vue';
+import InputField from '@/components/ui/InputField.vue';
+import InputLabel from '@/components/ui/InputLabel.vue';
+import SubmitButton from '@/components/ui/SubmitButton.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
 import { trackCalculatorSubmit } from '@/utils/analytics';
+import { getPayout } from '@/utils/helpers';
 
 // Set page title
 usePageTitle('Sports Betting Bonus Bet Calculator', 'Find the optimal hedge amount to conver your free bets or bonus bets into cash.');
 
 // State
-const viewingBookmark = ref(false);
 const oddsA = ref('');
 const stakeA = ref('');
 const oddsB = ref('');
 const conversion = ref(false);
 const loading = ref(false);
 const hasSearched = ref(false);
-const bookmarks = ref([]);
-
-// Computed
-const shareUrl = computed(() => {
-    const baseUrl = window.location.origin + '/bonus-bet';
-    const params = new URLSearchParams();
-
-    if (oddsA.value) params.set('oddsa', oddsA.value);
-    if (stakeA.value) params.set('stakea', stakeA.value);
-    if (oddsB.value) params.set('oddsb', oddsB.value);
-
-    return `${baseUrl}?${params.toString()}`;
-});
 
 // Methods
 function calculate() {
@@ -81,16 +67,9 @@ function calcFromUrl() {
 }
 
 // Lifecycle
-calcFromUrl();
-
-// Helper functions from mixins
-function getPayout(odds, stake) {
-    if (odds > 0) {
-        return (odds / 100) * stake + stake;
-    } else {
-        return (100 / Math.abs(odds)) * stake + stake;
-    }
-}
+onMounted(() => {
+    calcFromUrl();
+});
 
 function percentOf(a, b) {
     return (b / a) * 100;

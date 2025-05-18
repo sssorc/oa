@@ -1,5 +1,5 @@
 <script setup>
-import CopyButton from './CopyButton.vue';
+import CopyButton from '@/components/copy/CopyButton.vue';
 
 defineProps({
     content: {
@@ -10,5 +10,5 @@ defineProps({
 </script>
 
 <template>
-    <CopyButton :content="content" label="copy for discord" mobile-label="discord" />
+    <CopyButton :content="content" label="copy url" mobile-label="url" />
 </template>

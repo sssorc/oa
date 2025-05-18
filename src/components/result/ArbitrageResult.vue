@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import CopyUrlButton from './CopyUrlButton.vue';
+import CopyUrlButton from '@/components/copy/CopyUrlButton.vue';
 import { trackUrlCopy } from '@/utils/analytics';
 
 const props = defineProps({
