@@ -21,7 +21,7 @@ export const trackBookmark = (calculatorType) => {
 };
 
 export const trackThemeChange = (theme) => {
-    event('change_theme', {
+    event('set_theme', {
         theme,
     });
 };
