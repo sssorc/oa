@@ -1,5 +1,6 @@
 <script setup>
 import { useTheme } from '@/composables/useTheme';
+import { trackThemeChange } from '@/utils/analytics';
 
 const { theme, setTheme } = useTheme();
 const options = [
@@ -7,13 +8,18 @@ const options = [
     { value: 'dark', label: 'Dark' },
     { value: 'system', label: 'System' },
 ];
+
+const handleThemeChange = (newTheme) => {
+    setTheme(newTheme);
+    trackThemeChange(newTheme);
+};
 </script>
 <template>
     <div class="flex items-center gap-1">
         <button
             v-for="option in options"
             :key="option.value"
-            @click="setTheme(option.value)"
+            @click="handleThemeChange(option.value)"
             class="rounded-lg p-3 transition-colors sm:p-2"
             :class="{
                 'bg-gray-200 dark:bg-gray-700': theme === option.value,

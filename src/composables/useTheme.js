@@ -1,13 +1,9 @@
 import { ref, watch } from 'vue';
-import { trackThemeChange } from '@/utils/analytics';
 
 export function useTheme() {
     const theme = ref(localStorage.theme || 'system');
 
     const setTheme = (newTheme) => {
-        if (theme.value !== newTheme) {
-            trackThemeChange(newTheme);
-        }
         theme.value = newTheme;
         localStorage.theme = newTheme;
 
