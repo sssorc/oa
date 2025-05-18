@@ -8,6 +8,7 @@ import SubmitButton from '@/components/SubmitButton.vue';
 import DevigResults from '@/components/DevigResults.vue';
 import MonoText from '@/components/ui/MonoText.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
+import { trackCalculatorSubmit, trackBookmark } from '@/utils/analytics';
 
 // Set page title immediately
 usePageTitle('Sports Betting Devig Calculator', 'Calculate the fair odds expected value of your bets with the devig calculator powered by crazy ninja odds.');
@@ -224,6 +225,9 @@ const onSubmit = async () => {
         return;
     }
 
+    // Track calculator submission
+    trackCalculatorSubmit('devig');
+
     isSubmitting.value = true;
 
     const params = [];
@@ -301,6 +305,8 @@ const onToggleBookmark = () => {
         conversionRate.value = '70';
         sharp.value = '';
         results.value = false;
+
+        trackBookmark();
     } else {
         // Remove bookmark
         bookmarks.value.splice(index, 1);

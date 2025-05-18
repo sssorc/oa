@@ -6,6 +6,7 @@ import InputLabel from '@/components/InputLabel.vue';
 import SubmitButton from '@/components/SubmitButton.vue';
 import _ from 'lodash';
 import { usePageTitle } from '@/composables/usePageTitle';
+import { trackCalculatorSubmit } from '@/utils/analytics';
 
 // Set page title
 usePageTitle('Sports Betting Bonus Bet Calculator', 'Find the optimal hedge amount to conver your free bets or bonus bets into cash.');
@@ -36,6 +37,9 @@ const shareUrl = computed(() => {
 function calculate() {
     console.log('calculate', oddsA.value, stakeA.value, oddsB.value);
     if (!oddsA.value || !stakeA.value || !oddsB.value) return;
+
+    // Track calculator submission
+    trackCalculatorSubmit('bonus_bet');
 
     const payoutA = stakeA.value * (oddsA.value / 100);
     const o = (oddsB.value * -1) / 100;

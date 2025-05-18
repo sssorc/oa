@@ -7,6 +7,7 @@ import InputField from '@/components/InputField.vue';
 import InputLabel from '@/components/InputLabel.vue';
 import SubmitButton from '@/components/SubmitButton.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
+import { trackCalculatorSubmit } from '@/utils/analytics';
 
 // Extract helper methods we need
 const { getPayout, getStake, getQueryString } = helpers.methods;
@@ -58,6 +59,9 @@ const calculate = () => {
         loading.value = false;
         return;
     }
+
+    // Track calculator submission
+    trackCalculatorSubmit('arbitrage');
 
     // Reset stuff
     loading.value = true;

@@ -8,6 +8,7 @@ import SubmitButton from '@/components/SubmitButton.vue';
 import _ from 'lodash';
 import helpers from '@/mixins/helpers.js';
 import { usePageTitle } from '@/composables/usePageTitle';
+import { trackCalculatorSubmit } from '@/utils/analytics';
 
 // Extract helper methods we need
 const { getPayout } = helpers.methods;
@@ -45,6 +46,9 @@ const shareUrl = computed(() => {
 // Methods
 function calculate() {
     if (!oddsA.value || !stakeA.value || !oddsB.value) return;
+
+    // Track calculator submission
+    trackCalculatorSubmit('risk_free');
 
     const conversion = Number(stakeA.value * (conversionPercent.value / 100));
     const payoutA = getPayout(Number(oddsA.value), Number(stakeA.value));

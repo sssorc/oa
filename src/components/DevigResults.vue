@@ -1,9 +1,10 @@
 <script setup>
 import { computed, nextTick, ref, watch, onMounted } from 'vue';
 import CopyUrlButton from './CopyUrlButton.vue';
-const emit = defineEmits(['toggle-bookmark']);
+import { trackUrlCopy, trackDiscordCopy } from '@/utils/analytics';
 import CopyForDiscordButton from './CopyForDiscordButton.vue';
 
+const emit = defineEmits(['toggle-bookmark']);
 const props = defineProps({
     results: {
         type: [Object, Boolean],
@@ -197,8 +198,8 @@ watch(
             </div>
         </div>
         <div class="mt-2 flex justify-between gap-4">
-            <CopyUrlButton :content="shareUrl" />
-            <CopyForDiscordButton :content="discordText" />
+            <CopyUrlButton :content="shareUrl" @click="trackUrlCopy('devig')" />
+            <CopyForDiscordButton :content="discordText" @click="trackDiscordCopy()" />
             <button
                 @click="emit('toggle-bookmark')"
                 type="button"

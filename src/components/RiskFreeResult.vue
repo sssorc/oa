@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import CopyUrlButton from './CopyUrlButton.vue';
+import { trackUrlCopy } from '@/utils/analytics';
 
 const props = defineProps({
     result: {
@@ -129,7 +130,7 @@ function formatOdds(odds) {
             </div>
         </div>
         <div class="mt-2">
-            <CopyUrlButton :content="shareUrl" />
+            <CopyUrlButton :content="shareUrl" @click="trackUrlCopy('risk_free')" />
         </div>
     </div>
 </template>
