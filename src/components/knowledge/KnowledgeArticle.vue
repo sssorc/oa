@@ -1,3 +1,4 @@
+<script setup></script>
 <template>
     <article class="mx-auto w-full max-w-4xl px-5 py-12">
         <div class="prose">
