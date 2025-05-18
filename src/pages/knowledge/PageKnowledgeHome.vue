@@ -12,7 +12,8 @@ usePageTitle('Sports Betting Knowledge Base', 'Beginner-friendly explanations of
 
         <div class="grid gap-4 lg:gap-6">
             <KnowledgeLink to="/knowledge/when-to-hedge">When should I hedge a bet?</KnowledgeLink>
-            <KnowledgeLink to="/knowledge/what-is-positive-ev">What is positive EV?</KnowledgeLink>
+            <KnowledgeLink to="/knowledge/when-to-cash-out">When should I cash out a bet?</KnowledgeLink>
+            <KnowledgeLink to="/knowledge/what-is-positive-ev">What is positive expected value (+EV)?</KnowledgeLink>
             <KnowledgeLink to="/knowledge/what-is-a-zero-hold">What is a zero hold?</KnowledgeLink>
         </div>
     </div>

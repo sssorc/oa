@@ -53,6 +53,11 @@ const router = createRouter({
             component: () => import('../pages/knowledge/PageWhenToHedge.vue'),
         },
         {
+            path: '/knowledge/when-to-cash-out',
+            name: 'when-to-cash-out',
+            component: () => import('../pages/knowledge/PageWhenToCashOut.vue'),
+        },
+        {
             path: '/knowledge/what-is-positive-ev',
             name: 'what-is-positive-ev',
             component: () => import('../pages/knowledge/PageWhatIsPlusEV.vue'),
