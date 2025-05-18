@@ -1,69 +1,33 @@
-import { useHead } from '@vueuse/head';
+import { useHead, useSeoMeta } from '@unhead/vue';
 
 const defaultDescription = 'Free sports betting calculators for arbitrage, bonus bets, risk-free bets, and devigging.';
 const siteUrl = 'https://hedgecalc.com';
 
 export function usePageTitle(title, description = defaultDescription) {
     const siteName = 'HedgeCalc';
-    const fullTitle = title ? `${title}` : siteName;
+    const fullTitle = title ? `${title}` : 'HedgeCalc Betting Tools';
     const currentUrl = typeof window !== 'undefined' ? window.location.href : siteUrl;
 
+    // Set title with template
     useHead({
         title: fullTitle,
-        meta: [
-            // Basic meta tags
-            {
-                name: 'title',
-                content: fullTitle,
-            },
-            {
-                name: 'description',
-                content: description,
-            },
-            // Open Graph tags
-            {
-                property: 'og:title',
-                content: fullTitle,
-            },
-            {
-                property: 'og:description',
-                content: description,
-            },
-            {
-                property: 'og:url',
-                content: currentUrl,
-            },
-            {
-                property: 'og:type',
-                content: 'website',
-            },
-            {
-                property: 'og:site_name',
-                content: siteName,
-            },
-            // Twitter Card tags
-            {
-                name: 'twitter:card',
-                content: 'summary_large_image',
-            },
-            {
-                name: 'twitter:title',
-                content: fullTitle,
-            },
-            {
-                name: 'twitter:description',
-                content: description,
-            },
-            // Additional SEO meta tags
-            {
-                name: 'robots',
-                content: 'index, follow',
-            },
-            {
-                name: 'keywords',
-                content: 'sports betting, calculator, arbitrage, hedge, hedging, bonus bets, free bets, risk-free bets, devigging, devigger, devig',
-            },
-        ],
+        titleTemplate: '%s | HedgeCalc',
+    });
+
+    // Set SEO meta tags
+    useSeoMeta({
+        title: fullTitle,
+        description: description,
+        ogTitle: fullTitle,
+        ogDescription: description,
+        ogUrl: currentUrl,
+        ogType: 'website',
+        ogSiteName: siteName,
+        twitterCard: 'summary_large_image',
+        twitterTitle: fullTitle,
+        twitterDescription: description,
+        robots: 'index, follow',
+        keywords: 'sports betting, calculator, arbitrage, hedge, hedging, bonus bets, free bets, risk-free bets, devigging, devigger, devig',
     });
 
     return {

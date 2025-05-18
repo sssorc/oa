@@ -67,6 +67,18 @@ const router = createRouter({
             name: 'what-is-a-zero-hold',
             component: () => import('../pages/knowledge/PageWhatIsZeroHold.vue'),
         },
+        // Sportsbooks routes
+        {
+            path: '/sportsbooks',
+            name: 'sportsbooks-index',
+            component: () => import('../pages/sportsbooks/PageSportsbooksIndex.vue'),
+        },
+        {
+            path: '/sportsbooks/:state',
+            name: 'state-sportsbooks',
+            component: () => import('../pages/sportsbooks/PageStateSportsbooks.vue'),
+            props: true,
+        },
     ],
 });
 

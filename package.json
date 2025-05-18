@@ -11,10 +11,11 @@
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.0.1",
-        "@vueuse/head": "^2.0.0",
+        "@unhead/schema-org": "^2.0.9",
         "axios": "^1.4.0",
         "execa": "^7.1.1",
         "fs": "^0.0.1-security",
+        "unhead": "^2.0.9",
         "vue": "^3.5.0",
         "vue-gtag": "^3.5.0",
         "vue-router": "^4.1.6",

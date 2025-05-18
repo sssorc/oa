@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import { createHead } from '@vueuse/head';
+import { createHead } from '@unhead/vue';
 import App from './App.vue';
 import router from './router';
 import { configure } from 'vue-gtag';
@@ -16,8 +16,9 @@ if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color
 const app = createApp(App);
 const head = createHead();
 
-app.use(router);
+// Initialize head management
 app.use(head);
+app.use(router);
 
 // Initialize Google Analytics only in production
 if (import.meta.env.PROD) {

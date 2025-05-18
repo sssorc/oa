@@ -32,7 +32,7 @@ html {
     }
 
     .prose h2:not(:first-child) {
-        @apply mt-6 lg:mt-8;
+        @apply mt-8 lg:mt-12;
     }
 
     .prose ul {
