@@ -12,6 +12,7 @@
     "dependencies": {
         "@tailwindcss/vite": "^4.0.1",
         "@unhead/schema-org": "^2.0.9",
+        "@unhead/vue": "^2.0.9",
         "axios": "^1.4.0",
         "execa": "^7.1.1",
         "fs": "^0.0.1-security",
