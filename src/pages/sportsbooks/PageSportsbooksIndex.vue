@@ -35,7 +35,6 @@ const illegalStates = computed(() => {
 // Set page title and meta description
 useHead({
     title: 'Legal Sportsbooks by State - Online Sports Betting Sites',
-    titleTemplate: '%s | HedgeCalc',
 });
 
 // Set SEO meta tags

@@ -28,7 +28,6 @@ const formattedState = computed(() => {
 // Set page title and meta description
 useHead({
     title: `${formattedState.value} Sportsbooks - Legal Online Sports Betting Sites`,
-    titleTemplate: '%s | HedgeCalc',
 });
 
 // Set SEO meta tags
