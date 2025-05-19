@@ -363,7 +363,7 @@
     "mississippi": {
         "legal": false,
         "updatedAt": "2025-05-18",
-        "active": [],
+        "active": [{ "name": "BetMGM" }],
         "inactive": []
     },
     "missouri": {
@@ -676,12 +676,6 @@
             }
         ]
     },
-    "washington": {
-        "legal": true,
-        "updatedAt": "2025-05-18",
-        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }],
-        "inactive": []
-    },
     "west_virginia": {
         "legal": true,
         "updatedAt": "2025-05-18",
@@ -723,7 +717,7 @@
     "washington_dc": {
         "legal": true,
         "updatedAt": "2025-05-18",
-        "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "BetMGM" }, { "name": "Caesars" }, { "name": "BetRivers" }, { "name": "ESPNBet" }, { "name": "Fanatics" }],
+        "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "BetMGM" }, { "name": "Caesars" }, { "name": "ESPNBet" }, { "name": "Fanatics" }],
         "inactive": []
     }
 }
