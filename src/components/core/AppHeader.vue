@@ -60,10 +60,10 @@ watch(
             </button>
 
             <nav :class="{ 'max-md:hidden': !showNav, 'dark:bg-gray-900': showNav }" class="z-40 flex gap-2 font-mono max-md:fixed max-md:inset-0 max-md:flex-col max-md:bg-white max-md:pt-16">
-                <AppHeaderLink to="/arbitrage">Arbitrage</AppHeaderLink>
-                <AppHeaderLink to="/bonus-bet">Bonus bet</AppHeaderLink>
-                <AppHeaderLink to="/risk-free">Risk-free</AppHeaderLink>
-                <AppHeaderLink to="/devig">Devig</AppHeaderLink>
+                <AppHeaderLink to="/arbitrage-calculator">Arbitrage</AppHeaderLink>
+                <AppHeaderLink to="/bonus-bet-calculator">Bonus bet</AppHeaderLink>
+                <AppHeaderLink to="/risk-free-calculator">Risk-free</AppHeaderLink>
+                <AppHeaderLink to="/devig-calculator">Devig</AppHeaderLink>
             </nav>
         </div>
     </header>

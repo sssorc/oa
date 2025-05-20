@@ -9,38 +9,62 @@ const router = createRouter({
             component: () => import('../pages/PageHome.vue'),
         },
         {
-            path: '/arbitrage',
+            path: '/arbitrage-calculator',
             name: 'arbitrage',
             component: () => import('../pages/PageArbitrage.vue'),
+        },
+        {
+            path: '/arbitrage',
+            redirect: { name: 'arbitrage' },
         },
         {
             path: '/arb',
             redirect: { name: 'arbitrage' },
         },
         {
-            path: '/hedge',
+            path: '/hedge-calculator',
             name: 'hedge',
             component: () => import('../pages/PageHedge.vue'),
         },
         {
-            path: '/bonus-bet',
+            path: '/hedge',
+            redirect: { name: 'hedge' },
+        },
+        {
+            path: '/bonus-bet-calculator',
             name: 'bonus-bet',
             component: () => import('../pages/PageBonusBet.vue'),
         },
         {
-            path: '/free-bet',
+            path: '/bonus-bet',
+            redirect: { name: 'bonus-bet' },
+        },
+        {
+            path: '/free-bet-calculator',
             name: 'free-bet',
             component: () => import('../pages/PageFreeBet.vue'),
         },
         {
-            path: '/risk-free',
+            path: '/free-bet',
+            redirect: { name: 'free-bet' },
+        },
+        {
+            path: '/risk-free-calculator',
             name: 'risk-free',
             component: () => import('../pages/PageRiskFree.vue'),
         },
         {
-            path: '/devig',
+            path: '/risk-free',
+            redirect: { name: 'risk-free' },
+        },
+        {
+            path: '/devig-calculator',
             name: 'devig',
             component: () => import('../pages/PageDevig.vue'),
+        },
+        {
+            path: '/devig',
+            redirect: { name: 'devig' },
         },
         // Knowledge base routes
         {
