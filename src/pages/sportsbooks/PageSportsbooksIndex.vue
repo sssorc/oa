@@ -79,7 +79,7 @@ useHead({
 
 <template>
     <article class="prose mx-auto w-full max-w-4xl px-5 py-12">
-        <KnowledgeHeader>Legal Sportsbooks by State</KnowledgeHeader>
+        <KnowledgeHeader>Legal Online Sportsbooks by State</KnowledgeHeader>
 
         <p>Select your state to view available legal sportsbooks and daily fantasy sports sites:</p>
         <ul class="gap-8 sm:columns-2 lg:columns-3">
