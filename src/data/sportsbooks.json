@@ -23,9 +23,9 @@
             { "name": "Betfred" },
             { "name": "Hard Rock Bet" },
             { "name": "TwinSpires" },
-            { "name": "Unibet" },
             { "name": "Bet365" },
-            { "name": "Fanatics" }
+            { "name": "Fanatics" },
+            { "name": "Bally Bet" }
         ],
         "inactive": [
             {
@@ -37,6 +37,11 @@
                 "name": "WynnBET",
                 "status": "Closed",
                 "date": ""
+            },
+            {
+                "name": "Unibet",
+                "status": "Closed",
+                "date": "2024-04-11"
             }
         ]
     },
@@ -68,7 +73,9 @@
             { "name": "FanDuel" },
             { "name": "Fanatics" },
             { "name": "Smarkets" },
-            { "name": "Sporttrade" }
+            { "name": "Sporttrade" },
+            { "name": "Betfred" },
+            { "name": "TwinSpires" }
         ],
         "inactive": [
             {
@@ -138,7 +145,8 @@
             { "name": "Circa Sports" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "Hard Rock Bet" }
+            { "name": "Hard Rock Bet" },
+            { "name": "Bally Bet" }
         ],
         "inactive": [
             {
@@ -159,11 +167,12 @@
             { "name": "BetRivers" },
             { "name": "PointsBet" },
             { "name": "ESPNBet" },
-            { "name": "Unibet" },
             { "name": "PrizePicks" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "Hard Rock Bet" }
+            { "name": "Hard Rock Bet" },
+            { "name": "Bally Bet" },
+            { "name": "TwinSpires" }
         ],
         "inactive": [
             {
@@ -175,6 +184,11 @@
                 "name": "WynnBET",
                 "status": "Closed",
                 "date": ""
+            },
+            {
+                "name": "Unibet",
+                "status": "Closed",
+                "date": "2024-04-11"
             }
         ]
     },
@@ -189,10 +203,11 @@
             { "name": "BetRivers" },
             { "name": "PointsBet" },
             { "name": "ESPNBet" },
-            { "name": "Unibet" },
             { "name": "Circa Sports" },
             { "name": "Bet365" },
-            { "name": "Fanatics" }
+            { "name": "Fanatics" },
+            { "name": "Bally Bet" },
+            { "name": "Betfred" }
         ],
         "inactive": [
             {
@@ -204,6 +219,11 @@
                 "name": "SuperBook",
                 "status": "Closed",
                 "date": "2024-07-19"
+            },
+            {
+                "name": "Unibet",
+                "status": "Closed",
+                "date": "2024-04-11"
             }
         ]
     },
@@ -218,8 +238,6 @@
             { "name": "BetRivers" },
             { "name": "PointsBet" },
             { "name": "ESPNBet" },
-            { "name": "Betfred" },
-            { "name": "Circa Sports" },
             { "name": "Fanatics" }
         ],
         "inactive": [
@@ -284,7 +302,7 @@
     "maine": {
         "legal": true,
         "updatedAt": "2025-05-18",
-        "active": [{ "name": "DraftKings" }],
+        "active": [{ "name": "DraftKings" }, { "name": "Caesars" }],
         "inactive": []
     },
     "maryland": {
@@ -300,7 +318,9 @@
             { "name": "ESPNBet" },
             { "name": "Betfred" },
             { "name": "WynnBET" },
-            { "name": "Fanatics" }
+            { "name": "Fanatics" },
+            { "name": "Bally Bet" },
+            { "name": "TwinSpires" }
         ],
         "inactive": [
             {
@@ -339,7 +359,8 @@
             { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "Fox Bet" },
-            { "name": "Fanatics" }
+            { "name": "Fanatics" },
+            { "name": "TwinSpires" }
         ],
         "inactive": [
             {
@@ -363,7 +384,7 @@
     "mississippi": {
         "legal": false,
         "updatedAt": "2025-05-18",
-        "active": [{ "name": "BetMGM" }],
+        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "TwinSpires" }],
         "inactive": []
     },
     "missouri": {
@@ -387,7 +408,7 @@
     "nevada": {
         "legal": true,
         "updatedAt": "2025-05-18",
-        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "Circa Sports" }, { "name": "STN Sports" }, { "name": "William Hill" }],
+        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "Circa Sports" }, { "name": "STN Sports" }, { "name": "William Hill" }, { "name": "Betfred" }],
         "inactive": []
     },
     "new_hampshire": {
@@ -407,11 +428,11 @@
             { "name": "BetRivers" },
             { "name": "PointsBet" },
             { "name": "ESPNBet" },
-            { "name": "Unibet" },
             { "name": "Hard Rock Bet" },
             { "name": "Bally Bet" },
             { "name": "Bet365" },
-            { "name": "Fanatics" }
+            { "name": "Fanatics" },
+            { "name": "TwinSpires" }
         ],
         "inactive": [
             {
@@ -428,6 +449,11 @@
                 "name": "WynnBET",
                 "status": "Closed",
                 "date": ""
+            },
+            {
+                "name": "Unibet",
+                "status": "Closed",
+                "date": "2024-04-11"
             }
         ]
     },
@@ -500,7 +526,8 @@
             { "name": "Bally Bet" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "Hard Rock Bet" }
+            { "name": "Hard Rock Bet" },
+            { "name": "Betfred" }
         ],
         "inactive": [
             {
@@ -538,17 +565,23 @@
             { "name": "BetRivers" },
             { "name": "PointsBet" },
             { "name": "ESPNBet" },
-            { "name": "Unibet" },
             { "name": "Parx" },
             { "name": "FOX Bet" },
             { "name": "Bet365" },
-            { "name": "Fanatics" }
+            { "name": "Fanatics" },
+            { "name": "Betfred" },
+            { "name": "TwinSpires" }
         ],
         "inactive": [
             {
                 "name": "Barstool Sportsbook",
                 "status": "Became ESPNBet",
                 "date": "2023-11-14"
+            },
+            {
+                "name": "Unibet",
+                "status": "Closed",
+                "date": "2024-04-11"
             }
         ]
     },
@@ -582,7 +615,9 @@
             { "name": "Action 24/7" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "Hard Rock Bet" }
+            { "name": "Hard Rock Bet" },
+            { "name": "Bally Bet" },
+            { "name": "TwinSpires" }
         ],
         "inactive": [
             {
@@ -636,7 +671,8 @@
             { "name": "Hard Rock Bet" },
             { "name": "Betr" },
             { "name": "PrizePicks" },
-            { "name": "Sleeper Picks" }
+            { "name": "Sleeper Picks" },
+            { "name": "Betfred" }
         ],
         "inactive": [
             {
@@ -717,7 +753,7 @@
     "washington_dc": {
         "legal": true,
         "updatedAt": "2025-05-18",
-        "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "BetMGM" }, { "name": "Caesars" }, { "name": "ESPNBet" }, { "name": "Fanatics" }],
+        "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "BetMGM" }, { "name": "Caesars" }, { "name": "ESPNBet" }, { "name": "Fanatics" }, { "name": "Betfred" }],
         "inactive": []
     }
 }
