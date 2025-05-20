@@ -10,7 +10,7 @@ import { getPayout } from '@/utils/helpers';
 
 // Set page title immediately
 usePageTitle(
-    'Risk-Free Bet Calculator',
+    'Sports Betting Risk-Free Bet Calculator',
     'Calculate the optimal hedge amount for your risk-free bets. Our free calculator helps you maximize the value of your risk-free bet promotions while minimizing potential losses.'
 );
 
