@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useHead, useSeoMeta } from '@unhead/vue';
 import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
 import sportsbooksData from '@/data/sportsbooks.json';
-
+import BackButton from '@/components/ui/BackButton.vue';
 // Get list of states with data, separated by legal status
 const availableStates = computed(() => {
     return Object.entries(sportsbooksData)
@@ -78,23 +78,26 @@ useHead({
 </script>
 
 <template>
-    <article class="prose mx-auto w-full max-w-4xl px-5 py-12">
-        <KnowledgeHeader>Legal Online Sportsbooks by State</KnowledgeHeader>
+    <article class="mx-auto w-full max-w-4xl px-5 py-12">
+        <div class="prose">
+            <KnowledgeHeader>Legal Online Sportsbooks by State</KnowledgeHeader>
 
-        <p>Select your state to view available legal sportsbooks and daily fantasy sports sites:</p>
-        <ul class="gap-8 sm:columns-2 lg:columns-3">
-            <li v-for="state in availableStates" :key="state.code">
-                <router-link :to="'/sportsbooks/' + state.code.replace(/_/g, '-')">
+            <p>Select your state to view available legal sportsbooks and daily fantasy sports sites:</p>
+            <ul class="gap-8 sm:columns-2 lg:columns-3">
+                <li v-for="state in availableStates" :key="state.code">
+                    <router-link :to="'/sportsbooks/' + state.code.replace(/_/g, '-')">
+                        {{ state.name }}
+                    </router-link>
+                </li>
+            </ul>
+
+            <h2>States where sports betting is not yet legal</h2>
+            <ul class="gap-8 sm:columns-2 lg:columns-3">
+                <li v-for="state in illegalStates" :key="state.code">
                     {{ state.name }}
-                </router-link>
-            </li>
-        </ul>
-
-        <h2>States where sports betting is not yet legal</h2>
-        <ul class="gap-8 sm:columns-2 lg:columns-3">
-            <li v-for="state in illegalStates" :key="state.code">
-                {{ state.name }}
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
+        <BackButton to="/knowledge" class="mt-10">Back to knowledge base</BackButton>
     </article>
 </template>

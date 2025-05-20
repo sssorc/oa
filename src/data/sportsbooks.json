@@ -749,8 +749,14 @@
     "washington": {
         "legal": true,
         "updatedAt": "2025-05-18",
-        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "Fanatics" }],
-        "inactive": []
+        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }],
+        "inactive": [
+            {
+                "name": "Betfred",
+                "status": "Closed",
+                "date": "2024"
+            }
+        ]
     },
     "west_virginia": {
         "legal": true,
