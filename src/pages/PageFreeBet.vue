@@ -9,7 +9,7 @@ import { trackCalculatorSubmit } from '@/utils/analytics';
 import { getPayout } from '@/utils/helpers';
 
 // Set page title
-usePageTitle('Sports Betting Bonus Bet Calculator', 'Find the optimal hedge amount to conver your free bets or bonus bets into cash.');
+usePageTitle('Sports Betting Free Bet Calculator', 'Find the optimal hedge amount to convert your free bets or bonus bets into cash.');
 
 // State
 const oddsA = ref('');
@@ -25,7 +25,7 @@ function calculate() {
     if (!oddsA.value || !stakeA.value || !oddsB.value) return;
 
     // Track calculator submission
-    trackCalculatorSubmit('bonus_bet');
+    trackCalculatorSubmit('free_bet');
 
     const payoutA = stakeA.value * (oddsA.value / 100);
     const o = (oddsB.value * -1) / 100;
@@ -78,16 +78,16 @@ function percentOf(a, b) {
 
 <template>
     <section class="relative mx-auto w-full max-w-7xl px-5 py-8">
-        <h1 class="mb-6 font-mono text-xl">Bonus Bet Conversion Calculator</h1>
+        <h1 class="mb-6 font-mono text-xl">Free Bet Conversion Calculator</h1>
         <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
                     <div class="sm:w-44">
-                        <InputLabel for="stakeA" required>Bonus Bet Amount</InputLabel>
+                        <InputLabel for="stakeA" required>Free Bet Amount</InputLabel>
                         <InputField v-model="stakeA" type="text" id="stakeA" addon="$" />
                     </div>
                     <div class="sm:w-44">
-                        <InputLabel for="oddsA" required>Bonus Bet Odds</InputLabel>
+                        <InputLabel for="oddsA" required>Free Bet Odds</InputLabel>
                         <InputField v-model="oddsA" type="text" id="oddsA" />
                     </div>
                 </div>
@@ -109,9 +109,9 @@ function percentOf(a, b) {
     </section>
     <section class="prose mx-auto mt-10 max-w-7xl px-5">
         <h2>How to use</h2>
-        <p>Use the bonus bet conversion calculator to find the optimal amount to place when converting your bonus bets into cash. to see a</p>
+        <p>Use the free bet conversion calculator to find the optimal amount to place when converting your free bets into cash. to see a</p>
         <ul>
-            <li>Enter the bonus bet amount, your bet odds, and the hedge bet odds</li>
+            <li>Enter the free bet amount, your bet odds, and the hedge bet odds</li>
             <li>Results will show a breakdown of the two bets and the conversion rate</li>
             <li>Plus signs are optional in odds fields.</li>
         </ul>

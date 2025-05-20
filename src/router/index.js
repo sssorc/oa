@@ -29,7 +29,8 @@ const router = createRouter({
         },
         {
             path: '/free-bet',
-            redirect: { name: 'bonus-bet' },
+            name: 'free-bet',
+            component: () => import('../pages/PageFreeBet.vue'),
         },
         {
             path: '/risk-free',
