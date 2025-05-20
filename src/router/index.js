@@ -49,7 +49,7 @@ const router = createRouter({
             redirect: { name: 'free-bet' },
         },
         {
-            path: '/risk-free-calculator',
+            path: '/risk-free-bet-calculator',
             name: 'risk-free',
             component: () => import('../pages/PageRiskFree.vue'),
         },

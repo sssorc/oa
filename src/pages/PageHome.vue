@@ -19,7 +19,7 @@ import LandingLink from '@/components/ui/LandingLink.vue';
                 <LandingLink to="/bonus-bet-calculator">
                     <p>convert a <strong class="block font-mono text-2xl sm:text-3xl">Bonus Bet</strong></p>
                 </LandingLink>
-                <LandingLink to="/risk-free-calculator">
+                <LandingLink to="/risk-free-bet-calculator">
                     <p>hedge a <strong class="block font-mono text-2xl sm:text-3xl">Risk-Free Bet</strong></p>
                 </LandingLink>
                 <LandingLink to="/devig-calculator">
