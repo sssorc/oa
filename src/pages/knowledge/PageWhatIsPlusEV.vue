@@ -26,7 +26,7 @@ usePageTitle('What is Positive EV?', 'Understand positive expected value (EV) in
         </p>
         <p>
             Now imagine the same bet at +110. You win $1.10 if you guess correctly, but still only lose $1 if wrong. Your wins are going to make up for your losses, and then some. The expected value
-            of this bet is 0.05. You can plug these numbers into the <router-link to="/devig?finalOdds=110&legOdds=100">devig calculator</router-link> to see it's a 5% EV bet.
+            of this bet is 0.05. You can plug these numbers into the <router-link to="/devig-calculator?finalOdds=110&legOdds=100">devig calculator</router-link> to see it's a 5% EV bet.
         </p>
         <p>Using the formula:</p>
         <p>EV = (1.1 * 0.5) - (1 * 0.5)</p>

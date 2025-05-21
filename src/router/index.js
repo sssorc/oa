@@ -93,6 +93,11 @@ const router = createRouter({
             name: 'what-is-a-zero-hold',
             component: () => import('../pages/knowledge/PageWhatIsZeroHold.vue'),
         },
+        {
+            path: '/knowledge/what-is-a-devig',
+            name: 'what-is-a-devig',
+            component: () => import('../pages/knowledge/PageWhatIsADevig.vue'),
+        },
         // Sportsbooks routes
         {
             path: '/sportsbooks',

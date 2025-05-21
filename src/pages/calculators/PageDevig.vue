@@ -41,25 +41,6 @@ const inputs = ref({
     WeightedAverage_Shin: 0,
 });
 
-const shareUrl = computed(() => {
-    const baseUrl = window.location.origin + '/devig';
-    const params = new URLSearchParams();
-
-    if (inputs.value.FinalOdds) {
-        params.append('finalOdds', encodeURIComponent(inputs.value.FinalOdds));
-    }
-
-    if (inputs.value.LegOdds) {
-        params.append('legOdds', encodeURIComponent(inputs.value.LegOdds));
-    }
-
-    if (inputs.value.Boost_Text) {
-        params.append('boost', inputs.value.Boost_Text);
-    }
-
-    return `${baseUrl}?${params.toString()}`;
-});
-
 const isCurrentResultBookmarked = computed(() => {
     if (!results.value || !bookmarks.value.length) return false;
 

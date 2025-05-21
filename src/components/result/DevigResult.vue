@@ -39,7 +39,7 @@ const backgroundColor = computed(() => {
 const shareUrl = computed(() => {
     if (!props.results || !props.results.inputData) return window.location.href;
 
-    const baseUrl = window.location.origin + '/devig';
+    const baseUrl = window.location.origin + '/devig-calculator';
     const { finalOdds, legOdds, boost, correlation, freeBetType, freeBetPercentage, conversionRate } = props.results.inputData;
 
     const params = new URLSearchParams();
