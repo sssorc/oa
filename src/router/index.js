@@ -12,7 +12,7 @@ const router = createRouter({
         {
             path: '/arbitrage-calculator',
             name: 'arbitrage',
-            component: () => import('../pages/PageArbitrage.vue'),
+            component: () => import('../pages/calculators/PageArbitrage.vue'),
         },
         {
             path: '/arbitrage',
@@ -25,7 +25,7 @@ const router = createRouter({
         {
             path: '/hedge-calculator',
             name: 'hedge',
-            component: () => import('../pages/PageHedge.vue'),
+            component: () => import('../pages/calculators/PageHedge.vue'),
         },
         {
             path: '/hedge',
@@ -34,7 +34,7 @@ const router = createRouter({
         {
             path: '/bonus-bet-calculator',
             name: 'bonus-bet',
-            component: () => import('../pages/PageBonusBet.vue'),
+            component: () => import('../pages/calculators/PageBonusBet.vue'),
         },
         {
             path: '/bonus-bet',
@@ -43,7 +43,7 @@ const router = createRouter({
         {
             path: '/free-bet-calculator',
             name: 'free-bet',
-            component: () => import('../pages/PageFreeBet.vue'),
+            component: () => import('../pages/calculators/PageFreeBet.vue'),
         },
         {
             path: '/free-bet',
@@ -52,7 +52,7 @@ const router = createRouter({
         {
             path: '/risk-free-bet-calculator',
             name: 'risk-free',
-            component: () => import('../pages/PageRiskFree.vue'),
+            component: () => import('../pages/calculators/PageRiskFree.vue'),
         },
         {
             path: '/risk-free',
@@ -61,7 +61,7 @@ const router = createRouter({
         {
             path: '/devig-calculator',
             name: 'devig',
-            component: () => import('../pages/PageDevig.vue'),
+            component: () => import('../pages/calculators/PageDevig.vue'),
         },
         {
             path: '/devig',
