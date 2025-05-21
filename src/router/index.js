@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { trackPageView } from '@/utils/analytics';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -105,6 +106,11 @@ const router = createRouter({
             props: true,
         },
     ],
+});
+
+// Track page views on route changes
+router.afterEach((to) => {
+    trackPageView(to.fullPath);
 });
 
 export default router;

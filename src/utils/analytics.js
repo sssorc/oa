@@ -1,4 +1,4 @@
-import { event } from 'vue-gtag';
+import { event, pageview } from 'vue-gtag';
 
 export const trackCalculatorSubmit = (calculatorType) => {
     event('submit_calculator', {
@@ -23,5 +23,12 @@ export const trackBookmark = (calculatorType) => {
 export const trackThemeChange = (theme) => {
     event('set_theme', {
         theme,
+    });
+};
+
+export const trackPageView = (path) => {
+    pageview({
+        page_path: path,
+        page_title: document.title,
     });
 };
