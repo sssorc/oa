@@ -24,7 +24,8 @@
             { "name": "TwinSpires" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "Bally Bet" }
+            { "name": "Bally Bet" },
+            { "name": "ESPNBet" }
         ],
         "inactive": [
             {
@@ -148,7 +149,6 @@
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "Circa Sports" },
             { "name": "Bet365" },
@@ -161,6 +161,11 @@
                 "name": "Barstool Sportsbook",
                 "status": "Became ESPNBet",
                 "date": "2023-11-14"
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
@@ -173,7 +178,6 @@
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "PrizePicks" },
             { "name": "Bet365" },
@@ -197,6 +201,11 @@
                 "name": "Unibet",
                 "status": "Closed",
                 "date": "2024-04-11"
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
@@ -209,7 +218,6 @@
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "Circa Sports" },
             { "name": "Bet365" },
@@ -236,27 +244,28 @@
                 "name": "Unibet",
                 "status": "Closed",
                 "date": "2024-04-11"
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
     "kansas": {
         "legal": true,
         "updatedAt": "2025-05-18",
-        "active": [
-            { "name": "BetMGM" },
-            { "name": "Caesars" },
-            { "name": "DraftKings" },
-            { "name": "FanDuel" },
-            { "name": "BetRivers" },
-            { "name": "PointsBet" },
-            { "name": "ESPNBet" },
-            { "name": "Fanatics" }
-        ],
+        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetRivers" }, { "name": "ESPNBet" }, { "name": "Fanatics" }],
         "inactive": [
             {
                 "name": "Barstool Sportsbook",
                 "status": "Became ESPNBet",
                 "date": "2023-11-14"
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
@@ -269,7 +278,6 @@
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "Circa Sports" },
             { "name": "Bet365" },
@@ -280,6 +288,11 @@
                 "name": "Barstool Sportsbook",
                 "status": "Became ESPNBet",
                 "date": "2023-11-14"
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
@@ -292,7 +305,6 @@
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "Bet365" },
             { "name": "Fanatics" }
@@ -312,6 +324,11 @@
                 "name": "WynnBET",
                 "status": "Closed",
                 "date": ""
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
@@ -330,7 +347,6 @@
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "WynnBET" },
             { "name": "Fanatics" },
@@ -352,6 +368,11 @@
                 "name": "SuperBook",
                 "status": "Closed",
                 "date": "2024-07-19"
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
@@ -376,7 +397,6 @@
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "Fox Bet" },
             { "name": "Fanatics" },
@@ -452,7 +472,6 @@
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "Hard Rock Bet" },
             { "name": "Bally Bet" },
@@ -498,10 +517,10 @@
             { "name": "BetMGM" },
             { "name": "Caesars" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "Resorts World Bet" },
             { "name": "Bally Bet" },
-            { "name": "Fanatics" }
+            { "name": "Fanatics" },
+            { "name": "ESPNBet" }
         ],
         "inactive": [
             {
@@ -513,6 +532,11 @@
                 "name": "PrizePicks",
                 "status": "Banned",
                 "date": ""
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
@@ -547,7 +571,6 @@
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "Bally Bet" },
             { "name": "Bet365" },
@@ -569,6 +592,11 @@
                 "name": "SuperBook",
                 "status": "Closed",
                 "date": "2024-07-19"
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
@@ -593,7 +621,6 @@
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "Parx" },
             { "name": "FOX Bet" },
@@ -612,6 +639,11 @@
                 "name": "Unibet",
                 "status": "Closed",
                 "date": "2024-04-11"
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
@@ -664,6 +696,11 @@
                 "name": "WynnBET",
                 "status": "Closed",
                 "date": ""
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
@@ -694,7 +731,6 @@
             { "name": "BetMGM" },
             { "name": "BetRivers" },
             { "name": "Caesars" },
-            { "name": "PointsBet" },
             { "name": "ESPNBet" },
             { "name": "Fanatics" },
             { "name": "bet365" },
@@ -761,16 +797,7 @@
     "west_virginia": {
         "legal": true,
         "updatedAt": "2025-05-18",
-        "active": [
-            { "name": "BetMGM" },
-            { "name": "Caesars" },
-            { "name": "DraftKings" },
-            { "name": "FanDuel" },
-            { "name": "BetRivers" },
-            { "name": "PointsBet" },
-            { "name": "ESPNBet" },
-            { "name": "Fanatics" }
-        ],
+        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetRivers" }, { "name": "ESPNBet" }, { "name": "Fanatics" }],
         "inactive": [
             {
                 "name": "Barstool Sportsbook",
@@ -781,6 +808,11 @@
                 "name": "WynnBET",
                 "status": "Closed",
                 "date": "2023-08-11"
+            },
+            {
+                "name": "PointsBet",
+                "status": "Acquired by Fanatics",
+                "date": "2023-08-31"
             }
         ]
     },
