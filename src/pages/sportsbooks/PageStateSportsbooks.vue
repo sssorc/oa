@@ -75,6 +75,7 @@ useSeoMeta({
     twitterCard: 'summary_large_image',
     twitterTitle: `${formattedState.value} Sportsbooks - Legal Online Sports Betting Sites`,
     twitterDescription: `Complete list of legal sportsbooks available in ${formattedState.value}. Find the best online sports betting sites, current promotions, and betting options.`,
+    canonical: `https://hedgecalc.com/sportsbooks/${state.value}`,
 });
 </script>
 

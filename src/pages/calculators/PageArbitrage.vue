@@ -9,7 +9,11 @@ import { trackCalculatorSubmit } from '@/utils/analytics';
 import { getPayout, getStake } from '@/utils/helpers';
 
 // Set page title
-usePageTitle('Sports Betting Arbitrage Calculator', 'Calculate optimal bet sizes for arbitrage opportunities and hedges. Find the perfect stake amounts for guaranteed profits or risk management.');
+usePageTitle(
+    'Sports Betting Arbitrage Calculator',
+    'Calculate optimal bet size and ROI for arbitrage opportunities. Lock in risk-free profit regardless of the outcome.',
+    'https://hedgecalc.com/arbitrage-calculator'
+);
 
 // State
 const results = ref(false);

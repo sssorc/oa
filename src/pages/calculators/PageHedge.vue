@@ -9,7 +9,7 @@ import { trackCalculatorSubmit } from '@/utils/analytics';
 import { getPayout, getStake } from '@/utils/helpers';
 
 // Set page title
-usePageTitle('Sports Betting Hedge Calculator', 'Calculate optimal bet size for your hedge. Find the perfect stake amounts for guaranteed profits.');
+usePageTitle('Sports Betting Hedge Calculator', 'Calculate optimal bet size for hedging a bet and win the same amount regardless of the outcome.', 'https://hedgecalc.com/hedge-calculator');
 
 // State
 const results = ref(false);
