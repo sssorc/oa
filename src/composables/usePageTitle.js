@@ -30,6 +30,7 @@ export function usePageTitle(title, description = defaultDescription, canonicalU
         ogUrl: currentUrl,
         ogType: 'website',
         ogSiteName: siteName,
+        ogImage: `${siteUrl}/icon.svg`,
         twitterCard: 'summary_large_image',
         twitterTitle: fullTitle,
         twitterDescription: description,
