@@ -24,5 +24,8 @@ export const getStake = (oddsB, payoutA) => {
     if (odds < 0) {
         const o = (odds * -1) / 100;
         return Number((payout / (1 + 1 / o)).toFixed(2));
+    } else {
+        const o = odds / 100;
+        return Number((payout / (1 + o)).toFixed(2));
     }
 };
