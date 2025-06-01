@@ -159,18 +159,16 @@ const getLegData = (data) => {
 
 const getJuice = (data) => {
     let juice = 0;
-    let count = 0;
 
     for (const key in data) {
         let obj = data[key];
 
         if (Object.hasOwnProperty.call(obj, 'MarketJuice')) {
             juice += obj.MarketJuice;
-            count += 1;
         }
     }
 
-    return round((juice / count) * 100);
+    return round(juice * 100);
 };
 
 const areInputsUnchanged = () => {
