@@ -57,7 +57,7 @@ const shareUrl = computed(() => {
 const discordText = computed(() => {
     if (!props.results) return '';
 
-    return `Odds: ${props.results.finalOdds}; **EV: ${props.results.ev}%**\n\n\`${props.results.inputLegs}\` (${props.results.juice}% juice)\n\nFV: ${props.results.fairOdds}; Method: worst-case (${props.results.wcMethod}); (QK = ${round(props.results.kellyFull / 4)}u, FB = ${props.results.conversionPercentage}%)\n\n<${shareUrl.value}>`;
+    return `${props.results.finalOdds} = **${props.results.ev}% EV**; ${round(props.results.kellyFull / 4)}u QK\n\n\`${props.results.inputLegs}\` (${props.results.juice}% juice)\n\nFV: ${props.results.fairOdds}; Method: worst-case (${props.results.wcMethod}); FB: ${props.results.conversionPercentage}%\n\n[View/Edit Devig](<${shareUrl.value}>)`;
 });
 
 const kellyStakeSize = computed(() => {
