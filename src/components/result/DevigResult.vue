@@ -50,6 +50,7 @@ const shareUrl = computed(() => {
     if (freeBetType) params.set('freeBetType', freeBetType);
     if (freeBetPercentage) params.set('freeBetPercentage', freeBetPercentage);
     if (conversionRate) params.set('conversionRate', conversionRate);
+    params.set('utm_source', 'view_devig');
 
     return `${baseUrl}?${params.toString()}`;
 });
