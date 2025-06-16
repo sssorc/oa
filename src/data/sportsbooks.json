@@ -517,12 +517,16 @@
             { "name": "BetMGM" },
             { "name": "Caesars" },
             { "name": "BetRivers" },
-            { "name": "Resorts World Bet" },
             { "name": "Bally Bet" },
             { "name": "Fanatics" },
             { "name": "ESPNBet" }
         ],
         "inactive": [
+            {
+                "name": "Resorts World Bet",
+                "status": "Closed",
+                "date": "2025-06-30"
+            },
             {
                 "name": "WynnBET",
                 "status": "Closed",
