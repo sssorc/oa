@@ -42,7 +42,7 @@ usePageTitle('Why does hedging lower EV?', 'Hedging your bets will reduce varian
         </p>
 
         <h2>Strategy 2: Hedge the last leg</h2>
-        <p>Now let's calculate what the ROI would be if we always hedged with a -110 bet when our parlay made it to its last leg.</p>
+        <p>Now let's calculate the ROI if we hedge every parlay that reaches its final leg with a -110 bet.</p>
         <p>25% of bets will make it to the last leg:</p>
         <p class="bg-pale-blue/30 border-jet/10 border p-4 text-sm">0.5 &times; 0.5 = 0.25</p>
         <p>
@@ -52,7 +52,7 @@ usePageTitle('Why does hedging lower EV?', 'Hedging your bets will reduce varian
         <p class="bg-pale-blue/30 border-jet/10 border p-4 text-sm">
             Total profit = (1,000 &times; 0.25 &times; $31.6) + (1,000 &times; 0.75 &times; -$10)<br />
             <span class="invisible">Total profit</span> = (250 &times; $31.6) + (750 &times; -$10)<br />
-            <span class="invisible">Total profit</span> = $7,900 + -$7,500<br />
+            <span class="invisible">Total profit</span> = $7,900 - $7,500<br />
             <span class="invisible">Total profit</span> = $400
         </p>
         <p>The total profit is <strong>$400</strong>, which is significantly less than the unhedged strategy.</p>
@@ -68,8 +68,8 @@ usePageTitle('Why does hedging lower EV?', 'Hedging your bets will reduce varian
             <span class="invisible">Hedged EV</span> = $31.6
         </p>
         <p>
-            So while you smooth out variance with hedging, you are forfeiting $2.1 in EV dollars on each of those 250 parlays that make it to the last leg. $2.1 &times; 250 = <strong>$525</strong>,
-            which is the difference in profit between the two strategies above.
+            So while you smooth out variance with hedging, you are forfeiting $2.1 in expected value on each of those 250 parlays that make it to the last leg. $2.1 &times; 250 =
+            <strong>$525</strong>, which is the difference in profit between the two strategies above.
         </p>
     </KnowledgeArticle>
 </template>
