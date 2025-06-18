@@ -16,6 +16,7 @@ usePageTitle('Sports Betting Knowledge Base', 'Beginner-friendly explanations of
             <KnowledgeLink to="/knowledge/what-is-positive-ev">What is positive expected value (+EV)?</KnowledgeLink>
             <KnowledgeLink to="/knowledge/what-is-a-zero-hold">What is a zero hold?</KnowledgeLink>
             <KnowledgeLink to="/knowledge/what-is-a-devig">What is a devig?</KnowledgeLink>
+            <KnowledgeLink to="/knowledge/why-hedging-lowers-ev">Why does hedging lower EV?</KnowledgeLink>
             <KnowledgeLink to="/sportsbooks">What sportsbooks are available in my state?</KnowledgeLink>
         </div>
     </div>

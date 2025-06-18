@@ -98,6 +98,11 @@ const router = createRouter({
             name: 'what-is-a-devig',
             component: () => import('../pages/knowledge/PageWhatIsADevig.vue'),
         },
+        {
+            path: '/knowledge/why-hedging-lowers-ev',
+            name: 'why-hedging-lowers-ev',
+            component: () => import('../pages/knowledge/PageWhyHedgingLowersEV.vue'),
+        },
         // Sportsbooks routes
         {
             path: '/sportsbooks',

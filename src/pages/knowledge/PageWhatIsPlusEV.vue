@@ -15,7 +15,7 @@ usePageTitle('What is Positive EV?', 'Understand positive expected value (EV) in
             Every bet has an expected value (EV) based on the odds and the implied probability of hitting. When this value is positive for a bet, it's said to be "+EV". The formula for calculating EV
             is:
         </p>
-        <p class="bg-pale-blue/30 border-jet/10 border p-4 text-sm">(Amount won per bet * probability of winning) – (Amount lost per bet * probability of losing)</p>
+        <p class="bg-pale-blue/30 border-jet/10 border p-4 text-sm">(Amount won per bet &times; probability of winning) – (Amount lost per bet &times; probability of losing)</p>
         <p>+EV bets = good</p>
         <p>-EV bets = bad</p>
 
@@ -29,7 +29,7 @@ usePageTitle('What is Positive EV?', 'Understand positive expected value (EV) in
             of this bet is 0.05. You can plug these numbers into the <router-link to="/devig-calculator?finalOdds=110&legOdds=100">devig calculator</router-link> to see it's a 5% EV bet.
         </p>
         <p>Using the formula:</p>
-        <p>EV = (1.1 * 0.5) - (1 * 0.5)</p>
+        <p>EV = (1.1 &times; 0.5) - (1 &times; 0.5)</p>
         <p>EV = 0.55 - 0.5</p>
         <p>EV = 0.05</p>
         <p>Across many bets, you can expect to win $0.05 (or 5%) for every $1 wagered.</p>
