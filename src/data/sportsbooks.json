@@ -630,10 +630,19 @@
             { "name": "FOX Bet" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "Betfred" },
             { "name": "TwinSpires" }
         ],
         "inactive": [
+            {
+                "name": "Betfred",
+                "status": "Closed",
+                "date": "2025-07-31"
+            },
+            {
+                "name": "Wind Creek",
+                "status": "Closed",
+                "date": "2025-07-31"
+            },
             {
                 "name": "Barstool Sportsbook",
                 "status": "Became ESPNBet",
