@@ -10,9 +10,7 @@ import ThemeToggle from '@/components/ui/ThemeToggle.vue';
                 <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 sm:order-2">
                     <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">support</AppFooterLink>
                     <AppFooterLink href="/knowledge">knowledge</AppFooterLink>
-                    <AppFooterLink href="https://chromewebstore.google.com/detail/cno-parlay-buddy/hcpaaidgaenjoobhlbacpfnolcebefef?hl=en-US&utm_source=hedge_calcr" target="_blank"
-                        >parlay buddy</AppFooterLink
-                    >
+                    <AppFooterLink href="/parlay-buddy">parlay buddy</AppFooterLink>
                     <AppFooterLink href="https://discord.com/users/956734805033250826" target="_blank">contact</AppFooterLink>
                 </nav>
                 <ThemeToggle class="ml-auto sm:order-1 sm:ml-0" />

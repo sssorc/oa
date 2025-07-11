@@ -115,6 +115,12 @@ const router = createRouter({
             component: () => import('../pages/sportsbooks/PageStateSportsbooks.vue'),
             props: true,
         },
+        // Parlay Buddy routes
+        {
+            path: '/parlay-buddy',
+            name: 'parlay-buddy',
+            component: () => import('../pages/ParlayBuddy.vue'),
+        },
     ],
 });
 

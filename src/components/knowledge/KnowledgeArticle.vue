@@ -2,6 +2,12 @@
 import BackButton from '@/components/ui/BackButton.vue';
 import { onMounted } from 'vue';
 
+const props = defineProps({
+    backButton: {
+        type: Boolean,
+        default: true,
+    },
+});
 onMounted(() => {
     window.scrollTo(0, 0);
 });
@@ -11,6 +17,6 @@ onMounted(() => {
         <div class="prose">
             <slot></slot>
         </div>
-        <BackButton to="/knowledge" class="mt-10">Back to knowledge base</BackButton>
+        <BackButton v-if="backButton" to="/knowledge" class="mt-10">Back to knowledge base</BackButton>
     </article>
 </template>
