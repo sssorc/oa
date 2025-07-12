@@ -1,19 +1,19 @@
 {
     "alabama": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [],
         "inactive": []
     },
     "alaska": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [],
         "inactive": []
     },
     "arizona": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -25,7 +25,9 @@
             { "name": "Bet365" },
             { "name": "Fanatics" },
             { "name": "Bally Bet" },
-            { "name": "ESPNBet" }
+            { "name": "ESPNBet" },
+            { "name": "PrizePicks" },
+            { "name": "Sporttrade" }
         ],
         "inactive": [
             {
@@ -52,22 +54,22 @@
     },
     "arkansas": {
         "legal": true,
-        "updatedAt": "2025-05-18",
-        "active": [{ "name": "Betly" }, { "name": "Saracen Sportsbook" }, { "name": "PrizePicks" }],
+        "updatedAt": "2025-07-11",
+        "active": [{ "name": "Betly" }, { "name": "BetSaracen" }, { "name": "PrizePicks" }],
         "inactive": []
     },
     "california": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [],
         "inactive": []
     },
     "colorado": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "Bally Bet" },
-            { "name": "Bet Monarch" },
+            { "name": "BetMonarch" },
             { "name": "Bet365" },
             { "name": "BetMGM" },
             { "name": "BetRivers" },
@@ -79,7 +81,9 @@
             { "name": "Fanatics" },
             { "name": "Smarkets" },
             { "name": "Sporttrade" },
-            { "name": "TwinSpires" }
+            { "name": "TwinSpires" },
+            { "name": "SBK Sportsbook" },
+            { "name": "Smarkets" }
         ],
         "inactive": [
             {
@@ -101,48 +105,58 @@
                 "name": "WynnBET",
                 "status": "Closed",
                 "date": ""
+            },
+            {
+                "name": "Betsafe",
+                "status": "Closed",
+                "date": "2024-09-30"
+            },
+            {
+                "name": "ClutchBet",
+                "status": "Closed",
+                "date": "2024-09-16"
             }
         ]
     },
     "connecticut": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "PlaySugarHouse" }, { "name": "Fanatics" }],
         "inactive": []
     },
     "delaware": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "BetRivers" }],
         "inactive": []
     },
     "florida": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "Hard Rock Bet" }],
         "inactive": []
     },
     "georgia": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "PrizePicks" }],
         "inactive": []
     },
     "hawaii": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [],
         "inactive": []
     },
     "idaho": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [],
         "inactive": []
     },
     "illinois": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -171,7 +185,7 @@
     },
     "indiana": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -184,7 +198,8 @@
             { "name": "Fanatics" },
             { "name": "Hard Rock Bet" },
             { "name": "Bally Bet" },
-            { "name": "TwinSpires" }
+            { "name": "TwinSpires" },
+            { "name": "SBK Sportsbook" }
         ],
         "inactive": [
             {
@@ -211,7 +226,7 @@
     },
     "iowa": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -249,12 +264,17 @@
                 "name": "PointsBet",
                 "status": "Acquired by Fanatics",
                 "date": "2023-08-31"
+            },
+            {
+                "name": "ClutchBet",
+                "status": "Closed",
+                "date": "2024-09-16"
             }
         ]
     },
     "kansas": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetRivers" }, { "name": "ESPNBet" }, { "name": "Fanatics" }],
         "inactive": [
             {
@@ -271,7 +291,7 @@
     },
     "kentucky": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -298,7 +318,7 @@
     },
     "louisiana": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -329,18 +349,23 @@
                 "name": "PointsBet",
                 "status": "Acquired by Fanatics",
                 "date": "2023-08-31"
+            },
+            {
+                "name": "ClutchBet",
+                "status": "Closed",
+                "date": "2024-09-16"
             }
         ]
     },
     "maine": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "DraftKings" }, { "name": "Caesars" }],
         "inactive": []
     },
     "maryland": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -378,7 +403,7 @@
     },
     "massachusetts": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetMGM" }, { "name": "Caesars" }, { "name": "Fanatics" }, { "name": "ESPNBet" }, { "name": "Bally Bet" }],
         "inactive": [
             {
@@ -390,7 +415,7 @@
     },
     "michigan": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -417,37 +442,37 @@
     },
     "minnesota": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "PrizePicks" }],
         "inactive": []
     },
     "mississippi": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "TwinSpires" }],
         "inactive": []
     },
     "missouri": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [],
         "inactive": []
     },
     "montana": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "Sports Bet Montana" }],
         "inactive": []
     },
     "nebraska": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "PrizePicks" }],
         "inactive": []
     },
     "nevada": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "Circa Sports" }, { "name": "STN Sports" }, { "name": "William Hill" }],
         "inactive": [
             {
@@ -459,13 +484,13 @@
     },
     "new_hampshire": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "DraftKings" }],
         "inactive": []
     },
     "new_jersey": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -504,13 +529,13 @@
     },
     "new_mexico": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "PrizePicks" }],
         "inactive": []
     },
     "new_york": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "FanDuel" },
             { "name": "DraftKings" },
@@ -546,7 +571,7 @@
     },
     "north_carolina": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "Bet365" },
             { "name": "BetMGM" },
@@ -562,13 +587,13 @@
     },
     "north_dakota": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "PrizePicks" }],
         "inactive": []
     },
     "ohio": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -606,19 +631,19 @@
     },
     "oklahoma": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "PrizePicks" }],
         "inactive": []
     },
     "oregon": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "DraftKings" }],
         "inactive": []
     },
     "pennsylvania": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -662,25 +687,25 @@
     },
     "rhode_island": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "Sportsbook Rhode Island" }, { "name": "PrizePicks" }],
         "inactive": []
     },
     "south_carolina": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "PrizePicks" }],
         "inactive": []
     },
     "south_dakota": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "PrizePicks" }],
         "inactive": []
     },
     "tennessee": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "FanDuel" },
             { "name": "DraftKings" },
@@ -719,25 +744,25 @@
     },
     "texas": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "PrizePicks" }],
         "inactive": []
     },
     "utah": {
         "legal": false,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "PrizePicks" }],
         "inactive": []
     },
     "vermont": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "Fanatics" }, { "name": "PrizePicks" }],
         "inactive": []
     },
     "virginia": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [
             { "name": "FanDuel" },
             { "name": "DraftKings" },
@@ -797,7 +822,7 @@
     },
     "washington": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }],
         "inactive": [
             {
@@ -809,7 +834,7 @@
     },
     "west_virginia": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetRivers" }, { "name": "ESPNBet" }, { "name": "Fanatics" }],
         "inactive": [
             {
@@ -831,19 +856,19 @@
     },
     "wisconsin": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "Oneida Casino Sportsbook" }, { "name": "PrizePicks" }],
         "inactive": []
     },
     "wyoming": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "Fanatics" }],
         "inactive": []
     },
     "district_of_columbia": {
         "legal": true,
-        "updatedAt": "2025-05-18",
+        "updatedAt": "2025-07-11",
         "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "BetMGM" }, { "name": "Caesars" }, { "name": "ESPNBet" }, { "name": "Fanatics" }],
         "inactive": []
     }
