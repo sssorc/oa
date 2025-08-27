@@ -40,7 +40,7 @@ html {
     }
 
     .prose a {
-        @apply decoration-pink hover:decoration-pale-blue dark:decoration-pale-blue dark:hover:decoration-green underline decoration-2 underline-offset-2 transition-colors duration-100;
+        @apply decoration-pink hover:decoration-pale-blue dark:decoration-pale-blue dark:hover:decoration-green underline decoration-2 underline-offset-2;
     }
 
     .prose p {

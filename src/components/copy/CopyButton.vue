@@ -20,7 +20,7 @@ const props = defineProps({
 const copySuccess = ref(false);
 
 const visibleClasses = '!opacity-100 !scale-100';
-const hiddenClasses = '!scale-[50%] !opacity-0';
+const hiddenClasses = '!scale-[30%] !opacity-0';
 
 async function copyContent() {
     if (copySuccess.value) return;
@@ -69,7 +69,7 @@ async function copyContent() {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
                     width="13"
-                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-[50%] opacity-0 transition-[opacity,scale] duration-200 ease-in-out"
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-[30%] opacity-0 transition-[opacity,scale] duration-200 ease-in-out"
                 >
                     <path
                         fill="currentColor"

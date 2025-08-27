@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router';
 
 <template>
     <RouterLink
-        class="group border-jet hover:ring-ice-blue hover:bg-green/10 dark:hover:bg-ice-blue/20 dark:hover:border-ice-blue rounded border px-6 py-4 ring ring-transparent ring-offset-2 ring-offset-transparent transition-all duration-100 lg:py-6 dark:border-gray-600 dark:bg-gray-800 dark:hover:ring-transparent"
+        class="group border-jet hover:ring-ice-blue hover:bg-green/10 dark:hover:bg-ice-blue/20 dark:hover:border-ice-blue rounded border px-6 py-4 ring ring-transparent ring-offset-2 ring-offset-transparent lg:py-6 dark:border-gray-600 dark:bg-gray-800 dark:hover:ring-transparent"
     >
         <article class="flex items-center justify-between gap-4">
             <h2 class="text-lg font-bold lg:text-xl">
