@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue';
 import { onBeforeRouteUpdate, useRouter, useRoute } from 'vue-router';
 import AppHeaderLink from '@/components/ui/AppHeaderLink.vue';
+import AppFooterLink from '@/components/ui/AppFooterLink.vue';
 
 const showNav = ref(false);
 const route = useRoute();
@@ -16,7 +17,13 @@ watch(
 </script>
 
 <template>
-    <header class="border-pale-blue dark:border-pale-blue/60 mx-auto w-full max-w-7xl border-b px-5 py-4 lg:pt-8 lg:pb-6" style="box-shadow: 0 4px 5px -5px #bebebe">
+    <header class="border-pale-blue dark:border-pale-blue/60 mx-auto w-full max-w-7xl border-b px-5 py-4 lg:pt-4 lg:pb-6" style="box-shadow: 0 4px 5px -5px #bebebe">
+        <nav class="border-jet mb-4 flex flex-wrap gap-x-6 border-b pb-2 text-sm max-lg:hidden">
+            <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">support</AppFooterLink>
+            <AppFooterLink href="/knowledge">knowledge</AppFooterLink>
+            <AppFooterLink href="/parlay-buddy">parlay buddy</AppFooterLink>
+            <AppFooterLink href="https://discord.com/users/956734805033250826" target="_blank">contact</AppFooterLink>
+        </nav>
         <div class="flex items-center justify-end">
             <RouterLink to="/" class="mr-auto flex items-center gap-3 font-mono font-bold lg:pt-2">
                 <svg class="dark:hidden" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 180 180" fill="none">
