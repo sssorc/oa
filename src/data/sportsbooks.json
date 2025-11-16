@@ -8,7 +8,7 @@
     "alaska": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [],
+        "active": [{ "name": "Underdog" }],
         "inactive": []
     },
     "arizona": {
@@ -141,7 +141,7 @@
     "georgia": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "PrizePicks" }],
+        "active": [{ "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "hawaii": {
@@ -201,7 +201,8 @@
             { "name": "Hard Rock Bet" },
             { "name": "Bally Bet" },
             { "name": "TwinSpires" },
-            { "name": "SBK Sportsbook" }
+            { "name": "SBK Sportsbook" },
+            { "name": "Underdog" }
         ],
         "inactive": [
             {
@@ -445,7 +446,7 @@
     "minnesota": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "PrizePicks" }],
+        "active": [{ "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "mississippi": {
@@ -469,7 +470,7 @@
     "nebraska": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "PrizePicks" }],
+        "active": [{ "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "nevada": {
@@ -532,7 +533,7 @@
     "new_mexico": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "PrizePicks" }],
+        "active": [{ "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "new_york": {
@@ -590,7 +591,7 @@
     "north_dakota": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "PrizePicks" }],
+        "active": [{ "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "ohio": {
@@ -634,13 +635,13 @@
     "oklahoma": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "PrizePicks" }],
+        "active": [{ "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "oregon": {
         "legal": true,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "DraftKings" }],
+        "active": [{ "name": "DraftKings" }, { "name": "Underdog" }],
         "inactive": []
     },
     "pennsylvania": {
@@ -696,13 +697,13 @@
     "south_carolina": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "PrizePicks" }],
+        "active": [{ "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "south_dakota": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "PrizePicks" }],
+        "active": [{ "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "tennessee": {
@@ -747,13 +748,13 @@
     "texas": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "PrizePicks" }],
+        "active": [{ "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "utah": {
         "legal": false,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "PrizePicks" }],
+        "active": [{ "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "vermont": {
@@ -860,7 +861,7 @@
     "wisconsin": {
         "legal": true,
         "updatedAt": "2025-07-11",
-        "active": [{ "name": "Oneida Casino Sportsbook" }, { "name": "PrizePicks" }],
+        "active": [{ "name": "Oneida Casino Sportsbook" }, { "name": "PrizePicks" }, { "name": "Underdog" }],
         "inactive": []
     },
     "wyoming": {
