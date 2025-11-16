@@ -17,6 +17,7 @@
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
+            { "name": "Desert Diamond" },
             { "name": "DraftKings" },
             { "name": "FanDuel" },
             { "name": "BetRivers" },
@@ -79,6 +80,7 @@
             { "name": "ESPNBet" },
             { "name": "FanDuel" },
             { "name": "Fanatics" },
+            { "name": "Hard Rock Bet" },
             { "name": "Smarkets" },
             { "name": "Sporttrade" },
             { "name": "TwinSpires" },
@@ -765,6 +767,7 @@
         "updatedAt": "2025-07-11",
         "active": [
             { "name": "FanDuel" },
+            { "name": "Bally Bet" },
             { "name": "DraftKings" },
             { "name": "BetMGM" },
             { "name": "BetRivers" },
