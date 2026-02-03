@@ -18,6 +18,10 @@ const props = defineProps({
         type: Number,
         required: true,
     },
+    oddsFormat: {
+        type: String,
+        required: true,
+    },
     isBookmarked: {
         type: Boolean,
         default: false,
@@ -104,6 +108,42 @@ function formatUSD(number) {
     return dollarUS.format(number).replace('.00', '');
 }
 
+function convertToDecimalOdds(value) {
+    // Handle invalid inputs
+    if (value === null || value === undefined || isNaN(value) || value === 0) {
+        return null;
+    }
+
+    // Convert American odds to decimal odds
+    if (value > 0) {
+        // Positive American odds (underdog)
+        return parseFloat((value / 100 + 1).toFixed(2));
+    } else {
+        // Negative American odds (favorite)
+        return parseFloat((100 / Math.abs(value) + 1).toFixed(2));
+    }
+}
+
+const fairOdds = computed(() => {
+    if (!props.results) return '';
+
+    if (props.oddsFormat === 'decimal') {
+        return convertToDecimalOdds(props.results.fairOdds);
+    }
+
+    return props.results.fairOdds;
+});
+
+const finalOdds = computed(() => {
+    if (!props.results) return '';
+
+    if (props.oddsFormat === 'decimal') {
+        return convertToDecimalOdds(props.results.finalOdds);
+    }
+
+    return props.results.finalOdds;
+});
+
 watch(
     () => props.results,
     async (newVal) => {
@@ -180,11 +220,11 @@ watch(
                 </div>
                 <div class="mt-8 flex flex-wrap justify-between gap-4">
                     <div class="text-left">
-                        <div class="font-numbers font-bold">{{ results.finalOdds }}</div>
+                        <div class="font-numbers font-bold">{{ finalOdds }}</div>
                         <div class="font-mono text-xs tracking-tight">Final Odds</div>
                     </div>
                     <div class="text-left">
-                        <div class="font-numbers font-bold">{{ results.fairOdds }}</div>
+                        <div class="font-numbers font-bold">{{ fairOdds }}</div>
                         <div class="font-mono text-xs tracking-tight">Fair Odds</div>
                     </div>
                     <div class="text-left">

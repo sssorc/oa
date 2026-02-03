@@ -24,6 +24,7 @@ const freeBetPercentage = ref('100');
 const conversionRate = ref('70');
 const sharp = ref('');
 const bookmarks = ref([]);
+const oddsFormat = ref('american');
 const inputs = ref({
     LegOdds: '',
     FinalOdds: '',
@@ -76,8 +77,33 @@ watch(kellyBankroll, (newValue) => {
     setCookie('kellyBankroll', newValue);
 });
 
+watch(oddsFormat, (newValue) => {
+    setCookie('oddsFormat', newValue);
+});
+
+function convertToAmericanOdds(value) {
+    // Handle invalid inputs
+    if (value === null || value === undefined || isNaN(value) || value < 1) {
+        return null;
+    }
+
+    // Convert decimal odds to American odds
+    if (value >= 2) {
+        // Positive American odds (underdog)
+        return Math.round((value - 1) * 100);
+    } else {
+        // Negative American odds (favorite)
+        return Math.round(-100 / (value - 1));
+    }
+}
+
 // Methods
 const getFinalOddsForRequest = (value) => {
+    // Convert from decimal?
+    if (oddsFormat.value == 'decimal') {
+        value = convertToAmericanOdds(value);
+    }
+
     if (freeBetType.value == 0) {
         return encodeURIComponent(value);
     }
@@ -95,6 +121,16 @@ const getFinalOddsForRequest = (value) => {
 
     let out = `#=${value};${type}=${percentBack}x`;
     return encodeURIComponent(out);
+};
+
+const getLegOddsForRequest = (value) => {
+    if (oddsFormat.value == 'decimal') {
+        const arr = value.split('/');
+
+        return arr.map(convertToAmericanOdds).join('/');
+    }
+
+    return encodeURIComponent(value);
 };
 
 const formatFinalOdds = () => {
@@ -217,6 +253,9 @@ const onSubmit = async () => {
         if (key === 'FinalOdds') {
             let formatted = getFinalOddsForRequest(value);
             params.push(`${key}=${formatted}`);
+        } else if (key === 'LegOdds') {
+            let formatted = getLegOddsForRequest(value);
+            params.push(`${key}=${formatted}`);
         } else if (value || value === 0) {
             params.push(`${key}=${value}`);
         }
@@ -316,12 +355,18 @@ onMounted(() => {
     // Load saved values from cookies
     const savedConversionRate = getCookie('conversionRate');
     const savedKellyBankroll = getCookie('kellyBankroll');
+    const savedOddsFormat = getCookie('oddsFormat');
 
     if (savedConversionRate) {
         conversionRate.value = savedConversionRate;
     }
+
     if (savedKellyBankroll) {
         kellyBankroll.value = Number(savedKellyBankroll);
+    }
+
+    if (savedOddsFormat) {
+        oddsFormat.value = savedOddsFormat;
     }
 
     document.addEventListener('keydown', (event) => {
@@ -451,7 +496,7 @@ onMounted(() => {
                 </form>
 
                 <div class="max-w-[420px] md:min-w-[320px] md:flex-1">
-                    <DevigResult :results="results" :bankroll="kellyBankroll" :is-bookmarked="isCurrentResultBookmarked" @toggle-bookmark="onToggleBookmark" />
+                    <DevigResult :results="results" :bankroll="kellyBankroll" :odds-format="oddsFormat" :is-bookmarked="isCurrentResultBookmarked" @toggle-bookmark="onToggleBookmark" />
                 </div>
             </div>
         </section>
@@ -473,7 +518,12 @@ onMounted(() => {
         </section>
 
         <section class="mx-auto max-w-7xl px-5 text-right">
-            <div class="bg-slate/10 inline-flex gap-4 p-3 shadow dark:bg-gray-700">
+            <div class="bg-slate/10 inline-flex items-start gap-8 p-3 shadow dark:bg-gray-700">
+                <div class="flex flex-col gap-2">
+                    <InputLabel for="oddsFormat">Odds Format</InputLabel>
+                    <RadioField v-model="oddsFormat" id="oddsFormat0" value="american">American</RadioField>
+                    <RadioField v-model="oddsFormat" id="oddsFormat1" value="decimal">Decimal</RadioField>
+                </div>
                 <div class="w-32 text-left">
                     <InputLabel for="bankroll">Bankroll</InputLabel>
                     <div class="relative">
