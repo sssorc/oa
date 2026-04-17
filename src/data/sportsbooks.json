@@ -460,6 +460,7 @@
         "legal": true,
         "updatedAt": "2025-12-01",
         "active": [
+            { "name": "Bet365" },
             { "name": "BetMGM" },
             { "name": "Caesars" },
             { "name": "DraftKings" },
