@@ -76,9 +76,15 @@
     },
     "arkansas": {
         "legal": true,
-        "updatedAt": "2025-12-01",
-        "active": [{ "name": "Betly" }, { "name": "BetSaracen" }, { "name": "PrizePicks" }],
-        "inactive": []
+        "updatedAt": "2026-04-30",
+        "active": [{ "name": "BetSaracen" }, { "name": "PrizePicks" }, { "name": "FanDuel" }, { "name": "DraftKings" }],
+        "inactive": [
+            {
+                "name": "Betly",
+                "status": "Closed",
+                "date": "2026-03-20"
+            }
+        ]
     },
     "california": {
         "legal": false,
