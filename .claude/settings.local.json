@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:sportsbook.draftkings.com)",
+      "WebFetch(domain:about.espnbet.com)",
+      "WebFetch(domain:www.bet365.com)",
+      "WebFetch(domain:betfanatics.my.site.com)",
+      "WebFetch(domain:www.hardrock.bet)",
+      "WebFetch(domain:www.prizepicks.com)",
+      "WebSearch",
+      "WebFetch(domain:arizonagamblers.com)",
+      "WebFetch(domain:sportshandle.com)",
+      "WebFetch(domain:www.betarizona.com)",
+      "WebFetch(domain:az.twinspires.com)"
+    ]
+  }
+}

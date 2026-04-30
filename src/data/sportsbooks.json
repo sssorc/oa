@@ -13,7 +13,7 @@
     },
     "arizona": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-04-29",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -22,13 +22,14 @@
             { "name": "FanDuel" },
             { "name": "BetRivers" },
             { "name": "Hard Rock Bet" },
-            { "name": "TwinSpires" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
             { "name": "Bally Bet" },
             { "name": "theScore Bet" },
             { "name": "PrizePicks" },
-            { "name": "Sporttrade" }
+            { "name": "Sporttrade" },
+            { "name": "Golden Nugget" },
+            { "name": "BetCris" }
         ],
         "inactive": [
             {
@@ -50,6 +51,26 @@
                 "name": "Unibet",
                 "status": "Closed",
                 "date": "2024-04-11"
+            },
+            {
+                "name": "TwinSpires",
+                "status": "Closed",
+                "date": "2023-12-01"
+            },
+            {
+                "name": "Betway",
+                "status": "Closed",
+                "date": "2024-08-31"
+            },
+            {
+                "name": "SaharaBets",
+                "status": "Closed",
+                "date": "2024-07-09"
+            },
+            {
+                "name": "Fubo Sportsbook",
+                "status": "Closed",
+                "date": "2022-10-18"
             }
         ]
     },
