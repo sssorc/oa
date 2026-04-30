@@ -7,8 +7,8 @@
     },
     "alaska": {
         "legal": false,
-        "updatedAt": "2025-12-01",
-        "active": [{ "name": "Underdog" }],
+        "updatedAt": "2026-04-30",
+        "active": [{ "name": "Underdog" }, { "name": "PrizePicks" }],
         "inactive": []
     },
     "arizona": {
