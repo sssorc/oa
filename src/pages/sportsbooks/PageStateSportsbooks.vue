@@ -40,14 +40,14 @@ onMounted(() => {
 
 // Set page title and meta description
 useHead({
-    title: `${formattedState.value} Sportsbooks - Legal Online Sports Betting Sites`,
+    title: `Legal ${formattedState.value} Online Sportsbooks`,
     script: [
         {
             type: 'application/ld+json',
             children: JSON.stringify({
                 '@context': 'https://schema.org',
                 '@type': 'WebPage',
-                name: `${formattedState.value} Sportsbooks - Legal Online Sports Betting Sites`,
+                name: `Legal ${formattedState.value} Online Sportsbooks`,
                 description: `Complete list of legal sportsbooks available in ${formattedState.value}. Find the best online sports betting sites, current promotions, and betting options.`,
                 mainEntity: {
                     '@type': 'ItemList',
@@ -99,7 +99,7 @@ useSeoMeta({
             </section>
 
             <section v-if="stateData.inactive.length > 0">
-                <h2>Former {{ formattedState }} Sportsbooks</h2>
+                <h2>Former Online {{ formattedState }} Sportsbooks</h2>
                 <ul>
                     <li v-for="book in stateData.inactive" :key="book.name">
                         {{ book.name }} - {{ book.status }} <span v-if="book.date"> ({{ formatDate(book.date) }})</span>
