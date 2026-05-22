@@ -19,7 +19,7 @@ watch(
 <template>
     <header class="border-pale-blue dark:border-pale-blue/60 mx-auto w-full max-w-7xl border-b px-5 py-4 lg:pt-4 lg:pb-6" style="box-shadow: 0 4px 5px -5px #bebebe">
         <nav class="mb-6 flex flex-wrap gap-x-6 text-sm max-lg:hidden">
-            <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">support</AppFooterLink>
+            <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">buy me a <span class="font-sans">☕</span></AppFooterLink>
             <AppFooterLink href="/knowledge">knowledge</AppFooterLink>
             <AppFooterLink href="/parlay-buddy">parlay buddy</AppFooterLink>
             <AppFooterLink href="https://discord.com/users/956734805033250826" target="_blank">contact</AppFooterLink>

@@ -8,7 +8,7 @@ import ThemeToggle from '@/components/ui/ThemeToggle.vue';
             <div class="bg-pale-blue dark:bg-pale-blue/60 absolute inset-x-0 top-[2px] h-[1px]"></div>
             <div class="flex flex-col gap-y-8 sm:flex-row sm:items-center sm:justify-between">
                 <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 sm:order-2">
-                    <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">support</AppFooterLink>
+                    <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">buy me a <span class="font-sans">☕</span></AppFooterLink>
                     <AppFooterLink href="/knowledge">knowledge</AppFooterLink>
                     <AppFooterLink href="/parlay-buddy">parlay buddy</AppFooterLink>
                     <AppFooterLink href="https://discord.com/users/956734805033250826" target="_blank">contact</AppFooterLink>
