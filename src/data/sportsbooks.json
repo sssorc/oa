@@ -94,7 +94,7 @@
     },
     "colorado": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "Bally Bet" },
             { "name": "BetMonarch" },
@@ -108,11 +108,7 @@
             { "name": "FanDuel" },
             { "name": "Fanatics" },
             { "name": "Hard Rock Bet" },
-            { "name": "Smarkets" },
-            { "name": "Sporttrade" },
-            { "name": "TwinSpires" },
-            { "name": "SBK Sportsbook" },
-            { "name": "Smarkets" }
+            { "name": "Sporttrade" }
         ],
         "inactive": [
             {
@@ -144,19 +140,40 @@
                 "name": "ClutchBet",
                 "status": "Closed",
                 "date": "2024-09-16"
+            },
+            {
+                "name": "TwinSpires",
+                "status": "Closed",
+                "date": "2023-01-01"
+            },
+            {
+                "name": "Smarkets",
+                "status": "Closed",
+                "date": ""
+            },
+            {
+                "name": "SBK Sportsbook",
+                "status": "Closed",
+                "date": ""
             }
         ]
     },
     "connecticut": {
         "legal": true,
-        "updatedAt": "2025-12-01",
-        "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "PlaySugarHouse" }, { "name": "Fanatics" }],
-        "inactive": []
+        "updatedAt": "2026-05-22",
+        "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "Fanatics" }],
+        "inactive": [
+            {
+                "name": "PlaySugarHouse",
+                "status": "Replaced by Fanatics",
+                "date": "2023-12-11"
+            }
+        ]
     },
     "delaware": {
         "legal": true,
-        "updatedAt": "2025-12-01",
-        "active": [{ "name": "BetRivers" }],
+        "updatedAt": "2026-05-22",
+        "active": [{ "name": "BetRivers" }, { "name": "PrizePicks" }],
         "inactive": []
     },
     "florida": {
@@ -185,7 +202,7 @@
     },
     "illinois": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -196,8 +213,7 @@
             { "name": "Circa Sports" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "Hard Rock Bet" },
-            { "name": "Bally Bet" }
+            { "name": "Hard Rock Bet" }
         ],
         "inactive": [
             {
@@ -219,7 +235,7 @@
     },
     "indiana": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -232,7 +248,6 @@
             { "name": "Fanatics" },
             { "name": "Hard Rock Bet" },
             { "name": "Bally Bet" },
-            { "name": "TwinSpires" },
             { "name": "SBK Sportsbook" },
             { "name": "Underdog" }
         ],
@@ -261,12 +276,17 @@
                 "name": "PointsBet",
                 "status": "Acquired by Fanatics",
                 "date": "2023-08-31"
+            },
+            {
+                "name": "TwinSpires",
+                "status": "Closed",
+                "date": "2023-01-01"
             }
         ]
     },
     "iowa": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -277,7 +297,9 @@
             { "name": "Circa Sports" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "Bally Bet" }
+            { "name": "Bally Bet" },
+            { "name": "Sporttrade" },
+            { "name": "Q Sportsbook" }
         ],
         "inactive": [
             {
@@ -319,8 +341,8 @@
     },
     "kansas": {
         "legal": true,
-        "updatedAt": "2025-12-01",
-        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetRivers" }, { "name": "theScore Bet" }, { "name": "Fanatics" }],
+        "updatedAt": "2026-05-22",
+        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetRivers" }, { "name": "theScore Bet" }, { "name": "Fanatics" }, { "name": "Bet365" }],
         "inactive": [
             {
                 "name": "ESPNBet",
@@ -341,17 +363,17 @@
     },
     "kentucky": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
             { "name": "DraftKings" },
             { "name": "FanDuel" },
-            { "name": "BetRivers" },
             { "name": "theScore Bet" },
             { "name": "Circa Sports" },
             { "name": "Bet365" },
-            { "name": "Fanatics" }
+            { "name": "Fanatics" },
+            { "name": "Prime Sports" }
         ],
         "inactive": [
             {
@@ -425,7 +447,7 @@
     },
     "maryland": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -433,10 +455,12 @@
             { "name": "FanDuel" },
             { "name": "BetRivers" },
             { "name": "theScore Bet" },
-            { "name": "WynnBET" },
             { "name": "Fanatics" },
             { "name": "Bally Bet" },
-            { "name": "TwinSpires" }
+            { "name": "Bet365" },
+            { "name": "betPARX" },
+            { "name": "Crab Sports" },
+            { "name": "LetsBetMD" }
         ],
         "inactive": [
             {
@@ -463,6 +487,16 @@
                 "name": "PointsBet",
                 "status": "Acquired by Fanatics",
                 "date": "2023-08-31"
+            },
+            {
+                "name": "TwinSpires",
+                "status": "Closed",
+                "date": "2023-01-01"
+            },
+            {
+                "name": "WynnBET",
+                "status": "Relinquished license before launch",
+                "date": "2023-08-16"
             }
         ]
     },
@@ -485,7 +519,7 @@
     },
     "michigan": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "Bet365" },
             { "name": "BetMGM" },
@@ -494,9 +528,12 @@
             { "name": "FanDuel" },
             { "name": "BetRivers" },
             { "name": "theScore Bet" },
-            { "name": "Fox Bet" },
             { "name": "Fanatics" },
-            { "name": "TwinSpires" }
+            { "name": "betPARX" },
+            { "name": "FireKeepers" },
+            { "name": "Eagle Casino & Sports" },
+            { "name": "Four Winds" },
+            { "name": "Hard Rock Bet" }
         ],
         "inactive": [
             {
@@ -513,6 +550,16 @@
                 "name": "WynnBET",
                 "status": "Closed",
                 "date": ""
+            },
+            {
+                "name": "Fox Bet",
+                "status": "Closed",
+                "date": "2023-07-31"
+            },
+            {
+                "name": "TwinSpires",
+                "status": "Closed",
+                "date": "2023-01-01"
             }
         ]
     },
@@ -530,8 +577,8 @@
     },
     "missouri": {
         "legal": true,
-        "updatedAt": "2025-12-01",
-        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "Fanatics" }, { "name": "bet365" }, { "name": "theScore Bet" }],
+        "updatedAt": "2026-05-22",
+        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "Fanatics" }, { "name": "bet365" }, { "name": "theScore Bet" }, { "name": "Circa Sports" }],
         "inactive": []
     },
     "montana": {
@@ -566,7 +613,7 @@
     },
     "new_jersey": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -578,7 +625,11 @@
             { "name": "Bally Bet" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "TwinSpires" }
+            { "name": "Sporttrade" },
+            { "name": "Borgata Sportsbook" },
+            { "name": "betPARX" },
+            { "name": "Golden Nugget Online Sportsbook" },
+            { "name": "Prime Sportsbook" }
         ],
         "inactive": [
             {
@@ -605,6 +656,11 @@
                 "name": "Unibet",
                 "status": "Closed",
                 "date": "2024-04-11"
+            },
+            {
+                "name": "TwinSpires",
+                "status": "Closed",
+                "date": "2022-06-10"
             }
         ]
     },
@@ -657,7 +713,7 @@
     },
     "north_carolina": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "Bet365" },
             { "name": "BetMGM" },
@@ -666,7 +722,6 @@
             { "name": "theScore Bet" },
             { "name": "Fanatics" },
             { "name": "FanDuel" },
-            { "name": "Underdog" },
             { "name": "PrizePicks" }
         ],
         "inactive": [
@@ -674,6 +729,11 @@
                 "name": "ESPNBet",
                 "status": "Became theScore Bet",
                 "date": "2025-12-01"
+            },
+            {
+                "name": "Underdog",
+                "status": "Closed sportsbook, pivoted to DFS",
+                "date": "2025-12-16"
             }
         ]
     },
@@ -685,7 +745,7 @@
     },
     "ohio": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -696,7 +756,10 @@
             { "name": "Bally Bet" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "Hard Rock Bet" }
+            { "name": "Hard Rock Bet" },
+            { "name": "betJACK" },
+            { "name": "MVG Bet" },
+            { "name": "Prime Sports" }
         ],
         "inactive": [
             {
@@ -723,6 +786,11 @@
                 "name": "PointsBet",
                 "status": "Acquired by Fanatics",
                 "date": "2023-08-31"
+            },
+            {
+                "name": "betPARX",
+                "status": "Closed",
+                "date": "2025-01-01"
             }
         ]
     },
@@ -740,7 +808,7 @@
     },
     "pennsylvania": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -748,11 +816,9 @@
             { "name": "FanDuel" },
             { "name": "BetRivers" },
             { "name": "theScore Bet" },
-            { "name": "Parx" },
-            { "name": "FOX Bet" },
+            { "name": "betPARX" },
             { "name": "Bet365" },
-            { "name": "Fanatics" },
-            { "name": "TwinSpires" }
+            { "name": "Fanatics" }
         ],
         "inactive": [
             {
@@ -784,6 +850,21 @@
                 "name": "PointsBet",
                 "status": "Acquired by Fanatics",
                 "date": "2023-08-31"
+            },
+            {
+                "name": "FOX Bet",
+                "status": "Closed",
+                "date": "2023-07-31"
+            },
+            {
+                "name": "TwinSpires",
+                "status": "Closed",
+                "date": "2022-06-01"
+            },
+            {
+                "name": "Parx",
+                "status": "Rebranded to betPARX",
+                "date": ""
             }
         ]
     },
@@ -807,19 +888,18 @@
     },
     "tennessee": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-05-22",
         "active": [
             { "name": "FanDuel" },
             { "name": "DraftKings" },
             { "name": "BetMGM" },
             { "name": "Caesars" },
             { "name": "theScore Bet" },
-            { "name": "Action 24/7" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
             { "name": "Hard Rock Bet" },
             { "name": "Bally Bet" },
-            { "name": "TwinSpires" }
+            { "name": "VIP Play" }
         ],
         "inactive": [
             {
@@ -846,6 +926,16 @@
                 "name": "PointsBet",
                 "status": "Acquired by Fanatics",
                 "date": "2023-08-31"
+            },
+            {
+                "name": "Action 24/7",
+                "status": "Closed",
+                "date": "2026-01-16"
+            },
+            {
+                "name": "TwinSpires",
+                "status": "Closed",
+                "date": "2022-01-01"
             }
         ]
     },
@@ -947,8 +1037,8 @@
     },
     "west_virginia": {
         "legal": true,
-        "updatedAt": "2025-12-01",
-        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetRivers" }, { "name": "theScore Bet" }, { "name": "Fanatics" }],
+        "updatedAt": "2026-05-22",
+        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetRivers" }, { "name": "theScore Bet" }, { "name": "Fanatics" }, { "name": "Betly" }],
         "inactive": [
             {
                 "name": "ESPNBet",

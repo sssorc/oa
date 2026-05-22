@@ -72,6 +72,10 @@ Some states publish official registries. Check these for the relevant states:
 |---|---|
 | Colorado | https://docs.google.com/spreadsheets/d/10U_66tIi87Et38MplUEUTS39EvnEghVzP3gZd2tDAXI/edit?gid=1190930214#gid=1190930214 |
 | New York | https://gaming.ny.gov/sports-wagering |
+| Illinois | https://igb.illinois.gov/sports-wagering/sports-authorized-operating-sportsbooks.html |
+| Iowa | https://irgc.iowa.gov/licensing-information/sports-wagering |
+| Louisiana | https://lgcb.dps.louisiana.gov/licensed-platforms/ |
+| Tennessee | https://www.tn.gov/swac/licensees-registrants.html |
 
 For other states, use web search to find any official gaming commission pages.
 
