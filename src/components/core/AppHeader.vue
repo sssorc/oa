@@ -22,7 +22,7 @@ watch(
             <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">buy me a <span class="font-sans">☕</span></AppFooterLink>
             <AppFooterLink href="/knowledge">knowledge</AppFooterLink>
             <AppFooterLink href="/parlay-buddy">parlay buddy</AppFooterLink>
-            <AppFooterLink href="/parlay-buddy" class="flex items-center gap-2">
+            <AppFooterLink href="https://picksyprops.com" class="flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="8" height="" fill="none" viewBox="0 0 143 223" style="height: auto">
                     <path
                         :fill="`url(#${uid}-paint0_linear_16_23)`"
