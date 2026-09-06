@@ -121,6 +121,11 @@ const router = createRouter({
             name: 'parlay-buddy',
             component: () => import('../pages/ParlayBuddy.vue'),
         },
+        {
+            path: '/kotez',
+            name: 'kotez',
+            component: () => import('../pages/PageKotez.vue'),
+        },
     ],
 });
 
