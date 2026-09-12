@@ -23,7 +23,7 @@ const handleThemeChange = (newTheme) => {
             class="rounded-lg p-3 transition-colors sm:p-2"
             :class="{
                 'bg-gray-200 dark:bg-gray-700': theme === option.value,
-                'hover:bg-gray-100 dark:hover:bg-gray-800': theme !== option.value,
+                'hover:bg-gray-200/60 dark:hover:bg-gray-800': theme !== option.value,
             }"
             :title="option.label"
         >

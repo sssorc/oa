@@ -3,6 +3,8 @@ import { ref, watch } from 'vue';
 import { onBeforeRouteUpdate, useRouter, useRoute } from 'vue-router';
 import AppHeaderLink from '@/components/ui/AppHeaderLink.vue';
 import AppFooterLink from '@/components/ui/AppFooterLink.vue';
+import HedgeCalcLogo from '@/components/ui/HedgeCalcLogo.vue';
+import PicksyLogo from '@/components/ui/PicksyLogo.vue';
 
 const showNav = ref(false);
 const route = useRoute();
@@ -17,67 +19,22 @@ watch(
 </script>
 
 <template>
-    <header class="border-pale-blue dark:border-pale-blue/60 mx-auto w-full max-w-7xl border-b px-5 py-4 lg:pt-4 lg:pb-6" style="box-shadow: 0 4px 5px -5px #bebebe">
-        <nav class="mb-6 flex flex-wrap gap-x-6 text-sm max-lg:hidden">
-            <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">buy me a <span class="font-sans">☕</span></AppFooterLink>
-            <AppFooterLink href="/knowledge">knowledge</AppFooterLink>
-            <AppFooterLink href="/parlay-buddy">parlay buddy</AppFooterLink>
-            <AppFooterLink href="https://picksyprops.com" class="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="" fill="none" viewBox="0 0 143 223" style="height: auto">
-                    <path
-                        :fill="`url(#${uid}-paint0_linear_16_23)`"
-                        stroke="#B91D49"
-                        d="M74 87a4 4 0 0 1 4-4h62.961c.574 0 1.039.465 1.039 1.039C142 120.468 112.468 150 76.039 150h-.985A1.054 1.054 0 0 1 74 148.946z"
-                    />
-                    <rect width="63" height="222" x=".5" y=".5" :fill="`url(#${uid}-paint1_linear_16_23)`" stroke="#000" rx="31.5" />
-                    <rect width="67" height="67" x="74" y="6" :fill="`url(#${uid}-paint2_linear_16_23)`" stroke="#006094" rx="4" />
-                    <defs>
-                        <linearGradient :id="`${uid}-paint0_linear_16_23`" x1="142" x2="74.746" y1="150" y2="82.26" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#DD2257" />
-                            <stop offset="1" stop-color="#B91D49" />
-                        </linearGradient>
-                        <linearGradient :id="`${uid}-paint1_linear_16_23`" x1="1.483" x2="119.042" y1="0" y2="35.236" gradientUnits="userSpaceOnUse">
-                            <stop />
-                            <stop offset="1" stop-color="#4D4D4D" />
-                        </linearGradient>
-                        <linearGradient :id="`${uid}-paint2_linear_16_23`" x1="75.552" x2="139.707" y1="6" y2="73" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#0075B3" />
-                            <stop offset="1" stop-color="#0090DB" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                picksy
-            </AppFooterLink>
-            <AppFooterLink href="https://discord.com/users/956734805033250826" target="_blank">contact</AppFooterLink>
-        </nav>
-        <div class="flex items-center justify-end">
-            <RouterLink to="/" class="mr-auto flex items-center gap-3 font-mono font-bold lg:pt-2">
-                <svg class="dark:hidden" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 180 180" fill="none">
-                    <g clip-path="url(#a)"><path fill="url(#b)" d="M0 0h180v180H0V0Z" /></g>
-                    <path fill="#fff" d="M58.875 146V52.875H78.5v38.438h39.938V52.874h19.687V146h-19.687v-38.5H78.5V146H58.875Z" />
-                    <path fill="#B8E1FF" d="M51.875 140V46.875H71.5v38.438h39.938V46.874h19.687V140h-19.687v-38.5H71.5V140H51.875Z" />
-                    <path fill="#000" d="M44.875 134V40.875H64.5v38.438h39.938V40.874h19.687V134h-19.687V95.5H64.5V134H44.875Z" />
-                    <defs>
-                        <linearGradient id="b" x1="180" x2="0" y1="46.962" y2="113.416" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#A9FFF7" />
-                            <stop offset="1" stop-color="#94FBAB" />
-                        </linearGradient>
-                        <clipPath id="a"><path fill="#fff" d="M0 0h180v180H0z" /></clipPath>
-                    </defs>
-                </svg>
-                <svg class="hidden bg-gray-100 dark:block" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 180 180" fill="none">
-                    <g clip-path="url(#a)"><path fill="url(#b)" d="M0 0h180v180H0V0Z" /></g>
-                    <path fill="#243c5a" d="M58.875 146V52.875H78.5v38.438h39.938V52.874h19.687V146h-19.687v-38.5H78.5V146H58.875Z" />
-                    <path fill="#82aba1" d="M51.875 140V46.875H71.5v38.438h39.938V46.874h19.687V140h-19.687v-38.5H71.5V140H51.875Z" />
-                    <path fill="#000" d="M44.875 134V40.875H64.5v38.438h39.938V40.874h19.687V134h-19.687V95.5H64.5V134H44.875Z" />
-                    <defs>
-                        <linearGradient id="b" x1="180" x2="0" y1="46.962" y2="113.416" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#A9FFF7" />
-                            <stop offset="1" stop-color="#94FBAB" />
-                        </linearGradient>
-                        <clipPath id="a"><path fill="#fff" d="M0 0h180v180H0z" /></clipPath>
-                    </defs>
-                </svg>
+    <header class="relative z-30 w-full bg-white shadow-sm dark:bg-gray-900">
+        <div class="bg-gray-100 max-[375px]:hidden dark:bg-gray-950">
+            <nav class="mx-auto flex w-full max-w-[88rem] gap-x-3 px-5 py-1.5 text-xs whitespace-nowrap sm:gap-x-6 sm:text-sm">
+                <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">buy me a <span class="font-sans">☕</span></AppFooterLink>
+                <AppFooterLink href="/knowledge">knowledge</AppFooterLink>
+                <AppFooterLink href="/parlay-buddy">parlay buddy</AppFooterLink>
+                <AppFooterLink href="https://picksyprops.com" class="flex items-center gap-2">
+                    <PicksyLogo />
+                    picksy
+                </AppFooterLink>
+                <AppFooterLink href="https://discord.com/users/956734805033250826" target="_blank">contact</AppFooterLink>
+            </nav>
+        </div>
+        <div class="mx-auto flex w-full max-w-[88rem] items-center justify-end px-5 py-2">
+            <RouterLink to="/" class="mr-auto flex items-center gap-3 font-mono font-bold">
+                <HedgeCalcLogo />
                 <div class="hidden text-base font-normal min-[400px]:block">HedgeCalc Betting Tools</div>
             </RouterLink>
 
