@@ -2,16 +2,16 @@
 import { usePageTitle } from '@/composables/usePageTitle';
 import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
 
-usePageTitle('King of the End Zone', 'Track weekly results for the DraftKings King of the End Zone promo: eligible games, pot, winner, and payout.');
+usePageTitle('Slatebreaker', 'Track weekly results for the Slatebreaker promo: eligible games, pot, winner, and payout.');
 
 const weeks = [
     {
         week: 1,
-        eligibleGames: 'NE vs SEA',
-        pot: '$5M',
-        winner: 'Jaxon Smith-Njigba',
-        yards: 45,
-        payout: '$113',
+        eligibleGames: '1pm Sunday games',
+        pot: '$2M',
+        winner: '-',
+        time: '-',
+        payout: '-',
     },
 ];
 </script>
@@ -19,15 +19,15 @@ const weeks = [
 <template>
     <article class="mx-auto w-full max-w-4xl px-5 py-12">
         <div class="prose">
-            <KnowledgeHeader>DraftKings - King of the End Zone</KnowledgeHeader>
-            <p>Weekly tracker for the DraftKings King of the End Zone promo results. Win a share of the pot if your player scores the longest touchdown.</p>
+            <KnowledgeHeader>DraftKings - Slatebreaker</KnowledgeHeader>
+            <p>Weekly tracker for the Slatebreaker promo results. Win a share of the pot if your player scores the fastest touchdown.</p>
         </div>
 
         <section class="mt-8">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <caption class="sr-only">
-                        King of the End Zone weekly results
+                        Slatebreaker weekly results
                     </caption>
                     <thead>
                         <tr class="border-jet border-b font-mono dark:border-gray-400">
@@ -35,7 +35,7 @@ const weeks = [
                             <th scope="col" class="px-4 py-3 text-left font-bold">Eligible games</th>
                             <th scope="col" class="px-4 py-3 text-right font-bold">Pot</th>
                             <th scope="col" class="px-4 py-3 text-left font-bold">Winner</th>
-                            <th scope="col" class="px-4 py-3 text-right font-bold">Yards</th>
+                            <th scope="col" class="px-4 py-3 text-right font-bold">Time</th>
                             <th scope="col" class="py-3 pl-4 text-right font-bold">Payout</th>
                         </tr>
                     </thead>
@@ -45,7 +45,7 @@ const weeks = [
                             <td class="px-4 py-3">{{ row.eligibleGames }}</td>
                             <td class="font-numbers px-4 py-3 text-right">{{ row.pot }}</td>
                             <td class="px-4 py-3" :class="{ 'text-space dark:text-gray-400': row.winner === '-' }">{{ row.winner }}</td>
-                            <td class="font-numbers px-4 py-3 text-right" :class="{ 'text-space dark:text-gray-400': row.yards === '-' }">{{ row.yards }}</td>
+                            <td class="font-numbers px-4 py-3 text-right" :class="{ 'text-space dark:text-gray-400': row.time === '-' }">{{ row.time }}</td>
                             <td class="font-numbers py-3 pl-4 text-right" :class="{ 'text-space dark:text-gray-400': row.payout === '-' }">{{ row.payout }}</td>
                         </tr>
                     </tbody>

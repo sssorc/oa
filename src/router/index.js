@@ -126,6 +126,11 @@ const router = createRouter({
             name: 'kotez',
             component: () => import('../pages/PageKotez.vue'),
         },
+        {
+            path: '/slatebreaker',
+            name: 'slatebreaker',
+            component: () => import('../pages/PageSlatebreaker.vue'),
+        },
     ],
 });
 
