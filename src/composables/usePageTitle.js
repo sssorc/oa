@@ -18,11 +18,16 @@ export const absoluteUrl = (path) => `${siteUrl}${path}`;
  * @param {Array<{name: string, path: string}>} [options.breadcrumbs] Trail after Home, ending with the current page
  * @param {object|object[]} [options.schema] Extra schema.org nodes for this page
  * @param {boolean} [options.fullTitle] Use the title as-is, without the "| HedgeCalc" suffix
+ * @param {string} [options.image] Root-relative or absolute social image URL
+ * @param {string} [options.imageAlt] Alternative text for the social image
+ * @param {'website'|'article'} [options.ogType]
  */
 export function usePageTitle(title, description = defaultDescription, options = {}) {
     const route = useRoute();
     // Built from the route path (no query string) so it's identical at build time and in the browser
     const canonical = computed(() => absoluteUrl(route.path));
+    const image = options.image?.startsWith('http') ? options.image : absoluteUrl(options.image || '/og/hedgecalc.png');
+    const imageAlt = options.imageAlt || `${title} | ${siteName}`;
 
     const schema = [].concat(options.schema || []);
     if (options.breadcrumbs?.length) {
@@ -57,12 +62,17 @@ export function usePageTitle(title, description = defaultDescription, options = 
         ogTitle: title,
         ogDescription: description,
         ogUrl: canonical,
-        ogType: 'website',
+        ogType: options.ogType || 'website',
         ogSiteName: siteName,
-        ogImage: absoluteUrl('/apple-touch-icon.png'),
-        twitterCard: 'summary',
+        ogImage: image,
+        ogImageWidth: 1200,
+        ogImageHeight: 630,
+        ogImageAlt: imageAlt,
+        twitterCard: 'summary_large_image',
         twitterTitle: title,
         twitterDescription: description,
+        twitterImage: image,
+        twitterImageAlt: imageAlt,
     });
 
     return { title };
@@ -84,7 +94,9 @@ export function calculatorSchema(name, description, path) {
 }
 
 // Schema for a knowledge base article
-export function articleSchema(headline, description, path) {
+export function articleSchema(headline, description, path, options = {}) {
+    const image = options.image?.startsWith('http') ? options.image : absoluteUrl(options.image);
+
     return {
         '@type': 'Article',
         headline,
@@ -93,6 +105,9 @@ export function articleSchema(headline, description, path) {
         mainEntityOfPage: absoluteUrl(path),
         author: organization,
         publisher: organization,
+        ...(image && { image }),
+        ...(options.datePublished && { datePublished: options.datePublished }),
+        ...(options.dateModified && { dateModified: options.dateModified }),
     };
 }
 

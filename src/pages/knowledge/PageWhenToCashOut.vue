@@ -6,8 +6,13 @@ import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
 
 // Set page title
 const description = 'Cashing out a bet almost always costs you EV, and hedging usually nets more than the cash out offer. Here are the few times cashing out makes sense.';
+const publishedAt = '2025-05-18';
+const updatedAt = '2026-09-12';
+const image = '/og/when-to-cash-out.png';
 usePageTitle('When Should You Cash Out a Bet?', description, {
-    schema: articleSchema('When should I cash out a bet?', description, '/knowledge/when-to-cash-out'),
+    ogType: 'article',
+    image,
+    schema: articleSchema('When should I cash out a bet?', description, '/knowledge/when-to-cash-out', { datePublished: publishedAt, dateModified: updatedAt, image }),
     breadcrumbs: [
         { name: 'Knowledge Base', path: '/knowledge' },
         { name: 'When should I cash out a bet?', path: '/knowledge/when-to-cash-out' },
@@ -17,7 +22,7 @@ usePageTitle('When Should You Cash Out a Bet?', description, {
 
 <template>
     <KnowledgeArticle>
-        <KnowledgeHeader>When should I cash out a bet?</KnowledgeHeader>
+        <KnowledgeHeader :published-at="publishedAt" :updated-at="updatedAt">When should I cash out a bet?</KnowledgeHeader>
         <p>
             There are very few situations where it makes sense to cash out a bet. Primarily, you are sacrificing <router-link to="/knowledge/what-is-positive-ev">EV</router-link> by cashing out
             instead of letting your bets ride. Secondly, if you still wish to cash out, you will almost always net a higher amount if you hedge your bet instead of cashing out.

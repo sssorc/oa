@@ -1,4 +1,5 @@
 <script setup>
+import { useHead } from '@unhead/vue';
 import LandingLink from '@/components/ui/LandingLink.vue';
 import { usePageTitle, organization, siteUrl } from '@/composables/usePageTitle';
 
@@ -13,6 +14,22 @@ usePageTitle('HedgeCalc: Free Hedge, Arbitrage & Devig Calculators', description
         url: `${siteUrl}/`,
         publisher: organization,
     },
+});
+
+useHead({
+    script: [
+        {
+            type: 'application/ld+json',
+            key: 'site-schema',
+            innerHTML: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'WebSite',
+                name: 'HedgeCalc',
+                url: `${siteUrl}/`,
+                publisher: organization,
+            }),
+        },
+    ],
 });
 </script>
 

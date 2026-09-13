@@ -23,12 +23,12 @@ watch(
         <div class="bg-gray-100 max-[375px]:hidden dark:bg-gray-950">
             <nav class="mx-auto flex w-full max-w-[88rem] gap-x-3 px-5 py-1.5 text-xs whitespace-nowrap sm:gap-x-6 sm:text-sm">
                 <AppFooterLink href="https://ko-fi.com/sssorc" target="_blank">buy me a <span class="font-sans">☕</span></AppFooterLink>
-                <AppFooterLink href="/knowledge">knowledge</AppFooterLink>
-                <AppFooterLink href="/parlay-buddy">parlay buddy</AppFooterLink>
                 <AppFooterLink href="https://picksyprops.com" class="flex items-center gap-2">
-                    <PicksyLogo />
                     picksy
+                    <PicksyLogo />
                 </AppFooterLink>
+                <AppFooterLink href="/parlay-buddy">parlay buddy</AppFooterLink>
+                <AppFooterLink href="/knowledge">knowledge</AppFooterLink>
                 <AppFooterLink href="https://discord.com/users/956734805033250826" target="_blank">contact</AppFooterLink>
             </nav>
         </div>

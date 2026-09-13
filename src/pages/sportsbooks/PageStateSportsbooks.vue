@@ -40,7 +40,7 @@ onMounted(() => {
 const title = state?.legal ? `Legal ${name} Sportsbooks (${updated})` : `Is Sports Betting Legal in ${name}?`;
 const description = state?.legal
     ? `${name} has ${count} legal online sportsbooks and betting apps, including ${listNames(active.slice(0, 3).map((book) => book.name))}. See the full list and which books have left. Updated ${updated}.`
-    : `Online sports betting is not legal in ${name} as of ${updated}. See which states have legal sportsbooks and which betting apps operate there.`;
+    : `Online sports betting is not legal in ${name} as of ${updated}.${count ? ` See the other betting and fantasy operators listed for the state.` : ''}`;
 
 usePageTitle(title, description, {
     breadcrumbs: [
@@ -56,7 +56,7 @@ usePageTitle(title, description, {
         ...(count && {
             mainEntity: {
                 '@type': 'ItemList',
-                name: `Legal online sportsbooks in ${name}`,
+                name: state?.legal ? `Legal online sportsbooks in ${name}` : `Other betting and fantasy operators in ${name}`,
                 numberOfItems: count,
                 itemListElement: active.map((book, index) => ({
                     '@type': 'ListItem',
@@ -91,6 +91,13 @@ usePageTitle(title, description, {
                         Not yet. Online sports betting is not legal in {{ name }}. <span class="text-sm italic">(Updated {{ formatUpdatedAt(state?.updatedAt ?? '') }})</span>
                     </p>
                     <p>See the <RouterLink to="/sportsbooks">states where sports betting is legal</RouterLink> and which sportsbooks operate in each.</p>
+                </section>
+                <section v-if="active.length > 0">
+                    <h2>Other betting and fantasy operators in {{ name }}</h2>
+                    <p>These operators may offer daily fantasy sports or other betting products. They are not counted as legal statewide online sportsbooks.</p>
+                    <ul>
+                        <li v-for="book in active" :key="book.name">{{ book.name }}</li>
+                    </ul>
                 </section>
             </template>
 

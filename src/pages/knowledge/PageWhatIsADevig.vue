@@ -6,8 +6,13 @@ import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
 
 // Set page title
 const description = 'A devig removes the sportsbook vig to find the fair odds of a bet. Learn the devig methods, which odds to use, and see a worked parlay example.';
+const publishedAt = '2025-05-21';
+const updatedAt = '2026-09-12';
+const image = '/og/what-is-a-devig.png';
 usePageTitle('What Is a Devig? Finding Fair Odds in Sports Betting', description, {
-    schema: articleSchema('What is a devig?', description, '/knowledge/what-is-a-devig'),
+    ogType: 'article',
+    image,
+    schema: articleSchema('What is a devig?', description, '/knowledge/what-is-a-devig', { datePublished: publishedAt, dateModified: updatedAt, image }),
     breadcrumbs: [
         { name: 'Knowledge Base', path: '/knowledge' },
         { name: 'What is a devig?', path: '/knowledge/what-is-a-devig' },
@@ -17,7 +22,7 @@ usePageTitle('What Is a Devig? Finding Fair Odds in Sports Betting', description
 
 <template>
     <KnowledgeArticle>
-        <KnowledgeHeader>What is a devig?</KnowledgeHeader>
+        <KnowledgeHeader :published-at="publishedAt" :updated-at="updatedAt">What is a devig?</KnowledgeHeader>
         <p>
             In sports betting, a 'devig' is the process of finding the fair odds for a bet by removing the sportsbook's 'vig' or 'juice'. There are several methods of devigging including
             Multiplicative, Additive, Shin, and Power. For simplicity and the best results, the <router-link to="/devig-calculator">devig calculator</router-link> will use all of these methods and

@@ -6,8 +6,13 @@ import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
 
 // Set page title
 const description = 'Hedging reduces variance but lowers your long-term expected value. A worked 1,000-day parlay example shows exactly how much a hedge costs.';
+const publishedAt = '2025-06-18';
+const updatedAt = '2026-09-12';
+const image = '/og/why-hedging-lowers-ev.png';
 usePageTitle('Why Does Hedging Lower EV?', description, {
-    schema: articleSchema('Why does hedging lower EV?', description, '/knowledge/why-hedging-lowers-ev'),
+    ogType: 'article',
+    image,
+    schema: articleSchema('Why does hedging lower EV?', description, '/knowledge/why-hedging-lowers-ev', { datePublished: publishedAt, dateModified: updatedAt, image }),
     breadcrumbs: [
         { name: 'Knowledge Base', path: '/knowledge' },
         { name: 'Why does hedging lower EV?', path: '/knowledge/why-hedging-lowers-ev' },
@@ -17,7 +22,7 @@ usePageTitle('Why Does Hedging Lower EV?', description, {
 
 <template>
     <KnowledgeArticle>
-        <KnowledgeHeader>Why does hedging lower EV?</KnowledgeHeader>
+        <KnowledgeHeader :published-at="publishedAt" :updated-at="updatedAt">Why does hedging lower EV?</KnowledgeHeader>
         <p>
             Hedging bets will reduce your variance, or the up and down fluctuations of your bankroll, but doing so will lower your long term expected value. Below is a simplified example to illustrate
             this.

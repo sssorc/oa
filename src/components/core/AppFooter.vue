@@ -34,8 +34,8 @@ import ThemeToggle from '@/components/ui/ThemeToggle.vue';
                             <li><AppFooterLink href="/parlay-buddy">parlay buddy</AppFooterLink></li>
                             <li>
                                 <AppFooterLink href="https://picksyprops.com" class="inline-flex items-center gap-2">
-                                    <PicksyLogo />
                                     picksy
+                                    <PicksyLogo />
                                 </AppFooterLink>
                             </li>
                         </ul>
