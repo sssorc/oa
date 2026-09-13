@@ -1,79 +1,41 @@
 <script setup>
-import { computed } from 'vue';
-import { useHead, useSeoMeta } from '@unhead/vue';
 import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
-import sportsbooksData from '@/data/sportsbooks.json';
 import BackButton from '@/components/ui/BackButton.vue';
-// Get list of states with data, separated by legal status
-const availableStates = computed(() => {
-    return Object.entries(sportsbooksData)
-        .filter(([_, data]) => data.legal)
-        .map(([key, data]) => ({
-            code: key,
-            name: key
-                .replace(/_/g, ' ')
-                .split(' ')
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' '),
-            updatedAt: data.updatedAt,
-        }));
-});
+import { usePageTitle, absoluteUrl } from '@/composables/usePageTitle';
+import { states, monthYear } from '@/utils/states';
 
-const illegalStates = computed(() => {
-    return Object.entries(sportsbooksData)
-        .filter(([_, data]) => !data.legal)
-        .map(([key]) => ({
-            code: key,
-            name: key
-                .replace(/_/g, ' ')
-                .split(' ')
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' '),
-        }));
-});
+const legalStates = states.filter((state) => state.legal);
+const illegalStates = states.filter((state) => !state.legal);
+const legalCount = legalStates.filter((state) => state.key !== 'district_of_columbia').length;
+const hasDC = legalStates.length !== legalCount;
+const lastUpdated = states
+    .map((state) => state.updatedAt)
+    .sort()
+    .at(-1);
 
-// Set page title and meta description
-useHead({
-    title: 'Legal Sportsbooks by State - Online Sports Betting Sites',
-});
+const title = `Legal Sportsbooks by State (${monthYear(lastUpdated)})`;
+const description = `Online sports betting is legal in ${legalCount} states${hasDC ? ' and Washington, D.C.' : '.'} Pick your state to see every legal sportsbook and betting app available there.`;
 
-// Set SEO meta tags
-useSeoMeta({
-    description: 'Find legal sportsbooks and daily fantasy sports sites available in your state. Comprehensive list of online sports betting options by state.',
-    ogTitle: 'Legal Sportsbooks by State - Online Sports Betting Sites',
-    ogDescription: 'Find legal sportsbooks and daily fantasy sports sites available in your state. Comprehensive list of online sports betting options by state.',
-    ogType: 'website',
-    twitterCard: 'summary_large_image',
-    twitterTitle: 'Legal Sportsbooks by State - Online Sports Betting Sites',
-    twitterDescription: 'Find legal sportsbooks and daily fantasy sports sites available in your state. Comprehensive list of online sports betting options by state.',
-});
-
-// Add structured data using Schema.org
-useHead({
-    script: [
-        {
-            type: 'application/ld+json',
-            children: JSON.stringify({
-                '@context': 'https://schema.org',
-                '@type': 'WebPage',
-                name: 'Legal Sportsbooks by State - Online Sports Betting Sites',
-                description: 'Find legal sportsbooks and daily fantasy sports sites available in your state. Comprehensive list of online sports betting options by state.',
-                mainEntity: {
-                    '@type': 'ItemList',
-                    itemListElement: availableStates.value.map((state, index) => ({
-                        '@type': 'ListItem',
-                        position: index + 1,
-                        item: {
-                            '@type': 'WebPage',
-                            name: `${state.name} Sportsbooks`,
-                            url: `/sportsbooks/${state.code}`,
-                            dateModified: state.updatedAt,
-                        },
-                    })),
-                },
-            }),
+usePageTitle(title, description, {
+    breadcrumbs: [{ name: 'Sportsbooks by State', path: '/sportsbooks' }],
+    schema: {
+        '@type': 'WebPage',
+        name: title,
+        description,
+        url: absoluteUrl('/sportsbooks'),
+        dateModified: lastUpdated,
+        mainEntity: {
+            '@type': 'ItemList',
+            name: 'States with legal online sports betting',
+            numberOfItems: legalStates.length,
+            itemListElement: legalStates.map((state, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                name: `${state.name} Sportsbooks`,
+                url: absoluteUrl(state.path),
+            })),
         },
-    ],
+    },
 });
 </script>
 
@@ -82,19 +44,20 @@ useHead({
         <div class="prose">
             <KnowledgeHeader>Legal Online Sportsbooks by State</KnowledgeHeader>
 
-            <p>Select your state to view available legal sportsbooks and daily fantasy sports sites:</p>
+            <p>
+                Online sports betting is legal in {{ legalCount }} states<template v-if="hasDC"> and Washington, D.C</template>. Select your state to see the legal sportsbooks and daily fantasy sites
+                available there.
+            </p>
             <ul class="gap-8 sm:columns-2 lg:columns-3">
-                <li v-for="state in availableStates" :key="state.code">
-                    <router-link :to="'/sportsbooks/' + state.code.replace(/_/g, '-')">
-                        {{ state.name }}
-                    </router-link>
+                <li v-for="state in legalStates" :key="state.key">
+                    <RouterLink :to="state.path">{{ state.name }}</RouterLink>
                 </li>
             </ul>
 
             <h2>States where sports betting is not yet legal</h2>
             <ul class="gap-8 sm:columns-2 lg:columns-3">
-                <li v-for="state in illegalStates" :key="state.code">
-                    {{ state.name }}
+                <li v-for="state in illegalStates" :key="state.key">
+                    <RouterLink :to="state.path">{{ state.name }}</RouterLink>
                 </li>
             </ul>
         </div>

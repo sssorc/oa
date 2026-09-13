@@ -1,107 +1,110 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useHead, useSeoMeta } from '@unhead/vue';
 import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
-import sportsbooksData from '@/data/sportsbooks.json';
 import BackButton from '@/components/ui/BackButton.vue';
+import { usePageTitle, absoluteUrl } from '@/composables/usePageTitle';
+import { getState, monthYear, listNames } from '@/utils/states';
+
 const route = useRoute();
 const router = useRouter();
-const state = computed(() => route.params.state);
 
-// Format state name for display (e.g., "virginia" -> "Virginia")
-const formattedState = computed(() => {
-    return state.value
-        .split('-')
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-});
+// Pages are rendered one per state, so this doesn't need to react to route changes
+const state = getState(route.params.state);
+const name = state?.name ?? '';
+const active = state?.active ?? [];
+const inactive = state?.inactive ?? [];
+const updated = state ? monthYear(state.updatedAt) : '';
+const count = active.length;
 
-const stateData = computed(() => {
-    const stateKey = state.value.replace(/-/g, '_');
-    return sportsbooksData[stateKey] || { active: [], inactive: [] };
-});
+function formatUpdatedAt(date) {
+    // Fixed locale and time zone so the prerendered date matches hydration in every browser
+    return new Date(date).toLocaleDateString('en-US', { timeZone: 'UTC' });
+}
 
 function formatDate(date) {
     if (date.length === 4) {
         return date; // Just return the year if it's in YYYY format
     }
     const d = new Date(date);
-    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', timeZone: 'UTC' });
 }
 
 // Redirect if state data doesn't exist
 onMounted(() => {
-    const stateKey = state.value.replace(/-/g, '_');
-    if (!sportsbooksData[stateKey]) {
+    if (!state) {
         router.push('/sportsbooks');
     }
 });
 
-// Set page title and meta description
-useHead({
-    title: `Legal ${formattedState.value} Online Sportsbooks`,
-    script: [
-        {
-            type: 'application/ld+json',
-            children: JSON.stringify({
-                '@context': 'https://schema.org',
-                '@type': 'WebPage',
-                name: `Legal ${formattedState.value} Online Sportsbooks`,
-                description: `Complete list of legal sportsbooks available in ${formattedState.value}. Find the best online sports betting sites, current promotions, and betting options.`,
-                mainEntity: {
-                    '@type': 'ItemList',
-                    itemListElement: stateData.value.active.map((book, index) => ({
-                        '@type': 'ListItem',
-                        position: index + 1,
-                        item: {
-                            '@type': 'Service',
-                            name: book.name,
-                            description: `Online sports betting service available in ${formattedState.value}`,
-                        },
-                    })),
-                },
-            }),
-        },
-    ],
-});
+const title = state?.legal ? `Legal ${name} Sportsbooks (${updated})` : `Is Sports Betting Legal in ${name}?`;
+const description = state?.legal
+    ? `${name} has ${count} legal online sportsbooks and betting apps, including ${listNames(active.slice(0, 3).map((book) => book.name))}. See the full list and which books have left. Updated ${updated}.`
+    : `Online sports betting is not legal in ${name} as of ${updated}.${count ? ` See the other betting and fantasy operators listed for the state.` : ''}`;
 
-// Set SEO meta tags
-useSeoMeta({
-    description: `Complete list of legal sportsbooks available in ${formattedState.value}. Find the best online sports betting sites, current promotions, and betting options.`,
-    ogTitle: `${formattedState.value} Sportsbooks - Legal Online Sports Betting Sites`,
-    ogDescription: `Complete list of legal sportsbooks available in ${formattedState.value}. Find the best online sports betting sites, current promotions, and betting options.`,
-    ogType: 'website',
-    twitterCard: 'summary_large_image',
-    twitterTitle: `${formattedState.value} Sportsbooks - Legal Online Sports Betting Sites`,
-    twitterDescription: `Complete list of legal sportsbooks available in ${formattedState.value}. Find the best online sports betting sites, current promotions, and betting options.`,
-    canonical: `https://hedgecalc.com/sportsbooks/${state.value}`,
+usePageTitle(title, description, {
+    breadcrumbs: [
+        { name: 'Sportsbooks by State', path: '/sportsbooks' },
+        { name: `${name} Sportsbooks`, path: route.path },
+    ],
+    schema: {
+        '@type': 'WebPage',
+        name: title,
+        description,
+        url: absoluteUrl(route.path),
+        dateModified: state?.updatedAt,
+        ...(count && {
+            mainEntity: {
+                '@type': 'ItemList',
+                name: state?.legal ? `Legal online sportsbooks in ${name}` : `Other betting and fantasy operators in ${name}`,
+                numberOfItems: count,
+                itemListElement: active.map((book, index) => ({
+                    '@type': 'ListItem',
+                    position: index + 1,
+                    name: book.name,
+                })),
+            },
+        }),
+    },
 });
 </script>
 
 <template>
     <article class="mx-auto w-full max-w-4xl px-5 py-12">
         <div class="prose">
-            <KnowledgeHeader>{{ formattedState }} Sportsbooks</KnowledgeHeader>
-            <section v-if="stateData.legal" class="mb-12">
-                <p>
-                    The following sportsbooks and daily fantasy sites are legal and active in {{ formattedState }}.
-                    <span class="text-sm italic">(Updated {{ new Date(stateData.updatedAt).toLocaleDateString() }})</span>
-                </p>
-                <ul>
-                    <li v-for="book in stateData.active" :key="book.name">{{ book.name }}</li>
-                </ul>
-            </section>
-            <section v-else>
-                <p>
-                    Sports betting is not yet legal in {{ formattedState }}. <span class="text-sm italic">(Updated {{ new Date(stateData.updatedAt).toLocaleDateString() }})</span>
-                </p>
-            </section>
+            <template v-if="state?.legal">
+                <KnowledgeHeader>Legal Sportsbooks in {{ name }}</KnowledgeHeader>
+                <section class="mb-12">
+                    <p>
+                        Online sports betting is legal in {{ name }}. These {{ count }} sportsbooks and daily fantasy apps are currently active.
+                        <span class="text-sm italic">(Updated {{ formatUpdatedAt(state.updatedAt) }})</span>
+                    </p>
+                    <ul>
+                        <li v-for="book in active" :key="book.name">{{ book.name }}</li>
+                    </ul>
+                </section>
+            </template>
+            <template v-else>
+                <KnowledgeHeader>Is Sports Betting Legal in {{ name }}?</KnowledgeHeader>
+                <section>
+                    <p>
+                        Not yet. Online sports betting is not legal in {{ name }}. <span class="text-sm italic">(Updated {{ formatUpdatedAt(state?.updatedAt ?? '') }})</span>
+                    </p>
+                    <p>See the <RouterLink to="/sportsbooks">states where sports betting is legal</RouterLink> and which sportsbooks operate in each.</p>
+                </section>
+                <section v-if="active.length > 0">
+                    <h2>Other betting and fantasy operators in {{ name }}</h2>
+                    <p>These operators may offer daily fantasy sports or other betting products. They are not counted as legal statewide online sportsbooks.</p>
+                    <ul>
+                        <li v-for="book in active" :key="book.name">{{ book.name }}</li>
+                    </ul>
+                </section>
+            </template>
 
-            <section v-if="stateData.inactive.length > 0">
-                <h2>Former Online {{ formattedState }} Sportsbooks</h2>
+            <section v-if="inactive.length > 0">
+                <h2>Former Online {{ name }} Sportsbooks</h2>
                 <ul>
-                    <li v-for="book in stateData.inactive" :key="book.name">
+                    <li v-for="book in inactive" :key="book.name">
                         {{ book.name }} - {{ book.status }} <span v-if="book.date"> ({{ formatDate(book.date) }})</span>
                     </li>
                 </ul>

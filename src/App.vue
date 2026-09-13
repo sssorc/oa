@@ -3,7 +3,7 @@ import AppHeader from '@/components/core/AppHeader.vue';
 import AppFooter from '@/components/core/AppFooter.vue';
 import { usePageTitle } from '@/composables/usePageTitle';
 
-// Set default title
+// Defaults for any page that doesn't set its own
 usePageTitle('Sports Betting Calculators');
 </script>
 

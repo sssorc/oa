@@ -1,16 +1,28 @@
 <script setup>
-import { usePageTitle } from '@/composables/usePageTitle';
+import { usePageTitle, articleSchema } from '@/composables/usePageTitle';
 import { RouterLink } from 'vue-router';
 import KnowledgeArticle from '@/components/knowledge/KnowledgeArticle.vue';
 import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
 
 // Set page title
-usePageTitle('What is Positive EV?', 'Understand positive expected value (EV) in sports betting. Learn how to calculate EV, identify +EV opportunities, and make profitable betting decisions.');
+const description = 'What positive expected value (+EV) means in sports betting, the formula to calculate EV, and a simple coin flip example showing why +EV bets win long term.';
+const publishedAt = '2025-05-16';
+const updatedAt = '2026-09-12';
+const image = '/og/what-is-positive-ev.png';
+usePageTitle('What Is Positive EV (+EV) Betting?', description, {
+    ogType: 'article',
+    image,
+    schema: articleSchema('What is positive EV?', description, '/knowledge/what-is-positive-ev', { datePublished: publishedAt, dateModified: updatedAt, image }),
+    breadcrumbs: [
+        { name: 'Knowledge Base', path: '/knowledge' },
+        { name: 'What is positive EV?', path: '/knowledge/what-is-positive-ev' },
+    ],
+});
 </script>
 
 <template>
     <KnowledgeArticle>
-        <KnowledgeHeader>What is positive EV?</KnowledgeHeader>
+        <KnowledgeHeader :published-at="publishedAt" :updated-at="updatedAt">What is positive EV?</KnowledgeHeader>
         <p>
             Every bet has an expected value (EV) based on the odds and the implied probability of hitting. When this value is positive for a bet, it's said to be "+EV". The formula for calculating EV
             is:

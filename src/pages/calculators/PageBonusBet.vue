@@ -4,12 +4,19 @@ import ConversionResult from '@/components/result/ConversionResult.vue';
 import InputField from '@/components/ui/InputField.vue';
 import InputLabel from '@/components/ui/InputLabel.vue';
 import SubmitButton from '@/components/ui/SubmitButton.vue';
-import { usePageTitle } from '@/composables/usePageTitle';
+import { usePageTitle, calculatorSchema } from '@/composables/usePageTitle';
 import { trackCalculatorSubmit } from '@/utils/analytics';
 import { getPayout } from '@/utils/helpers';
 
 // Set page title
-usePageTitle('Sports Betting Bonus Bet Calculator', 'Find the optimal hedge amount to conver your free bets or bonus bets into cash.');
+const description = 'Free bonus bet and free bet calculator. Find the hedge that turns a sportsbook bonus bet or free bet into guaranteed cash and see your conversion rate.';
+usePageTitle('Bonus Bet & Free Bet Calculator: Convert to Cash', description, {
+    schema: {
+        ...calculatorSchema('Bonus Bet Calculator', description, '/bonus-bet-calculator'),
+        alternateName: 'Free Bet Calculator',
+    },
+    breadcrumbs: [{ name: 'Bonus Bet Calculator', path: '/bonus-bet-calculator' }],
+});
 
 // State
 const oddsA = ref('');
@@ -21,7 +28,6 @@ const hasSearched = ref(false);
 
 // Methods
 function calculate() {
-    console.log('calculate', oddsA.value, stakeA.value, oddsB.value);
     if (!oddsA.value || !stakeA.value || !oddsB.value) return;
 
     // Track calculator submission
@@ -78,7 +84,7 @@ function percentOf(a, b) {
 
 <template>
     <section class="relative mx-auto w-full max-w-7xl px-5 py-8">
-        <h1 class="mb-6 font-mono text-xl">Bonus Bet Conversion Calculator</h1>
+        <h1 class="mb-6 font-mono text-xl">Bonus Bet &amp; Free Bet Calculator</h1>
         <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <form @submit.prevent="calculate" class="grid max-w-xl gap-6 md:flex-1">
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -109,16 +115,33 @@ function percentOf(a, b) {
     </section>
     <section class="prose mx-auto mt-10 max-w-7xl px-5">
         <h2>How to use</h2>
-        <p>Use the bonus bet conversion calculator to find the optimal amount to place when converting your bonus bets into cash. to see a</p>
+        <p>Use the bonus bet calculator to find how much cash to bet on the other side of a bonus bet or free bet to guarantee a profit.</p>
         <ul>
-            <li>Enter the bonus bet amount, your bet odds, and the hedge bet odds</li>
-            <li>Results will show a breakdown of the two bets and the conversion rate</li>
-            <li>Plus signs are optional in odds fields.</li>
+            <li>Enter the bonus bet amount, your bonus bet odds, and the hedge odds</li>
+            <li>Results show both bets and your conversion rate</li>
+            <li>Plus signs are optional in odds fields</li>
         </ul>
+
+        <h2>Bonus bets vs. free bets</h2>
         <p>
-            Any conversion rate above 70% is considered good. However, it's easy to consistently get a much higher conversion rate by using the
-            <a href="https://chromewebstore.google.com/detail/cno-parlay-buddy/hcpaaidgaenjoobhlbacpfnolcebefef?hl=en-US&utm_source=hedge_calc" target="_blank">Parlay Buddy</a> chrome extension on the
-            Crazy Ninja Odds <a href="https://crazyninjaodds.com/site/tools/positive-ev.aspx" target="_blank">Postive EV page</a>. A parlay of the top three legs will usually be above 90%.
+            They're the same thing. Most US sportsbooks now call them bonus bets, while others (and most UK books) still say free bets. Either way, if it wins you get the winnings but not the stake,
+            so this calculator works for both.
+        </p>
+        <p>
+            A <em>risk-free bet</em> or second-chance bet is different. You bet real money and get a bonus bet back if you lose. Use the
+            <RouterLink to="/risk-free-bet-calculator">risk-free bet calculator</RouterLink> for those.
+        </p>
+
+        <h2>How bonus bet conversion works</h2>
+        <p>
+            A bonus bet only pays out the winnings, not the stake. That makes long odds more valuable: bet the bonus on an underdog, then hedge the favorite with cash so you profit whichever side
+            wins. Your conversion rate is that guaranteed profit as a percentage of the bonus amount.
+        </p>
+        <p>For example, a $100 bonus bet at +500 <a href="/bonus-bet-calculator?stakea=100&oddsa=500&oddsb=-600">hedged with $429 at -600</a> returns about $71 either way, a 71% conversion.</p>
+        <p>
+            Any conversion rate above 70% is considered good. You can consistently get a higher rate by using the
+            <a href="https://chromewebstore.google.com/detail/cno-parlay-buddy/hcpaaidgaenjoobhlbacpfnolcebefef?hl=en-US&utm_source=hedge_calc" target="_blank">Parlay Buddy</a> Chrome extension on the
+            Crazy Ninja Odds <a href="https://crazyninjaodds.com/site/tools/positive-ev.aspx" target="_blank">Positive EV page</a>. A parlay of the top three legs is usually above 90%.
         </p>
     </section>
 </template>
