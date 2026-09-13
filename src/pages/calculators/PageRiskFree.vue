@@ -4,15 +4,16 @@ import RiskFreeResult from '@/components/result/RiskFreeResult.vue';
 import InputField from '@/components/ui/InputField.vue';
 import InputLabel from '@/components/ui/InputLabel.vue';
 import SubmitButton from '@/components/ui/SubmitButton.vue';
-import { usePageTitle } from '@/composables/usePageTitle';
+import { usePageTitle, calculatorSchema } from '@/composables/usePageTitle';
 import { trackCalculatorSubmit } from '@/utils/analytics';
 import { getPayout } from '@/utils/helpers';
 
 // Set page title immediately
-usePageTitle(
-    'Sports Betting Risk-Free Bet Calculator',
-    'Calculate the optimal hedge amount for your risk-free bets. Our free calculator helps you maximize the value of your risk-free bet promotions while minimizing potential losses.'
-);
+const description = 'Free risk-free bet calculator for second-chance bet promos. Find the hedge amount that locks in profit when a losing bet is refunded as a bonus bet.';
+usePageTitle('Risk-Free Bet Calculator (Second-Chance Bets)', description, {
+    schema: calculatorSchema('Risk-Free Bet Calculator', description, '/risk-free-bet-calculator'),
+    breadcrumbs: [{ name: 'Risk-Free Bet Calculator', path: '/risk-free-bet-calculator' }],
+});
 
 // State
 const oddsA = ref('');
@@ -116,5 +117,22 @@ onMounted(() => {
                 <RiskFreeResult :result="result" />
             </div>
         </div>
+    </section>
+    <section class="prose mx-auto mt-10 max-w-7xl px-5">
+        <h2>How to use</h2>
+        <p>Use the risk-free bet calculator to hedge a second-chance promo, where the sportsbook refunds a losing bet as a bonus bet.</p>
+        <ul>
+            <li>Enter your risk-free stake and odds</li>
+            <li>Enter the odds for the other side as <em>Hedge Odds</em></li>
+            <li>Set <em>Assumed Conversion %</em> to how much cash you expect to get from the refunded bonus bet (70% is a reasonable default)</li>
+        </ul>
+        <p>Plus signs are optional in odds fields.</p>
+
+        <h2>How risk-free bets work</h2>
+        <p>
+            A risk-free bet isn't free money up front. You bet real cash, and if it loses, the sportsbook gives you a bonus bet for the amount you lost. To lock in value, you hedge the other side with
+            a smaller amount, sized so you end up with the same profit whether your bet wins or loses and you convert the refund.
+        </p>
+        <p>Once you get the bonus bet back, use the <RouterLink to="/bonus-bet-calculator">bonus bet calculator</RouterLink> to convert it to cash.</p>
     </section>
 </template>

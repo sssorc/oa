@@ -7,11 +7,15 @@ import InputLabel from '@/components/ui/InputLabel.vue';
 import SubmitButton from '@/components/ui/SubmitButton.vue';
 import DevigResult from '@/components/result/DevigResult.vue';
 import MonoText from '@/components/ui/MonoText.vue';
-import { usePageTitle } from '@/composables/usePageTitle';
+import { usePageTitle, calculatorSchema } from '@/composables/usePageTitle';
 import { trackCalculatorSubmit, trackBookmark } from '@/utils/analytics';
 
 // Set page title immediately
-usePageTitle('Sports Betting Devig Calculator', 'Calculate the fair odds expected value of your bets with the devig calculator powered by crazy ninja odds.');
+const description = 'Free devig calculator powered by Crazy Ninja Odds. Remove the vig to find fair odds, expected value (EV), and Kelly bet size for singles, parlays, and boosts.';
+usePageTitle('Devig Calculator: Fair Odds, EV & Kelly Stake', description, {
+    schema: calculatorSchema('Devig Calculator', description, '/devig-calculator'),
+    breadcrumbs: [{ name: 'Devig Calculator', path: '/devig-calculator' }],
+});
 
 // State
 const isSubmitting = ref(false);
@@ -379,7 +383,6 @@ onMounted(() => {
     const hashAndParams = window.location.search;
     // Split on ? to get just the query string
     const queryString = hashAndParams.substring(1); // Remove the leading ?
-    console.log(queryString);
 
     if (queryString) {
         const urlParams = new URLSearchParams(queryString);
@@ -537,7 +540,8 @@ onMounted(() => {
             <h2 class="font-space">How to use</h2>
             <p>
                 Use the devig calculator powered by <a href="https://crazyninjaodds.com/" target="_blank">Crazy Ninja Odds</a> to find the fair odds for a bet and the expected value for the odds
-                you're getting.
+                you're getting. New to this? Start with <RouterLink to="/knowledge/what-is-a-devig">what is a devig</RouterLink> and
+                <RouterLink to="/knowledge/what-is-positive-ev">what is positive EV</RouterLink>.
             </p>
             <ul>
                 <li><em>Odds</em> - Enter the odds of your bet (without any boosts)</li>
@@ -562,7 +566,7 @@ onMounted(() => {
                 <li>Single sharp 4-sided market: <MonoText>413/252/-104/763</MonoText></li>
             </ul>
             <p>
-                Detailed documentation of input syntax can be found on the <a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger_help.aspx" target="blank">devigger help guide</a>.
+                Detailed documentation of input syntax can be found on the <a href="http://crazyninjamike.com/Public/sportsbooks/sportsbook_devigger_help.aspx" target="_blank">devigger help guide</a>.
             </p>
         </section>
     </div>

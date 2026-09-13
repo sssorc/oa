@@ -31,7 +31,7 @@ const borderColor = computed(() => {
 const shareUrl = computed(() => {
     if (!props.result) return window.location.href;
 
-    const baseUrl = window.location.origin + '/risk-free';
+    const baseUrl = window.location.origin + '/risk-free-bet-calculator';
     const { stakeA, oddsA, oddsB, conversionRate } = props.result;
 
     const params = new URLSearchParams();

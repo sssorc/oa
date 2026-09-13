@@ -3,12 +3,19 @@ import { usePageTitle } from '@/composables/usePageTitle';
 import KnowledgeLink from '@/components/knowledge/KnowledgeLink.vue';
 
 // Set page title
-usePageTitle('Sports Betting Knowledge Base', 'Beginner-friendly explanations of key topics and terms related to sports betting that are necessary to be a profitable bettor.');
+usePageTitle(
+    '+EV Sports Betting Knowledge Base',
+    'Plain-English answers about +EV betting: what positive EV and devigs are, when to hedge or cash out, zero holds, and legal sportsbooks by state.',
+    {
+        breadcrumbs: [{ name: 'Knowledge Base', path: '/knowledge' }],
+    }
+);
 </script>
 
 <template>
     <div class="mx-auto w-full max-w-4xl px-5 py-12">
-        <h1 class="mb-8 text-3xl font-bold">Sports Betting Knowledge Base</h1>
+        <h1 class="mb-4 text-3xl font-bold">Sports Betting Knowledge Base</h1>
+        <p class="mb-8">Short, plain-English answers to the questions that come up when you start betting for expected value.</p>
 
         <div class="grid gap-4 lg:gap-6">
             <KnowledgeLink to="/knowledge/when-to-hedge">When should I hedge a bet?</KnowledgeLink>

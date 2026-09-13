@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
-import { onBeforeRouteUpdate, useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import AppHeaderLink from '@/components/ui/AppHeaderLink.vue';
 import AppFooterLink from '@/components/ui/AppFooterLink.vue';
 import HedgeCalcLogo from '@/components/ui/HedgeCalcLogo.vue';
@@ -50,6 +50,7 @@ watch(
             </button>
 
             <nav :class="{ 'max-md:hidden': !showNav, 'dark:bg-gray-900': showNav }" class="z-40 flex gap-2 font-mono max-md:fixed max-md:inset-0 max-md:flex-col max-md:bg-white max-md:pt-16">
+                <AppHeaderLink to="/hedge-calculator">Hedge</AppHeaderLink>
                 <AppHeaderLink to="/arbitrage-calculator">Arbitrage</AppHeaderLink>
                 <AppHeaderLink to="/bonus-bet-calculator">Bonus bet</AppHeaderLink>
                 <AppHeaderLink to="/risk-free-bet-calculator">Risk-free</AppHeaderLink>

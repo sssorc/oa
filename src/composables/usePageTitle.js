@@ -1,44 +1,99 @@
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import { useHead, useSeoMeta } from '@unhead/vue';
 
-const defaultDescription = 'Free sports betting calculators for arbitrage, bonus bets, risk-free bets, and devigging.';
-const siteUrl = 'https://hedgecalc.com';
+export const siteUrl = 'https://hedgecalc.com';
+const siteName = 'HedgeCalc';
+const defaultDescription = 'Free sports betting calculators for hedging, arbitrage, bonus bets, risk-free bets, and devigging.';
+const organization = { '@type': 'Organization', name: siteName, url: `${siteUrl}/` };
 
-export function usePageTitle(title, description = defaultDescription, canonicalUrl = null) {
-    const siteName = 'HedgeCalc';
-    const fullTitle = title ? `${title}` : 'HedgeCalc Betting Tools';
-    const currentUrl = typeof window !== 'undefined' ? window.location.href : siteUrl;
-    const canonical = canonicalUrl || currentUrl;
+export const absoluteUrl = (path) => `${siteUrl}${path}`;
 
-    // Set title with template and canonical URL
+/**
+ * Sets title, description, canonical, social tags, and JSON-LD for a page.
+ *
+ * @param {string} title
+ * @param {string} [description]
+ * @param {object} [options]
+ * @param {Array<{name: string, path: string}>} [options.breadcrumbs] Trail after Home, ending with the current page
+ * @param {object|object[]} [options.schema] Extra schema.org nodes for this page
+ * @param {boolean} [options.fullTitle] Use the title as-is, without the "| HedgeCalc" suffix
+ */
+export function usePageTitle(title, description = defaultDescription, options = {}) {
+    const route = useRoute();
+    // Built from the route path (no query string) so it's identical at build time and in the browser
+    const canonical = computed(() => absoluteUrl(route.path));
+
+    const schema = [].concat(options.schema || []);
+    if (options.breadcrumbs?.length) {
+        schema.push({
+            '@type': 'BreadcrumbList',
+            itemListElement: [{ name: 'Home', path: '/' }, ...options.breadcrumbs].map((crumb, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                name: crumb.name,
+                item: absoluteUrl(crumb.path),
+            })),
+        });
+    }
+
     useHead({
-        title: fullTitle,
-        titleTemplate: '%s | HedgeCalc',
-        link: [
-            {
-                rel: 'canonical',
-                href: canonical,
-            },
-        ],
+        title,
+        titleTemplate: options.fullTitle ? '%s' : `%s | ${siteName}`,
+        link: [{ rel: 'canonical', href: canonical }],
+        script: schema.length
+            ? [
+                  {
+                      type: 'application/ld+json',
+                      key: 'page-schema',
+                      innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@graph': schema }),
+                  },
+              ]
+            : [],
     });
 
-    // Set SEO meta tags
     useSeoMeta({
-        title: fullTitle,
-        description: description,
-        ogTitle: fullTitle,
+        description,
+        ogTitle: title,
         ogDescription: description,
-        ogUrl: currentUrl,
+        ogUrl: canonical,
         ogType: 'website',
         ogSiteName: siteName,
-        ogImage: `${siteUrl}/icon.svg`,
-        twitterCard: 'summary_large_image',
-        twitterTitle: fullTitle,
+        ogImage: absoluteUrl('/apple-touch-icon.png'),
+        twitterCard: 'summary',
+        twitterTitle: title,
         twitterDescription: description,
-        robots: 'index, follow',
-        keywords: 'sports betting, calculator, arbitrage, hedge, hedging, bonus bets, free bets, risk-free bets, devigging, devigger, devig',
     });
 
+    return { title };
+}
+
+// Schema for a calculator page
+export function calculatorSchema(name, description, path) {
     return {
-        title: fullTitle,
+        '@type': 'WebApplication',
+        name,
+        description,
+        url: absoluteUrl(path),
+        applicationCategory: 'FinanceApplication',
+        operatingSystem: 'Any',
+        isAccessibleForFree: true,
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        publisher: organization,
     };
 }
+
+// Schema for a knowledge base article
+export function articleSchema(headline, description, path) {
+    return {
+        '@type': 'Article',
+        headline,
+        description,
+        url: absoluteUrl(path),
+        mainEntityOfPage: absoluteUrl(path),
+        author: organization,
+        publisher: organization,
+    };
+}
+
+export { organization };

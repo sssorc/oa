@@ -1,8 +1,19 @@
 <script setup>
-import { usePageTitle } from '@/composables/usePageTitle';
+import { usePageTitle, absoluteUrl } from '@/composables/usePageTitle';
 import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
+import WeeklyWinnersTable from '@/components/promo/WeeklyWinnersTable.vue';
 
-usePageTitle('Slatebreaker', 'Track weekly results for the Slatebreaker promo: eligible games, pot, winner, and payout.');
+const season = 2026;
+const description = `Weekly DraftKings Slatebreaker winners for the ${season} NFL season: eligible games, prize pot, winning player, time, and payout.`;
+usePageTitle(`DraftKings Slatebreaker Winners (${season})`, description, {
+    breadcrumbs: [{ name: 'DraftKings Slatebreaker Winners', path: '/slatebreaker' }],
+    schema: {
+        '@type': 'WebPage',
+        name: `DraftKings Slatebreaker Winners (${season} NFL Season)`,
+        description,
+        url: absoluteUrl('/slatebreaker'),
+    },
+});
 
 const weeks = [
     {
@@ -19,38 +30,13 @@ const weeks = [
 <template>
     <article class="mx-auto w-full max-w-4xl px-5 py-12">
         <div class="prose">
-            <KnowledgeHeader>DraftKings - Slatebreaker</KnowledgeHeader>
-            <p>Weekly tracker for the Slatebreaker promo results. Win a share of the pot if your player scores the fastest touchdown.</p>
+            <KnowledgeHeader>DraftKings Slatebreaker Winners ({{ season }})</KnowledgeHeader>
+            <p>Weekly tracker for the DraftKings Slatebreaker promo winners. Win a share of the pot if your player scores the fastest touchdown.</p>
+            <p>Also see this season's <RouterLink to="/kotez">King of the End Zone winners</RouterLink>.</p>
         </div>
 
         <section class="mt-8">
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                    <caption class="sr-only">
-                        Slatebreaker weekly results
-                    </caption>
-                    <thead>
-                        <tr class="border-jet border-b font-mono dark:border-gray-400">
-                            <th scope="col" class="py-3 pr-4 text-right font-bold">Week</th>
-                            <th scope="col" class="px-4 py-3 text-left font-bold">Eligible games</th>
-                            <th scope="col" class="px-4 py-3 text-right font-bold">Pot</th>
-                            <th scope="col" class="px-4 py-3 text-left font-bold">Winner</th>
-                            <th scope="col" class="px-4 py-3 text-right font-bold">Time</th>
-                            <th scope="col" class="py-3 pl-4 text-right font-bold">Payout</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="row in weeks" :key="row.week" class="border-pale-blue/70 border-b dark:border-gray-700">
-                            <td class="font-numbers py-3 pr-4 text-right">{{ row.week }}</td>
-                            <td class="px-4 py-3">{{ row.eligibleGames }}</td>
-                            <td class="font-numbers px-4 py-3 text-right">{{ row.pot }}</td>
-                            <td class="px-4 py-3" :class="{ 'text-space dark:text-gray-400': row.winner === '-' }">{{ row.winner }}</td>
-                            <td class="font-numbers px-4 py-3 text-right" :class="{ 'text-space dark:text-gray-400': row.time === '-' }">{{ row.time }}</td>
-                            <td class="font-numbers py-3 pl-4 text-right" :class="{ 'text-space dark:text-gray-400': row.payout === '-' }">{{ row.payout }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <WeeklyWinnersTable :weeks="weeks" caption="Slatebreaker weekly winners" stat-label="Time" stat-key="time" />
         </section>
     </article>
 </template>

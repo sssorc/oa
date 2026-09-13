@@ -2,38 +2,21 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <script>
+            (function () {
+                var t = localStorage.theme || 'system';
+                if (t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            })();
+        </script>
 
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Free sports betting calculators for arbitrage, hedging, bonus bets, risk-free bets, and devigging." />
         <meta name="google-adsense-account" content="ca-pub-4912765764305405" />
-        <meta name="robots" content="index, follow" />
         <title>HedgeCalc - Sports Betting Calculators</title>
-
-        <!-- Structured Data -->
-        <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "WebApplication",
-                "name": "HedgeCalc",
-                "description": "Free sports betting calculators for arbitrage, hedging, bonus bets, risk-free bets, and devigging.",
-                "url": "https://hedgecalc.com",
-                "operatingSystem": "Any",
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD"
-                },
-                "featureList": ["Arbitrage Calculator", "Hedging Calculator", "Bonus Bet Calculator", "Risk-Free Bet Calculator", "Devig Calculator"],
-                "keywords": "sports betting, calculator, arbitrage, hedge, hedging, bonus bets, free bets,risk-free bets, devigging, devigger, devig"
-            }
-        </script>
     </head>
     <body class="antialiased dark:bg-gray-900 dark:text-white/90">
         <div id="app" class="min-h-screen"></div>

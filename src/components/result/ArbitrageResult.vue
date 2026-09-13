@@ -51,7 +51,7 @@ const borderColor = computed(() => {
 const shareUrl = computed(() => {
     if (!props.results) return window.location.href;
 
-    const baseUrl = window.location.origin + '/arbitrage';
+    const baseUrl = window.location.origin + window.location.pathname;
     const { oddsA, oddsB, oddsC, stakeA } = props.results;
 
     const params = new URLSearchParams();

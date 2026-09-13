@@ -1,11 +1,18 @@
 <script setup>
-import { usePageTitle } from '@/composables/usePageTitle';
+import { usePageTitle, articleSchema } from '@/composables/usePageTitle';
 import { RouterLink } from 'vue-router';
 import KnowledgeArticle from '@/components/knowledge/KnowledgeArticle.vue';
 import KnowledgeHeader from '@/components/knowledge/KnowledgeHeader.vue';
 
 // Set page title
-usePageTitle('What is Positive EV?', 'Understand positive expected value (EV) in sports betting. Learn how to calculate EV, identify +EV opportunities, and make profitable betting decisions.');
+const description = 'What positive expected value (+EV) means in sports betting, the formula to calculate EV, and a simple coin flip example showing why +EV bets win long term.';
+usePageTitle('What Is Positive EV (+EV) Betting?', description, {
+    schema: articleSchema('What is positive EV?', description, '/knowledge/what-is-positive-ev'),
+    breadcrumbs: [
+        { name: 'Knowledge Base', path: '/knowledge' },
+        { name: 'What is positive EV?', path: '/knowledge/what-is-positive-ev' },
+    ],
+});
 </script>
 
 <template>

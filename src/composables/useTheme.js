@@ -1,7 +1,10 @@
-import { ref, watch } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 export function useTheme() {
-    const theme = ref(localStorage.theme || 'system');
+    // Start as 'system' so the prerendered HTML matches the first client render;
+    // the stored preference is applied after hydration. The inline script in
+    // index.html sets the `dark` class before paint to avoid a flash.
+    const theme = ref('system');
 
     const setTheme = (newTheme) => {
         theme.value = newTheme;
@@ -15,15 +18,22 @@ export function useTheme() {
         }
     };
 
-    // Initialize theme
-    setTheme(theme.value);
-
     // Watch for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', (e) => {
+    let mediaQuery;
+    const onSystemChange = () => {
         if (theme.value === 'system') {
             setTheme('system');
         }
+    };
+
+    onMounted(() => {
+        setTheme(localStorage.theme || 'system');
+        mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addEventListener('change', onSystemChange);
+    });
+
+    onBeforeUnmount(() => {
+        mediaQuery?.removeEventListener('change', onSystemChange);
     });
 
     return {

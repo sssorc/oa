@@ -3,7 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-mono: 'Space Mono', monospace;
+    --font-sans: 'Google Sans Flex Variable', Helvetica, Arial, sans-serif;
+    --font-mono: 'Google Sans Code Variable', monospace;
     --font-numbers: 'JetBrains Mono', monospace;
 
     --color-pink: #e8aeb7;
@@ -18,7 +19,7 @@
 }
 
 html {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: var(--font-sans);
     scrollbar-gutter: stable;
 }
 

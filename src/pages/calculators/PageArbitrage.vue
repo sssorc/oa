@@ -4,16 +4,16 @@ import ArbitrageResult from '@/components/result/ArbitrageResult.vue';
 import InputField from '@/components/ui/InputField.vue';
 import InputLabel from '@/components/ui/InputLabel.vue';
 import SubmitButton from '@/components/ui/SubmitButton.vue';
-import { usePageTitle } from '@/composables/usePageTitle';
+import { usePageTitle, calculatorSchema } from '@/composables/usePageTitle';
 import { trackCalculatorSubmit } from '@/utils/analytics';
 import { getPayout, getStake } from '@/utils/helpers';
 
 // Set page title
-usePageTitle(
-    'Sports Betting Arbitrage Calculator',
-    'Calculate optimal bet size and ROI for arbitrage opportunities. Lock in risk-free profit regardless of the outcome.',
-    'https://hedgecalc.com/arbitrage-calculator'
-);
+const description = 'Free arbitrage betting calculator for 2-way and 3-way markets. Find the stake for each side of an arb and see your guaranteed profit and ROI.';
+usePageTitle('Arbitrage Calculator for Sports Betting', description, {
+    schema: calculatorSchema('Arbitrage Calculator', description, '/arbitrage-calculator'),
+    breadcrumbs: [{ name: 'Arbitrage Calculator', path: '/arbitrage-calculator' }],
+});
 
 // State
 const results = ref(false);
@@ -151,7 +151,7 @@ onMounted(() => {
                     </div>
 
                     <div class="mt-2">
-                        <SubmitButton :disabled="!oddsA || !stakeA || !oddsB" class="max-sm:w-full" :is-submitting="loading">Calculate Hedge</SubmitButton>
+                        <SubmitButton :disabled="!oddsA || !stakeA || !oddsB" class="max-sm:w-full" :is-submitting="loading">Calculate Arb</SubmitButton>
                     </div>
                 </form>
 
@@ -160,13 +160,31 @@ onMounted(() => {
         </section>
         <section class="prose mx-auto mt-10 max-w-7xl px-5">
             <h2>How to use</h2>
-            <p>Use the abritrage calculator to find the optimal amount to place for an arbitrage or hedge.</p>
+            <p>Use the arbitrage calculator to find how much to bet on each side of an arb.</p>
             <ul>
-                <li>Enter your first bet amount and odds as <em>Stake A</em> and <em>Odds A</em></li>
-                <li>Enter the odds of your second or hedge bet as <em>Odds B</em></li>
-                <li>Enter additional odds as <em>Odds C</em> for a three-way arb</li>
+                <li>Enter the amount and odds for one side as <em>Stake A</em> and <em>Odds A</em></li>
+                <li>Enter the odds for the other side, at a different sportsbook, as <em>Odds B</em></li>
+                <li>Enter the third outcome as <em>Odds C</em> for a three-way market, like a soccer match that can end in a draw</li>
             </ul>
             <p>Plus signs are optional in odds fields.</p>
+
+            <h2>What is arbitrage betting?</h2>
+            <p>
+                An arbitrage, or arb, happens when sportsbooks disagree enough on a market that betting every outcome guarantees a profit. For example, if one book offers +110 on a team and another
+                offers +100 on their opponent, <a href="/arbitrage-calculator?stakeA=100&oddsA=110&oddsB=100">betting $100 and $105</a> returns $210 whichever side wins, a $5 profit.
+            </p>
+            <p>
+                When the two sides add up to exactly break-even, it's a <RouterLink to="/knowledge/what-is-a-zero-hold">zero hold</RouterLink>, which is useful for clearing promo requirements without
+                risking money.
+            </p>
+
+            <h2>Things to watch for</h2>
+            <ul>
+                <li>Odds move quickly. Place the side most likely to change first.</li>
+                <li>Check that both books use the same rules for the market, such as overtime or player scratches.</li>
+                <li>Sportsbooks may limit accounts that bet arbs regularly.</li>
+            </ul>
+            <p>Already have a bet placed and want to lock in a result? Use the <RouterLink to="/hedge-calculator">hedge calculator</RouterLink>.</p>
         </section>
     </div>
 </template>
