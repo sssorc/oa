@@ -24,6 +24,14 @@ const weeks = [
         yards: 45,
         payout: '$113',
     },
+    {
+        week: 2,
+        eligibleGames: 'DET vs BUF',
+        pot: '$2M',
+        winner: '-',
+        yards: '-',
+        payout: '-',
+    },
 ];
 </script>
 
