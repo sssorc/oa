@@ -28,8 +28,8 @@ const weeks = [
         week: 2,
         eligibleGames: 'DET vs BUF',
         pot: '$2M',
-        winner: '-',
-        yards: '-',
+        winner: 'Josh Palmer',
+        yards: '43',
         payout: '-',
     },
 ];
