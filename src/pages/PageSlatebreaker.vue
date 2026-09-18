@@ -24,6 +24,14 @@ const weeks = [
         time: '1Q 11:33',
         payout: '$7.3K',
     },
+    {
+        week: 2,
+        eligibleGames: '1pm Sunday games',
+        pot: '$2M',
+        winner: '-',
+        time: '-',
+        payout: '-',
+    },
 ];
 </script>
 
