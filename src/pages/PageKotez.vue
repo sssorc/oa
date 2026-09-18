@@ -30,7 +30,7 @@ const weeks = [
         pot: '$2M',
         winner: 'Josh Palmer',
         yards: '43',
-        payout: '-',
+        payout: '$286',
     },
 ];
 </script>
