@@ -60,6 +60,7 @@ These sportsbooks publish their own state availability pages. **Check these firs
 | DraftKings | https://sportsbook.draftkings.com/help/sports-betting/where-is-sports-betting-legal |
 | Circa | https://www.circasports.com/ |
 | Bally Bet | https://play.ballybet.com/promo/sports/p/brand-bet10-get50/ |
+| Bally Bet (state list) | https://www.ballybet.com/states-where-sports-betting-is-legal |
 | Betfred | https://betfredsports.com/ |
 | TwinSpires | https://www.twinspires.com/edge/help/our-story/ |
 | ESPN Bet | https://about.espnbet.com/ |

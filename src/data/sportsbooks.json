@@ -13,7 +13,7 @@
     },
     "arizona": {
         "legal": true,
-        "updatedAt": "2026-04-29",
+        "updatedAt": "2026-09-18",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -27,7 +27,6 @@
             { "name": "Bally Bet" },
             { "name": "theScore Bet" },
             { "name": "PrizePicks" },
-            { "name": "Sporttrade" },
             { "name": "Golden Nugget" },
             { "name": "BetCris" }
         ],
@@ -71,6 +70,11 @@
                 "name": "Fubo Sportsbook",
                 "status": "Closed",
                 "date": "2022-10-18"
+            },
+            {
+                "name": "Sporttrade",
+                "status": "Closed",
+                "date": "2026-05-25"
             }
         ]
     },
@@ -94,7 +98,7 @@
     },
     "colorado": {
         "legal": true,
-        "updatedAt": "2026-05-22",
+        "updatedAt": "2026-09-18",
         "active": [
             { "name": "Bally Bet" },
             { "name": "BetMonarch" },
@@ -107,8 +111,7 @@
             { "name": "theScore Bet" },
             { "name": "FanDuel" },
             { "name": "Fanatics" },
-            { "name": "Hard Rock Bet" },
-            { "name": "Sporttrade" }
+            { "name": "Hard Rock Bet" }
         ],
         "inactive": [
             {
@@ -155,6 +158,11 @@
                 "name": "SBK Sportsbook",
                 "status": "Closed",
                 "date": ""
+            },
+            {
+                "name": "Sporttrade",
+                "status": "Closed",
+                "date": "2026-05-25"
             }
         ]
     },
@@ -286,7 +294,7 @@
     },
     "iowa": {
         "legal": true,
-        "updatedAt": "2026-05-22",
+        "updatedAt": "2026-09-18",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -298,7 +306,6 @@
             { "name": "Bet365" },
             { "name": "Fanatics" },
             { "name": "Bally Bet" },
-            { "name": "Sporttrade" },
             { "name": "Q Sportsbook" }
         ],
         "inactive": [
@@ -336,6 +343,11 @@
                 "name": "ClutchBet",
                 "status": "Closed",
                 "date": "2024-09-16"
+            },
+            {
+                "name": "Sporttrade",
+                "status": "Closed",
+                "date": "2026-05-25"
             }
         ]
     },
@@ -447,7 +459,7 @@
     },
     "maryland": {
         "legal": true,
-        "updatedAt": "2026-05-22",
+        "updatedAt": "2026-09-18",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -459,7 +471,6 @@
             { "name": "Bally Bet" },
             { "name": "Bet365" },
             { "name": "betPARX" },
-            { "name": "Crab Sports" },
             { "name": "LetsBetMD" }
         ],
         "inactive": [
@@ -497,6 +508,11 @@
                 "name": "WynnBET",
                 "status": "Relinquished license before launch",
                 "date": "2023-08-16"
+            },
+            {
+                "name": "Crab Sports",
+                "status": "Paused operations",
+                "date": "2026-07-12"
             }
         ]
     },
@@ -613,7 +629,7 @@
     },
     "new_jersey": {
         "legal": true,
-        "updatedAt": "2026-05-22",
+        "updatedAt": "2026-09-18",
         "active": [
             { "name": "BetMGM" },
             { "name": "Caesars" },
@@ -625,7 +641,6 @@
             { "name": "Bally Bet" },
             { "name": "Bet365" },
             { "name": "Fanatics" },
-            { "name": "Sporttrade" },
             { "name": "Borgata Sportsbook" },
             { "name": "betPARX" },
             { "name": "Golden Nugget Online Sportsbook" },
@@ -661,6 +676,11 @@
                 "name": "TwinSpires",
                 "status": "Closed",
                 "date": "2022-06-10"
+            },
+            {
+                "name": "Sporttrade",
+                "status": "Closed",
+                "date": "2026-05-25"
             }
         ]
     },
@@ -959,7 +979,7 @@
     },
     "virginia": {
         "legal": true,
-        "updatedAt": "2025-12-01",
+        "updatedAt": "2026-09-18",
         "active": [
             { "name": "FanDuel" },
             { "name": "Bally Bet" },
@@ -1020,6 +1040,11 @@
                 "name": "WynnBET",
                 "status": "Closed",
                 "date": "2023-08-11"
+            },
+            {
+                "name": "Sporttrade",
+                "status": "Closed",
+                "date": "2026-05-25"
             }
         ]
     },
@@ -1037,8 +1062,8 @@
     },
     "west_virginia": {
         "legal": true,
-        "updatedAt": "2026-05-22",
-        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetRivers" }, { "name": "theScore Bet" }, { "name": "Fanatics" }, { "name": "Betly" }],
+        "updatedAt": "2026-09-18",
+        "active": [{ "name": "BetMGM" }, { "name": "Caesars" }, { "name": "DraftKings" }, { "name": "FanDuel" }, { "name": "BetRivers" }, { "name": "theScore Bet" }, { "name": "Fanatics" }, { "name": "Betly" }, { "name": "Bet365" }],
         "inactive": [
             {
                 "name": "ESPNBet",
@@ -1076,8 +1101,8 @@
     },
     "district_of_columbia": {
         "legal": true,
-        "updatedAt": "2025-12-01",
-        "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "BetMGM" }, { "name": "Caesars" }, { "name": "theScore Bet" }, { "name": "Fanatics" }],
+        "updatedAt": "2026-09-18",
+        "active": [{ "name": "FanDuel" }, { "name": "DraftKings" }, { "name": "BetMGM" }, { "name": "Caesars" }, { "name": "theScore Bet" }, { "name": "Fanatics" }, { "name": "Bet365" }],
         "inactive": [
             {
                 "name": "ESPNBet",
