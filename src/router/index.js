@@ -121,6 +121,11 @@ export const routes = [
         component: () => import('../pages/PageKotez.vue'),
     },
     {
+        path: '/kotez/2025',
+        name: 'kotez-2025',
+        component: () => import('../pages/PageKotez2025.vue'),
+    },
+    {
         path: '/slatebreaker',
         name: 'slatebreaker',
         component: () => import('../pages/PageSlatebreaker.vue'),

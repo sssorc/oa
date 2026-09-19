@@ -1,6 +1,7 @@
 <script setup>
 defineProps({
-    // [{ week, eligibleGames, pot, winner, payout, [statKey] }]
+    // [{ week, eligibleGames, pot, winner, payout, [statKey] }]; week is a number, or a label like 'Wild Card'
+    // A week can appear more than once when DraftKings ran the promo on multiple days
     weeks: {
         type: Array,
         required: true,
@@ -40,10 +41,13 @@ const muted = (value) => ({ 'text-space dark:text-gray-400': value === '-' });
         <tbody class="grid gap-3 sm:table-row-group">
             <tr
                 v-for="row in weeks"
-                :key="row.week"
+                :key="`${row.week}-${row.eligibleGames}`"
                 class="border-pale-blue/70 grid grid-cols-3 gap-x-4 gap-y-3 rounded border p-4 sm:table-row sm:rounded-none sm:border-0 sm:border-b sm:p-0 dark:border-gray-700"
             >
-                <td class="font-numbers order-1 block font-bold before:content-['Week_'] sm:table-cell sm:py-3 sm:pr-4 sm:text-right sm:font-normal sm:before:content-none">
+                <td
+                    class="font-numbers order-1 block font-bold sm:table-cell sm:py-3 sm:pr-4 sm:text-right sm:font-normal sm:before:content-none"
+                    :class="typeof row.week === 'number' && `before:content-['Week_']`"
+                >
                     {{ row.week }}
                 </td>
                 <td class="text-space order-2 col-span-2 block text-right sm:table-cell sm:px-4 sm:py-3 sm:text-left sm:text-inherit dark:text-gray-400 sm:dark:text-inherit">
