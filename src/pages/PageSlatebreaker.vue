@@ -28,9 +28,9 @@ const weeks = [
         week: 2,
         eligibleGames: '1pm Sunday games',
         pot: '$2M',
-        winner: '-',
-        time: '-',
-        payout: '-',
+        winner: 'Chuba Hubbard',
+        time: '1Q 10:48',
+        payout: '$3,408',
     },
 ];
 </script>
