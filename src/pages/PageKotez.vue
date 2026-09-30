@@ -36,9 +36,9 @@ const weeks = [
         week: 3,
         eligibleGames: 'PHI vs CHI',
         pot: '$2M',
-        winner: '-',
-        yards: '-',
-        payout: '-',
+        winner: 'Kalif Raymond',
+        yards: 41,
+        payout: '$477',
     },
 ];
 </script>
