@@ -23,6 +23,7 @@ const weeks = [
         winner: 'Jaxon Smith-Njigba',
         yards: 45,
         payout: '$113',
+        odds: '+135',
     },
     {
         week: 2,
@@ -31,6 +32,7 @@ const weeks = [
         winner: 'Josh Palmer',
         yards: '43',
         payout: '$286',
+        odds: '+550',
     },
     {
         week: 3,
@@ -39,6 +41,16 @@ const weeks = [
         winner: 'Kalif Raymond',
         yards: 41,
         payout: '$477',
+        odds: '+550',
+    },
+    {
+        week: 4,
+        eligibleGames: 'ATL vs NO',
+        pot: '$2M',
+        winner: '-',
+        yards: '-',
+        payout: '-',
+        odds: '-',
     },
 ];
 </script>

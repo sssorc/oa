@@ -1,0 +1,1 @@
+{"version":"0.0.1","configurations":[{"name":"dev","runtimeExecutable":"npm","runtimeArgs":["run","dev"],"port":5173},{"name":"wrangler","runtimeExecutable":"zsh","runtimeArgs":["-c","PATH=$HOME/.nvm/versions/node/v22.17.1/bin:$PATH npx wrangler pages dev dist --port 8787"],"port":8787}]}

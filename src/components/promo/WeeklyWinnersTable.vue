@@ -1,6 +1,8 @@
 <script setup>
-defineProps({
-    // [{ week, eligibleGames, pot, winner, payout, [statKey] }]; week is a number, or a label like 'Wild Card'
+import { computed } from 'vue';
+
+const props = defineProps({
+    // [{ week, eligibleGames, pot, winner, payout, odds?, [statKey] }]; week is a number, or a label like 'Wild Card'
     // A week can appear more than once when DraftKings ran the promo on multiple days
     weeks: {
         type: Array,
@@ -21,11 +23,12 @@ defineProps({
     },
 });
 
+const showOdds = computed(() => props.weeks.some((row) => row.odds));
 const muted = (value) => ({ 'text-space dark:text-gray-400': value === '-' });
 </script>
 
 <template>
-    <!-- Below sm each row is a card: week and games, winner, then labeled yards/time, pot, and payout -->
+    <!-- Below sm each row is a card: week and games, winner, then labeled stats and payout -->
     <table class="block w-full text-sm sm:table">
         <caption class="sr-only">{{ caption }}</caption>
         <thead class="sr-only sm:not-sr-only sm:table-header-group">
@@ -34,6 +37,7 @@ const muted = (value) => ({ 'text-space dark:text-gray-400': value === '-' });
                 <th scope="col" class="px-4 py-3 text-left font-bold">Eligible games</th>
                 <th scope="col" class="px-4 py-3 text-right font-bold">Pot</th>
                 <th scope="col" class="px-4 py-3 text-left font-bold">Winner</th>
+                <th v-if="showOdds" scope="col" class="px-4 py-3 text-right font-bold">Odds</th>
                 <th scope="col" class="px-4 py-3 text-right font-bold">{{ statLabel }}</th>
                 <th scope="col" class="py-3 pl-4 text-right font-bold">Payout</th>
             </tr>
@@ -42,7 +46,8 @@ const muted = (value) => ({ 'text-space dark:text-gray-400': value === '-' });
             <tr
                 v-for="row in weeks"
                 :key="`${row.week}-${row.eligibleGames}`"
-                class="border-pale-blue/70 grid grid-cols-3 gap-x-4 gap-y-3 rounded border p-4 sm:table-row sm:rounded-none sm:border-0 sm:border-b sm:p-0 dark:border-gray-700"
+                class="border-pale-blue/70 grid gap-x-4 gap-y-3 rounded border p-4 sm:table-row sm:rounded-none sm:border-0 sm:border-b sm:p-0 dark:border-gray-700"
+                :class="showOdds ? 'grid-cols-2' : 'grid-cols-3'"
             >
                 <td
                     class="font-numbers order-1 block font-bold sm:table-cell sm:py-3 sm:pr-4 sm:text-right sm:font-normal sm:before:content-none"
@@ -50,28 +55,36 @@ const muted = (value) => ({ 'text-space dark:text-gray-400': value === '-' });
                 >
                     {{ row.week }}
                 </td>
-                <td class="text-space order-2 col-span-2 block text-right sm:table-cell sm:px-4 sm:py-3 sm:text-left sm:text-inherit dark:text-gray-400 sm:dark:text-inherit">
+                <td class="text-space order-2 block text-right sm:table-cell sm:px-4 sm:py-3 sm:text-left sm:text-inherit dark:text-gray-400 sm:dark:text-inherit" :class="showOdds ? 'col-span-1' : 'col-span-2'">
                     {{ row.eligibleGames }}
                 </td>
                 <td
                     data-label="Pot"
-                    class="font-numbers order-5 block text-center before:block before:font-mono before:text-xs before:text-gray-500 before:content-[attr(data-label)] sm:table-cell sm:px-4 sm:py-3 sm:text-right sm:before:content-none dark:before:text-gray-400"
+                    class="font-numbers order-6 block text-center before:block before:font-mono before:text-xs before:text-gray-500 before:content-[attr(data-label)] sm:table-cell sm:px-4 sm:py-3 sm:text-right sm:before:content-none dark:before:text-gray-400"
                 >
                     {{ row.pot }}
                 </td>
-                <td class="order-3 col-span-3 block text-base font-bold sm:table-cell sm:px-4 sm:py-3 sm:text-sm sm:font-normal" :class="muted(row.winner)">
+                <td class="order-3 block text-base font-bold sm:table-cell sm:px-4 sm:py-3 sm:text-sm sm:font-normal" :class="[muted(row.winner), showOdds ? 'col-span-2' : 'col-span-3']">
                     {{ row.winner }}
                 </td>
                 <td
-                    :data-label="statLabel"
+                    v-if="showOdds"
+                    data-label="Odds"
                     class="font-numbers order-4 block before:block before:font-mono before:text-xs before:text-gray-500 before:content-[attr(data-label)] sm:table-cell sm:px-4 sm:py-3 sm:text-right sm:before:content-none dark:before:text-gray-400"
+                    :class="muted(row.odds || '-')"
+                >
+                    {{ row.odds || '-' }}
+                </td>
+                <td
+                    :data-label="statLabel"
+                    class="font-numbers order-5 block before:block before:font-mono before:text-xs before:text-gray-500 before:content-[attr(data-label)] sm:table-cell sm:px-4 sm:py-3 sm:text-right sm:before:content-none dark:before:text-gray-400"
                     :class="muted(row[statKey])"
                 >
                     {{ row[statKey] }}
                 </td>
                 <td
                     data-label="Payout"
-                    class="font-numbers order-6 block text-right before:block before:font-mono before:text-xs before:text-gray-500 before:content-[attr(data-label)] sm:table-cell sm:py-3 sm:pl-4 sm:before:content-none dark:before:text-gray-400"
+                    class="font-numbers order-7 block text-right before:block before:font-mono before:text-xs before:text-gray-500 before:content-[attr(data-label)] sm:table-cell sm:py-3 sm:pl-4 sm:before:content-none dark:before:text-gray-400"
                     :class="muted(row.payout)"
                 >
                     {{ row.payout }}
