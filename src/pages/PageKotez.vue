@@ -47,10 +47,10 @@ const weeks = [
         week: 4,
         eligibleGames: 'ATL vs NO',
         pot: '$2M',
-        winner: '-',
-        yards: '-',
+        winner: 'Bijan Robinson',
+        yards: 59,
         payout: '-',
-        odds: '-',
+        odds: '-210',
     },
 ];
 </script>
