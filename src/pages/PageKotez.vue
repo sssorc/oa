@@ -49,8 +49,17 @@ const weeks = [
         pot: '$2M',
         winner: 'Bijan Robinson',
         yards: 59,
-        payout: '-',
+        payout: '$77',
         odds: '-210',
+    },
+    {
+        week: 5,
+        eligibleGames: 'BUF vs LAR',
+        pot: '$2M',
+        winner: 'James Cook',
+        yards: 17,
+        payout: '$147',
+        odds: '-110',
     },
 ];
 </script>
