@@ -61,6 +61,15 @@ const weeks = [
         payout: '$147',
         odds: '-110',
     },
+    {
+        week: 6,
+        eligibleGames: 'WAS vs SF',
+        pot: '$2M',
+        winner: 'George Kittle',
+        yards: 11,
+        payout: '-',
+        odds: '+105',
+    },
 ];
 </script>
 
