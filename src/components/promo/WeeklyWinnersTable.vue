@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-    // [{ week, eligibleGames, pot, winner, payout, odds?, [statKey] }]; week is a number, or a label like 'Wild Card'
+    // [{ [firstColumnKey], eligibleGames, pot, winner, payout, odds?, [statKey] }]
     // A week can appear more than once when DraftKings ran the promo on multiple days
     weeks: {
         type: Array,
@@ -21,6 +21,14 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    firstColumnLabel: {
+        type: String,
+        default: 'Week',
+    },
+    firstColumnKey: {
+        type: String,
+        default: 'week',
+    },
 });
 
 const showOdds = computed(() => props.weeks.some((row) => row.odds));
@@ -33,7 +41,7 @@ const muted = (value) => ({ 'text-space dark:text-gray-400': value === '-' });
         <caption class="sr-only">{{ caption }}</caption>
         <thead class="sr-only sm:not-sr-only sm:table-header-group">
             <tr class="border-jet border-b font-mono dark:border-gray-400">
-                <th scope="col" class="py-3 pr-4 text-right font-bold">Week</th>
+                <th scope="col" class="py-3 pr-4 text-right font-bold">{{ firstColumnLabel }}</th>
                 <th scope="col" class="px-4 py-3 text-left font-bold">Eligible games</th>
                 <th scope="col" class="px-4 py-3 text-right font-bold">Pot</th>
                 <th scope="col" class="px-4 py-3 text-left font-bold">Winner</th>
@@ -45,15 +53,15 @@ const muted = (value) => ({ 'text-space dark:text-gray-400': value === '-' });
         <tbody class="grid gap-3 sm:table-row-group">
             <tr
                 v-for="row in weeks"
-                :key="`${row.week}-${row.eligibleGames}`"
+                :key="`${row[firstColumnKey]}-${row.eligibleGames}`"
                 class="border-pale-blue/70 grid gap-x-4 gap-y-3 rounded border p-4 sm:table-row sm:rounded-none sm:border-0 sm:border-b sm:p-0 dark:border-gray-700"
                 :class="showOdds ? 'grid-cols-2' : 'grid-cols-3'"
             >
                 <td
                     class="font-numbers order-1 block font-bold sm:table-cell sm:py-3 sm:pr-4 sm:text-right sm:font-normal sm:before:content-none"
-                    :class="typeof row.week === 'number' && `before:content-['Week_']`"
+                    :class="firstColumnKey === 'week' && typeof row.week === 'number' && `before:content-['Week_']`"
                 >
-                    {{ row.week }}
+                    {{ row[firstColumnKey] }}
                 </td>
                 <td class="text-space order-2 block text-right sm:table-cell sm:px-4 sm:py-3 sm:text-left sm:text-inherit dark:text-gray-400 sm:dark:text-inherit" :class="showOdds ? 'col-span-1' : 'col-span-2'">
                     {{ row.eligibleGames }}

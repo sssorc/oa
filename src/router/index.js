@@ -131,6 +131,11 @@ export const routes = [
         component: () => import('../pages/PageSlatebreaker.vue'),
     },
     {
+        path: '/king-of-the-court',
+        name: 'king-of-the-court',
+        component: () => import('../pages/PageKingOfTheCourt.vue'),
+    },
+    {
         path: '/:pathMatch(.*)*',
         name: 'not-found',
         component: () => import('../pages/PageNotFound.vue'),

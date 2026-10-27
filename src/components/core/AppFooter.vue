@@ -24,6 +24,7 @@ import ThemeToggle from '@/components/ui/ThemeToggle.vue';
                         <ul class="grid gap-2 font-sans">
                             <li><AppFooterLink href="/knowledge">knowledge center</AppFooterLink></li>
                             <li><AppFooterLink href="/kotez">king of the end zone</AppFooterLink></li>
+                            <li><AppFooterLink href="/king-of-the-court">king of the court</AppFooterLink></li>
                             <li><AppFooterLink href="/slatebreaker">slatebreaker</AppFooterLink></li>
                             <li><AppFooterLink href="/sportsbooks">sportsbooks by state</AppFooterLink></li>
                         </ul>
