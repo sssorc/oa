@@ -74,10 +74,10 @@ const weeks = [
         week: 7,
         eligibleGames: 'DAL vs PHI',
         pot: '$2M',
-        winner: '-',
-        yards: '-',
-        payout: '-',
-        odds: '-',
+        winner: 'George Pickens',
+        yards: 21,
+        payout: '$66',
+        odds: '+175',
     },
 ];
 </script>
