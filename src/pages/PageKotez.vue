@@ -88,6 +88,7 @@ const weeks = [
             <KnowledgeHeader>DraftKings King of the End Zone Winners ({{ season }})</KnowledgeHeader>
             <p>Weekly tracker for the DraftKings King of the End Zone promo winners. Win a share of the pot if your player scores the longest touchdown.</p>
             <p>Also see this season's <RouterLink to="/slatebreaker">Slatebreaker winners</RouterLink>.</p>
+            <p>For NBA results, see the <RouterLink to="/king-of-the-court">King of the Court winners</RouterLink>.</p>
         </div>
 
         <section class="mt-8">
