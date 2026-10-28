@@ -29,6 +29,10 @@ const props = defineProps({
         type: String,
         default: 'week',
     },
+    gamesLabel: {
+        type: String,
+        default: 'Eligible games',
+    },
 });
 
 const showOdds = computed(() => props.weeks.some((row) => row.odds));
@@ -42,7 +46,7 @@ const muted = (value) => ({ 'text-space dark:text-gray-400': value === '-' });
         <thead class="sr-only sm:not-sr-only sm:table-header-group">
             <tr class="border-jet border-b font-mono dark:border-gray-400">
                 <th scope="col" class="py-3 pr-4 text-right font-bold">{{ firstColumnLabel }}</th>
-                <th scope="col" class="px-4 py-3 text-left font-bold">Eligible games</th>
+                <th scope="col" class="px-4 py-3 text-left font-bold">{{ gamesLabel }}</th>
                 <th scope="col" class="px-4 py-3 text-right font-bold">Pot</th>
                 <th scope="col" class="px-4 py-3 text-left font-bold">Winner</th>
                 <th v-if="showOdds" scope="col" class="px-4 py-3 text-right font-bold">Odds</th>
