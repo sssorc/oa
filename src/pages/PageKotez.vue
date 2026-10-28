@@ -67,7 +67,7 @@ const weeks = [
         pot: '$2M',
         winner: 'George Kittle',
         yards: 11,
-        payout: '-',
+        payout: '$69',
         odds: '+105',
     },
     {
