@@ -18,7 +18,7 @@ usePageTitle(`DraftKings King of the Court Winners (${season})`, description, {
 const dates = [
     {
         date: '10/21',
-        eligibleGames: '-',
+        eligibleGames: '11 games',
         pot: '$5M',
         winner: 'Anthony Edwards / Ty Jerome',
         pra: 45,
