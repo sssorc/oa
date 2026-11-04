@@ -79,6 +79,15 @@ const weeks = [
         payout: '$66',
         odds: '+175',
     },
+    {
+        week: 8,
+        eligibleGames: 'CHI vs SEA',
+        pot: '$2M',
+        winner: 'Jaxon Smith-Njigba',
+        yards: 43,
+        payout: '$34',
+        odds: '-105',
+    },
 ];
 </script>
 
