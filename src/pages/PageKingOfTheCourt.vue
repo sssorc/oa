@@ -32,6 +32,14 @@ const dates = [
         pra: 55,
         payout: '$21',
     },
+    {
+        date: '11/10',
+        eligibleGames: '6 games',
+        pot: '$1M',
+        winner: '-',
+        pra: '-',
+        payout: '-',
+    },
 ];
 </script>
 
