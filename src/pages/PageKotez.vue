@@ -91,6 +91,7 @@ const weeks = [
     {
         week: 9,
         eligibleGames: 'No promo',
+        noPromo: true,
         pot: '-',
         winner: '-',
         yards: '-',
