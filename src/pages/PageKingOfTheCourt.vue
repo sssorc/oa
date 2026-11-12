@@ -36,9 +36,9 @@ const dates = [
         date: '11/10',
         eligibleGames: '6 games',
         pot: '$1M',
-        winner: '-',
-        pra: '-',
-        payout: '-',
+        winner: 'Franz Wagner',
+        pra: 47,
+        payout: '$159',
     },
 ];
 </script>
