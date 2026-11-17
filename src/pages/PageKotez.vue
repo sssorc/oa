@@ -98,6 +98,16 @@ const weeks = [
         payout: '-',
         odds: '-',
     },
+    {
+        week: 10,
+        eligibleGames: 'No promo',
+        noPromo: true,
+        pot: '-',
+        winner: '-',
+        yards: '-',
+        payout: '-',
+        odds: '-',
+    },
 ];
 </script>
 
