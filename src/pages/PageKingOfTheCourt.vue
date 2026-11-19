@@ -40,6 +40,14 @@ const dates = [
         pra: 47,
         payout: '$159',
     },
+    {
+        date: '11/17',
+        eligibleGames: '5 games',
+        pot: '$1M',
+        winner: 'Quentin Grimes / Brice Sensabaugh',
+        pra: 56,
+        payout: '$11.6K each',
+    },
 ];
 </script>
 
